@@ -3,4 +3,8 @@
     <color name="colorPrimary">#233142</color>
     <color name="colorPrimaryDark">#00081c</color>
     <color name="colorAccent">#4c5a6d</color>
+
+    <color name="productGridBackgroundColor">#FFFBFA</color>
+    <color name="colorControlActivated">#FBB8AC</color>
+
 </resources>

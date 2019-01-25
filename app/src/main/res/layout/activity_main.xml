@@ -19,6 +19,66 @@
         <include layout="@layout/backdrop_market" />
     </LinearLayout>
 
+    <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:elevation="0dp">
+
+        <androidx.appcompat.widget.Toolbar
+                android:id="@+id/app_bar"
+                style="@style/Widget.Stadroid.Toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:paddingStart="12dp"
+                android:paddingLeft="12dp"
+                android:paddingEnd="12dp"
+                android:paddingRight="12dp"
+                app:contentInsetStart="0dp"
+                app:navigationIcon="@drawable/ic_home_white_24dp"
+                app:title="aleyk" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <!--<com.google.android.material.appbar.AppBarLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--app:elevation="0dp">-->
+
+        <!--<android.support.v7.widget.Toolbar-->
+                <!--android:id="@+id/app_bar"-->
+                <!--style="@style/Widget.Shrine.Toolbar"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="?attr/actionBarSize"-->
+                <!--android:paddingStart="12dp"-->
+                <!--android:paddingLeft="12dp"-->
+                <!--android:paddingEnd="12dp"-->
+                <!--android:paddingRight="12dp"-->
+                <!--app:contentInsetStart="0dp"-->
+                <!--app:navigationIcon="@drawable/shr_branded_menu"-->
+                <!--app:title="@string/shr_app_name" />-->
+    <!--</com.google.android.material.appbar.AppBarLayout>-->
+
+
+    <androidx.core.widget.NestedScrollView
+            android:id="@+id/nested_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="56dp"
+            android:background="@color/colorPrimary"
+            android:elevation="8dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+
+    </androidx.core.widget.NestedScrollView>
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/navigation"

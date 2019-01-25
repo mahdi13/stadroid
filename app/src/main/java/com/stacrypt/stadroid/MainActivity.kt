@@ -1,24 +1,44 @@
 package com.stacrypt.stadroid
 
+import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import okhttp3.*
-import okio.ByteString
-import org.jetbrains.anko.toast
-import java.lang.Exception
+import android.view.animation.AccelerateDecelerateInterpolator
+import com.stacrypt.stadroid.market.BackdropNavigationHandler
 
 
 class MainActivity : AppCompatActivity() {
 
+    private fun setUpToolbar() {
+        val toolbar = app_bar
+        setSupportActionBar(toolbar)
+
+        // Set cut corner background for API 23+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            nested_content.background = getDrawable(R.drawable.market_backdrop_background_shape)
+        }
+
+
+        toolbar.setNavigationOnClickListener(
+            BackdropNavigationHandler(
+                this@MainActivity,
+                nested_content,
+                AccelerateDecelerateInterpolator(),
+                this@MainActivity.resources.getDrawable(R.drawable.ic_home_white_24dp), // Menu open icon
+                this@MainActivity.resources.getDrawable(R.drawable.ic_dashboard_white_24dp)
+            )
+        ) // Menu close icon
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        setUpToolbar()
 
         navigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
