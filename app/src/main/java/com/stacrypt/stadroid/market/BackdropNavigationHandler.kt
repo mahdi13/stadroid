@@ -41,7 +41,8 @@ class BackdropNavigationHandler @JvmOverloads internal constructor(
 
         updateIcon(view.childrenRecursiveSequence().findLast { it is ImageView }!!)
 
-        val translateY = height - Utils.convertDpToPixel(300.0F)
+//        val translateY = height - Utils.convertDpToPixel(300.0F)
+        val translateY = 200F
 
         val animator = ObjectAnimator.ofFloat(sheet, "translationY", if (backdropShown) translateY else 0F)
         animator.duration = 500

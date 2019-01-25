@@ -20,7 +20,7 @@ var nextId: Int = 0
 
 interface StemeraldApiClient {
     @GET
-    fun marketList(): Deferred<Market>
+    fun marketList(): Deferred<ArrayList<Market>>
 }
 
 //interface WebsocketClientInterface {

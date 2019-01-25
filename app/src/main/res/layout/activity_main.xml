@@ -10,6 +10,7 @@
 
     <LinearLayout
             style="@style/Widget.Stadroid.Backdrop"
+            android:id="@+id/backdrop_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
@@ -17,11 +18,10 @@
             android:paddingTop="88dp"
             android:background="@color/colorPrimaryDark">
 
-        <include layout="@layout/backdrop_market"/>
     </LinearLayout>
 
     <RelativeLayout android:id="@+id/backdrop_edge_container"
-            android:layout_width="match_parent"
+                    android:layout_width="match_parent"
                     android:layout_height="56dp"
                     app:layout_constraintTop_toTopOf="parent"
                     android:background="@drawable/market_backdrop_background_shape">

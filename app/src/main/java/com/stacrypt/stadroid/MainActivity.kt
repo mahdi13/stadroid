@@ -8,7 +8,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import android.view.animation.AccelerateDecelerateInterpolator
+import android.widget.Button
 import com.stacrypt.stadroid.market.BackdropNavigationHandler
+import org.jetbrains.anko.textResource
+import org.jetbrains.anko.toast
 
 
 class MainActivity : AppCompatActivity() {
@@ -35,15 +38,36 @@ class MainActivity : AppCompatActivity() {
 //    }g
 
     private fun setUpMarketBackdrop() {
+        backdrop_edge.text = "Loading ..."
+
+        GlobalScope.launch(Dispatchers.Main) {
+            try {
+//                val markets = stemeraldApiClient.marketList().await()
+                val markets = arrayListOf(
+                    Market("BTC/ETH", 0L, 0L, 0L, 0F, 0L, 0F),
+                    Market("BCH/ETH", 0L, 0L, 0L, 0F, 0L, 0F),
+                    Market("BTC/BCH", 0L, 0L, 0L, 0F, 0L, 0F)
+                )
+                backdrop_list.removeAllViews()
+                markets.forEach {
+                    val listItem = layoutInflater.inflate(R.layout.backdrop_market_row, backdrop_list, true)
+//                    listItem.text = it.name
+                    backdrop_list.addView(listItem)
+                }
+            } catch (e: Exception) {
+                toast(e.toString())
+            }
+        }
+
         backdrop_edge_container.setOnClickListener(
             BackdropNavigationHandler(
                 this@MainActivity,
                 nested_content,
                 AccelerateDecelerateInterpolator(),
-                resources.getDrawable(android.R.drawable.arrow_up_float), // Menu open icon
+                resources.getDrawable(android.R.drawable.arrow_up_float),
                 resources.getDrawable(android.R.drawable.arrow_down_float)
             )
-        ) // Menu close icon
+        )
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
