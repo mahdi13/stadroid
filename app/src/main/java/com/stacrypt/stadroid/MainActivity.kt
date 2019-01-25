@@ -13,23 +13,35 @@ import com.stacrypt.stadroid.market.BackdropNavigationHandler
 
 class MainActivity : AppCompatActivity() {
 
-    private fun setUpToolbar() {
-        val toolbar = app_bar
-        setSupportActionBar(toolbar)
+//    private fun setUpToolbar() {
+//        val toolbar = app_bar
+//        setSupportActionBar(toolbar)
+//
+//        // Set cut corner background for API 23+
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//            nested_content.background = getDrawable(R.drawable.market_backdrop_background_shape)
+//        }
+//
+//
+//        toolbar.setNavigationOnClickListener(
+//            BackdropNavigationHandler(
+//                this@MainActivity,
+//                nested_content,
+//                AccelerateDecelerateInterpolator(),
+//                this@MainActivity.resources.getDrawable(R.drawable.ic_home_white_24dp), // Menu open icon
+//                this@MainActivity.resources.getDrawable(R.drawable.ic_dashboard_white_24dp)
+//              )
+//        ) // Menu close icon
+//    }g
 
-        // Set cut corner background for API 23+
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            nested_content.background = getDrawable(R.drawable.market_backdrop_background_shape)
-        }
-
-
-        toolbar.setNavigationOnClickListener(
+    private fun setUpMarketBackdrop() {
+        backdrop_edge_container.setOnClickListener(
             BackdropNavigationHandler(
                 this@MainActivity,
                 nested_content,
                 AccelerateDecelerateInterpolator(),
-                this@MainActivity.resources.getDrawable(R.drawable.ic_home_white_24dp), // Menu open icon
-                this@MainActivity.resources.getDrawable(R.drawable.ic_dashboard_white_24dp)
+                resources.getDrawable(android.R.drawable.arrow_up_float), // Menu open icon
+                resources.getDrawable(android.R.drawable.arrow_down_float)
             )
         ) // Menu close icon
     }
@@ -38,7 +50,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        setUpToolbar()
+        setUpMarketBackdrop()
 
         navigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {

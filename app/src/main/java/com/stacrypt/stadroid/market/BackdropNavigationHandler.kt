@@ -10,11 +10,12 @@ import android.view.View
 import android.view.animation.Interpolator
 import android.widget.ImageView
 import com.github.mikephil.charting.utils.Utils
+import org.jetbrains.anko.childrenRecursiveSequence
 import org.jetbrains.annotations.Nullable
 
 
 class BackdropNavigationHandler @JvmOverloads internal constructor(
-    private val context: Context,
+    context: Context,
     private val sheet: View, @param:Nullable private val interpolator: Interpolator? = null,
     @param:Nullable private val openIcon: Drawable? = null, @param:Nullable private val closeIcon: Drawable? = null
 ) : View.OnClickListener {
@@ -38,9 +39,9 @@ class BackdropNavigationHandler @JvmOverloads internal constructor(
         animatorSet.end()
         animatorSet.cancel()
 
-        updateIcon(view)
+        updateIcon(view.childrenRecursiveSequence().findLast { it is ImageView }!!)
 
-        val translateY = height - Utils.convertDpToPixel(100.0F)
+        val translateY = height - Utils.convertDpToPixel(300.0F)
 
         val animator = ObjectAnimator.ofFloat(sheet, "translationY", if (backdropShown) translateY else 0F)
         animator.duration = 500
@@ -57,9 +58,9 @@ class BackdropNavigationHandler @JvmOverloads internal constructor(
                 throw IllegalArgumentException("updateIcon() must be called on an ImageView")
             }
             if (backdropShown) {
-                (view as ImageView).setImageDrawable(closeIcon)
+                view.setImageDrawable(closeIcon)
             } else {
-                (view as ImageView).setImageDrawable(openIcon)
+                view.setImageDrawable(openIcon)
             }
         }
     }
