@@ -23,13 +23,13 @@ class MainActivity : AppCompatActivity() {
         navigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.navigation_home -> {
-                    message.setText(R.string.title_wallet)
+//                    message.setText(R.string.title_wallet)
                 }
                 R.id.navigation_dashboard -> {
-                    message.setText(R.string.title_market)
+//                    message.setText(R.string.title_market)
                 }
                 R.id.navigation_notifications -> {
-                    message.setText(R.string.title_profile)
+//                    message.setText(R.string.title_profile)
                 }
             }
             true
@@ -43,14 +43,14 @@ class MainActivity : AppCompatActivity() {
         stexchangeApiClient.start()
 
         GlobalScope.launch(Dispatchers.Main) {
-            while (true) {
-                try {
-                    toast(stexchangeApiClient.ping())
-                } catch (e: Exception) {
-                    toast(e.toString())
-                    delay(2000)
-                }
-            }
+            //            while (true) {
+//                try {
+//                    toast(stexchangeApiClient.ping())
+//                } catch (e: Exception) {
+//                    toast(e.toString())
+//                    delay(2000)
+//                }
+//            }
         }
 
     }
