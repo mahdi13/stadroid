@@ -1,19 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".market.MarketActivityFragment"
-        android:padding="10dp">
+        tools:context=".market.MarketActivityFragment">
+
+    <FrameLayout
+            android:id="@+id/summary"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_alignParentTop="true"
+            android:background="@color/colorPrimaryDark">
+
+    </FrameLayout>
+
+    <com.google.android.material.tabs.TabLayout
+            style="@style/Widget.MaterialComponents.TabLayout.Colored"
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/summary"
+            app:tabTextColor="#ffffff"
+            app:tabIndicatorColor="#ffffff"
+            app:tabRippleColor="#ffffff"
+            >
+
+        <com.google.android.material.tabs.TabItem
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:id="@+id/mine_tab"
+                android:text="Mine"
+                />
+
+        <com.google.android.material.tabs.TabItem
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:id="@+id/book_tab"
+                android:text="Book"
+                />
+
+        <com.google.android.material.tabs.TabItem
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:id="@+id/chart_tab"
+                android:text="Chart"
+                />
+
+        <com.google.android.material.tabs.TabItem
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:id="@+id/history_tab"
+                android:text="History"
+                />
+
+
+    </com.google.android.material.tabs.TabLayout>
+
+
+    <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tabs"
+            android:layout_above="@+id/order"/>
 
     <com.github.mikephil.charting.charts.CandleStickChart
             android:id="@+id/chart"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:layout_marginEnd="4dp"/>
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:layout_below="@id/tabs"
+            android:layout_above="@+id/order"/>
 
 
-</LinearLayout>
+    <FrameLayout
+            android:id="@+id/order"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorPrimaryDark"></FrameLayout>
+
+
+</RelativeLayout>
