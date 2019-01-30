@@ -11,37 +11,31 @@ import com.stacrypt.stadroid.market.BackdropNavigationHandler
 import org.jetbrains.anko.toast
 import androidx.fragment.app.Fragment
 import com.stacrypt.stadroid.market.MarketActivityFragment
+import com.stacrypt.stadroid.profile.ProfileFragment
+import com.stacrypt.stadroid.wallet.WalletFragment
 
 
 class MainActivity : AppCompatActivity() {
 
-    private val fragments = ArrayList<Fragment>(3)
+    private val pages = ArrayList<Fragment>(3)
 
 
     private fun switchFragment(pos: Int, tag: String) {
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.container, fragments[pos], tag)
+            .replace(R.id.container, pages[pos], tag)
             .commit()
     }
 
-    private fun buildFragment(title: String): Fragment {
-        val fragment = MarketActivityFragment()
-        val bundle = Bundle()
-//        bundle.putString(Fragment.ARG_TITLE, title)
-//        fragment.setArguments(bundle)
-        return fragment
-    }
+    private fun buildWalletFragment(): Fragment = WalletFragment()
+    private fun buildMarketFragment(): Fragment = MarketActivityFragment()
+    private fun buildProfileFragment(): Fragment = ProfileFragment()
 
 
     private fun buildFragmentsList() {
-        val callsFragment = buildFragment("Calls")
-        val recentsFragment = buildFragment("Recents")
-        val tripsFragment = buildFragment("Trips")
-
-        fragments.add(callsFragment)
-        fragments.add(recentsFragment)
-        fragments.add(tripsFragment)
+        pages.add(buildWalletFragment())
+        pages.add(buildMarketFragment())
+        pages.add(buildProfileFragment())
     }
 
 //    private fun setUpToolbar() {
