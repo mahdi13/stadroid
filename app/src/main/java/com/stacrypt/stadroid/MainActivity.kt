@@ -1,6 +1,5 @@
 package com.stacrypt.stadroid
 
-import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -8,13 +7,42 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import android.view.animation.AccelerateDecelerateInterpolator
-import android.widget.Button
 import com.stacrypt.stadroid.market.BackdropNavigationHandler
-import org.jetbrains.anko.textResource
 import org.jetbrains.anko.toast
+import androidx.fragment.app.Fragment
+import com.stacrypt.stadroid.market.MarketActivityFragment
 
 
 class MainActivity : AppCompatActivity() {
+
+    private val fragments = ArrayList<Fragment>(3)
+
+
+    private fun switchFragment(pos: Int, tag: String) {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.container, fragments[pos], tag)
+            .commit()
+    }
+
+    private fun buildFragment(title: String): Fragment {
+        val fragment = MarketActivityFragment()
+        val bundle = Bundle()
+//        bundle.putString(Fragment.ARG_TITLE, title)
+//        fragment.setArguments(bundle)
+        return fragment
+    }
+
+
+    private fun buildFragmentsList() {
+        val callsFragment = buildFragment("Calls")
+        val recentsFragment = buildFragment("Recents")
+        val tripsFragment = buildFragment("Trips")
+
+        fragments.add(callsFragment)
+        fragments.add(recentsFragment)
+        fragments.add(tripsFragment)
+    }
 
 //    private fun setUpToolbar() {
 //        val toolbar = app_bar
@@ -75,22 +103,25 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         setUpMarketBackdrop()
+        buildFragmentsList()
 
         navigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.navigation_home -> {
-//                    message.setText(R.string.title_wallet)
+                R.id.navigation_wallet -> {
+                    switchFragment(0, "0")
                 }
-                R.id.navigation_dashboard -> {
-//                    message.setText(R.string.title_market)
+                R.id.navigation_market -> {
+                    switchFragment(1, "1")
                 }
-                R.id.navigation_notifications -> {
-//                    message.setText(R.string.title_profile)
+                R.id.navigation_profile -> {
+                    switchFragment(2, "2")
                 }
             }
             true
         }
 
+        // Set the Market Fragment to be displayed by default.
+        navigation.selectedItemId = R.id.navigation_market
 
     }
 

@@ -9,6 +9,8 @@ import androidx.fragment.app.FragmentPagerAdapter
 import com.stacrypt.stadroid.R
 import kotlinx.android.synthetic.main.fragment_market.*
 import com.google.android.material.tabs.TabLayout
+import java.lang.Exception
+import java.lang.IndexOutOfBoundsException
 
 
 /**
@@ -22,20 +24,23 @@ class MarketActivityFragment : Fragment() {
         tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabReselected(tab: TabLayout.Tab?) {}
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
-            override fun onTabSelected(tab: TabLayout.Tab?) = viewpager.setCurrentItem(tab!!.position)
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                viewpager.currentItem = tab!!.position
+            }
         })
+        viewpager.offscreenPageLimit = 8
         viewpager.adapter = object : FragmentPagerAdapter(childFragmentManager) {
             override fun getItem(position: Int): Fragment {
                 return when (position) {
                     0 -> MarketMineFragment.newInstance(1)
                     1 -> MarketBookFragment.newInstance(2)
                     2 -> MarketCandlestickFragment.newInstance("", "")
-                    else -> MarketHistoryFragment.newInstance(1)
+                    3 -> MarketHistoryFragment.newInstance(1)
+                    else -> throw IndexOutOfBoundsException()
                 }
             }
 
-            override fun getCount(): Int = 2
-
+            override fun getCount(): Int = 4
         }
 
     }
