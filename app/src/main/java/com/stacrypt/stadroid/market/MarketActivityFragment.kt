@@ -36,10 +36,10 @@ class MarketActivityFragment : Fragment() {
         viewpager.adapter = object : FragmentPagerAdapter(childFragmentManager) {
             override fun getItem(position: Int): Fragment {
                 return when (position) {
-                    0 -> MarketCandlestickFragment.newInstance("", """)
-                    else -> {
-                        return MarketHistoryFragment.newInstance(1)
-                    }
+                    0 -> MarketCandlestickFragment.newInstance("", "")
+                    1 -> MarketHistoryFragment.newInstance(1)
+                    2 -> MarketMineFragment.newInstance(1)
+                    else -> MarketMineFragment.newInstance(1)
                 }
             }
 
