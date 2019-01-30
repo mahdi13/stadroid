@@ -1,22 +1,13 @@
 package com.stacrypt.stadroid.market
 
-import android.graphics.Color
-import android.graphics.Paint
 import androidx.fragment.app.Fragment
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentPagerAdapter
-import com.github.mikephil.charting.components.YAxis
-import com.github.mikephil.charting.data.CandleData
-import com.github.mikephil.charting.data.CandleDataSet
-import com.github.mikephil.charting.data.CandleEntry
-import com.github.mikephil.charting.utils.ColorTemplate
 import com.stacrypt.stadroid.R
 import kotlinx.android.synthetic.main.fragment_market.*
-import com.github.mikephil.charting.components.XAxis.XAxisPosition
-import com.github.mikephil.charting.components.XAxis
 import com.google.android.material.tabs.TabLayout
 
 
@@ -36,10 +27,10 @@ class MarketActivityFragment : Fragment() {
         viewpager.adapter = object : FragmentPagerAdapter(childFragmentManager) {
             override fun getItem(position: Int): Fragment {
                 return when (position) {
-                    0 -> MarketCandlestickFragment.newInstance("", "")
-                    1 -> MarketHistoryFragment.newInstance(1)
-                    2 -> MarketMineFragment.newInstance(1)
-                    else -> MarketMineFragment.newInstance(1)
+                    0 -> MarketMineFragment.newInstance(1)
+                    1 -> MarketBookFragment.newInstance(2)
+                    2 -> MarketCandlestickFragment.newInstance("", "")
+                    else -> MarketHistoryFragment.newInstance(1)
                 }
             }
 
