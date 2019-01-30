@@ -7,8 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.stacrypt.stadroid.LoadingFragment
 
 import com.stacrypt.stadroid.R
+import kotlinx.android.synthetic.main.fragment_wallet.view.*
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -44,6 +47,20 @@ class WalletFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_wallet, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        if (childFragmentManager.fragments.size == 0) {
+            val ft = childFragmentManager.beginTransaction()
+            ft.replace(R.id.asset_balance_container, LoadingFragment())
+            ft.commit()
+
+
+//            val ft = childFragmentManager.beginTransaction()
+//            ft.replace(R.id.asset_balance_container, AssetBalanceFragment.newInstance(1))
+//            ft.commit()
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event
