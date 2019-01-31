@@ -64,11 +64,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tabs"
-            android:layout_above="@+id/order"/>
+            android:layout_above="@+id/new_order"/>
 
 
     <FrameLayout
-            android:id="@+id/order"
+            android:id="@+id/new_order"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_alignParentBottom="true"

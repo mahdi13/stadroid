@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
 
+apply plugin: 'kotlin-kapt'
+
 apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
@@ -49,9 +51,9 @@ dependencies {
 
     implementation "androidx.room:room-runtime:2.1.0-alpha04"
     implementation "androidx.room:room-coroutines:2.1.0-alpha04"
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0-beta01'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.0.0'
-    annotationProcessor "androidx.room:room-compiler-kapt:2.1.0-alpha04"
+    kapt "androidx.room:room-compiler:2.1.0-alpha04"
 
     implementation "androidx.paging:paging-runtime-ktx:2.1.0"
 
