@@ -4,7 +4,26 @@
     <color name="colorPrimaryDark">#00081c</color>
     <color name="colorAccent">#4c5a6d</color>
 
+    <color name="colorPrimaryText">#ffffff</color>
+    <color name="colorPrimaryTextDark">#ffffff</color>
+    <color name="colorPrimaryTextLight">#ffffff</color>
+
     <color name="productGridBackgroundColor">#FFFBFA</color>
     <color name="colorControlActivated">#FBB8AC</color>
+
+    <color name="colorSecondary">#1976d2</color>
+    <color name="colorSecondaryDark">#004ba0</color>
+    <color name="colorSecondaryLight">#63a4ff</color>
+    <color name="colorSecondaryText">#ffffff</color>
+    <color name="colorSecondaryDarkText">#ffffff</color>
+    <color name="colorSecondaryLightText">#000000</color>
+
+    <color name="green">#1b5e20</color>
+    <color name="greenDark">#003300</color>
+    <color name="greenLight">#4c8c4a</color>
+
+    <color name="red">#b71c1c</color>
+    <color name="redDark">#7f0000</color>
+    <color name="redLight">#f05545</color>
 
 </resources>
