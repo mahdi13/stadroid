@@ -52,14 +52,14 @@ class WalletFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (childFragmentManager.fragments.size == 0) {
-            val ft = childFragmentManager.beginTransaction()
-            ft.replace(R.id.asset_balance_container, LoadingFragment())
-            ft.commit()
-
-
 //            val ft = childFragmentManager.beginTransaction()
-//            ft.replace(R.id.asset_balance_container, AssetBalanceFragment.newInstance(1))
+//            ft.replace(R.id.asset_balance_container, LoadingFragment())
 //            ft.commit()
+
+
+            val ft = childFragmentManager.beginTransaction()
+            ft.replace(R.id.asset_balance_container, AssetBalanceFragment())
+            ft.commit()
         }
     }
 

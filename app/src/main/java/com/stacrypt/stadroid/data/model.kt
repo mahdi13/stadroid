@@ -1,8 +1,9 @@
-package com.stacrypt.stadroid
+package com.stacrypt.stadroid.data
 
 import androidx.room.Entity
+import androidx.room.ForeignKey
+import androidx.room.PrimaryKey
 
-@Entity
 data class Market(
     val name: String,
     val stock: Long,
@@ -14,7 +15,6 @@ data class Market(
 
 )
 
-@Entity
 data class MarketStatus(
     val open: Long,  // open price
     val last: Long,  // latest price
@@ -26,13 +26,20 @@ data class MarketStatus(
 
 @Entity
 data class Asset(
-    val name: String,
-    val prec: String
+    @PrimaryKey var name: String,
+    var prec: String
 )
 
-@Entity
+@Entity(
+//    foreignKeys = [ForeignKey(
+//        entity = Asset::class,
+//        parentColumns = arrayOf("name"),
+//        childColumns = arrayOf("assetName"),
+//        onDelete = ForeignKey.CASCADE
+//    )]
+)
 data class Balance(
-    val assetName: String,
-    val available: Double,
-    val freeze: Double
+    @PrimaryKey var assetName: String,
+    var available: Double,
+    var freeze: Double
 )

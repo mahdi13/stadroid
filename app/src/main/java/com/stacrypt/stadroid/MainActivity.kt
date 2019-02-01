@@ -10,9 +10,14 @@ import android.view.animation.AccelerateDecelerateInterpolator
 import com.stacrypt.stadroid.market.BackdropNavigationHandler
 import org.jetbrains.anko.toast
 import androidx.fragment.app.Fragment
+import com.stacrypt.stadroid.data.Market
+import com.stacrypt.stadroid.data.StemeraldDatabase
+import com.stacrypt.stadroid.data.StemeraldDatabase_Impl
+import com.stacrypt.stadroid.data.stemeraldDatabase
 import com.stacrypt.stadroid.market.MarketActivityFragment
 import com.stacrypt.stadroid.profile.ProfileFragment
 import com.stacrypt.stadroid.wallet.WalletFragment
+import androidx.room.Room
 
 
 class MainActivity : AppCompatActivity() {
@@ -96,6 +101,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        stemeraldDatabase = Room.databaseBuilder(
+            applicationContext,
+            StemeraldDatabase::class.java, "stemerald_db"
+        ).build()
+
+
         setUpMarketBackdrop()
         buildFragmentsList()
 
@@ -121,7 +132,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        stexchangeApiClient.start()
+//        stexchangeApiClient.start()
 
         GlobalScope.launch(Dispatchers.Main) {
             //            while (true) {
@@ -138,7 +149,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
-        stexchangeApiClient.shutdown()
+//        stexchangeApiClient.shutdown()
     }
 }
 
