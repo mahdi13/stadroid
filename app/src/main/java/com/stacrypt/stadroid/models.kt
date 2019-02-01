@@ -1,8 +1,11 @@
 package com.stacrypt.stadroid
 
+import androidx.room.Entity
+
+@Entity
 data class Market(
     val name: String,
-    val stock: Long ,
+    val stock: Long,
     val stockPrec: Long,
     val money: Long,
     val feePrec: Float,
@@ -11,6 +14,7 @@ data class Market(
 
 )
 
+@Entity
 data class MarketStatus(
     val open: Long,  // open price
     val last: Long,  // latest price
@@ -18,4 +22,17 @@ data class MarketStatus(
     val low: Long,   //  lowest price
     val deal: Long,  // amount
     val volume: Long // volume
+)
+
+@Entity
+data class Asset(
+    val name: String,
+    val prec: String
+)
+
+@Entity
+data class Balance(
+    val assetName: String,
+    val available: Double,
+    val freeze: Double
 )
