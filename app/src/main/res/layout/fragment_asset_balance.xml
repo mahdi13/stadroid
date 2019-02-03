@@ -18,23 +18,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="center_vertical"
+                android:gravity="center"
                 android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_toLeftOf="@id/buttons_container"
+                android:layout_alignBottom="@+id/buttons_container"
                 android:id="@+id/price_and_label"
-                android:padding="10dp"
-                android:layout_marginTop="@dimen/text_margin"
-                android:layout_marginStart="@dimen/text_margin"
-                android:layout_marginEnd="@dimen/text_margin"
-                android:layout_marginBottom="@dimen/text_margin">
+                android:padding="10dp">
 
             <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:src="@drawable/ic_btc"
                     android:layout_marginEnd="10dp"/>
 
             <TextView
-                    style="@style/TextAppearance.MaterialComponents.Headline6"
+                    style="@style/TextAppearance.MaterialComponents.Headline4"
                     android:id="@+id/name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -51,35 +50,93 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_toEndOf="@+id/price_and_label"
-                android:layout_toStartOf="@+id/buttons_container"
-                android:layout_centerVertical="true">
+                android:layout_below="@+id/buttons_container"
+                android:layout_alignParentStart="true"
+                android:layout_alignEnd="@+id/buttons_container"
+                android:layout_centerVertical="true"
+                android:padding="10dp">
 
-            <TextView
-                    style="@style/TextAppearance.MaterialComponents.Body1"
-                    android:id="@+id/available"
+            <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="3dp"
-                    android:gravity="center"
-                    android:textColor="@color/greenLight"
-                    android:text="1.00000000"
-                    android:typeface=""
-                    android:scaleY="1.5"/>
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                <TextView
+                        android:id="@+id/total"
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
+                        android:gravity="center"
+                        android:textColor="@color/colorPrimaryText"
+                        android:fontFamily="@font/roboto_mono_regular"
+                        android:text="1.00000000"
+                        android:lines="1"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:textSize="30dp"/>
+
+                <TextView
+                        android:id="@+id/value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
+                        android:gravity="center"
+                        android:textColor="@color/colorGrayText"
+                        android:fontFamily="@font/roboto_mono_regular"
+                        android:text=" ≃12345 $"
+                        android:lines="1"
+                        android:autoSizePresetSizes="10dp"
+                        android:textSize="20dp"/>
 
 
-            <TextView
-                    style="@style/TextAppearance.MaterialComponents.Body2"
-                    android:id="@+id/freeze"
-                    android:layout_width="wrap_content"
+            </LinearLayout>
+
+
+            <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textColor="@color/redLight"
-                    android:text="0.5000"
-                    android:drawablePadding="10dp"
-                    android:drawableStart="@drawable/ic_lock_outline_black_24dp"/>
+                    android:orientation="horizontal"
+                    android:layout_marginTop="15dp"
+                    android:gravity="center">
 
 
+                <TextView
+                        android:id="@+id/available"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center"
+                        android:textColor="@color/greenLight"
+                        android:text="0.500000000"
+                        android:drawablePadding="10dp"
+                        android:textSize="15sp"
+                        android:lines="1"
+                        android:layout_marginEnd="20dp"
+                        android:fontFamily="@font/kameron_bold"
+                        android:drawableTint="@color/greenLight"
+                        android:drawableStart="@drawable/ic_lock_open_black_24dp"/>
+
+
+                <TextView
+                        android:id="@+id/freeze"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center"
+                        android:textColor="@color/yellow"
+                        android:text="0.500000000"
+                        android:drawablePadding="10dp"
+                        android:textSize="15sp"
+                        android:lines="1"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/kameron_bold"
+                        android:drawableTint="@color/yellow"
+                        android:drawableStart="@drawable/ic_lock_outline_black_24dp"/>
+
+
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -94,40 +151,47 @@
 
 
             <com.google.android.material.button.MaterialButton
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+                    style="@style/Widget.MaterialComponents.Button.TextButton.Dialog.Icon"
                     android:id="@+id/deposit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorPrimaryText"
-                    android:textSize="10sp"
+                    android:textSize="15sp"
                     android:padding="5dp"
-                    app:icon="@drawable/ic_add_box_black_24dp"
                     app:iconTint="@color/colorPrimaryText"
+                    app:backgroundTint="@color/colorSecondaryDark"
                     android:text="Deposit"/>
 
-            <com.google.android.material.button.MaterialButton
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
-                    android:id="@+id/withdraw"
-                    android:layout_width="match_parent"
+            <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorPrimaryText"
-                    android:padding="5dp"
-                    android:textSize="10sp"
-                    app:icon="@drawable/ic_send_black_24dp"
-                    app:iconTint="@color/colorPrimaryText"
-                    android:text="Withdraw"/>
+                    android:orientation="horizontal">
 
-            <com.google.android.material.button.MaterialButton
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
-                    android:id="@+id/history"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorPrimaryText"
-                    android:padding="5dp"
-                    android:textSize="10sp"
-                    app:icon="@drawable/ic_history_black_24dp"
-                    app:iconTint="@color/colorPrimaryText"
-                    android:text="History"/>
+                <com.google.android.material.button.MaterialButton
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+                        android:id="@+id/withdraw"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorGrayText"
+                        android:padding="5dp"
+                        android:textSize="10sp"
+                        app:icon="@drawable/ic_send_black_24dp"
+                        app:iconTint="@color/colorGrayText"
+                        android:text="Withdraw"/>
+
+                <com.google.android.material.button.MaterialButton
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+                        android:id="@+id/history"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorGrayText"
+                        android:padding="5dp"
+                        android:textSize="10sp"
+                        app:icon="@drawable/ic_history_black_24dp"
+                        app:iconTint="@color/colorGrayText"
+                        android:text="History"/>
+
+            </LinearLayout>
 
 
         </LinearLayout>
