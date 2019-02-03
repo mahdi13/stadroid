@@ -1,13 +1,19 @@
 package com.stacrypt.stadroid.wallet
 
+import android.net.Uri
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import com.stacrypt.stadroid.data.Balance
 import com.stacrypt.stadroid.R
 import kotlinx.android.synthetic.main.fragment_asset_balance.view.*
+import org.jetbrains.anko.imageResource
+import org.jetbrains.anko.imageURI
+import java.lang.Exception
 
 class AssetBalanceRecyclerViewAdapter(
     var items: List<Balance>
@@ -33,8 +39,17 @@ class AssetBalanceRecyclerViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
         holder.nameView.text = item.assetName
+        holder.totalView.text = (item.available + item.freeze).toString()
         holder.availableView.text = item.available.toString()
         holder.freezeView.text = item.freeze.toString()
+        try {
+            holder.iconView.imageURI =
+                Uri.parse("android.resource://com.stacrypt.stadroid/drawable/ic_${item.assetName}")
+        } catch (e: Exception) {
+            holder.iconView.imageResource =
+                arrayOf(R.drawable.ic_btc, R.drawable.ic_eth, R.drawable.ic_ltc, R.drawable.ic_xrp).random()
+        }   
+
 
 //        with(holder.view) {
 //            tag = item
@@ -46,8 +61,13 @@ class AssetBalanceRecyclerViewAdapter(
 
     inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         val nameView: TextView = view.name
-        val availableView: TextView = view.available
+        val depositView: Button = view.deposit
+        val withdrawView: Button = view.withdraw
+        val historyView: Button = view.history
+        val totalView: TextView = view.available
+        val availableView: TextView = view.total
         val freezeView: TextView = view.freeze
+        val iconView: ImageView = view.icon
 
     }
 }
