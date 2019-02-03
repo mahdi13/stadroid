@@ -2,91 +2,136 @@
 
 <androidx.cardview.widget.CardView
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:backgroundTint="@color/colorPrimaryLight"
+        android:backgroundTint="@color/colorPrimaryDark"
         android:layout_margin="5dp">
 
-    <LinearLayout
+    <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center">
 
-        <TextView
-                style="@style/TextAppearance.MaterialComponents.Headline6"
-                android:id="@+id/name"
-                android:layout_width="0dp"
+        <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/text_margin"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="BTC"
-                android:textColor="@color/colorPrimaryDark"
-                android:textStyle="bold"
-                android:textAppearance="?attr/textAppearanceListItem"/>
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_alignParentStart="true"
+                android:id="@+id/price_and_label"
+                android:padding="10dp"
+                android:layout_marginTop="@dimen/text_margin"
+                android:layout_marginStart="@dimen/text_margin"
+                android:layout_marginEnd="@dimen/text_margin"
+                android:layout_marginBottom="@dimen/text_margin">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_btc"
+                    android:layout_marginEnd="10dp"/>
+
+            <TextView
+                    style="@style/TextAppearance.MaterialComponents.Headline6"
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="BTC"
+                    android:textColor="@color/colorPrimaryTextDark"
+                    android:textStyle="bold"
+                    android:textAppearance="?attr/textAppearanceListItem"/>
+
+
+        </LinearLayout>
 
         <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_toEndOf="@+id/price_and_label"
+                android:layout_toStartOf="@+id/buttons_container"
+                android:layout_centerVertical="true">
 
             <TextView
                     style="@style/TextAppearance.MaterialComponents.Body1"
                     android:id="@+id/available"
-                    android:textStyle="bold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="3dp"
                     android:gravity="center"
                     android:textColor="@color/greenLight"
-                    android:text="1.0000"/>
+                    android:text="1.00000000"
+                    android:typeface=""
+                    android:scaleY="1.5"/>
+
 
             <TextView
                     style="@style/TextAppearance.MaterialComponents.Body2"
                     android:id="@+id/freeze"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="3dp"
                     android:gravity="center"
                     android:textColor="@color/redLight"
-                    android:text="0.5000"/>
+                    android:text="0.5000"
+                    android:drawablePadding="10dp"
+                    android:drawableStart="@drawable/ic_lock_outline_black_24dp"/>
+
 
 
         </LinearLayout>
 
 
         <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:orientation="horizontal">
+                android:orientation="vertical"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:id="@+id/buttons_container">
+
 
             <com.google.android.material.button.MaterialButton
-                    style="@style/Widget.MaterialComponents.Button"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
                     android:id="@+id/deposit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:backgroundTint="@color/greenDark"
                     android:textColor="@color/colorPrimaryText"
+                    android:textSize="10sp"
+                    android:padding="5dp"
+                    app:icon="@drawable/ic_add_box_black_24dp"
+                    app:iconTint="@color/colorPrimaryText"
                     android:text="Deposit"/>
 
             <com.google.android.material.button.MaterialButton
-                    style="@style/Widget.MaterialComponents.FloatingActionButton"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
                     android:id="@+id/withdraw"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:backgroundTint="@color/redDark"
                     android:textColor="@color/colorPrimaryText"
+                    android:padding="5dp"
+                    android:textSize="10sp"
+                    app:icon="@drawable/ic_send_black_24dp"
+                    app:iconTint="@color/colorPrimaryText"
                     android:text="Withdraw"/>
+
+            <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+                    android:id="@+id/history"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimaryText"
+                    android:padding="5dp"
+                    android:textSize="10sp"
+                    app:icon="@drawable/ic_history_black_24dp"
+                    app:iconTint="@color/colorPrimaryText"
+                    android:text="History"/>
 
 
         </LinearLayout>
 
 
-    </LinearLayout>
+    </RelativeLayout>
 </androidx.cardview.widget.CardView>
