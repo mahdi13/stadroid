@@ -26,24 +26,21 @@ class AssetBalanceFragment : Fragment() {
         val recyclerView = inflater.inflate(R.layout.fragment_asset_balance_list, container, false) as RecyclerView
 
         adapter = AssetBalanceRecyclerViewAdapter(ArrayList())
-        with(recyclerView) {
-            layoutManager = LinearLayoutManager(context)
-            this.adapter = adapter
-        }
-        return view
-    }
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.adapter = adapter
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        viewModel.balances.observe(this,
-            Observer<List<Balance>> { balances -> adapter.items = balances!! })
-
-
+        return recyclerView
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(AssetBalanceViewModel::class.java)
+        viewModel.balances.observe(this,
+            Observer<List<Balance>> { balances ->
+                adapter.items = balances!!
+                adapter.notifyDataSetChanged()
+            })
+
     }
 
 }

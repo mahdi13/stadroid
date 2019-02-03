@@ -1,31 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:orientation="horizontal">
 
-    <TextView
-            android:id="@+id/name"
-            android:layout_width="0dp"
+<androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:backgroundTint="@color/colorPrimaryLight"
+        android:layout_margin="5dp">
+
+    <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
-            android:layout_weight="1"
-            android:textAppearance="?attr/textAppearanceListItem"/>
+            android:orientation="horizontal"
+            android:gravity="center">
 
-    <TextView
-            android:id="@+id/available"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
-            android:layout_weight="1"
-            android:textAppearance="?attr/textAppearanceListItem"/>
+        <TextView
+                style="@style/TextAppearance.MaterialComponents.Headline6"
+                android:id="@+id/name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/text_margin"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="BTC"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold"
+                android:textAppearance="?attr/textAppearanceListItem"/>
 
-    <TextView
-            android:id="@+id/freeze"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
-            android:layout_weight="1"
-            android:textAppearance="?attr/textAppearanceListItem"/>
+        <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:orientation="vertical">
 
-</LinearLayout>
+            <TextView
+                    style="@style/TextAppearance.MaterialComponents.Body1"
+                    android:id="@+id/available"
+                    android:textStyle="bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:gravity="center"
+                    android:textColor="@color/greenLight"
+                    android:text="1.0000"/>
+
+            <TextView
+                    style="@style/TextAppearance.MaterialComponents.Body2"
+                    android:id="@+id/freeze"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:gravity="center"
+                    android:textColor="@color/redLight"
+                    android:text="0.5000"/>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.MaterialComponents.Button"
+                    android:id="@+id/deposit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:backgroundTint="@color/greenDark"
+                    android:textColor="@color/colorPrimaryText"
+                    android:text="Deposit"/>
+
+            <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.MaterialComponents.FloatingActionButton"
+                    android:id="@+id/withdraw"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:backgroundTint="@color/redDark"
+                    android:textColor="@color/colorPrimaryText"
+                    android:text="Withdraw"/>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

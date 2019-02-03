@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import com.stacrypt.stadroid.LoadingFragment
 
 import com.stacrypt.stadroid.R
+import com.stacrypt.stadroid.market.NewOrderFragment
 import kotlinx.android.synthetic.main.fragment_wallet.view.*
 
 
@@ -51,16 +52,17 @@ class WalletFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (childFragmentManager.fragments.size == 0) {
+//        if (childFragmentManager.fragments.size == 0) {
 //            val ft = childFragmentManager.beginTransaction()
 //            ft.replace(R.id.asset_balance_container, LoadingFragment())
 //            ft.commit()
 
+        childFragmentManager.beginTransaction().replace(R.id.asset_balance_container, AssetBalanceFragment()).commitNow()
 
-            val ft = childFragmentManager.beginTransaction()
-            ft.replace(R.id.asset_balance_container, AssetBalanceFragment())
-            ft.commit()
-        }
+//        val ft = childFragmentManager.beginTransaction()
+//        ft.replace(R.id.asset_balance_container, AssetBalanceFragment())
+//        ft.commitNow()
+//        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event

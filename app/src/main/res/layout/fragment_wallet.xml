@@ -4,11 +4,5 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent"
              tools:context=".wallet.WalletFragment"
-             android:background="@color/colorPrimary">
-
-    <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/asset_balance_container"/>
-
-</FrameLayout>
+             android:id="@+id/asset_balance_container"
+             android:background="@color/colorPrimary"/>
