@@ -20,6 +20,9 @@ interface StemeraldApiClient {
 
     @GET
     fun marketList(): Deferred<ArrayList<Market>>
+
+    @GET("stacrypt-kline.json?key=98063e30")
+    fun kline(): Deferred<ArrayList<Kline>>
 }
 
 var okHttpClient = OkHttpClient.Builder()

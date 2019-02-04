@@ -24,3 +24,12 @@ interface BalanceDao {
     @Query("SELECT * FROM Balance")
     fun loadAll(): LiveData<List<Balance>>
 }
+
+@Dao
+interface KlineDao {
+    @Insert(onConflict = REPLACE)
+    fun save(kline: Kline)
+
+    @Query("SELECT * FROM Kline WHERE market = :market ORDER BY time DESC")
+    fun loadByMarket(market: String): LiveData<List<Kline>>
+}

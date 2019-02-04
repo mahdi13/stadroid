@@ -4,6 +4,27 @@ import androidx.lifecycle.LiveData
 import kotlinx.coroutines.*
 
 
+object MarketRepository {
+    private val klineDao: KlineDao = stemeraldDatabase.klineDao
+
+    private var job: Job? = null
+    private val scope = CoroutineScope(Dispatchers.Default)
+
+
+    fun getKline(market: String): LiveData<List<Kline>> {
+        refreshKline()
+        return klineDao.loadByMarket(market)
+    }
+
+    private fun refreshKline() {
+        MarketRepository.job = MarketRepository.scope.launch {
+            stemeraldApiClient.kline().await().forEach { MarketRepository.klineDao.save(it) }
+        }
+    }
+
+}
+
+
 object WalletRepository {
     private val assetDao: AssetDao = stemeraldDatabase.assetDao
     private val balanceDao: BalanceDao = stemeraldDatabase.balanceDao

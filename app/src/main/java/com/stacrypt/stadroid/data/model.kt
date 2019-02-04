@@ -31,6 +31,22 @@ data class Asset(
 )
 
 @Entity(
+    primaryKeys = arrayOf(
+        "market", "time"
+    )
+)
+data class Kline(
+    var market: String,
+    var time: Long,
+    var o: Double,
+    var h: Double,
+    var l: Double,
+    var c: Double,
+    var volume: Double,
+    var amount: Double
+)
+
+@Entity(
 //    foreignKeys = [ForeignKey(
 //        entity = Asset::class,
 //        parentColumns = arrayOf("name"),
