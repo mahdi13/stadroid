@@ -18,11 +18,13 @@ import com.github.mikephil.charting.data.CandleEntry
 import com.github.mikephil.charting.data.DataSet
 import com.github.mikephil.charting.utils.ColorTemplate
 
-import com.stacrypt.stadroid.R
 import com.stacrypt.stadroid.data.Balance
 import com.stacrypt.stadroid.data.Kline
 import com.stacrypt.stadroid.wallet.AssetBalanceViewModel
 import kotlinx.android.synthetic.main.fragment_market_candlestick.*
+import com.github.mikephil.charting.components.Legend
+import com.stacrypt.stadroid.R
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -49,8 +51,8 @@ class MarketCandlestickFragment : Fragment() {
 
         items?.forEachIndexed { i, it ->
             //            val multi = seekBarY.getProgress() + 1
-            val multi = i + 1
-            val `val` = (Math.random() * 40).toFloat() + multi
+//            val multi = i + 1
+//            val `val` = 0F
 
 //            val high = (Math.random() * 9).toFloat() + 8f
 //            val low = (Math.random() * 9).toFloat() + 8f
@@ -65,14 +67,15 @@ class MarketCandlestickFragment : Fragment() {
             val open = it.o.toFloat()
             val close = it.c.toFloat()
 
-            val even = i % 2 == 0
+//            val even = i % 2 == 0
 
             values.add(
                 CandleEntry(
-                    i.toFloat(), `val` + high,
-                    `val` - low,
-                    if (even) `val` + open else `val` - open,
-                    if (even) `val` - close else `val` + close
+                    i.toFloat(),
+                    high,
+                    low,
+                    open,
+                    close
 //                    resources.getDrawable(R.drawable.star)
                 )
             )
@@ -83,7 +86,7 @@ class MarketCandlestickFragment : Fragment() {
         dataset.setDrawIcons(false)
         dataset.axisDependency = YAxis.AxisDependency.LEFT
         dataset.shadowColor = Color.DKGRAY
-        dataset.shadowWidth = 0.7f
+        dataset.shadowWidth = 0.1f
         dataset.decreasingColor = Color.RED
         dataset.decreasingPaintStyle = Paint.Style.FILL
         dataset.increasingColor = Color.rgb(122, 242, 84)
@@ -99,40 +102,68 @@ class MarketCandlestickFragment : Fragment() {
     private fun initChart(dataset: CandleDataSet) {
         chart.setBackgroundColor(Color.WHITE)
 
-        chart.description.isEnabled = false
+//        chart.description.isEnabled = false
+//
+//        // if more than 60 entries are displayed in the chart, no values will be
+//        // drawn
+//        chart.setMaxVisibleValueCount(1000)
+//
+//        // scaling can now only be done on x- and y-axis separately
+//        chart.setPinchZoom(false)
+//        chart.isHorizontalScrollBarEnabled = true
+//
+//        chart.setDrawGridBackground(false)
+//
+//        val xAxis = chart.xAxis
+//        xAxis.position = XAxis.XAxisPosition.BOTTOM
+//        xAxis.setDrawGridLines(false)
+//
+//        val leftAxis = chart.axisLeft
+////        leftAxis.setEnabled(false);
+//        leftAxis.setLabelCount(1000, false)
+//        leftAxis.setDrawGridLines(false)
+//        leftAxis.setDrawAxisLine(false)
+//
+//        val rightAxis = chart.axisRight
+//        rightAxis.isEnabled = false
+////        rightAxis.setStartAtZero(false);
+//
+////        // setting data
+////        seekBarX.setProgress(40)
+////        seekBarY.setProgress(100)
+//
+//        chart.legend.isEnabled = false
+//
+//        chart.resetTracking()
 
-        // if more than 60 entries are displayed in the chart, no values will be
-        // drawn
-        chart.setMaxVisibleValueCount(60)
+        chart.setHighlightPerDragEnabled(true)
 
-        // scaling can now only be done on x- and y-axis separately
-        chart.setPinchZoom(false)
+        chart.setDrawBorders(true)
 
-        chart.setDrawGridBackground(false)
+//        chart.setBorderColor(resources.getColor(R.color.colorLightGray))
 
-        val xAxis = chart.xAxis
-        xAxis.position = XAxis.XAxisPosition.BOTTOM
-        xAxis.setDrawGridLines(false)
+        val yAxis = chart.getAxisLeft()
+        val rightAxis = chart.getAxisRight()
+        yAxis.setDrawGridLines(false)
+        rightAxis.setDrawGridLines(false)
+        chart.requestDisallowInterceptTouchEvent(true)
 
-        val leftAxis = chart.axisLeft
-//        leftAxis.setEnabled(false);
-        leftAxis.setLabelCount(7, false)
-        leftAxis.setDrawGridLines(false)
-        leftAxis.setDrawAxisLine(false)
+        val xAxis = chart.getXAxis()
 
-        val rightAxis = chart.axisRight
-        rightAxis.isEnabled = false
-//        rightAxis.setStartAtZero(false);
+        xAxis.setDrawGridLines(false)// disable x axis grid lines
+        xAxis.setDrawLabels(false)
+        rightAxis.setTextColor(Color.WHITE)
+        yAxis.setDrawLabels(false)
+        xAxis.setGranularity(1f)
+        xAxis.setGranularityEnabled(true)
+        xAxis.setAvoidFirstLastClipping(true)
 
-//        // setting data
-//        seekBarX.setProgress(40)
-//        seekBarY.setProgress(100)
+        val l = chart.getLegend()
+        l.setEnabled(false)
 
-        chart.legend.isEnabled = false
-
-        chart.resetTracking()
 
         chart.data = CandleData(dataset)
+        chart.invalidate()
 
     }
 
