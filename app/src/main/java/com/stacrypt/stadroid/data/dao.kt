@@ -30,6 +30,6 @@ interface KlineDao {
     @Insert(onConflict = REPLACE)
     fun save(kline: Kline)
 
-    @Query("SELECT * FROM Kline WHERE market = :market ORDER BY time DESC")
+    @Query("SELECT * FROM Kline WHERE market = :market ORDER BY time DESC LIMIT 10000")
     fun loadByMarket(market: String): LiveData<List<Kline>>
 }

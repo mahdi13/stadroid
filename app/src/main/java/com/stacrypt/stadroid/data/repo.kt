@@ -18,7 +18,9 @@ object MarketRepository {
 
     private fun refreshKline() {
         MarketRepository.job = MarketRepository.scope.launch {
-            stemeraldApiClient.kline().await().forEach { MarketRepository.klineDao.save(it) }
+            stemeraldApiClient.kline().await().forEach {
+                MarketRepository.klineDao.save(it)
+            }
         }
     }
 

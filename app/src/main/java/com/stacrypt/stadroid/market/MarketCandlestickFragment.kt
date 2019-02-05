@@ -24,12 +24,15 @@ import com.stacrypt.stadroid.wallet.AssetBalanceViewModel
 import kotlinx.android.synthetic.main.fragment_market_candlestick.*
 import com.github.mikephil.charting.components.Legend
 import com.stacrypt.stadroid.R
+import kotlin.math.absoluteValue
 
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
+
+private const val SHOWING_ITEMS = 20
 
 /**
  * A simple [Fragment] subclass.
@@ -47,123 +50,106 @@ class MarketCandlestickFragment : Fragment() {
     private fun initDataset(items: List<Kline>?): CandleDataSet {
         val values = ArrayList<CandleEntry>()
 
-
-
         items?.forEachIndexed { i, it ->
-            //            val multi = seekBarY.getProgress() + 1
-//            val multi = i + 1
-//            val `val` = 0F
-
-//            val high = (Math.random() * 9).toFloat() + 8f
-//            val low = (Math.random() * 9).toFloat() + 8f
-//
-//            val open = (Math.random() * 6).toFloat() + 1f
-//            val close = (Math.random() * 6).toFloat() + 1f
-
-
-            val high = it.h.toFloat()
-            val low = it.l.toFloat()
-
-            val open = it.o.toFloat()
-            val close = it.c.toFloat()
-
-//            val even = i % 2 == 0
-
             values.add(
                 CandleEntry(
                     i.toFloat(),
-                    high,
-                    low,
-                    open,
-                    close
-//                    resources.getDrawable(R.drawable.star)
+                    it.h.toFloat(),
+                    it.l.toFloat(),
+                    it.o.toFloat(),
+                    it.c.toFloat()
                 )
             )
         }
 
-        val dataset = CandleDataSet(values, "Data Set")
+        val dataset = CandleDataSet(values, "")
 
         dataset.setDrawIcons(false)
         dataset.axisDependency = YAxis.AxisDependency.LEFT
-        dataset.shadowColor = Color.DKGRAY
-        dataset.shadowWidth = 0.1f
-        dataset.decreasingColor = Color.RED
+        dataset.shadowColorSameAsCandle = true
+        dataset.shadowWidth = 1f
+        dataset.valueTextColor = Color.WHITE
+        dataset.decreasingColor = resources.getColor(R.color.pink_A400)
         dataset.decreasingPaintStyle = Paint.Style.FILL
-        dataset.increasingColor = Color.rgb(122, 242, 84)
-        dataset.increasingPaintStyle = Paint.Style.STROKE
+        dataset.increasingColor = resources.getColor(R.color.green_A400)
+        dataset.increasingPaintStyle = Paint.Style.FILL
         dataset.neutralColor = Color.BLUE
 
-
-        dataset.colors = ColorTemplate.COLORFUL_COLORS.toList()
+        dataset.colors = ColorTemplate.VORDIPLOM_COLORS.toList()
 
         return dataset
     }
 
     private fun initChart(dataset: CandleDataSet) {
-        chart.setBackgroundColor(Color.WHITE)
+        // Set dataset
+        chart.data = CandleData(dataset)
+        chart.notifyDataSetChanged()
+//        chart.setVisibleYRangeMinimum(1_000F, YAxis.AxisDependency.RIGHT)
+//        chart.setVisibleYRangeMaximum(10_000F, YAxis.AxisDependency.RIGHT)
+//        chart.setVisibleYRangeMinimum(1_000F, YAxis.AxisDependency.LEFT)
+//        chart.setVisibleYRangeMaximum(10_000F, YAxis.AxisDependency.LEFT)
+        chart.invalidate()
+//        chart.setMaxVisibleValueCount(100)
+//        chart.zoom(1F, 1F, 100F, 100F)
+        // scaling can now only be done on x- and y-axis separately
+        chart.setPinchZoom(true)
+        chart.isDoubleTapToZoomEnabled = false
+        chart.isNestedScrollingEnabled = true
+        chart.isHorizontalScrollBarEnabled = true
+        chart.isVerticalScrollBarEnabled = true
+        chart.setVisibleXRange(SHOWING_ITEMS.toFloat(), SHOWING_ITEMS.toFloat())
+        chart.moveViewToX((dataset.values.size - SHOWING_ITEMS / 2).toFloat())
+        chart.description.isEnabled = false
+        chart.isScaleYEnabled= false
+        chart.isScaleXEnabled= true
 
-//        chart.description.isEnabled = false
-//
-//        // if more than 60 entries are displayed in the chart, no values will be
-//        // drawn
-//        chart.setMaxVisibleValueCount(1000)
-//
-//        // scaling can now only be done on x- and y-axis separately
-//        chart.setPinchZoom(false)
-//        chart.isHorizontalScrollBarEnabled = true
-//
-//        chart.setDrawGridBackground(false)
-//
-//        val xAxis = chart.xAxis
-//        xAxis.position = XAxis.XAxisPosition.BOTTOM
-//        xAxis.setDrawGridLines(false)
-//
-//        val leftAxis = chart.axisLeft
-////        leftAxis.setEnabled(false);
-//        leftAxis.setLabelCount(1000, false)
-//        leftAxis.setDrawGridLines(false)
-//        leftAxis.setDrawAxisLine(false)
-//
-//        val rightAxis = chart.axisRight
-//        rightAxis.isEnabled = false
-////        rightAxis.setStartAtZero(false);
-//
-////        // setting data
-////        seekBarX.setProgress(40)
-////        seekBarY.setProgress(100)
-//
-//        chart.legend.isEnabled = false
-//
-//        chart.resetTracking()
+        // Colors
+        chart.setBackgroundColor(resources.getColor(R.color.colorPrimary))
 
-        chart.setHighlightPerDragEnabled(true)
+        // Touch
+        chart.requestDisallowInterceptTouchEvent(true)
 
-        chart.setDrawBorders(true)
+        // xAxis
+        val xAxis = chart.xAxis
+        xAxis.position = XAxis.XAxisPosition.BOTTOM
+        xAxis.setDrawGridLines(false)// disable x axis grid lines
+        xAxis.setDrawLabels(true)
+//        xAxis.axisMinimum = (dataset.values.size - 25).toFloat()
+//        xAxis.axisMaximum = dataset.values.size.toFloat()
+        xAxis.granularity = 1f
+        xAxis.isGranularityEnabled = true
+        xAxis.setAvoidFirstLastClipping(true)
+        xAxis.axisLineColor = Color.WHITE
+        xAxis.textColor = Color.WHITE
+        xAxis.setValueFormatter { value, axis ->
+            "${((value * 5) / 60).toInt() % 24}:${(value * 5).toInt() % 60}"
+        }
+
+        // Right Axis
+        chart.axisRight.isEnabled = false
+
+        // Left axis
+        val leftAxis = chart.axisLeft
+        leftAxis.setLabelCount(7, false)
+        leftAxis.setDrawGridLines(false)
+        leftAxis.setDrawAxisLine(false)
+        leftAxis.axisLineColor = Color.WHITE
+        leftAxis.textColor = Color.WHITE
+
+
+
+        chart.isHighlightPerDragEnabled = true
+
+        chart.setDrawBorders(false)
+        chart.setBorderWidth(0F)
 
 //        chart.setBorderColor(resources.getColor(R.color.colorLightGray))
 
-        val yAxis = chart.getAxisLeft()
-        val rightAxis = chart.getAxisRight()
-        yAxis.setDrawGridLines(false)
-        rightAxis.setDrawGridLines(false)
-        chart.requestDisallowInterceptTouchEvent(true)
 
-        val xAxis = chart.getXAxis()
+        chart.axisRight.textColor = Color.WHITE
 
-        xAxis.setDrawGridLines(false)// disable x axis grid lines
-        xAxis.setDrawLabels(false)
-        rightAxis.setTextColor(Color.WHITE)
-        yAxis.setDrawLabels(false)
-        xAxis.setGranularity(1f)
-        xAxis.setGranularityEnabled(true)
-        xAxis.setAvoidFirstLastClipping(true)
+        chart.legend.isEnabled = false
 
-        val l = chart.getLegend()
-        l.setEnabled(false)
-
-
-        chart.data = CandleData(dataset)
-        chart.invalidate()
 
     }
 
