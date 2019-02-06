@@ -7,6 +7,8 @@ import kotlinx.coroutines.*
 object MarketRepository {
     private val klineDao: KlineDao = stemeraldDatabase.klineDao
     private val bookDao: BookDao = stemeraldDatabase.bookDao
+    private val dealDao: DealDao = stemeraldDatabase.dealDao
+    private val mineDao: MineDao = stemeraldDatabase.mineDao
 
     private var job: Job? = null
     private val scope = CoroutineScope(Dispatchers.Default)
@@ -22,6 +24,16 @@ object MarketRepository {
         return bookDao.loadByMarket(market)
     }
 
+    fun getDeal(market: String): LiveData<List<Deal>> {
+        refreshDeal()
+        return dealDao.loadByMarket(market)
+    }
+
+    fun getMine(market: String): LiveData<List<Mine>> {
+        refreshMine()
+        return mineDao.loadByMarket(market)
+    }
+
     private fun refreshKline() {
         MarketRepository.scope.launch {
             stemeraldApiClient.kline().await().forEach {
@@ -34,6 +46,22 @@ object MarketRepository {
         MarketRepository.scope.launch {
             stemeraldApiClient.book().await().run { buys + sells }.forEach {
                 MarketRepository.bookDao.save(it)
+            }
+        }
+    }
+
+    private fun refreshDeal() {
+        MarketRepository.scope.launch {
+            stemeraldApiClient.deal().await().forEach {
+                MarketRepository.dealDao.save(it)
+            }
+        }
+    }
+
+    private fun refreshMine() {
+        MarketRepository.scope.launch {
+            stemeraldApiClient.mine().await().forEach {
+                MarketRepository.mineDao.save(it)
             }
         }
     }

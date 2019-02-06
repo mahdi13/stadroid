@@ -42,3 +42,21 @@ interface BookDao {
     @Query("SELECT * FROM Book WHERE market = :market ORDER BY i ASC")
     fun loadByMarket(market: String): LiveData<List<Book>>
 }
+
+@Dao
+interface DealDao {
+    @Insert(onConflict = REPLACE)
+    fun save(deal: Deal)
+
+    @Query("SELECT * FROM Deal WHERE market = :market ORDER BY time DESC")
+    fun loadByMarket(market: String): LiveData<List<Deal>>
+}
+
+@Dao
+interface MineDao {
+    @Insert(onConflict = REPLACE)
+    fun save(mine: Mine)
+
+    @Query("SELECT * FROM Mine WHERE market = :market ORDER BY time DESC")
+    fun loadByMarket(market: String): LiveData<List<Mine>>
+}

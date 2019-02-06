@@ -1,7 +1,6 @@
 package com.stacrypt.stadroid.data
 
 import androidx.room.Entity
-import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
 data class Market(
@@ -53,6 +52,35 @@ data class Book(
     var side: String,
     var price: String,
     var amount: String
+)
+
+@Entity(
+    primaryKeys = ["market", "id"]
+)
+data class Deal(
+    var market: String,
+    var id: Int,
+    var time: Long,
+    var type: String,
+    var amount: String,
+    var price: String
+)
+
+@Entity(
+    primaryKeys = ["market", "id"]
+)
+data class Mine(
+    var id: Int,
+    var market: String,
+    var user: String,
+    var time: Long,
+    var side: String,
+    var role: String,
+    var amount: String,
+    var price: String,
+    var fee: String,
+    var fillId: Int,
+    var orderId: Int
 )
 
 @Entity(

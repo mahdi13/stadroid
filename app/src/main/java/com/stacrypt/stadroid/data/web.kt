@@ -28,6 +28,12 @@ interface StemeraldApiClient {
 
     @GET("stacrypt-order-book.json?key=98063e30")
     fun book(): Deferred<BookResponse>
+
+    @GET("stacrypt-deals.json?key=98063e30")
+    fun deal(): Deferred<ArrayList<Deal>>
+
+    @GET("stacrypt-mine.json?key=98063e30")
+    fun mine(): Deferred<ArrayList<Mine>>
 }
 
 var okHttpClient = OkHttpClient.Builder()
