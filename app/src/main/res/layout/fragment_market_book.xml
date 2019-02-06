@@ -1,34 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="wrap_content"
-                android:layout_height="70dp"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:orientation="horizontal"
-        android:id="@+id/container">
 
-    <!--<androidx.appcompat.widget.AppCompatSeekBar-->
-            <!--style="@style/Widget.AppCompat.ProgressBar.Horizontal"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:progress="60"-->
-            <!--android:progressTint="@color/blue_900"-->
-            <!--android:progressBackgroundTint="@color/red_500"-->
-            <!--android:thumb="null"-->
-            <!--android:paddingTop="10px"-->
-            <!--android:paddingBottom="10px"-->
-            <!--android:paddingStart="30px"-->
-            <!--android:paddingEnd="30px"-->
-            <!--android:maxHeight="70dp"-->
-            <!--android:minHeight="70dp"-->
-            <!--/>-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
 
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true">
+
+        <View   android:id="@+id/bg_left"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingEnd="10dp"
+                android:background="@color/green_500"/>
+
+        <View android:id="@+id/bg_right"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingStart="10dp"
+                android:background="@color/red_500"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true">
 
         <TextView
-                android:id="@+id/price"
+                android:id="@+id/price_left"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -37,7 +48,25 @@
                 android:textAppearance="?attr/textAppearanceListItem"/>
 
         <TextView
-                android:id="@+id/amount"
+                android:id="@+id/amount_left"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="@dimen/text_margin"
+                android:text="2.43498573"
+                android:textAppearance="?attr/textAppearanceListItem"/>
+
+        <TextView
+                android:id="@+id/price_right"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="@dimen/text_margin"
+                android:text="345.12"
+                android:textAppearance="?attr/textAppearanceListItem"/>
+
+        <TextView
+                android:id="@+id/amount_right"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
