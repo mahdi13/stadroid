@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.stacrypt.stadroid.R
-import com.stacrypt.stadroid.data.Book
 import com.stacrypt.stadroid.data.Mine
 
 
