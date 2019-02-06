@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.stacrypt.stadroid.R
+import com.stacrypt.stadroid.data.Book
 
 
 import com.stacrypt.stadroid.market.MarketBookFragment.OnListFragmentInteractionListener
@@ -19,7 +20,7 @@ import kotlinx.android.synthetic.main.fragment_market_book.view.*
  * TODO: Replace the implementation with code for your data type.
  */
 class MarketBookRecyclerViewAdapter(
-    private val mValues: List<DummyItem>,
+    private val items: List<Pair<Book?, Book?>>,
     private val mListener: OnListFragmentInteractionListener?
 ) : RecyclerView.Adapter<MarketBookRecyclerViewAdapter.ViewHolder>() {
 

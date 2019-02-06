@@ -31,9 +31,7 @@ data class Asset(
 )
 
 @Entity(
-    primaryKeys = arrayOf(
-        "market", "time"
-    )
+    primaryKeys = ["market", "time"]
 )
 data class Kline(
     var market: String,
@@ -44,6 +42,17 @@ data class Kline(
     var c: Double,
     var volume: Double,
     var amount: Double
+)
+
+@Entity(
+    primaryKeys = ["market", "i", "side"]
+)
+data class Book(
+    var market: String,
+    var i: Int,
+    var side: String,
+    var price: String,
+    var amount: String
 )
 
 @Entity(

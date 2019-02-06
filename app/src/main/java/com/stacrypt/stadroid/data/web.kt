@@ -23,6 +23,9 @@ interface StemeraldApiClient {
 
     @GET("stacrypt-kline.json?key=98063e30")
     fun kline(): Deferred<ArrayList<Kline>>
+
+    @GET("stacrypt-order-book.json?key=98063e30")
+    fun book(): Deferred<ArrayList<Book>>
 }
 
 var okHttpClient = OkHttpClient.Builder()

@@ -8,7 +8,8 @@ import androidx.room.Database
     entities = [
         Asset::class,
         Balance::class,
-        Kline::class
+        Kline::class,
+        Book::class
 //        Market::class,
 //        MarketStatus::class
     ],
@@ -18,6 +19,7 @@ abstract class StemeraldDatabase : RoomDatabase() {
     abstract val assetDao: AssetDao
     abstract val balanceDao: BalanceDao
     abstract val klineDao: KlineDao
+    abstract val bookDao: BookDao
 }
 
 lateinit var stemeraldDatabase: StemeraldDatabase

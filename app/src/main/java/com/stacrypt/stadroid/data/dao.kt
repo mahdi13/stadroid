@@ -33,3 +33,12 @@ interface KlineDao {
     @Query("SELECT * FROM Kline WHERE market = :market ORDER BY time DESC LIMIT 10000")
     fun loadByMarket(market: String): LiveData<List<Kline>>
 }
+
+@Dao
+interface BookDao {
+    @Insert(onConflict = REPLACE)
+    fun save(book: Book)
+
+    @Query("SELECT * FROM Book WHERE market = :market ORDER BY i ASC")
+    fun loadByMarket(market: String): LiveData<List<Book>>
+}
