@@ -32,7 +32,7 @@ object MarketRepository {
 
     private fun refreshBook() {
         MarketRepository.scope.launch {
-            stemeraldApiClient.book().await().forEach {
+            stemeraldApiClient.book().await().serialize().forEach {
                 MarketRepository.bookDao.save(it)
             }
         }

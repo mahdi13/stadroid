@@ -11,6 +11,10 @@ import retrofit2.http.GET
 //const val STEMERALD_API_URL = "http://localhost:8070"
 const val STEMERALD_API_URL = "https://my.api.mockaroo.com/"
 
+data class BookResponse(val buys: ArrayList<Book>, val sells: ArrayList<Book>) {
+    fun serialize() = buys.map { it.side = "buy"; it } + sells.map { it.side = "sell"; it }
+}
+
 interface StemeraldApiClient {
     @GET("assets")
     fun assetList(): Deferred<ArrayList<Asset>>
@@ -25,7 +29,7 @@ interface StemeraldApiClient {
     fun kline(): Deferred<ArrayList<Kline>>
 
     @GET("stacrypt-order-book.json?key=98063e30")
-    fun book(): Deferred<ArrayList<Book>>
+    fun book(): Deferred<BookResponse>
 }
 
 var okHttpClient = OkHttpClient.Builder()

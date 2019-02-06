@@ -33,7 +33,7 @@ class MarketActivityFragment : Fragment() {
             override fun getItem(position: Int): Fragment {
                 return when (position) {
                     0 -> MarketMineFragment.newInstance(1)
-                    1 -> MarketBookFragment.newInstance(2)
+                    1 -> MarketBookFragment()
                     2 -> MarketCandlestickFragment.newInstance("", "")
                     3 -> MarketHistoryFragment.newInstance(1)
                     else -> throw IndexOutOfBoundsException()

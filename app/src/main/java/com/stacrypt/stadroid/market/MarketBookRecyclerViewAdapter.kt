@@ -1,5 +1,7 @@
 package com.stacrypt.stadroid.market
 
+import android.graphics.Color
+import android.graphics.drawable.Drawable
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -8,32 +10,13 @@ import android.widget.TextView
 import com.stacrypt.stadroid.R
 import com.stacrypt.stadroid.data.Book
 
-
-import com.stacrypt.stadroid.market.MarketBookFragment.OnListFragmentInteractionListener
-import com.stacrypt.stadroid.market.dummy.DummyContent.DummyItem
-
 import kotlinx.android.synthetic.main.fragment_market_book.view.*
+import android.graphics.drawable.GradientDrawable
 
-/**
- * [RecyclerView.Adapter] that can display a [DummyItem] and makes a call to the
- * specified [OnListFragmentInteractionListener].
- * TODO: Replace the implementation with code for your data type.
- */
+
 class MarketBookRecyclerViewAdapter(
-    private val items: List<Pair<Book?, Book?>>,
-    private val mListener: OnListFragmentInteractionListener?
+    var items: List<Pair<Book?, Book?>>
 ) : RecyclerView.Adapter<MarketBookRecyclerViewAdapter.ViewHolder>() {
-
-    private val mOnClickListener: View.OnClickListener
-
-    init {
-        mOnClickListener = View.OnClickListener { v ->
-            val item = v.tag as DummyItem
-            // Notify the active callbacks interface (the activity, if the fragment is attached to
-            // one) that an item has been selected.
-            mListener?.onListFragmentInteraction(item)
-        }
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -42,24 +25,24 @@ class MarketBookRecyclerViewAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = mValues[position]
-        holder.mIdView.text = item.id
-        holder.mContentView.text = item.content
+        val isLeft = position % 2 == 0
+        val item = if (isLeft) items[position].first else items[position].second
+        holder.priceView.text = item?.price ?: ""
+        holder.amountView.text = item?.amount ?: ""
 
-        with(holder.mView) {
-            tag = item
-            setOnClickListener(mOnClickListener)
-        }
+        val shape = GradientDrawable()
+        shape.shape = GradientDrawable.OVAL
+        shape.setColor(Color.WHITE)
+        shape.setStroke(2, Color.BLACK)
+        holder.containerView.background = shape
+
     }
 
-    override fun getItemCount(): Int = mValues.size
+    override fun getItemCount(): Int = items.size
 
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
-        val mIdView: TextView = mView.item_number
-        val mContentView: TextView = mView.content
-
-        override fun toString(): String {
-            return super.toString() + " '" + mContentView.text + "'"
-        }
+        val containerView: View = mView.container
+        val priceView: TextView = mView.price
+        val amountView: TextView = mView.amount
     }
 }
