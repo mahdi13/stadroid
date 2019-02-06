@@ -11,9 +11,7 @@ import retrofit2.http.GET
 //const val STEMERALD_API_URL = "http://localhost:8070"
 const val STEMERALD_API_URL = "https://my.api.mockaroo.com/"
 
-data class BookResponse(val buys: ArrayList<Book>, val sells: ArrayList<Book>) {
-    fun serialize() = buys.map { it.side = "buy"; it } + sells.map { it.side = "sell"; it }
-}
+data class BookResponse(val buys: ArrayList<Book>, val sells: ArrayList<Book>)
 
 interface StemeraldApiClient {
     @GET("assets")
