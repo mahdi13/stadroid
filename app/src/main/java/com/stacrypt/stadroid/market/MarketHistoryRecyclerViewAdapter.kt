@@ -9,10 +9,12 @@ import com.stacrypt.stadroid.R
 import com.stacrypt.stadroid.data.Deal
 
 import kotlinx.android.synthetic.main.fragment_market_history.view.*
+import org.jetbrains.anko.textColorResource
+import kotlin.math.abs
 
 class MarketHistoryRecyclerViewAdapter(
     var items: List<Deal>
-    ) : RecyclerView.Adapter<MarketHistoryRecyclerViewAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<MarketHistoryRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -22,14 +24,31 @@ class MarketHistoryRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
-        holder.mIdView.text = item.id
-        holder.mContentView.text = item.content
+        holder.amountView.text = item.amount
+        holder.priceView.text = item.price
+
+        val newPrice = item.price.toDouble()
+        val lastPrice = if (position > 0) items[position - 1].price.toDouble() else newPrice
+        val change = newPrice - lastPrice
+        val changePercent = abs(change) / lastPrice * 100.0
+
+        holder.changeView.text = String.format("%.${2}f", changePercent)
+
+        if (change >= 0) {
+            holder.priceView.textColorResource = R.color.pink_600
+            holder.changeView.textColorResource = R.color.pink_600
+        } else {
+            holder.priceView.textColorResource = R.color.green_600
+            holder.changeView.textColorResource = R.color.green_600
+        }
+
     }
 
     override fun getItemCount(): Int = items.size
 
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
-        val mIdView: TextView = mView.item_number
-        val mContentView: TextView = mView.content
+        val amountView: TextView = mView.amount
+        val priceView: TextView = mView.price
+        val changeView: TextView = mView.change
     }
 }
