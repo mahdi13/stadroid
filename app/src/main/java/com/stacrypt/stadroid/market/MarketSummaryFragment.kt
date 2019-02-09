@@ -2,14 +2,13 @@ package com.stacrypt.stadroid.market
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 
 import androidx.lifecycle.ViewModelProviders
 import com.stacrypt.stadroid.R
-import com.stacrypt.stadroid.data.Deal
+import com.stacrypt.stadroid.data.Market
 
 
 class MarketSummaryFragment : Fragment() {
@@ -24,10 +23,8 @@ class MarketSummaryFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(MarketViewModel::class.java)
-        viewModel.deal.observe(this,
-            Observer<List<Deal>> { deals ->
-                adapter.items = deals
-                adapter.notifyDataSetChanged()
+        viewModel.market.observe(this,
+            Observer<List<Market>> { market ->
             })
 
     }

@@ -7,6 +7,9 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
+import retrofit2.http.Query
+import retrofit2.http.Url
 
 //const val STEMERALD_API_URL = "http://localhost:8070"
 const val STEMERALD_API_URL = "https://my.api.mockaroo.com/"
@@ -20,8 +23,14 @@ interface StemeraldApiClient {
     @GET("stacrypt-balances.json?key=98063e30")
     fun balanceList(): Deferred<ArrayList<Balance>>
 
-    @GET
+    @GET("stacrypt-market-list.json?key=98063e30")
     fun marketList(): Deferred<ArrayList<Market>>
+
+    @GET("stacrypt-market-status.json?key=98063e30")
+    fun marketStatus(@Path("market") market: String): Deferred<MarketStatus>
+
+    @GET("stacrypt-market-list.json?key=98063e30")
+    fun marketSummary(@Path("market") market: String, @Query("period") period: Long = 86400): Deferred<ArrayList<MarketSummary>>
 
     @GET("stacrypt-kline.json?key=98063e30")
     fun kline(): Deferred<ArrayList<Kline>>

@@ -5,6 +5,23 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
+import androidx.room.Update
+
+
+@Dao
+interface MarketDao {
+    @Insert(onConflict = REPLACE)
+    fun save(market: Market)
+
+    @Update(onConflict = REPLACE)
+    fun update(market: Market)
+
+    @Query("SELECT * FROM Market WHERE name = :name")
+    fun load(name: String): LiveData<Market>
+
+    @Query("SELECT * FROM Market ORDER BY name ASC")
+    fun loadAll(): LiveData<List<Market>>
+}
 
 
 @Dao

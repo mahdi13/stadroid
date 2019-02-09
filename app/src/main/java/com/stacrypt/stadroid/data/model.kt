@@ -1,26 +1,41 @@
 package com.stacrypt.stadroid.data
 
+import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+@Entity
 data class Market(
-    val name: String,
-    val stock: Long,
-    val stockPrec: Long,
-    val money: Long,
-    val feePrec: Float,
-    val minAmount: Long,
-    val moneyPrec: Float
+    @PrimaryKey var name: String,
+    var stock: String,
+    var stockPrec: Int,
+    var money: String,
+    var feePrec: Int,
+    var minAmount: String,
+    var moneyPrec: Int,
+    @Embedded var status: MarketStatus?,
+    @Embedded var summary: MarketSummary?
 
 )
 
 data class MarketStatus(
-    val open: Long,  // open price
-    val last: Long,  // latest price
-    val high: Long,  // highest price
-    val low: Long,   //  lowest price
-    val deal: Long,  // amount
-    val volume: Long // volume
+    val open: Long,
+    val high: Long,
+    val low: Long,
+    val close: Long,
+    val last: Long,
+    val deal: Long,
+    val volume: Long,
+    val period: Long
+)
+
+data class MarketSummary(
+    val open: Long,
+    val last: Long,
+    val high: Long,
+    val low: Long,
+    val deal: Long,
+    val volume: Long
 )
 
 @Entity
