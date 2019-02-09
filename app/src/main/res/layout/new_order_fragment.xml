@@ -38,9 +38,11 @@
 
                 <com.google.android.material.button.MaterialButton
                         style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
-                        android:text="Selllllll !"
+                        android:text="S E L L"
+                        android:fontFamily="@font/open_sans_bold"
+                        android:textColor="@color/colorPrimaryDark"
                         app:strokeColor="@color/colorPrimaryDark"
-                        android:backgroundTint="@color/redLight"
+                        android:backgroundTint="@color/pink_400"
                         android:layout_margin="3dp"
                         android:layout_width="0dp"
                         android:layout_weight="1"
@@ -49,9 +51,11 @@
 
                 <com.google.android.material.button.MaterialButton
                         style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
-                        android:text="Buyyyyyy !"
+                        android:text="B U Y"
+                        android:fontFamily="@font/open_sans_bold"
+                        android:textColor="@color/colorPrimaryDark"
                         app:strokeColor="@color/colorPrimaryDark"
-                        android:backgroundTint="@color/greenLight"
+                        android:backgroundTint="@color/green_A400"
                         android:layout_margin="3dp"
                         android:layout_weight="1"
                         android:layout_width="0dp"
@@ -78,7 +82,7 @@
                         android:inputType="number"
                         android:ems="10"
                         android:id="@+id/amount"
-                        android:text="@={viewmodel.amount}"/>
+                        android:text=""/>
 
             </TableRow>
 
@@ -101,7 +105,7 @@
                         android:inputType="number"
                         android:ems="10"
                         android:id="@+id/price"
-                        android:text="@={viewmodel.price"/>
+                        android:text=""/>
 
             </TableRow>
         </TableLayout>

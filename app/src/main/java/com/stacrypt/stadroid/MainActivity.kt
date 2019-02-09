@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
     private fun switchFragment(pos: Int, tag: String) {
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.container, pages[pos], tag)
+            .replace(R.id.nested_content, pages[pos], tag)
             .commit()
     }
 

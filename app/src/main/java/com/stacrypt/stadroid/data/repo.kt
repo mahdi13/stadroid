@@ -15,22 +15,22 @@ object MarketRepository {
 
 
     fun getKline(market: String): LiveData<List<Kline>> {
-        refreshKline()
+//        refreshKline()
         return klineDao.loadByMarket(market)
     }
 
     fun getBook(market: String): LiveData<List<Book>> {
-        refreshBook()
+//        refreshBook()
         return bookDao.loadByMarket(market)
     }
 
     fun getDeal(market: String): LiveData<List<Deal>> {
-        refreshDeal()
+//        refreshDeal()
         return dealDao.loadByMarket(market)
     }
 
     fun getMine(market: String): LiveData<List<Mine>> {
-        refreshMine()
+//        refreshMine()
         return mineDao.loadByMarket(market)
     }
 
@@ -104,12 +104,12 @@ object WalletRepository {
 //    }
 
     fun getBalances(): LiveData<List<Balance>> {
-        refreshBalances()
+//        refreshBalances()
         return balanceDao.loadAll()
     }
 
     fun getAsset(): LiveData<List<Asset>> {
-        refreshAssets()
+//        refreshAssets()
         return assetDao.loadAll()
     }
 
