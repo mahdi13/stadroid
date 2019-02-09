@@ -44,6 +44,7 @@ class MarketActivityFragment : Fragment() {
         }
 
         childFragmentManager.beginTransaction().replace(R.id.new_order, NewOrderFragment()).commitNow()
+        childFragmentManager.beginTransaction().replace(R.id.new_order, NewOrderFragment()).commitNow()
 
     }
 

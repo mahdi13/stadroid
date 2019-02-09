@@ -15,7 +15,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="150dp"
         tools:context=".market.NewOrderFragment"
         android:padding="5dp">
 
@@ -25,7 +25,7 @@
 
 
         <TableLayout
-                android:layout_width="match_parent"
+                android:layout_width="407dp"
                 android:layout_height="match_parent"
                 android:gravity="center">
 
@@ -68,13 +68,6 @@
                     android:layout_height="match_parent"
                     android:gravity="center_horizontal">
 
-                <TextView
-                        style="@style/TextAppearance.MaterialComponents.Body1"
-                        android:text="Amount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/textView"/>
-
                 <com.google.android.material.textfield.TextInputEditText
                         style="@style/Widget.MaterialComponents.TextInputEditText.FilledBox"
                         android:layout_width="wrap_content"
@@ -82,21 +75,8 @@
                         android:inputType="number"
                         android:ems="10"
                         android:id="@+id/amount"
+                        android:hint="Amount"
                         android:text=""/>
-
-            </TableRow>
-
-            <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_horizontal">
-
-                <TextView
-                        style="@style/TextAppearance.MaterialComponents.Body1"
-                        android:text="Price"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/textView2"/>
 
                 <com.google.android.material.textfield.TextInputEditText
                         style="@style/Widget.MaterialComponents.TextInputEditText.FilledBox"
@@ -105,9 +85,12 @@
                         android:inputType="number"
                         android:ems="10"
                         android:id="@+id/price"
+                        android:hint="Price"
                         android:text=""/>
 
+
             </TableRow>
+
         </TableLayout>
     </androidx.cardview.widget.CardView>
 
