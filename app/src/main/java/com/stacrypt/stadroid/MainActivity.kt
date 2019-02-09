@@ -12,7 +12,6 @@ import org.jetbrains.anko.toast
 import androidx.fragment.app.Fragment
 import com.stacrypt.stadroid.data.Market
 import com.stacrypt.stadroid.data.StemeraldDatabase
-import com.stacrypt.stadroid.data.StemeraldDatabase_Impl
 import com.stacrypt.stadroid.data.stemeraldDatabase
 import com.stacrypt.stadroid.market.MarketActivityFragment
 import com.stacrypt.stadroid.profile.ProfileFragment
@@ -67,24 +66,24 @@ class MainActivity : AppCompatActivity() {
     private fun setUpMarketBackdrop() {
         backdrop_edge.text = "Loading ..."
 
-        GlobalScope.launch(Dispatchers.Main) {
-            try {
-//                val markets = stemeraldApiClient.marketList().await()
-                val markets = arrayListOf(
-                    Market("BTC/ETH", 0L, 0L, 0L, 0F, 0L, 0F),
-                    Market("BCH/ETH", 0L, 0L, 0L, 0F, 0L, 0F),
-                    Market("BTC/BCH", 0L, 0L, 0L, 0F, 0L, 0F)
-                )
-                backdrop_list.removeAllViews()
-                markets.forEach {
-                    val listItem = layoutInflater.inflate(R.layout.backdrop_market_row, backdrop_list, true)
-//                    listItem.text = it.name
-                    backdrop_list.addView(listItem)
-                }
-            } catch (e: Exception) {
-                toast(e.toString())
-            }
-        }
+//        GlobalScope.launch(Dispatchers.Main) {
+//            try {
+////                val markets = stemeraldApiClient.marketList().await()
+//                val markets = arrayListOf(
+//                    Market("BTC/ETH", 0L, 0L, 0L, 0F, 0L, 0F),
+//                    Market("BCH/ETH", 0L, 0L, 0L, 0F, 0L, 0F),
+//                    Market("BTC/BCH", 0L, 0L, 0L, 0F, 0L, 0F)
+//                )
+//                backdrop_list.removeAllViews()
+//                markets.forEach {
+//                    val listItem = layoutInflater.inflate(R.layout.backdrop_market_row, backdrop_list, true)
+////                    listItem.text = it.name
+//                    backdrop_list.addView(listItem)
+//                }
+//            } catch (e: Exception) {
+//                toast(e.toString())
+//            }
+//        }
 
         backdrop_edge_container.setOnClickListener(
             BackdropNavigationHandler(
