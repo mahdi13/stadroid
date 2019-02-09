@@ -32,10 +32,10 @@ class MarketActivityFragment : Fragment() {
         viewpager.adapter = object : FragmentPagerAdapter(childFragmentManager) {
             override fun getItem(position: Int): Fragment {
                 return when (position) {
-                    0 -> MarketMineFragment.newInstance(1)
+                    0 -> MarketMineFragment()
                     1 -> MarketBookFragment()
                     2 -> MarketCandlestickFragment.newInstance("", "")
-                    3 -> MarketHistoryFragment.newInstance(1)
+                    3 -> MarketHistoryFragment()
                     else -> throw IndexOutOfBoundsException()
                 }
             }
