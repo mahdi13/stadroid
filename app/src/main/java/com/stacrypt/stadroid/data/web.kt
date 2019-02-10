@@ -9,7 +9,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
-import retrofit2.http.Url
 
 //const val STEMERALD_API_URL = "http://localhost:8070"
 const val STEMERALD_API_URL = "https://my.api.mockaroo.com/"
