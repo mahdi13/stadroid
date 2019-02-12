@@ -1,6 +1,5 @@
 package com.stacrypt.stadroid.data
 
-import android.media.session.MediaSession
 import android.util.Base64
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.Deferred
@@ -9,12 +8,13 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
+import java.nio.charset.Charset
 
 //const val STEMERALD_API_URL = "http://localhost:8070"
 const val STEMERALD_API_URL = "https://my.api.mockaroo.com/"
 val EMERALD_API_URL = Base64
-    .decode("aHR0cH" + "M6Ly9iZXRhLn" + "RyYWRlb2ZmLnRy" + "YWRlL2FwaXYx", Base64.DEFAULT)!!
-    .toString()
+    .decode("aHR0cH" + "M6Ly9iZXRhLn" + "RyYWRlb2ZmLnRy" + "YWRlL2FwaXYxLw", Base64.DEFAULT)!!
+    .toString(Charset.forName("utf-8"))
 
 data class BookResponse(val buys: ArrayList<Book>, val sells: ArrayList<Book>)
 

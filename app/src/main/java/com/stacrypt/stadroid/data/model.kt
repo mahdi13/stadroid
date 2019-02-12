@@ -20,23 +20,23 @@ data class Market(
 )
 
 data class MarketStatus(
-    val open: Long,
-    val high: Long,
-    val low: Long,
-    val close: Long,
-    val last: Long,
-    val deal: Long,
-    val volume: Long,
-    val period: Long
+    val openStatus: Long,
+    val highStatus: Long,
+    val lowStatus: Long,
+    val closeStatus: Long,
+    val lastStatus: Long,
+    val dealStatus: Long,
+    val volumeStatus: Long,
+    val periodStatus: Long
 )
 
 data class MarketSummary(
-    val open: Long,
-    val last: Long,
-    val high: Long,
-    val low: Long,
-    val deal: Long,
-    val volume: Long
+    val open24: Long,
+    val last24: Long,
+    val high24: Long,
+    val low24: Long,
+    val deal24: Long,
+    val volume24: Long
 )
 
 @Entity
