@@ -1,17 +1,19 @@
 package com.stacrypt.stadroid.data
 
+import android.util.Base64
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.Deferred
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 
 //const val STEMERALD_API_URL = "http://localhost:8070"
 const val STEMERALD_API_URL = "https://my.api.mockaroo.com/"
+val EMERALD_API_URL = Base64
+    .decode("aHR0cH" + "M6Ly9iZXRhLn" + "RyYWRlb2ZmLnRy" + "YWRlL2FwaXYx", Base64.DEFAULT)!!
+    .toString()
 
 data class BookResponse(val buys: ArrayList<Book>, val sells: ArrayList<Book>)
 
@@ -44,12 +46,27 @@ interface StemeraldApiClient {
     fun mine(): Deferred<ArrayList<Mine>>
 }
 
+interface EmeraldApiClient {
+    @FormUrlEncoded
+    @HTTP(method = "POST", path = "sessions", hasBody = true)
+    fun login(@Field("email") email: String, @Field("password") password: String)
+}
+
 var okHttpClient = OkHttpClient.Builder()
     .addInterceptor(HttpLoggingInterceptor())
     .build()
 
 var stemeraldApiClient = Retrofit.Builder()
     .baseUrl(STEMERALD_API_URL)
+    .addCallAdapterFactory(CoroutineCallAdapterFactory())
+    .addConverterFactory(GsonConverterFactory.create())
+    .client(okHttpClient)
+    .build()
+    .create(StemeraldApiClient::class.java)
+
+
+var emeraldApiClient = Retrofit.Builder()
+    .baseUrl(EMERALD_API_URL)
     .addCallAdapterFactory(CoroutineCallAdapterFactory())
     .addConverterFactory(GsonConverterFactory.create())
     .client(okHttpClient)
