@@ -15,9 +15,8 @@
     <string name="title_activity_login">Login</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in</string>
-    <string name="action_sign_up">Register</string>
-    <string name="action_sign_in_short">Sign in</string>
+    <string name="action_login">Login</string>
+    <string name="action_register">Register</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
@@ -25,7 +24,7 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
     <string name="already_logged_in_toast">Welcome !</string>
     <string name="success_login_toast">Welcome back</string>
-    <string name="success_register_toast">Registered successfully! Welcome</string>
+    <string name="success_register_toast">Registered successfully! Do Login</string>
     <string name="error_login_toast">Authentication failed.</string>
     <string name="error_register_toast">Registration problem. Maybe you have already registered.</string>
     <string name="problem_occurred_toast">Problem occurred.</string>

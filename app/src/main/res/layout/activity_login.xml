@@ -61,7 +61,7 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/prompt_password"
                         android:imeActionId="6"
-                        android:imeActionLabel="@string/action_sign_in_short"
+                        android:imeActionLabel="@string/action_login"
                         android:imeOptions="actionUnspecified"
                         android:inputType="textPassword"
                         android:maxLines="1"
@@ -75,24 +75,24 @@
 
                 <com.google.android.material.button.MaterialButton
                         style="@style/Widget.MaterialComponents.Button.TextButton"
-                        android:id="@+id/signin"
+                        android:id="@+id/login"
                         android:layout_margin="5dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:text="@string/action_sign_in"
+                        android:text="@string/action_login"
                         android:textColor="@color/colorPrimaryTextDark"
                         android:layout_weight="1"
                         android:textStyle="bold"/>
 
                 <com.google.android.material.button.MaterialButton
                         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                        android:id="@+id/signout"
+                        android:id="@+id/register"
                         android:layout_margin="5dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:text="@string/action_sign_up"
+                        android:text="@string/action_register"
                         android:textColor="@color/colorGrayText"
                         android:layout_weight="1"
                         android:textStyle="bold"/>

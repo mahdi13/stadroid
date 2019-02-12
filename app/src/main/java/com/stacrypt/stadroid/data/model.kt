@@ -98,16 +98,23 @@ data class Mine(
     var orderId: Int
 )
 
-@Entity(
-//    foreignKeys = [ForeignKey(
-//        entity = Asset::class,
-//        parentColumns = arrayOf("name"),
-//        childColumns = arrayOf("assetName"),
-//        onDelete = ForeignKey.CASCADE
-//    )]
-)
+@Entity
 data class Balance(
     @PrimaryKey var assetName: String,
     var available: Double,
     var freeze: Double
+)
+
+data class User(
+    val id: Int,
+    val email: String
+)
+
+data class TokenResponse(
+    val token: String
+)
+
+data class ErrorResponse(
+    val message: String,
+    val description: String
 )

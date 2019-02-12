@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
+import com.stacrypt.stadroid.data.TokenResponse
+import com.stacrypt.stadroid.data.User
 import com.stacrypt.stadroid.data.emeraldApiClient
 import com.stacrypt.stadroid.data.sessionManager
 import kotlinx.android.synthetic.main.activity_login.*
@@ -48,13 +50,14 @@ class LoginActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_login)
 
-        signin.setOnClickListener {
+        login.setOnClickListener {
             if (!validateInputs()) return@setOnClickListener
             singletonAsync {
                 try {
                     progress.visibility = View.VISIBLE
-                    val user: User = apiClient!!.signin(email.text.toString(), password.text.toString()).await()
-                    sessionManager.login(user.token!!)
+                    val token: TokenResponse =
+                        emeraldApiClient.login(email.text.toString(), password.text.toString()).await()
+                    sessionManager.login(token.token)
                     toast(getString(R.string.already_logged_in_toast))
                     startActivity<MainActivity>()
                     finish()
@@ -66,16 +69,16 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        signout.setOnClickListener {
+        register.setOnClickListener {
             if (!validateInputs()) return@setOnClickListener
             singletonAsync {
                 try {
                     progress.visibility = View.VISIBLE
-                    val user: User = emeraldApiClient.signup(email.text.toString(), password.text.toString()).await()
-                    sessionManager.login(user.token!!)
+                    val user: User = emeraldApiClient.registerNewClient(
+                        email.text.toString(),
+                        password.text.toString()
+                    ).await()
                     longToast("${getString(R.string.success_register_toast)} ${user.email}!")
-                    startActivity<MainActivity>()
-                    finish()
                 } catch (e: HttpException) {
                     toast(getString(R.string.error_register_toast))
                 } finally {
