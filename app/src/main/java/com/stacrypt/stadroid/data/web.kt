@@ -30,10 +30,16 @@ interface StemeraldApiClient {
     fun marketList(): Deferred<ArrayList<Market>>
 
     @GET("stacrypt-market-status.json?key=98063e30")
-    fun marketStatus(@Path("market") market: String): Deferred<MarketStatus>
+//    fun marketStatus(@Path("market") market: String): Deferred<MarketStatus>
+    fun marketStatus(@Query("market") market: String): Deferred<MarketStatus>
 
-    @GET("stacrypt-market-list.json?key=98063e30")
-    fun marketSummary(@Path("market") market: String, @Query("period") period: Long = 86400): Deferred<ArrayList<MarketSummary>>
+    @GET("stacrypt-market-summary.json?key=98063e30")
+//    fun marketSummary(@Path("market") market: String, @Query("period") period: Long = 86400): Deferred<ArrayList<MarketSummary>>
+    fun marketSummary(@Query("market") market: String, @Query("period") period: Long = 86400): Deferred<ArrayList<MarketSummary>>
+
+    @GET("stacrypt-market-last.json?key=98063e30")
+//    fun marketLast(@Path("market") market: String): Deferred<MarketLast>
+    fun marketLast(@Query("market") market: String): Deferred<MarketLast>
 
     @GET("stacrypt-kline.json?key=98063e30")
     fun kline(): Deferred<ArrayList<Kline>>

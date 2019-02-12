@@ -15,7 +15,8 @@ data class Market(
     var minAmount: String,
     var moneyPrec: Int,
     @Embedded var status: MarketStatus?,
-    @Embedded var summary: MarketSummary?
+    @Embedded var summary: MarketSummary?,
+    @Embedded var last: MarketLast?
 
 )
 
@@ -37,6 +38,10 @@ data class MarketSummary(
     val low24: Long,
     val deal24: Long,
     val volume24: Long
+)
+
+data class MarketLast(
+    val price: Double
 )
 
 @Entity

@@ -15,16 +15,11 @@ import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.CandleData
 import com.github.mikephil.charting.data.CandleDataSet
 import com.github.mikephil.charting.data.CandleEntry
-import com.github.mikephil.charting.data.DataSet
 import com.github.mikephil.charting.utils.ColorTemplate
 
-import com.stacrypt.stadroid.data.Balance
 import com.stacrypt.stadroid.data.Kline
-import com.stacrypt.stadroid.wallet.AssetBalanceViewModel
 import kotlinx.android.synthetic.main.fragment_market_candlestick.*
-import com.github.mikephil.charting.components.Legend
 import com.stacrypt.stadroid.R
-import kotlin.math.absoluteValue
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -47,7 +42,7 @@ class MarketCandlestickFragment : Fragment() {
 
     private lateinit var viewModel: MarketViewModel
 
-    private fun initDataset(items: List<Kline>?): CandleDataSet {
+    private fun initDataset(items: List<Kline>?): CandleDataSet? {
         val values = ArrayList<CandleEntry>()
 
         items?.forEachIndexed { i, it ->
@@ -61,6 +56,8 @@ class MarketCandlestickFragment : Fragment() {
                 )
             )
         }
+
+        if (values.isNullOrEmpty()) return null
 
         val dataset = CandleDataSet(values, "")
 
@@ -80,28 +77,30 @@ class MarketCandlestickFragment : Fragment() {
         return dataset
     }
 
-    private fun initChart(dataset: CandleDataSet) {
+    private fun initChart(dataset: CandleDataSet?) {
         // Set dataset
-        chart.data = CandleData(dataset)
-        chart.notifyDataSetChanged()
-//        chart.setVisibleYRangeMinimum(1_000F, YAxis.AxisDependency.RIGHT)
+        if (dataset != null) {
+            chart.data = CandleData(dataset)
+            chart.notifyDataSetChanged()
+            //        chart.setVisibleYRangeMinimum(1_000F, YAxis.AxisDependency.RIGHT)
 //        chart.setVisibleYRangeMaximum(10_000F, YAxis.AxisDependency.RIGHT)
 //        chart.setVisibleYRangeMinimum(1_000F, YAxis.AxisDependency.LEFT)
 //        chart.setVisibleYRangeMaximum(10_000F, YAxis.AxisDependency.LEFT)
-        chart.invalidate()
+            chart.invalidate()
 //        chart.setMaxVisibleValueCount(100)
 //        chart.zoom(1F, 1F, 100F, 100F)
-        // scaling can now only be done on x- and y-axis separately
-        chart.setPinchZoom(true)
-        chart.isDoubleTapToZoomEnabled = false
-        chart.isNestedScrollingEnabled = true
-        chart.isHorizontalScrollBarEnabled = true
-        chart.isVerticalScrollBarEnabled = true
-        chart.setVisibleXRange(SHOWING_ITEMS.toFloat(), SHOWING_ITEMS.toFloat())
-        chart.moveViewToX((dataset.values.size - SHOWING_ITEMS / 2).toFloat())
-        chart.description.isEnabled = false
-        chart.isScaleYEnabled= false
-        chart.isScaleXEnabled= true
+            // scaling can now only be done on x- and y-axis separately
+            chart.setPinchZoom(true)
+            chart.isDoubleTapToZoomEnabled = false
+            chart.isNestedScrollingEnabled = true
+            chart.isHorizontalScrollBarEnabled = true
+            chart.isVerticalScrollBarEnabled = true
+            chart.setVisibleXRange(SHOWING_ITEMS.toFloat(), SHOWING_ITEMS.toFloat())
+            chart.moveViewToX((dataset.values.size - SHOWING_ITEMS / 2).toFloat())
+            chart.description.isEnabled = false
+            chart.isScaleYEnabled = false
+            chart.isScaleXEnabled = true
+        }
 
         // Colors
         chart.setBackgroundColor(resources.getColor(R.color.colorPrimary))
@@ -164,6 +163,7 @@ class MarketCandlestickFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(MarketViewModel::class.java)
         viewModel.kline.observe(this,
             Observer<List<Kline>> { klineItems ->
+                // FIXME: This method is called several times and reload the existing data
                 initChart(initDataset(klineItems))
                 //                adapter.items = balances!!
 //                adapter.notifyDataSetChanged()

@@ -64,10 +64,10 @@ class MarketBookRecyclerViewAdapter(
 //            setLayerSize(1, 100, 200)
 //            this.setLayerWidth()
 //        }
-        holder.leftContainerView.backgroundColor = Color.RED
-        holder.leftContainerView.right = (holder.leftAmountView.width + holder.leftPriceView.width) - (leftItem?.amount?.toDouble()!! / 400.0 * (holder.leftAmountView.width + holder.leftPriceView.width)).toInt()
-        holder.rightContainerView.backgroundColor = Color.GREEN
-        holder.rightContainerView.left = (holder.rightPriceView.width + holder.rightAmountView.width) + (rightItem?.amount?.toDouble()!! / 400.0 * (holder.leftAmountView.width + holder.leftPriceView.width)).toInt()
+//        holder.leftContainerView.backgroundColor = Color.RED
+//        holder.leftContainerView.right = (holder.leftAmountView.width + holder.leftPriceView.width) - (leftItem?.amount?.toDouble()!! / 400.0 * (holder.leftAmountView.width + holder.leftPriceView.width)).toInt()
+//        holder.rightContainerView.backgroundColor = Color.GREEN
+//        holder.rightContainerView.left = (holder.rightPriceView.width + holder.rightAmountView.width) + (rightItem?.amount?.toDouble()!! / 400.0 * (holder.leftAmountView.width + holder.leftPriceView.width)).toInt()
 
     }
 

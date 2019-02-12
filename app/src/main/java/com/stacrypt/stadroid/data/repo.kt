@@ -20,30 +20,32 @@ object MarketRepository {
     }
 
     fun getKline(market: String): LiveData<List<Kline>> {
-//        refreshKline()
+        refreshKline()
         return klineDao.loadByMarket(market)
     }
 
     fun getBook(market: String): LiveData<List<Book>> {
-//        refreshBook()
+        refreshBook()
         return bookDao.loadByMarket(market)
     }
 
     fun getDeal(market: String): LiveData<List<Deal>> {
-//        refreshDeal()
+        refreshDeal()
         return dealDao.loadByMarket(market)
     }
 
     fun getMine(market: String): LiveData<List<Mine>> {
-//        refreshMine()
+        refreshMine()
         return mineDao.loadByMarket(market)
     }
 
     private fun refreshMarkets() {
         MarketRepository.scope.launch {
-            stemeraldApiClient.marketList().await().forEach {
+//            stemeraldApiClient.marketList().await().forEach {
+            stemeraldApiClient.marketList().await().firstOrNull()?.let {
                 it.status = stemeraldApiClient.marketStatus(it.name).await()
                 it.summary = stemeraldApiClient.marketSummary(it.name).await().firstOrNull()
+                it.last = stemeraldApiClient.marketLast(it.name).await()
                 MarketRepository.marketDao.save(it)
             }
         }
@@ -119,7 +121,7 @@ object WalletRepository {
 //    }
 
     fun getBalances(): LiveData<List<Balance>> {
-//        refreshBalances()
+        refreshBalances()
         return balanceDao.loadAll()
     }
 
