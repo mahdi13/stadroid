@@ -77,3 +77,12 @@ interface MineDao {
     @Query("SELECT * FROM Mine WHERE market = :market ORDER BY time DESC")
     fun loadByMarket(market: String): LiveData<List<Mine>>
 }
+
+@Dao
+interface UserDao {
+    @Insert(onConflict = REPLACE)
+    fun save(user: User)
+
+    @Query("SELECT * FROM User WHERE email = :email")
+    fun loadByEmail(email: String): LiveData<User>
+}

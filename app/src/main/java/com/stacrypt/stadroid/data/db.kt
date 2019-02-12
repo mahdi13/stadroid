@@ -24,6 +24,7 @@ abstract class StemeraldDatabase : RoomDatabase() {
     abstract val bookDao: BookDao
     abstract val dealDao: DealDao
     abstract val mineDao: MineDao
+    abstract val userDao: UserDao
 }
 
 lateinit var stemeraldDatabase: StemeraldDatabase

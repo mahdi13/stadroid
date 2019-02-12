@@ -85,6 +85,26 @@ object MarketRepository {
 
 }
 
+object UserRepository {
+    private val userDao: UserDao = stemeraldDatabase.userDao
+
+    private var job: Job? = null
+    private val scope = CoroutineScope(Dispatchers.Default)
+
+    fun getUser(email: String): LiveData<User> {
+        UserRepository.refreshUser()
+        return UserRepository.userDao.loadByEmail(email)
+    }
+
+    private fun refreshUser() {
+        UserRepository.scope.launch {
+            emeraldApiClient.clien().await().forEach {
+                UserRepository.userDao.save(it)
+            }
+        }
+    }
+
+}
 
 object WalletRepository {
     private val assetDao: AssetDao = stemeraldDatabase.assetDao

@@ -111,9 +111,10 @@ data class Balance(
     var freeze: Double
 )
 
+@Entity
 data class User(
     val id: Int,
-    val email: String,
+    @PrimaryKey val email: String,
     val type: String,
     val isEmailVerified: Boolean,
     val isEvidenceVerified: Boolean,
