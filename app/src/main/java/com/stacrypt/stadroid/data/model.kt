@@ -3,6 +3,7 @@ package com.stacrypt.stadroid.data
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.util.*
 
 @Entity
 data class Market(
@@ -107,7 +108,15 @@ data class Balance(
 
 data class User(
     val id: Int,
-    val email: String
+    val email: String,
+    val type: String,
+    val isEmailVerified: Boolean,
+    val isEvidenceVerified: Boolean,
+    val hasSecondFactor: Boolean,
+    val isActive: Boolean,
+    val invitationCode: String?,
+    val createdAt: Date?,
+    val modifiedAt: Date?
 )
 
 data class TokenResponse(
