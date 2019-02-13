@@ -17,9 +17,16 @@ import com.stacrypt.stadroid.market.MarketActivityFragment
 import com.stacrypt.stadroid.profile.ProfileFragment
 import com.stacrypt.stadroid.wallet.WalletFragment
 import androidx.room.Room
+import com.stacrypt.stadroid.data.sessionManager
+import com.stacrypt.stadroid.profile.LoginFragment
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), LoginFragment.OnLoginInteractionListener {
+    override fun onLoggedIn() {
+        switchFragment(2, "2")
+    }
+
+    override fun onRegistered() {}
 
     private val pages = ArrayList<Fragment>(3)
 
@@ -34,12 +41,14 @@ class MainActivity : AppCompatActivity() {
     private fun buildWalletFragment(): Fragment = WalletFragment()
     private fun buildMarketFragment(): Fragment = MarketActivityFragment()
     private fun buildProfileFragment(): Fragment = ProfileFragment()
+    private fun buildLoginFragment(): Fragment = LoginFragment()
 
 
     private fun buildFragmentsList() {
         pages.add(buildWalletFragment())
         pages.add(buildMarketFragment())
         pages.add(buildProfileFragment())
+        pages.add(buildLoginFragment())
     }
 
 //    private fun setUpToolbar() {
@@ -118,7 +127,8 @@ class MainActivity : AppCompatActivity() {
                     switchFragment(1, "1")
                 }
                 R.id.navigation_profile -> {
-                    switchFragment(2, "2")
+                    if (sessionManager.isLoggedIn()) switchFragment(2, "2")
+                    else switchFragment(3, "3")
                 }
             }
             true

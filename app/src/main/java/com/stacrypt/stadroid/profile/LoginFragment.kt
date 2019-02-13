@@ -14,6 +14,7 @@ import com.stacrypt.stadroid.data.User
 import com.stacrypt.stadroid.data.emeraldApiClient
 import com.stacrypt.stadroid.data.sessionManager
 import kotlinx.android.synthetic.main.fragment_login.*
+import kotlinx.android.synthetic.main.fragment_login.view.*
 import kotlinx.coroutines.*
 import org.jetbrains.anko.support.v4.longToast
 import org.jetbrains.anko.support.v4.toast
@@ -29,7 +30,7 @@ class LoginFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_login, container, false)
 
-        login.setOnClickListener {
+        view.login.setOnClickListener {
             if (!validateInputs()) return@setOnClickListener
             singletonAsync {
                 try {
@@ -47,7 +48,7 @@ class LoginFragment : Fragment() {
             }
         }
 
-        register.setOnClickListener {
+        view.register.setOnClickListener {
             if (!validateInputs()) return@setOnClickListener
             singletonAsync {
                 try {
