@@ -191,6 +191,26 @@ data class SecurityLog(
     var createdAt: Date?
 )
 
+@Entity
+data class ShetabAddress(
+    @PrimaryKey var id: Int,
+    var clientId: Int?,
+    var isVerified: Boolean,
+    var address: String?,
+    var error: String?,
+    var createdAt: Date?
+)
+
+@Entity
+data class ShebaAddress(
+    @PrimaryKey var id: Int,
+    var clientId: Int?,
+    var isVerified: Boolean,
+    var address: String?,
+    var error: String?,
+    var createdAt: Date?
+)
+
 data class ErrorResponse(
     val message: String,
     val description: String
