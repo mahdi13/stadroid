@@ -130,8 +130,9 @@ data class TokenResponse(
     val token: String
 )
 
+@Entity
 data class Ticket(
-    var id: Int,
+    @PrimaryKey var id: Int,
     var title: String,
     var memberId: Int?,
     var closedAt: Date?,
@@ -169,6 +170,17 @@ data class TicketDepartment(
     var title: String
 )
 
+@Entity
+data class Session(
+    @PrimaryKey var id: String,
+    var remoteAddress: String?,
+    var machine: String?,
+    var os: String?,
+    var agent: String?,
+    var client: String?,
+    var app: String?,
+    var lastActivity: Date?
+)
 
 data class ErrorResponse(
     val message: String,
