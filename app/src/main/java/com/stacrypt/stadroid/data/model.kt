@@ -2,6 +2,7 @@ package com.stacrypt.stadroid.data
 
 import androidx.room.Embedded
 import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import java.util.*
 
@@ -128,6 +129,46 @@ data class User(
 data class TokenResponse(
     val token: String
 )
+
+data class Ticket(
+    var id: Int,
+    var title: String,
+    var memberId: Int?,
+    var closedAt: Date?,
+    @Embedded(prefix = "dp") var department: TicketDepartment,
+    var isClosed: Boolean,
+    @Embedded(prefix = "fm") var firstMessage: TicketMessage?,
+    var createdAt: Date?,
+    var modifiedAt: Date?
+)
+
+@Entity(
+    primaryKeys = ["id"],
+    foreignKeys = [
+        ForeignKey(
+            entity = Ticket::class,
+            parentColumns = arrayOf("id"),
+            childColumns = arrayOf("ticketId"),
+            onDelete = ForeignKey.CASCADE
+        )
+    ]
+)
+data class TicketMessage(
+    var id: Int,
+    var text: String,
+    var isAnswer: Boolean,
+    var ticketId: Int,
+    var attachment: String?,
+    var memberId: Int?,
+    var createdAt: Date?,
+    var modifiedAt: Date?
+)
+
+data class TicketDepartment(
+    var id: Int,
+    var title: String
+)
+
 
 data class ErrorResponse(
     val message: String,
