@@ -1,14 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context=".profile.ProfileFragment">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context=".profile.ProfileFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment"/>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-</FrameLayout>
+        <ImageView
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:padding="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"/>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="2"
+                    android:text="test@test.com"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:gravity="center_vertical"/>
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="Verified Client"
+                    android:textSize="14dp"
+                    android:textColor="@color/colorGrayText"
+                    android:gravity="center_vertical"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TableLayout
+            style=""
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <TableRow>
+            <TextView android:text="Second Factor"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView android:text="Second Factor"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView android:text="Security Logs"/>
+        </TableRow>
+
+    </TableLayout>
+
+
+</LinearLayout>

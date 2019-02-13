@@ -8,9 +8,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import android.view.animation.AccelerateDecelerateInterpolator
 import com.stacrypt.stadroid.market.BackdropNavigationHandler
-import org.jetbrains.anko.toast
 import androidx.fragment.app.Fragment
-import com.stacrypt.stadroid.data.Market
 import com.stacrypt.stadroid.data.StemeraldDatabase
 import com.stacrypt.stadroid.data.stemeraldDatabase
 import com.stacrypt.stadroid.market.MarketActivityFragment
@@ -21,7 +19,13 @@ import com.stacrypt.stadroid.data.sessionManager
 import com.stacrypt.stadroid.profile.LoginFragment
 
 
-class MainActivity : AppCompatActivity(), LoginFragment.OnLoginInteractionListener {
+class MainActivity : AppCompatActivity(),
+    LoginFragment.OnLoginInteractionListener,
+    ProfileFragment.OnProfileInteractionListener {
+    override fun onLoggedOut() {
+        switchFragment(3, "3")
+    }
+
     override fun onLoggedIn() {
         switchFragment(2, "2")
     }
