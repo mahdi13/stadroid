@@ -41,7 +41,7 @@ object MarketRepository {
 
     private fun refreshMarkets() {
         MarketRepository.scope.launch {
-//            stemeraldApiClient.marketList().await().forEach {
+            //            stemeraldApiClient.marketList().await().forEach {
             stemeraldApiClient.marketList().await().firstOrNull()?.let {
                 it.status = stemeraldApiClient.marketStatus(it.name).await()
                 it.summary = stemeraldApiClient.marketSummary(it.name).await().firstOrNull()
@@ -91,14 +91,14 @@ object UserRepository {
     private var job: Job? = null
     private val scope = CoroutineScope(Dispatchers.Default)
 
-    fun getUser(email: String): LiveData<User> {
-        UserRepository.refreshUser()
-        return UserRepository.userDao.loadByEmail(email)
+    fun getMe(): LiveData<User> {
+        UserRepository.refreshMe()
+        return UserRepository.userDao.loadByEmail(sessionManager.getPayload().email)
     }
 
-    private fun refreshUser() {
+    private fun refreshMe() {
         UserRepository.scope.launch {
-            emeraldApiClient.clien().await().forEach {
+            emeraldApiClient.me().await().let {
                 UserRepository.userDao.save(it)
             }
         }

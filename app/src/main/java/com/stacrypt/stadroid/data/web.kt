@@ -56,6 +56,10 @@ interface StemeraldApiClient {
 
 @Suppress("DeferredIsResult")
 interface EmeraldApiClient {
+
+    @HTTP(method = "GET", path = "clients/me", hasBody = false)
+    fun me(): Deferred<User>
+
     @FormUrlEncoded
     @HTTP(method = "POST", path = "sessions", hasBody = true)
     fun login(
