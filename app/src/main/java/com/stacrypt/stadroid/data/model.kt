@@ -182,6 +182,15 @@ data class Session(
     var lastActivity: Date?
 )
 
+@Entity
+data class SecurityLog(
+    @PrimaryKey var id: Int,
+    var clientId: Int?,
+    var type: String?,
+    var details: String?,
+    var createdAt: Date?
+)
+
 data class ErrorResponse(
     val message: String,
     val description: String
