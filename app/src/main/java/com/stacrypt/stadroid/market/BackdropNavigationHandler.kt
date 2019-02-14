@@ -39,7 +39,7 @@ class BackdropNavigationHandler @JvmOverloads internal constructor(
         animatorSet.end()
         animatorSet.cancel()
 
-        updateIcon(view.childrenRecursiveSequence().findLast { it is ImageView }!!)
+//        updateIcon(view.childrenRecursiveSequence().findLast { it is ImageView }!!)
 
 //        val translateY = height - Utils.convertDpToPixel(300.0F)
         val translateY = 200F

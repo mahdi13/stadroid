@@ -1,6 +1,7 @@
 package com.stacrypt.stadroid
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.Dispatchers
@@ -77,7 +78,7 @@ class MainActivity : AppCompatActivity(),
 //    }g
 
     private fun setUpMarketBackdrop() {
-        backdrop_edge.text = "Loading ..."
+        backdrop_toggle.text = "Loading ..."
 
 //        GlobalScope.launch(Dispatchers.Main) {
 //            try {
@@ -98,13 +99,11 @@ class MainActivity : AppCompatActivity(),
 //            }
 //        }
 
-        backdrop_edge_container.setOnClickListener(
+        backdrop_toggle.setOnClickListener(
             BackdropNavigationHandler(
                 this@MainActivity,
                 nested_content,
-                AccelerateDecelerateInterpolator(),
-                resources.getDrawable(android.R.drawable.arrow_up_float),
-                resources.getDrawable(android.R.drawable.arrow_down_float)
+                AccelerateDecelerateInterpolator()
             )
         )
     }
@@ -125,12 +124,15 @@ class MainActivity : AppCompatActivity(),
         navigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.navigation_wallet -> {
+                    backdrop_toggle.visibility = View.GONE
                     switchFragment(0, "0")
                 }
                 R.id.navigation_market -> {
                     switchFragment(1, "1")
+                    backdrop_toggle.visibility = View.VISIBLE
                 }
                 R.id.navigation_profile -> {
+                    backdrop_toggle.visibility = View.GONE
                     if (sessionManager.isLoggedIn()) switchFragment(2, "2")
                     else switchFragment(3, "3")
                 }
