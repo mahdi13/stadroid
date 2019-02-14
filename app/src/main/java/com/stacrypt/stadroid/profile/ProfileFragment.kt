@@ -6,10 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 
 import com.stacrypt.stadroid.R
+import com.stacrypt.stadroid.data.User
 
 class ProfileFragment : Fragment() {
+    private lateinit var viewModel: ProfileViewModel
     private var listener: OnProfileInteractionListener? = null
 
     override fun onCreateView(
@@ -29,6 +33,17 @@ class ProfileFragment : Fragment() {
             throw RuntimeException("$context must implement OnProfileInteractionListener")
         }
     }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModel = ViewModelProviders.of(this).get(ProfileViewModel::class.java)
+        viewModel.user?.observe(this,
+            Observer<User> { user ->
+
+            })
+
+    }
+
 
     override fun onDetach() {
         super.onDetach()

@@ -58,7 +58,9 @@ interface StemeraldApiClient {
 interface EmeraldApiClient {
 
     @HTTP(method = "GET", path = "clients/me", hasBody = false)
-    fun me(): Deferred<User>
+    fun me(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: ""
+    ): Deferred<User>
 
     @FormUrlEncoded
     @HTTP(method = "POST", path = "sessions", hasBody = true)

@@ -5,5 +5,5 @@ import androidx.lifecycle.ViewModel
 import com.stacrypt.stadroid.data.*
 
 class ProfileViewModel : ViewModel() {
-    val user: LiveData<User> = UserRepository.getMe()
+    val user: LiveData<User>? = if (sessionManager.isLoggedIn()) UserRepository.getMe() else null
 }
