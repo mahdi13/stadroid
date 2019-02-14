@@ -11,6 +11,8 @@ import androidx.lifecycle.ViewModelProviders
 
 import com.stacrypt.stadroid.R
 import com.stacrypt.stadroid.data.User
+import com.stacrypt.stadroid.data.sessionManager
+import kotlinx.android.synthetic.main.fragment_profile.view.*
 
 class ProfileFragment : Fragment() {
     private lateinit var viewModel: ProfileViewModel
@@ -21,6 +23,12 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
+
+        view.logout.setOnClickListener {
+            sessionManager.logout()
+            // TODO: Clear entire db
+            listener?.onLoggedOut()
+        }
 
         return view
     }
@@ -43,7 +51,6 @@ class ProfileFragment : Fragment() {
             })
 
     }
-
 
     override fun onDetach() {
         super.onDetach()

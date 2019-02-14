@@ -5,7 +5,7 @@
               android:layout_height="match_parent"
               android:orientation="vertical"
               tools:context=".profile.ProfileFragment"
-              android:background="@color/colorPrimaryDark">
+              android:background="@color/colorPrimary">
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -20,7 +20,8 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:layout_marginStart="30dp"
-                android:layout_marginEnd="30dp"/>
+                android:layout_marginEnd="0dp"
+                />
 
         <LinearLayout
                 android:layout_width="match_parent"
@@ -34,15 +35,22 @@
                     android:text="test@test.com"
                     android:textStyle="bold"
                     android:textSize="18sp"
-                    android:gravity="center_vertical"/>
+                    android:gravity="center"
+                    android:textAllCaps="true"
+                    />
 
             <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:text="Verified Client"
                     android:textSize="14dp"
-                    android:textColor="@color/colorGrayText"
+                    android:drawableStart="@drawable/ic_check_circle_black_24dp"
+                    android:textColor="@color/green_600"
+                    android:drawableTint="@color/green_600"
+                    android:layout_marginEnd="20dp"
+                    android:textAllCaps="false"
+                    android:layout_gravity="end"
                     android:gravity="center_vertical"/>
 
         </LinearLayout>
@@ -79,7 +87,8 @@
 
     <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimaryDark">
 
         <TableLayout
                 android:layout_width="match_parent"
@@ -94,7 +103,11 @@
 
                 <TextView
                         android:text="Verification"
+                        android:drawableStart="@drawable/ic_verified_user_black_24dp"
+                        android:drawableTint="@color/colorGrayText"
+                        android:drawablePadding="10dp"
                         android:textColor="@color/colorGrayText"
+                        android:textAllCaps="true"
                         android:textSize="16sp"/>
             </TableRow>
 
@@ -118,7 +131,11 @@
 
                 <TextView
                         android:text="Bank Accounts"
+                        android:drawableStart="@drawable/ic_credit_card_black_24dp"
+                        android:drawableTint="@color/colorGrayText"
+                        android:drawablePadding="10dp"
                         android:textColor="@color/colorGrayText"
+                        android:textAllCaps="true"
                         android:textSize="16sp"/>
             </TableRow>
 
@@ -142,7 +159,11 @@
 
                 <TextView
                         android:text="Support"
+                        android:drawableStart="@drawable/ic_perm_phone_msg_black_24dp"
+                        android:drawableTint="@color/colorGrayText"
+                        android:drawablePadding="10dp"
                         android:textColor="@color/colorGrayText"
+                        android:textAllCaps="true"
                         android:textSize="16sp"/>
             </TableRow>
 
@@ -167,7 +188,11 @@
 
                 <TextView
                         android:text="Application Security"
+                        android:drawableStart="@drawable/ic_screen_lock_portrait_black_24dp"
+                        android:drawableTint="@color/colorGrayText"
+                        android:drawablePadding="10dp"
                         android:textColor="@color/colorGrayText"
+                        android:textAllCaps="true"
                         android:textSize="16sp"/>
             </TableRow>
 
@@ -193,7 +218,11 @@
 
                 <TextView
                         android:text="Withdrawal"
+                        android:drawableStart="@drawable/ic_account_balance_wallet_black_24dp"
+                        android:drawableTint="@color/colorGrayText"
+                        android:drawablePadding="10dp"
                         android:textColor="@color/colorGrayText"
+                        android:textAllCaps="true"
                         android:textSize="16sp"/>
             </TableRow>
 
@@ -201,7 +230,7 @@
 
                 <com.google.android.material.button.MaterialButton
                         style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
-                        android:id="@+id/second_factor"
+                        android:id="@+id/withdrawal_pin"
                         android:text="Withdrawal PIN"/>
             </TableRow>
 
@@ -209,7 +238,7 @@
 
                 <com.google.android.material.button.MaterialButton
                         style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
-                        android:id="@+id/second_factor"
+                        android:id="@+id/withdrawal_limit"
                         android:text="Withdrawal Limitations"/>
             </TableRow>
 
@@ -217,7 +246,11 @@
 
                 <TextView
                         android:text="Account Security"
+                        android:drawableStart="@drawable/ic_security_black_24dp"
+                        android:drawableTint="@color/colorGrayText"
+                        android:drawablePadding="10dp"
                         android:textColor="@color/colorGrayText"
+                        android:textAllCaps="true"
                         android:textSize="16sp"/>
             </TableRow>
 
@@ -273,7 +306,11 @@
 
                 <TextView
                         android:text="Other"
+                        android:drawableStart="@drawable/ic_more_horiz_black_24dp"
+                        android:drawableTint="@color/colorGrayText"
+                        android:drawablePadding="10dp"
                         android:textColor="@color/colorGrayText"
+                        android:textAllCaps="true"
                         android:textSize="16sp"/>
             </TableRow>
 

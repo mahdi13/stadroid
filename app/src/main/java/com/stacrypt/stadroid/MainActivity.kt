@@ -18,6 +18,7 @@ import com.stacrypt.stadroid.wallet.WalletFragment
 import androidx.room.Room
 import com.stacrypt.stadroid.data.sessionManager
 import com.stacrypt.stadroid.profile.LoginFragment
+import org.jetbrains.anko.toast
 
 
 class MainActivity : AppCompatActivity(),
@@ -25,6 +26,7 @@ class MainActivity : AppCompatActivity(),
     ProfileFragment.OnProfileInteractionListener {
     override fun onLoggedOut() {
         switchFragment(3, "3")
+        toast("Logged out!")
     }
 
     override fun onLoggedIn() {
