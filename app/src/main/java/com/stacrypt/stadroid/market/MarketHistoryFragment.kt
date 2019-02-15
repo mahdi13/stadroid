@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.stacrypt.stadroid.R
 import com.stacrypt.stadroid.data.Deal
+import org.jetbrains.anko.support.v4.toast
 
 class MarketHistoryFragment : Fragment() {
 
@@ -33,6 +34,11 @@ class MarketHistoryFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(MarketViewModel::class.java)
+
+        viewModel.selectedMarketName.observe(this, Observer {
+            toast("ldjslkfjslkfdj")
+        })
+
         viewModel.deal.observe(this,
             Observer<List<Deal>> { deals ->
                 adapter.items = deals

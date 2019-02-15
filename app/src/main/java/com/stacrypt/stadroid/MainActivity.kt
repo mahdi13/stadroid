@@ -98,7 +98,7 @@ class MainActivity : AppCompatActivity(),
         backdrop_toggle.setOnClickListener(backdropNavigationHandler)
 
         backdrop_list.adapter = MarketListRecyclerViewAdapter(listOf()) {
-            marketViewModel.selectedMarketName.value = it
+            marketViewModel.currentMarket.setValue(it)
             backdropNavigationHandler.collapse()
         }
         backdrop_list.layoutManager = LinearLayoutManager(this)
@@ -110,11 +110,11 @@ class MainActivity : AppCompatActivity(),
             marketListAdapter?.items = markets
             marketListAdapter?.notifyDataSetChanged()
 
-            if (marketViewModel.selectedMarketName.value == null && markets.isNotEmpty())
-                marketViewModel.selectedMarketName.postValue(markets[0].name)
+            if (marketViewModel.currentMarket.value == null && markets.isNotEmpty())
+                marketViewModel.currentMarket.setValue(markets[0].name)
         })
 
-        marketViewModel.selectedMarketName.observe(this, Observer<String> { marketName ->
+        marketViewModel.currentMarket.observe(this, Observer { marketName ->
             backdrop_toggle.text = marketName
         })
     }
