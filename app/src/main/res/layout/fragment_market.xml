@@ -11,9 +11,9 @@
     <FrameLayout
             android:id="@+id/summary"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="120dp"
             android:layout_alignParentTop="true"
-            android:background="@color/colorPrimaryDark">
+            android:background="@color/colorPrimary">
 
     </FrameLayout>
 
@@ -71,7 +71,7 @@
     <FrameLayout
             android:id="@+id/new_order"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="100dp"
             android:layout_alignParentBottom="true"
             android:background="@color/colorPrimaryDark"></FrameLayout>
 

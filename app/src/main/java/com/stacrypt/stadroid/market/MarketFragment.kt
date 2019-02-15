@@ -43,7 +43,7 @@ class MarketFragment : Fragment() {
             override fun getCount(): Int = 4
         }
 
-        childFragmentManager.beginTransaction().replace(R.id.new_order, NewOrderFragment()).commitNow()
+        childFragmentManager.beginTransaction().replace(R.id.summary, MarketSummaryFragment()).commitNow()
         childFragmentManager.beginTransaction().replace(R.id.new_order, NewOrderFragment()).commitNow()
 
     }
