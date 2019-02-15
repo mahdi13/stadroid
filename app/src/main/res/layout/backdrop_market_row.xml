@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <com.google.android.material.button.MaterialButton
-            style="@style/Widget.Stadroid.Button.TextButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:text="Market Name"/>
-
-</merge>
+<com.google.android.material.button.MaterialButton
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:backgroundTint="@color/pink_A700"
+        android:text="BTC / USD"
+        android:gravity="center"
+        android:id="@+id/name"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        />

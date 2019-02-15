@@ -9,8 +9,7 @@ import android.content.Context
 import android.view.View
 import android.view.animation.Interpolator
 import android.widget.ImageView
-import com.github.mikephil.charting.utils.Utils
-import org.jetbrains.anko.childrenRecursiveSequence
+import com.stacrypt.stadroid.R
 import org.jetbrains.annotations.Nullable
 
 
@@ -19,6 +18,8 @@ class BackdropNavigationHandler @JvmOverloads internal constructor(
     private val sheet: View, @param:Nullable private val interpolator: Interpolator? = null,
     @param:Nullable private val openIcon: Drawable? = null, @param:Nullable private val closeIcon: Drawable? = null
 ) : View.OnClickListener {
+
+    private val duration = 500L
 
     private val animatorSet = AnimatorSet()
     private val height: Int
@@ -31,7 +32,9 @@ class BackdropNavigationHandler @JvmOverloads internal constructor(
         height = displayMetrics.heightPixels
     }
 
-    override fun onClick(view: View) {
+    override fun onClick(view: View) = animateToggle(duration)
+
+    private fun animateToggle(duration: Long) {
         backdropShown = !backdropShown
 
         // Cancel the existing animations
@@ -42,16 +45,21 @@ class BackdropNavigationHandler @JvmOverloads internal constructor(
 //        updateIcon(view.childrenRecursiveSequence().findLast { it is ImageView }!!)
 
 //        val translateY = height - Utils.convertDpToPixel(300.0F)
-        val translateY = 200F
+        val translateY = sheet.resources.getDimensionPixelSize(R.dimen.backdrop_height).toFloat()
 
         val animator = ObjectAnimator.ofFloat(sheet, "translationY", if (backdropShown) translateY else 0F)
-        animator.duration = 500
+        animator.duration = duration
         if (interpolator != null) {
             animator.interpolator = interpolator
         }
         animatorSet.play(animator)
         animator.start()
     }
+
+    fun collapse(fast: Boolean = false) =
+        if (backdropShown) animateToggle(if (fast) 1L else duration) else null
+
+    fun expand() = if (!backdropShown) this.animateToggle(duration) else null
 
     private fun updateIcon(view: View) {
         if (openIcon != null && closeIcon != null) {

@@ -1,10 +1,14 @@
 package com.stacrypt.stadroid.market
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.stacrypt.stadroid.data.*
 
-class MarketViewModel: ViewModel(){
+class MarketViewModel : ViewModel() {
+    val selectedMarketName: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
+    }
     val market: LiveData<List<Market>> = MarketRepository.getMarkets()
     val kline: LiveData<List<Kline>> = MarketRepository.getKline("btc/usd")
     val book: LiveData<List<Book>> = MarketRepository.getBook("btc/usd")

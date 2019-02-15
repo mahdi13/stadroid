@@ -16,7 +16,7 @@ import java.lang.IndexOutOfBoundsException
 /**
  * A placeholder fragment containing a simple view.
  */
-class MarketActivityFragment : Fragment() {
+class MarketFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

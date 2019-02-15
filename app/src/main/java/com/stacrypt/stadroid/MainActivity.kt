@@ -8,15 +8,18 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import android.view.animation.AccelerateDecelerateInterpolator
-import com.stacrypt.stadroid.market.BackdropNavigationHandler
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.stacrypt.stadroid.data.StemeraldDatabase
 import com.stacrypt.stadroid.data.stemeraldDatabase
-import com.stacrypt.stadroid.market.MarketActivityFragment
 import com.stacrypt.stadroid.profile.ProfileFragment
 import com.stacrypt.stadroid.wallet.WalletFragment
 import androidx.room.Room
+import com.stacrypt.stadroid.data.Market
 import com.stacrypt.stadroid.data.sessionManager
+import com.stacrypt.stadroid.market.*
 import com.stacrypt.stadroid.profile.LoginFragment
 import org.jetbrains.anko.toast
 
@@ -24,6 +27,10 @@ import org.jetbrains.anko.toast
 class MainActivity : AppCompatActivity(),
     LoginFragment.OnLoginInteractionListener,
     ProfileFragment.OnProfileInteractionListener {
+
+    private lateinit var marketViewModel: MarketViewModel
+    private lateinit var backdropNavigationHandler: BackdropNavigationHandler
+
     override fun onLoggedOut() {
         switchFragment(3, "3")
         toast("Logged out!")
@@ -39,6 +46,7 @@ class MainActivity : AppCompatActivity(),
 
 
     private fun switchFragment(pos: Int, tag: String) {
+        backdropNavigationHandler.collapse(true)
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.nested_content, pages[pos], tag)
@@ -46,7 +54,7 @@ class MainActivity : AppCompatActivity(),
     }
 
     private fun buildWalletFragment(): Fragment = WalletFragment()
-    private fun buildMarketFragment(): Fragment = MarketActivityFragment()
+    private fun buildMarketFragment(): Fragment = MarketFragment()
     private fun buildProfileFragment(): Fragment = ProfileFragment()
     private fun buildLoginFragment(): Fragment = LoginFragment()
 
@@ -82,32 +90,33 @@ class MainActivity : AppCompatActivity(),
     private fun setUpMarketBackdrop() {
         backdrop_toggle.text = "Loading ..."
 
-//        GlobalScope.launch(Dispatchers.Main) {
-//            try {
-////                val markets = stemeraldApiClient.marketList().await()
-//                val markets = arrayListOf(
-//                    Market("BTC/ETH", 0L, 0L, 0L, 0F, 0L, 0F),
-//                    Market("BCH/ETH", 0L, 0L, 0L, 0F, 0L, 0F),
-//                    Market("BTC/BCH", 0L, 0L, 0L, 0F, 0L, 0F)
-//                )
-//                backdrop_list.removeAllViews()
-//                markets.forEach {
-//                    val listItem = layoutInflater.inflate(R.layout.backdrop_market_row, backdrop_list, true)
-////                    listItem.text = it.name
-//                    backdrop_list.addView(listItem)
-//                }
-//            } catch (e: Exception) {
-//                toast(e.toString())
-//            }
-//        }
-
-        backdrop_toggle.setOnClickListener(
-            BackdropNavigationHandler(
-                this@MainActivity,
-                nested_content,
-                AccelerateDecelerateInterpolator()
-            )
+        backdropNavigationHandler = BackdropNavigationHandler(
+            this@MainActivity,
+            nested_content,
+            AccelerateDecelerateInterpolator()
         )
+        backdrop_toggle.setOnClickListener(backdropNavigationHandler)
+
+        backdrop_list.adapter = MarketListRecyclerViewAdapter(listOf()) {
+            marketViewModel.selectedMarketName.value = it
+            backdropNavigationHandler.collapse()
+        }
+        backdrop_list.layoutManager = LinearLayoutManager(this)
+
+        marketViewModel.market.observe(this, Observer<List<Market>> { markets ->
+            if (markets == null) return@Observer
+
+            val marketListAdapter = backdrop_list.adapter as MarketListRecyclerViewAdapter?
+            marketListAdapter?.items = markets
+            marketListAdapter?.notifyDataSetChanged()
+
+            if (marketViewModel.selectedMarketName.value == null && markets.isNotEmpty())
+                marketViewModel.selectedMarketName.value = markets[0].name
+        })
+
+        marketViewModel.selectedMarketName.observe(this, Observer<String> { marketName ->
+            backdrop_toggle.text = marketName
+        })
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -119,6 +128,7 @@ class MainActivity : AppCompatActivity(),
             StemeraldDatabase::class.java, "stemerald_db"
         ).build()
 
+        marketViewModel = ViewModelProviders.of(this).get(MarketViewModel::class.java)
 
         setUpMarketBackdrop()
         buildFragmentsList()
