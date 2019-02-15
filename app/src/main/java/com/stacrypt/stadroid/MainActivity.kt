@@ -111,7 +111,7 @@ class MainActivity : AppCompatActivity(),
             marketListAdapter?.notifyDataSetChanged()
 
             if (marketViewModel.selectedMarketName.value == null && markets.isNotEmpty())
-                marketViewModel.selectedMarketName.value = markets[0].name
+                marketViewModel.selectedMarketName.postValue(markets[0].name)
         })
 
         marketViewModel.selectedMarketName.observe(this, Observer<String> { marketName ->

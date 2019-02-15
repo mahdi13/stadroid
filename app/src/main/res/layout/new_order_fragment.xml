@@ -15,7 +15,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="120dp"
         tools:context=".market.NewOrderFragment"
         android:padding="5dp">
 
@@ -25,7 +25,7 @@
 
 
         <TableLayout
-                android:layout_width="407dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center">
 
@@ -42,7 +42,7 @@
                         android:textColor="@color/colorPrimaryDark"
                         app:strokeColor="@color/colorPrimaryDark"
                         android:backgroundTint="@color/pink_400"
-                        android:layout_margin="3dp"
+                        android:layout_marginEnd="3dp"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
                         android:textColor="@color/colorPrimaryDark"
                         app:strokeColor="@color/colorPrimaryDark"
                         android:backgroundTint="@color/green_A400"
-                        android:layout_margin="3dp"
+                        android:layout_marginStart="3dp"
                         android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
