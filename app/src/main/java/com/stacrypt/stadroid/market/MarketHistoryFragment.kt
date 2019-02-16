@@ -35,10 +35,6 @@ class MarketHistoryFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(MarketViewModel::class.java)
 
-        viewModel.selectedMarketName.observe(this, Observer {
-            toast("ldjslkfjslkfdj")
-        })
-
         viewModel.deal.observe(this,
             Observer<List<Deal>> { deals ->
                 adapter.items = deals

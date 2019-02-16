@@ -23,35 +23,32 @@ interface StemeraldApiClient {
     @GET("assets")
     fun assetList(): Deferred<ArrayList<Asset>>
 
-    @GET("stacrypt-balances.json?key=98063e30")
+    @GET("balances?key=98063e30")
     fun balanceList(): Deferred<ArrayList<Balance>>
 
-    @GET("stacrypt-market-list.json?key=98063e30")
+    @GET("market-list?key=98063e30")
     fun marketList(): Deferred<ArrayList<Market>>
 
-    @GET("stacrypt-market-status.json?key=98063e30")
-//    fun marketStatus(@Path("market") market: String): Deferred<MarketStatus>
-    fun marketStatus(@Query("market") market: String): Deferred<MarketStatus>
+    @GET("market-status/{market}?key=98063e30")
+    fun marketStatus(@Path("market") market: String): Deferred<MarketStatus>
 
-    @GET("stacrypt-market-summary.json?key=98063e30")
-//    fun marketSummary(@Path("market") market: String, @Query("period") period: Long = 86400): Deferred<ArrayList<MarketSummary>>
-    fun marketSummary(@Query("market") market: String, @Query("period") period: Long = 86400): Deferred<ArrayList<MarketSummary>>
+    @GET("market-summary/{market}?key=98063e30")
+    fun marketSummary(@Path("market") market: String, @Query("period") period: Long = 86400): Deferred<ArrayList<MarketSummary>>
 
-    @GET("stacrypt-market-last.json?key=98063e30")
-//    fun marketLast(@Path("market") market: String): Deferred<MarketLast>
-    fun marketLast(@Query("market") market: String): Deferred<MarketLast>
+    @GET("market-last/{market}?key=98063e30")
+    fun marketLast(@Path("market") market: String): Deferred<MarketLast>
 
-    @GET("stacrypt-kline.json?key=98063e30")
-    fun kline(): Deferred<ArrayList<Kline>>
+    @GET("kline/{market}?key=98063e30")
+    fun kline(@Path("market") market: String): Deferred<ArrayList<Kline>>
 
-    @GET("stacrypt-order-book.json?key=98063e30")
-    fun book(): Deferred<BookResponse>
+    @GET("order-book/{market}?key=98063e30")
+    fun book(@Path("market") market: String): Deferred<BookResponse>
 
-    @GET("stacrypt-deals.json?key=98063e30")
-    fun deal(): Deferred<ArrayList<Deal>>
+    @GET("deals/{market}?key=98063e30")
+    fun deal(@Path("market") market: String): Deferred<ArrayList<Deal>>
 
-    @GET("stacrypt-mine.json?key=98063e30")
-    fun mine(): Deferred<ArrayList<Mine>>
+    @GET("mine/{market}?key=98063e30")
+    fun mine(@Path("market") market: String): Deferred<ArrayList<Mine>>
 }
 
 @Suppress("DeferredIsResult")

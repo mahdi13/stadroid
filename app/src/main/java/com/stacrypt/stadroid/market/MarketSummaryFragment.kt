@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 
 import androidx.lifecycle.ViewModelProviders
 import com.stacrypt.stadroid.R
+import com.stacrypt.stadroid.data.Market
 import kotlinx.android.synthetic.main.fragment_market_summary.view.*
 
 
@@ -27,17 +28,13 @@ class MarketSummaryFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(MarketViewModel::class.java)
-        viewModel.selectedMarketName.observe(this, Observer<String> { marketName ->
-                val market = viewModel.market.value?.find { it.name == marketName } ?: return@Observer
-
-                rootView?.name?.text = "salam"
-                rootView?.open?.text = market.summary?.low24.toString()
-                rootView?.high?.text = market.summary?.high24.toString()
-                rootView?.low?.text = market.summary?.low24.toString()
-                rootView?.close?.text = market.summary?.last24.toString()
-
-
-            })
+        viewModel.currentMarket.observe(this, Observer<Market> { market ->
+            rootView?.name?.text = market.name
+            rootView?.open?.text = market.summary?.low24.toString()
+            rootView?.high?.text = market.summary?.high24.toString()
+            rootView?.low?.text = market.summary?.low24.toString()
+            rootView?.close?.text = market.summary?.last24.toString()
+        })
     }
 
 

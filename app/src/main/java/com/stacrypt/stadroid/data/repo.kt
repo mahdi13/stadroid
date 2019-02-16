@@ -14,40 +14,39 @@ object MarketRepository {
     private var job: Job? = null
     private val scope = CoroutineScope(Dispatchers.Default)
 
-    fun getMarket(marketName): LiveData<List<Market>> {
-//        refreshMarkets()
+    fun getMarket(marketName: String): LiveData<Market> {
+        refreshMarkets()
         return marketDao.load(marketName)
     }
 
     fun getMarkets(): LiveData<List<Market>> {
-//        refreshMarkets()
+        refreshMarkets()
         return marketDao.loadAll()
     }
 
     fun getKline(market: String): LiveData<List<Kline>> {
-//        refreshKline()
+        refreshKline(market)
         return klineDao.loadByMarket(market)
     }
 
     fun getBook(market: String): LiveData<List<Book>> {
-//        refreshBook()
+        refreshBook(market)
         return bookDao.loadByMarket(market)
     }
 
     fun getDeal(market: String): LiveData<List<Deal>> {
-//        refreshDeal()
+        refreshDeal(market)
         return dealDao.loadByMarket(market)
     }
 
     fun getMine(market: String): LiveData<List<Mine>> {
-//        refreshMine()
+        refreshMine(market)
         return mineDao.loadByMarket(market)
     }
 
     private fun refreshMarkets() {
         MarketRepository.scope.launch {
-            //            stemeraldApiClient.marketList().await().forEach {
-            stemeraldApiClient.marketList().await().firstOrNull()?.let {
+            stemeraldApiClient.marketList().await().forEach {
                 it.status = stemeraldApiClient.marketStatus(it.name).await()
                 it.summary = stemeraldApiClient.marketSummary(it.name).await().firstOrNull()
                 it.last = stemeraldApiClient.marketLast(it.name).await()
@@ -56,33 +55,33 @@ object MarketRepository {
         }
     }
 
-    private fun refreshKline() {
+    private fun refreshKline(market: String) {
         MarketRepository.scope.launch {
-            stemeraldApiClient.kline().await().forEach {
+            stemeraldApiClient.kline(market).await().forEach {
                 MarketRepository.klineDao.save(it)
             }
         }
     }
 
-    private fun refreshBook() {
+    private fun refreshBook(market: String) {
         MarketRepository.scope.launch {
-            stemeraldApiClient.book().await().run { buys + sells }.forEach {
+            stemeraldApiClient.book(market).await().run { buys + sells }.forEach {
                 MarketRepository.bookDao.save(it)
             }
         }
     }
 
-    private fun refreshDeal() {
+    private fun refreshDeal(market: String) {
         MarketRepository.scope.launch {
-            stemeraldApiClient.deal().await().forEach {
+            stemeraldApiClient.deal(market).await().forEach {
                 MarketRepository.dealDao.save(it)
             }
         }
     }
 
-    private fun refreshMine() {
+    private fun refreshMine(market: String) {
         MarketRepository.scope.launch {
-            stemeraldApiClient.mine().await().forEach {
+            stemeraldApiClient.mine(market).await().forEach {
                 MarketRepository.mineDao.save(it)
             }
         }

@@ -8,23 +8,27 @@ import com.stacrypt.stadroid.data.*
 
 class MarketViewModel : ViewModel() {
 
-    val currentMarket = MutableLiveData<String>()
+    val currentMarketName: MutableLiveData<String> by lazy { MutableLiveData<String>().apply { value = "btc/usd" } }
 
     val marketList: LiveData<List<Market>> = MarketRepository.getMarkets()
 
-    val kline: LiveData<List<Kline>> = Transformations.switchMap(currentMarket) { market ->
+    val currentMarket: LiveData<Market> = Transformations.switchMap(currentMarketName) { market ->
+        MarketRepository.getMarket(market)
+    }
+
+    val kline: LiveData<List<Kline>> = Transformations.switchMap(currentMarketName) { market ->
         MarketRepository.getKline(market)
     }
 
-    val book: LiveData<List<Book>> = Transformations.switchMap(currentMarket) { market ->
+    val book: LiveData<List<Book>> = Transformations.switchMap(currentMarketName) { market ->
         MarketRepository.getBook(market)
     }
 
-    val deal: LiveData<List<Deal>> = Transformations.switchMap(currentMarket) { market ->
+    val deal: LiveData<List<Deal>> = Transformations.switchMap(currentMarketName) { market ->
         MarketRepository.getDeal(market)
     }
 
-    val mine: LiveData<List<Mine>> = Transformations.switchMap(currentMarket) { market ->
+    val mine: LiveData<List<Mine>> = Transformations.switchMap(currentMarketName) { market ->
         MarketRepository.getMine(market)
     }
 
