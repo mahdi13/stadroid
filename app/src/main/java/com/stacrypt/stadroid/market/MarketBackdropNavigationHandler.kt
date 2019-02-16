@@ -9,14 +9,26 @@ import android.content.Context
 import android.view.View
 import android.view.animation.Interpolator
 import android.widget.ImageView
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.stacrypt.stadroid.R
+import com.stacrypt.stadroid.data.Market
 import org.jetbrains.annotations.Nullable
 
 
-class BackdropNavigationHandler @JvmOverloads internal constructor(
+class MarketBackdropNavigationHandler @JvmOverloads internal constructor(
     context: Context,
-    private val sheet: View, @param:Nullable private val interpolator: Interpolator? = null,
-    @param:Nullable private val openIcon: Drawable? = null, @param:Nullable private val closeIcon: Drawable? = null
+    private val sheet: View,
+    @param:Nullable private val interpolator: Interpolator? = null,
+    @param:Nullable private val openIcon: Drawable? = null,
+    @param:Nullable private val closeIcon: Drawable? = null,
+    @param:Nullable private val toggleView: TextView? = null,
+    @param:Nullable private val sheetList: RecyclerView? = null,
+    @param:Nullable private val loadingText: String? = null
 ) : View.OnClickListener {
 
     private val duration = 500L
@@ -25,11 +37,38 @@ class BackdropNavigationHandler @JvmOverloads internal constructor(
     private val height: Int
     private var backdropShown = false
 
-    init {
+    private var marketViewModel: MarketViewModel
 
+    init {
         val displayMetrics = DisplayMetrics()
         (context as Activity).windowManager.defaultDisplay.getMetrics(displayMetrics)
+        marketViewModel = ViewModelProviders.of(context as AppCompatActivity).get(MarketViewModel::class.java)
         height = displayMetrics.heightPixels
+
+        toggleView?.text = loadingText
+        toggleView?.setOnClickListener(this)
+
+        sheetList?.adapter = MarketListRecyclerViewAdapter(listOf()) {
+            marketViewModel.currentMarket.setValue(it)
+            collapse()
+        }
+        sheetList?.layoutManager = LinearLayoutManager(context)
+
+        marketViewModel.marketList.observe(context, Observer<List<Market>> { markets ->
+            if (markets == null) return@Observer
+
+            val marketListAdapter = sheetList?.adapter as MarketListRecyclerViewAdapter?
+            marketListAdapter?.items = markets
+            marketListAdapter?.notifyDataSetChanged()
+
+            if (marketViewModel.currentMarket.value == null && markets.isNotEmpty())
+                marketViewModel.currentMarket.setValue(markets[0].name)
+        })
+
+        marketViewModel.currentMarket.observe(context, Observer { marketName ->
+            toggleView?.text = marketName
+        })
+
     }
 
     override fun onClick(view: View) = animateToggle(duration)

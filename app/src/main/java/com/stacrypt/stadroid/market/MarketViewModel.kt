@@ -10,7 +10,7 @@ class MarketViewModel : ViewModel() {
 
     val currentMarket = MutableLiveData<String>()
 
-    val market: LiveData<List<Market>> = MarketRepository.getMarkets()
+    val marketList: LiveData<List<Market>> = MarketRepository.getMarkets()
 
     val kline: LiveData<List<Kline>> = Transformations.switchMap(currentMarket) { market ->
         MarketRepository.getKline(market)

@@ -9,7 +9,6 @@ import androidx.fragment.app.FragmentPagerAdapter
 import com.stacrypt.stadroid.R
 import kotlinx.android.synthetic.main.fragment_market.*
 import com.google.android.material.tabs.TabLayout
-import java.lang.Exception
 import java.lang.IndexOutOfBoundsException
 
 
