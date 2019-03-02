@@ -15,12 +15,12 @@ object MarketRepository {
     private val scope = CoroutineScope(Dispatchers.Default)
 
     fun getMarket(marketName: String): LiveData<Market> {
-        refreshMarkets()
+//        refreshMarkets()
         return marketDao.load(marketName)
     }
 
     fun getMarkets(): LiveData<List<Market>> {
-        refreshMarkets()
+//        refreshMarkets()
         return marketDao.loadAll()
     }
 

@@ -1,7 +1,6 @@
 package com.stacrypt.stadroid.wallet
 
 import android.os.Bundle
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +10,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.stacrypt.stadroid.R
 
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.stacrypt.stadroid.data.Balance
 
 
