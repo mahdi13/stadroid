@@ -31,15 +31,21 @@ interface AssetDao {
 
     @Query("SELECT * FROM Asset")
     fun loadAll(): LiveData<List<Asset>>
+
+    @Query("SELECT * FROM Asset WHERE name = :name")
+    fun loadByName(name: String): LiveData<Asset>
 }
 
 @Dao
-interface BalanceDao {
+interface BalanceOverviewDao {
     @Insert(onConflict = REPLACE)
-    fun save(balance: Balance)
+    fun save(balanceOverview: BalanceOverview)
 
-    @Query("SELECT * FROM Balance")
-    fun loadAll(): LiveData<List<Balance>>
+    @Query("SELECT * FROM BalanceOverview WHERE assetName = :assetName")
+    fun load(assetName: String): LiveData<BalanceOverview>
+
+    @Query("SELECT * FROM BalanceOverview")
+    fun loadAll(): LiveData<List<BalanceOverview>>
 }
 
 @Dao

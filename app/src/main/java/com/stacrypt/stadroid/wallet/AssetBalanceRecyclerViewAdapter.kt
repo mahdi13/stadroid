@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import com.stacrypt.stadroid.data.Balance
+import com.stacrypt.stadroid.data.BalanceOverview
 import com.stacrypt.stadroid.R
 import kotlinx.android.synthetic.main.fragment_asset_balance.view.*
 import org.jetbrains.anko.imageResource
@@ -16,7 +16,7 @@ import org.jetbrains.anko.imageURI
 import java.lang.Exception
 
 class AssetBalanceRecyclerViewAdapter(
-    var items: List<Balance>
+    var items: List<BalanceOverview>
 ) : RecyclerView.Adapter<AssetBalanceRecyclerViewAdapter.ViewHolder>() {
 
 //    private val mOnClickListener: View.OnClickListener

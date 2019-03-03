@@ -110,64 +110,6 @@ object UserRepository {
 
 }
 
-object WalletRepository {
-    private val assetDao: AssetDao = stemeraldDatabase.assetDao
-    private val balanceDao: BalanceDao = stemeraldDatabase.balanceDao
-
-    private var job: Job? = null
-    private val scope = CoroutineScope(Dispatchers.Default)
-
-    //    fun loadAssets(): NetworkBoundResource<List<Asset>, Asset> = object : NetworkBoundResource<List<Asset>, Asset>() {
-//        override val asLiveData: LiveData<Resource<List<Asset>>>
-//            get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
-//
-//        override fun shouldFetch(data: List<Asset>?): Boolean {
-//            return rateLimiter.canFetch(userId)
-//                    && (data == null || !isFresh(data));
-//        }
-//
-//        override fun onFetchFailed() {
-//            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-//        }
-//
-//        override fun saveCallResult(asset: Asset) {
-//            assetDao!!.save(asset)
-//        }
-//
-//
-//        override fun loadFromDb(): LiveData<List<Asset>> {
-//            return assetDao!!.loadAll()
-//        }
-//
-//        override fun createCall(): LiveData<ApiResponse<Asset>> {
-//            return stemeraldApiClient.assetList().getAsLiveData()
-//        }
-//    }
-
-    fun getBalances(): LiveData<List<Balance>> {
-//        refreshBalances()
-        return balanceDao.loadAll()
-    }
-
-    fun getAsset(): LiveData<List<Asset>> {
-//        refreshAssets()
-        return assetDao.loadAll()
-    }
-
-    private fun refreshBalances() {
-        job = scope.launch {
-            stemeraldApiClient.balanceList().await().forEach { balanceDao.save(it) }
-        }
-    }
-
-    private fun refreshAssets() {
-        job = scope.launch {
-            stemeraldApiClient.assetList().await().forEach { assetDao.save(it) }
-        }
-    }
-
-}
-
 //// A generic class that contains data and status about loading this data.
 //class Resource<T> private constructor(val status: Status, val data: T?, val message: String?) {
 //

@@ -1,6 +1,7 @@
 package com.stacrypt.stadroid.data
 
 import androidx.room.*
+import com.google.gson.annotations.SerializedName
 import java.util.*
 
 @Entity
@@ -103,10 +104,19 @@ data class Mine(
 )
 
 @Entity
-data class Balance(
-    @PrimaryKey var assetName: String,
+data class BalanceOverview(
+    @PrimaryKey @SerializedName("name") var assetName: String,
     var available: Double,
     var freeze: Double
+)
+
+data class BalanceHistory(
+    @SerializedName("time") var time: Date,
+    @SerializedName("asset") var assetName: String,
+    @SerializedName("business") var business: String,
+    @SerializedName("change") var change: String,
+    @SerializedName("balance") var balance: String,
+    @SerializedName("detail") var detail: String
 )
 
 @Entity

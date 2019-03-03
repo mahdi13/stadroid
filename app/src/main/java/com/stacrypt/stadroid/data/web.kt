@@ -12,6 +12,7 @@ import java.nio.charset.Charset
 
 //const val STEMERALD_API_URL = "http://localhost:8070"
 const val STEMERALD_API_URL = "https://my.api.mockaroo.com/"
+const val STAWALLET_API_URL = "https://localhost:7071/apiv2"
 val EMERALD_API_URL = Base64
     .decode("aHR0cH" + "M6Ly9iZXRhLn" + "RyYWRlb2ZmLnRy" + "YWRlL2FwaXYxLw", Base64.DEFAULT)!!
     .toString(Charset.forName("utf-8"))
@@ -19,12 +20,28 @@ val EMERALD_API_URL = Base64
 data class BookResponse(val buys: ArrayList<Book>, val sells: ArrayList<Book>)
 
 @Suppress("DeferredIsResult")
+interface StawalletApiClient {
+    @HTTP(method = "OVERVIEW", path = "balances", hasBody = false)
+    fun balanceOverview(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: ""
+    ): Deferred<ArrayList<BalanceOverview>>
+
+    @HTTP(method = "HISTORY", path = "balances", hasBody = false)
+    fun balanceHistory(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
+        @Query("asset") assetName: String,
+        @Query("page") page: Int = 0
+    ): Deferred<ArrayList<BalanceHistory>>
+
+}
+
+@Suppress("DeferredIsResult")
 interface StemeraldApiClient {
     @GET("assets")
     fun assetList(): Deferred<ArrayList<Asset>>
 
     @GET("balances?key=98063e30")
-    fun balanceList(): Deferred<ArrayList<Balance>>
+    fun balanceList(): Deferred<ArrayList<BalanceOverview>>
 
     @GET("market-list?key=98063e30")
     fun marketList(): Deferred<ArrayList<Market>>
@@ -85,6 +102,14 @@ var stemeraldApiClient = Retrofit.Builder()
     .client(okHttpClient)
     .build()
     .create(StemeraldApiClient::class.java)
+
+var stawalletApiClient = Retrofit.Builder()
+    .baseUrl(STAWALLET_API_URL)
+    .addCallAdapterFactory(CoroutineCallAdapterFactory())
+    .addConverterFactory(GsonConverterFactory.create())
+    .client(okHttpClient)
+    .build()
+    .create(StawalletApiClient::class.java)
 
 var emeraldApiClient = Retrofit.Builder()
     .baseUrl(EMERALD_API_URL)

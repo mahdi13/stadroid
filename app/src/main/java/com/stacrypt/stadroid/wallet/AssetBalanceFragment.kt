@@ -11,7 +11,7 @@ import com.stacrypt.stadroid.R
 
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.stacrypt.stadroid.data.Balance
+import com.stacrypt.stadroid.data.BalanceOverview
 
 
 class AssetBalanceFragment : Fragment() {
@@ -36,7 +36,7 @@ class AssetBalanceFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(AssetBalanceViewModel::class.java)
         viewModel.balances.observe(this,
-            Observer<List<Balance>> { balances ->
+            Observer<List<BalanceOverview>> { balances ->
                 adapter.items = balances!!
                 adapter.notifyDataSetChanged()
             })
