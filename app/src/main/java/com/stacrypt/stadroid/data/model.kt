@@ -263,3 +263,34 @@ data class LoadingState private constructor(
 //            NetworkStatus.FAILED -> "Error Loading! Try Again!"
 //        }
 }
+
+
+interface BankId {
+    val id: Int
+    val clientId: Int
+    val isVerified: Int
+    val error: Int
+    val fiatSymbol: String
+}
+
+
+data class BankAccount(
+    override val id: Int,
+    override val clientId: Int,
+    override val isVerified: Int,
+    override val error: Int,
+    override val fiatSymbol: String,
+    val iban: String,
+    val owner: String,
+    val bic: String
+) : BankId
+
+data class BankCard(
+    override val id: Int,
+    override val clientId: Int,
+    override val isVerified: Int,
+    override val error: Int,
+    override val fiatSymbol: String,
+    val pan: String,
+    val holder: String
+) : BankId
