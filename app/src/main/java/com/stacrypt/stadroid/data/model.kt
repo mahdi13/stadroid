@@ -273,7 +273,6 @@ interface BankId {
     val fiatSymbol: String
 }
 
-
 data class BankAccount(
     override val id: Int,
     override val clientId: Int,

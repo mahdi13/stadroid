@@ -89,6 +89,34 @@ interface EmeraldApiClient {
         @Field("email") email: String,
         @Field("password") password: String
     ): Deferred<User>
+
+    @HTTP(method = "GET", path = "banking/accounts", hasBody = false)
+    fun getBankAccounts(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: ""
+    ): Deferred<List<BankAccount>>
+
+    @HTTP(method = "GET", path = "banking/cards", hasBody = false)
+    fun getBankCards(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: ""
+    ): Deferred<List<BankCard>>
+
+    @FormUrlEncoded
+    @HTTP(method = "ADD", path = "banking/accounts", hasBody = true)
+    fun addBankAccount(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
+        @Field("iban") iban: String,
+        @Field("fiatSymbol") fiatSymbol: String,
+        @Field("holder") holder: String
+    ): Deferred<BankAccount>
+
+    @FormUrlEncoded
+    @HTTP(method = "ADD", path = "banking/cards", hasBody = true)
+    fun addBankCard(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
+        @Field("pan") pan: String,
+        @Field("fiatSymbol") fiatSymbol: String,
+        @Field("holder") holder: String
+    ): Deferred<BankCard>
 }
 
 var okHttpClient = OkHttpClient.Builder()
