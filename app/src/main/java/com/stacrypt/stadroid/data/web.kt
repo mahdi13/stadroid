@@ -92,12 +92,16 @@ interface EmeraldApiClient {
 
     @HTTP(method = "GET", path = "banking/accounts", hasBody = false)
     fun getBankAccounts(
-        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: ""
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
+        @Query("skip") skip: Int = 0,
+        @Query("take") take: Int = 20
     ): Deferred<List<BankAccount>>
 
     @HTTP(method = "GET", path = "banking/cards", hasBody = false)
     fun getBankCards(
-        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: ""
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
+        @Query("skip") skip: Int = 0,
+        @Query("take") take: Int = 20
     ): Deferred<List<BankCard>>
 
     @FormUrlEncoded
@@ -106,7 +110,7 @@ interface EmeraldApiClient {
         @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
         @Field("iban") iban: String,
         @Field("fiatSymbol") fiatSymbol: String,
-        @Field("holder") holder: String
+        @Field("owner") owner: String
     ): Deferred<BankAccount>
 
     @FormUrlEncoded

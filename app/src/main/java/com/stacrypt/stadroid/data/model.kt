@@ -264,6 +264,7 @@ data class LoadingState private constructor(
 //        }
 }
 
+enum class BankIdType { ACCOUNT, CARD }
 
 interface BankId {
     val id: Int
@@ -271,6 +272,7 @@ interface BankId {
     val isVerified: Int
     val error: Int
     val fiatSymbol: String
+    val type: BankIdType
 }
 
 data class BankAccount(
@@ -279,6 +281,7 @@ data class BankAccount(
     override val isVerified: Int,
     override val error: Int,
     override val fiatSymbol: String,
+    override val type: BankIdType = BankIdType.ACCOUNT,
     val iban: String,
     val owner: String,
     val bic: String
@@ -290,6 +293,7 @@ data class BankCard(
     override val isVerified: Int,
     override val error: Int,
     override val fiatSymbol: String,
+    override val type: BankIdType = BankIdType.CARD,
     val pan: String,
     val holder: String
 ) : BankId
