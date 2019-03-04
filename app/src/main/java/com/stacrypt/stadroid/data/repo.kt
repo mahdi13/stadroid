@@ -46,10 +46,10 @@ object MarketRepository {
 
     private fun refreshMarkets() {
         MarketRepository.scope.launch {
-            stemeraldApiClient.marketList().await().forEach {
-                it.status = stemeraldApiClient.marketStatus(it.name).await()
-                it.summary = stemeraldApiClient.marketSummary(it.name).await().firstOrNull()
-                it.last = stemeraldApiClient.marketLast(it.name).await()
+            stemeraldV2ApiClient.marketList().await().forEach {
+                it.status = stemeraldV2ApiClient.marketStatus(it.name).await()
+                it.summary = stemeraldV2ApiClient.marketSummary(it.name).await().firstOrNull()
+                it.last = stemeraldV2ApiClient.marketLast(it.name).await()
                 MarketRepository.marketDao.save(it)
             }
         }
@@ -57,7 +57,7 @@ object MarketRepository {
 
     private fun refreshKline(market: String) {
         MarketRepository.scope.launch {
-            stemeraldApiClient.kline(market).await().forEach {
+            stemeraldV2ApiClient.kline(market).await().forEach {
                 MarketRepository.klineDao.save(it)
             }
         }
