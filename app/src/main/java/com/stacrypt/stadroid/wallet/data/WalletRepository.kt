@@ -16,7 +16,7 @@ object WalletRepository {
     private val balanceOverviewDao = stemeraldDatabase.balanceOverviewDao
 
     private var job: Job? = null
-    private val scope = CoroutineScope(Dispatchers.Default)
+    private val scope = CoroutineScope(Dispatchers.IO)
 
     //    fun loadAssets(): NetworkBoundResource<List<Asset>, Asset> = object : NetworkBoundResource<List<Asset>, Asset>() {
 //        override val asLiveData: LiveData<Resource<List<Asset>>>

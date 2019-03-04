@@ -12,7 +12,10 @@ import androidx.lifecycle.ViewModelProviders
 import com.stacrypt.stadroid.R
 import com.stacrypt.stadroid.data.User
 import com.stacrypt.stadroid.data.sessionManager
+import com.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.ARG_TARGET
+import com.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_VERIFICATION_EMAIL
 import kotlinx.android.synthetic.main.fragment_profile.view.*
+import org.jetbrains.anko.support.v4.startActivity
 
 class ProfileFragment : Fragment() {
     private lateinit var viewModel: ProfileViewModel
@@ -28,6 +31,10 @@ class ProfileFragment : Fragment() {
             sessionManager.logout()
             // TODO: Clear entire db
             listener?.onLoggedOut()
+        }
+
+        view.email_verify.setOnClickListener {
+            startActivity<ProfileSettingActivity>(ARG_TARGET to TARGET_VERIFICATION_EMAIL)
         }
 
         return view

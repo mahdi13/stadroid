@@ -1,10 +1,10 @@
 package com.stacrypt.stadroid.wallet
 
 import androidx.lifecycle.ViewModel
-import com.stacrypt.stadroid.data.WalletRepository
+import com.stacrypt.stadroid.wallet.data.WalletRepository
 
 class AssetBalanceViewModel : ViewModel() {
-    val balances = WalletRepository.getBalances()
+    val balances = WalletRepository.getBalanceOverview()
 
 
 }

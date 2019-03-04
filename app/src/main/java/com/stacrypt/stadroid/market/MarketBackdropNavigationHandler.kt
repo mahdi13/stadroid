@@ -62,6 +62,7 @@ class MarketBackdropNavigationHandler @JvmOverloads internal constructor(
             marketListAdapter?.notifyDataSetChanged()
 
 //            if (marketViewModel.currentMarketName.value == null && markets.isNotEmpty())
+            if (markets.isNotEmpty())
                 marketViewModel.currentMarketName.setValue(markets[0].name)
         })
 

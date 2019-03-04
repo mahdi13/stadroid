@@ -8,7 +8,7 @@ import com.stacrypt.stadroid.data.*
 
 class MarketViewModel : ViewModel() {
 
-    val currentMarketName: MutableLiveData<String> by lazy { MutableLiveData<String>().apply { value = "btc/usd" } }
+    val currentMarketName: MutableLiveData<String> = MutableLiveData<String>()
 
     val marketList: LiveData<List<Market>> = MarketRepository.getMarkets()
 

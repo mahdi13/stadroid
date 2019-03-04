@@ -12,7 +12,7 @@ import java.nio.charset.Charset
 
 //const val STEMERALD_API_URL = "http://localhost:8070"
 const val STEMERALD_API_URL = "https://my.api.mockaroo.com/"
-const val STAWALLET_API_URL = "https://localhost:7071/apiv2"
+const val STAWALLET_API_URL = "https://localhost:7071/apiv2/"
 val EMERALD_API_URL = Base64
     .decode("aHR0cH" + "M6Ly9iZXRhLn" + "RyYWRlb2ZmLnRy" + "YWRlL2FwaXYxLw", Base64.DEFAULT)!!
     .toString(Charset.forName("utf-8"))
