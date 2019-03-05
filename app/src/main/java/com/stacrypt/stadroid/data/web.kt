@@ -134,7 +134,7 @@ interface StemeraldV2ApiClient {
 @Suppress("DeferredIsResult")
 interface EmeraldApiClient {
 
-    @HTTP(method = "GET", path = "clients/me", hasBody = true)
+    @HTTP(method = "GET", path = "clients/me", hasBody = false)
     fun me(
         @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: ""
     ): Deferred<User>
@@ -153,14 +153,14 @@ interface EmeraldApiClient {
         @Field("password") password: String
     ): Deferred<User>
 
-    @HTTP(method = "GET", path = "banking/accounts", hasBody = true)
+    @HTTP(method = "GET", path = "banking/accounts", hasBody = false)
     fun getBankAccounts(
         @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
         @Query("skip") skip: Int = 0,
         @Query("take") take: Int = 20
     ): Deferred<List<BankAccount>>
 
-    @HTTP(method = "GET", path = "banking/cards", hasBody = true)
+    @HTTP(method = "GET", path = "banking/cards", hasBody = false)
     fun getBankCards(
         @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
         @Query("skip") skip: Int = 0,
