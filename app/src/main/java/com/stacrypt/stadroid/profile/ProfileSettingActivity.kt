@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.stacrypt.stadroid.R
+import com.stacrypt.stadroid.profile.banking.BankCardsFragment
 import com.stacrypt.stadroid.profile.verification.EmailVerificationFragment
 
 class ProfileSettingActivity : AppCompatActivity() {
@@ -15,6 +16,7 @@ class ProfileSettingActivity : AppCompatActivity() {
 
         val contentFragment: Fragment = when (intent.extras!![ARG_TARGET]) {
             TARGET_VERIFICATION_EMAIL -> EmailVerificationFragment()
+            TARGET_BANK_CARDS -> BankCardsFragment()
             else -> throw IllegalArgumentException("Bad target")
         }
 
@@ -27,6 +29,7 @@ class ProfileSettingActivity : AppCompatActivity() {
     companion object {
         val ARG_TARGET = "target"
         val TARGET_VERIFICATION_EMAIL = "email_verification"
+        val TARGET_BANK_CARDS = "bank_cards"
     }
 
 }

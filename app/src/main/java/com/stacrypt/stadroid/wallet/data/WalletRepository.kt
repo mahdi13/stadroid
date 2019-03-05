@@ -71,7 +71,7 @@ object WalletRepository {
         val sourceFactory = BalanceHistoryDataSourceFactory(assetName)
 
         val livePagedList = sourceFactory.toLiveData(
-            pageSize = 0 // Doesn't matter, because server will set it
+            pageSize = 20 // Doesn't matter, because server will set it
         )
 
         val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {

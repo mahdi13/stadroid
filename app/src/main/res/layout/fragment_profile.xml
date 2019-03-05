@@ -143,16 +143,16 @@
 
                 <com.google.android.material.button.MaterialButton
                         style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
-                        android:id="@+id/shetab"
-                        android:text="Shetab Cards"/>
+                        android:id="@+id/bank_cards"
+                        android:text="Bank Cards"/>
             </TableRow>
 
             <TableRow>
 
                 <com.google.android.material.button.MaterialButton
                         style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
-                        android:id="@+id/sheba"
-                        android:text="Sheba Addresses"/>
+                        android:id="@+id/bank_accounts"
+                        android:text="Bank Accounts"/>
             </TableRow>
 
             <TableRow>

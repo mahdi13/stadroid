@@ -13,6 +13,7 @@ import com.stacrypt.stadroid.R
 import com.stacrypt.stadroid.data.User
 import com.stacrypt.stadroid.data.sessionManager
 import com.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.ARG_TARGET
+import com.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_BANK_CARDS
 import com.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_VERIFICATION_EMAIL
 import kotlinx.android.synthetic.main.fragment_profile.view.*
 import org.jetbrains.anko.support.v4.startActivity
@@ -35,6 +36,10 @@ class ProfileFragment : Fragment() {
 
         view.email_verify.setOnClickListener {
             startActivity<ProfileSettingActivity>(ARG_TARGET to TARGET_VERIFICATION_EMAIL)
+        }
+
+        view.bank_cards.setOnClickListener {
+            startActivity<ProfileSettingActivity>(ARG_TARGET to TARGET_BANK_CARDS)
         }
 
         return view
