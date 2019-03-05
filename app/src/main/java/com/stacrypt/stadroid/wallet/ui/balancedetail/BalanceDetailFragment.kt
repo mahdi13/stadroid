@@ -25,7 +25,7 @@ class BalanceDetailFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(BalanceDetailViewModel::class.java)
+        viewModel = ViewModelProviders.of(activity!!).get(BalanceDetailViewModel::class.java)
         // TODO: Use the ViewModel
     }
 

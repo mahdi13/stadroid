@@ -10,7 +10,7 @@ import com.stacrypt.stadroid.market.data.MarketRepository
 class MarketViewModel : ViewModel() {
 
     val marketName: MutableLiveData<String> = MutableLiveData<String>().apply {
-        value = "tirr_tbtc"//FIXME
+        value = "TIRR_TBTC"//FIXME
     }
 
     val allMarkets: LiveData<List<Market>> = MarketRepository.getMarkets()

@@ -35,7 +35,7 @@ class MarketBookFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(MarketViewModel::class.java)
+        viewModel = ViewModelProviders.of(activity!!).get(MarketViewModel::class.java)
         viewModel.book.observe(this,
             Observer<BookResponse> { books ->
                 val items = ArrayList<Pair<Book?, Book?>>()

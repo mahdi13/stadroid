@@ -34,7 +34,7 @@ class EmailVerificationFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(EmailVerificationViewModel::class.java)
+        viewModel = ViewModelProviders.of(activity!!).get(EmailVerificationViewModel::class.java)
         // TODO: Use the ViewModel
     }
 

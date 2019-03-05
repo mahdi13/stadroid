@@ -27,7 +27,7 @@ class MarketSummaryFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(MarketViewModel::class.java)
+        viewModel = ViewModelProviders.of(activity!!).get(MarketViewModel::class.java)
         viewModel.market.observe(this, Observer<Market?> { market ->
             if (market == null) return@Observer
             rootView?.name?.text = market.name

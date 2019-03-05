@@ -160,7 +160,7 @@ class MarketCandlestickFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(MarketViewModel::class.java)
+        viewModel = ViewModelProviders.of(activity!!).get(MarketViewModel::class.java)
         viewModel.kline.observe(this,
             Observer<List<Kline>> { klineItems ->
                 // FIXME: This method is called several times and reload the existing data

@@ -33,7 +33,7 @@ class MarketHistoryFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(MarketViewModel::class.java)
+        viewModel = ViewModelProviders.of(activity!!).get(MarketViewModel::class.java)
 
         viewModel.deal.observe(this,
             Observer<List<Deal>> { deals ->

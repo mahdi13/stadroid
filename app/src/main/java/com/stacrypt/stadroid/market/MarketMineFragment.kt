@@ -33,7 +33,7 @@ class MarketMineFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(MarketViewModel::class.java)
+        viewModel = ViewModelProviders.of(activity!!).get(MarketViewModel::class.java)
         viewModel.mine.observe(this,
             Observer<List<Mine>> { mines ->
                 adapter.items = mines

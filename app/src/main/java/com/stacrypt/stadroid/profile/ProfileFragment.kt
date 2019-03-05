@@ -51,7 +51,7 @@ class ProfileFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(ProfileViewModel::class.java)
+        viewModel = ViewModelProviders.of(activity!!).get(ProfileViewModel::class.java)
         viewModel.user?.observe(this,
             Observer<User> { user ->
 

@@ -26,7 +26,7 @@ class NewOrderFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(NewOrderViewModel::class.java)
+        viewModel = ViewModelProviders.of(activity!!).get(NewOrderViewModel::class.java)
     }
 
 }

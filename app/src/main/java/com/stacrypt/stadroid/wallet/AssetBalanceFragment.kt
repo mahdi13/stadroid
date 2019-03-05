@@ -34,7 +34,7 @@ class AssetBalanceFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(AssetBalanceViewModel::class.java)
+        viewModel = ViewModelProviders.of(activity!!).get(AssetBalanceViewModel::class.java)
         viewModel.balances.observe(this,
             Observer<List<BalanceOverview>> { balances ->
                 adapter.items = balances!!

@@ -22,12 +22,12 @@ data class BookResponse(val buys: List<Book>, val sells: List<Book>)
 
 //@Suppress("DeferredIsResult")
 //interface StawalletApiClient {
-//    @HTTP(method = "OVERVIEW", path = "balances", hasBody = false)
+//    @HTTP(method = "OVERVIEW", path = "balances", hasBody = true)
 //    fun balanceOverview(
 //        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: ""
 //    ): Deferred<ArrayList<BalanceOverview>>
 //
-//    @HTTP(method = "HISTORY", path = "balances", hasBody = false)
+//    @HTTP(method = "HISTORY", path = "balances", hasBody = true)
 //    fun balanceHistory(
 //        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
 //        @Query("asset") assetName: String,
@@ -38,22 +38,22 @@ data class BookResponse(val buys: List<Book>, val sells: List<Book>)
 
 @Suppress("DeferredIsResult")
 interface StemeraldV2ApiClient {
-    @HTTP(method = "LIST", path = "assets", hasBody = false)
+    @HTTP(method = "LIST", path = "assets", hasBody = true)
     fun assetList(): Deferred<ArrayList<Asset>>
 
-    @HTTP(method = "LIST", path = "markets", hasBody = false)
+    @HTTP(method = "LIST", path = "markets", hasBody = true)
     fun marketList(): Deferred<ArrayList<Market>>
 
-    @HTTP(method = "STATUS", path = "markets/{market}", hasBody = false)
+    @HTTP(method = "STATUS", path = "markets/{market}", hasBody = true)
     fun marketStatus(@Path("market") market: String, @Query("period") period: Long = 86400): Deferred<MarketStatus>
 
-    @HTTP(method = "SUMMARY", path = "markets/{market}", hasBody = false)
+    @HTTP(method = "SUMMARY", path = "markets/{market}", hasBody = true)
     fun marketSummary(@Path("market") market: String): Deferred<ArrayList<MarketSummary>>
 
-    @HTTP(method = "LAST", path = "markets/{market}", hasBody = false)
+    @HTTP(method = "LAST", path = "markets/{market}", hasBody = true)
     fun marketLast(@Path("market") market: String): Deferred<MarketLast>
 
-    @HTTP(method = "KLINE", path = "markets/{market}", hasBody = false)
+    @HTTP(method = "KLINE", path = "markets/{market}", hasBody = true)
     fun kline(
         @Path("market") market: String,
         @Query("start") start: Int,
@@ -61,17 +61,17 @@ interface StemeraldV2ApiClient {
         @Query("interval") interval: Int = 86400
     ): Deferred<ArrayList<Kline>>
 
-    @HTTP(method = "BOOK", path = "markets/{market}", hasBody = false)
+    @HTTP(method = "BOOK", path = "markets/{market}", hasBody = true)
     fun book(@Path("market") market: String, @Query("side") side: String): Deferred<List<Book>>
 
-    @HTTP(method = "PEEK", path = "markets/{market}/mydeals", hasBody = false)
+    @HTTP(method = "PEEK", path = "markets/{market}/marketdeals", hasBody = true)
     fun deal(
         @Path("market") market: String,
         @Query("limit") take: Int = 20,
         @Query("lastId") lastId: Int = 0
     ): Deferred<ArrayList<Deal>>
 
-    @HTTP(method = "PEEK", path = "markets/{market}/mydeals", hasBody = false)
+    @HTTP(method = "PEEK", path = "markets/{market}/mydeals", hasBody = true)
     fun mine(
         @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
         @Path("market") market: String,
@@ -79,17 +79,17 @@ interface StemeraldV2ApiClient {
         @Query("limit") take: Int = 20
     ): Deferred<ArrayList<Mine>>
 
-    @HTTP(method = "OVERVIEW", path = "balances", hasBody = false)
+    @HTTP(method = "OVERVIEW", path = "balances", hasBody = true)
     fun balanceList(
         @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: ""
     ): Deferred<ArrayList<BalanceOverview>>
 
-    @HTTP(method = "OVERVIEW", path = "balances", hasBody = false)
+    @HTTP(method = "OVERVIEW", path = "balances", hasBody = true)
     fun balanceOverview(
         @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: ""
     ): Deferred<ArrayList<BalanceOverview>>
 
-    @HTTP(method = "HISTORY", path = "balances", hasBody = false)
+    @HTTP(method = "HISTORY", path = "balances", hasBody = true)
     fun balanceHistory(
         @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
         @Query("asset") assetName: String,
@@ -134,7 +134,7 @@ interface StemeraldV2ApiClient {
 @Suppress("DeferredIsResult")
 interface EmeraldApiClient {
 
-    @HTTP(method = "GET", path = "clients/me", hasBody = false)
+    @HTTP(method = "GET", path = "clients/me", hasBody = true)
     fun me(
         @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: ""
     ): Deferred<User>
@@ -153,14 +153,14 @@ interface EmeraldApiClient {
         @Field("password") password: String
     ): Deferred<User>
 
-    @HTTP(method = "GET", path = "banking/accounts", hasBody = false)
+    @HTTP(method = "GET", path = "banking/accounts", hasBody = true)
     fun getBankAccounts(
         @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
         @Query("skip") skip: Int = 0,
         @Query("take") take: Int = 20
     ): Deferred<List<BankAccount>>
 
-    @HTTP(method = "GET", path = "banking/cards", hasBody = false)
+    @HTTP(method = "GET", path = "banking/cards", hasBody = true)
     fun getBankCards(
         @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
         @Query("skip") skip: Int = 0,
