@@ -12,10 +12,6 @@ import java.util.*
         Market::class,
         Asset::class,
         BalanceOverview::class,
-        Kline::class,
-        Book::class,
-        Deal::class,
-        Mine::class,
 
         User::class,
         Ticket::class,
@@ -32,10 +28,10 @@ abstract class StemeraldDatabase : RoomDatabase() {
     abstract val marketDao: MarketDao
     abstract val assetDao: AssetDao
     abstract val balanceOverviewDao: BalanceOverviewDao
-    abstract val klineDao: KlineDao
-    abstract val bookDao: BookDao
-    abstract val dealDao: DealDao
-    abstract val mineDao: MineDao
+//    abstract val klineDao: KlineDao
+//    abstract val bookDao: BookDao
+//    abstract val dealDao: DealDao
+//    abstract val mineDao: MineDao
     abstract val userDao: UserDao
 }
 

@@ -11,34 +11,34 @@ import retrofit2.http.*
 import java.nio.charset.Charset
 
 //const val STEMERALD_API_URL = "http://localhost:8070"
-const val STEMERALD_API_URL = "https://my.api.mockaroo.com/"
-const val STAWALLET_API_URL = "https://localhost:7071/apiv2/"
-const val STEMERALD_V2_API_URL = "https://localhost:7071/apiv2/"
+//const val MOCK_STEMERALD_API_URL = "https://my.api.mockaroo.com/"
+//const val STAWALLET_API_URL = "http://10.0.2.2:7071/apiv2/"
+const val STEMERALD_API_URL = "http://10.0.2.2:7071/apiv2/"
 val EMERALD_API_URL = Base64
     .decode("aHR0cH" + "M6Ly9iZXRhLn" + "RyYWRlb2ZmLnRy" + "YWRlL2FwaXYxLw", Base64.DEFAULT)!!
     .toString(Charset.forName("utf-8"))
 
-data class BookResponse(val buys: ArrayList<Book>, val sells: ArrayList<Book>)
+data class BookResponse(val buys: List<Book>, val sells: List<Book>)
 
-@Suppress("DeferredIsResult")
-interface StawalletApiClient {
-    @HTTP(method = "OVERVIEW", path = "balances", hasBody = false)
-    fun balanceOverview(
-        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: ""
-    ): Deferred<ArrayList<BalanceOverview>>
-
-    @HTTP(method = "HISTORY", path = "balances", hasBody = false)
-    fun balanceHistory(
-        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
-        @Query("asset") assetName: String,
-        @Query("page") page: Int = 0
-    ): Deferred<ArrayList<BalanceHistory>>
-
-}
+//@Suppress("DeferredIsResult")
+//interface StawalletApiClient {
+//    @HTTP(method = "OVERVIEW", path = "balances", hasBody = false)
+//    fun balanceOverview(
+//        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: ""
+//    ): Deferred<ArrayList<BalanceOverview>>
+//
+//    @HTTP(method = "HISTORY", path = "balances", hasBody = false)
+//    fun balanceHistory(
+//        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
+//        @Query("asset") assetName: String,
+//        @Query("page") page: Int = 0
+//    ): Deferred<ArrayList<BalanceHistory>>
+//
+//}
 
 @Suppress("DeferredIsResult")
 interface StemeraldV2ApiClient {
-    @GET("assets")
+    @HTTP(method = "LIST", path = "assets", hasBody = false)
     fun assetList(): Deferred<ArrayList<Asset>>
 
     @HTTP(method = "LIST", path = "markets", hasBody = false)
@@ -53,7 +53,7 @@ interface StemeraldV2ApiClient {
     @HTTP(method = "LAST", path = "markets/{market}", hasBody = false)
     fun marketLast(@Path("market") market: String): Deferred<MarketLast>
 
-    @GET("kline/{market}")
+    @HTTP(method = "KLINE", path = "markets/{market}", hasBody = false)
     fun kline(
         @Path("market") market: String,
         @Query("start") start: Int,
@@ -61,18 +61,53 @@ interface StemeraldV2ApiClient {
         @Query("interval") interval: Int = 86400
     ): Deferred<ArrayList<Kline>>
 
-}
+    @HTTP(method = "BOOK", path = "markets/{market}", hasBody = false)
+    fun book(@Path("market") market: String, @Query("side") side: String): Deferred<List<Book>>
 
-@Suppress("DeferredIsResult")
-interface StemeraldApiClient {
+    @HTTP(method = "PEEK", path = "markets/{market}/mydeals", hasBody = false)
+    fun deal(
+        @Path("market") market: String,
+        @Query("limit") take: Int = 20,
+        @Query("lastId") lastId: Int = 0
+    ): Deferred<ArrayList<Deal>>
+
+    @HTTP(method = "PEEK", path = "markets/{market}/mydeals", hasBody = false)
+    fun mine(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
+        @Path("market") market: String,
+        @Query("offset") skip: Int = 0,
+        @Query("limit") take: Int = 20
+    ): Deferred<ArrayList<Mine>>
+
+    @HTTP(method = "OVERVIEW", path = "balances", hasBody = false)
+    fun balanceList(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: ""
+    ): Deferred<ArrayList<BalanceOverview>>
+
+    @HTTP(method = "OVERVIEW", path = "balances", hasBody = false)
+    fun balanceOverview(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: ""
+    ): Deferred<ArrayList<BalanceOverview>>
+
+    @HTTP(method = "HISTORY", path = "balances", hasBody = false)
+    fun balanceHistory(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
+        @Query("asset") assetName: String,
+        @Query("page") page: Int = 0
+    ): Deferred<ArrayList<BalanceHistory>>
+
+}
+//
+//@Suppress("DeferredIsResult")
+//interface StemeraldApiClient {
 //    @GET("assets")
 //    fun assetList(): Deferred<ArrayList<Asset>>
 
-    @GET("balances?key=98063e30")
-    fun balanceList(): Deferred<ArrayList<BalanceOverview>>
+//    @GET("balances?key=98063e30")
+//    fun balanceList(): Deferred<ArrayList<BalanceOverview>>
 
 //    @GET("market-list?key=98063e30")
-//    fun marketList(): Deferred<ArrayList<Market>>
+//    fun allMarkets(): Deferred<ArrayList<Market>>
 //
 //    @GET("market-status/{market}?key=98063e30")
 //    fun marketStatus(@Path("market") market: String): Deferred<MarketStatus>
@@ -86,15 +121,15 @@ interface StemeraldApiClient {
 //    @GET("kline/{market}?key=98063e30")
 //    fun kline(@Path("market") market: String): Deferred<ArrayList<Kline>>
 
-    @GET("order-book/{market}?key=98063e30")
-    fun book(@Path("market") market: String): Deferred<BookResponse>
-
-    @GET("deals/{market}?key=98063e30")
-    fun deal(@Path("market") market: String): Deferred<ArrayList<Deal>>
-
-    @GET("mine/{market}?key=98063e30")
-    fun mine(@Path("market") market: String): Deferred<ArrayList<Mine>>
-}
+//    @GET("order-book/{market}?key=98063e30")
+//    fun book(@Path("market") market: String): Deferred<BookResponse>
+//
+//    @GET("deals/{market}?key=98063e30")
+//    fun deal(@Path("market") market: String): Deferred<ArrayList<Deal>>
+//
+//    @GET("mine/{market}?key=98063e30")
+//    fun mine(@Path("market") market: String): Deferred<ArrayList<Mine>>
+//}
 
 @Suppress("DeferredIsResult")
 interface EmeraldApiClient {
@@ -155,24 +190,16 @@ var okHttpClient = OkHttpClient.Builder()
     .addInterceptor(HttpLoggingInterceptor())
     .build()
 
+//var stemeraldApiClient = Retrofit.Builder()
+//    .baseUrl(STEMERALD_API_URL)
+//    .addCallAdapterFactory(CoroutineCallAdapterFactory())
+//    .addConverterFactory(GsonConverterFactory.create())
+//    .client(okHttpClient)
+//    .build()
+//    .create(StemeraldApiClient::class.java)
+
 var stemeraldApiClient = Retrofit.Builder()
     .baseUrl(STEMERALD_API_URL)
-    .addCallAdapterFactory(CoroutineCallAdapterFactory())
-    .addConverterFactory(GsonConverterFactory.create())
-    .client(okHttpClient)
-    .build()
-    .create(StemeraldApiClient::class.java)
-
-var stawalletApiClient = Retrofit.Builder()
-    .baseUrl(STAWALLET_API_URL)
-    .addCallAdapterFactory(CoroutineCallAdapterFactory())
-    .addConverterFactory(GsonConverterFactory.create())
-    .client(okHttpClient)
-    .build()
-    .create(StawalletApiClient::class.java)
-
-var stemeraldV2ApiClient = Retrofit.Builder()
-    .baseUrl(STEMERALD_V2_API_URL)
     .addCallAdapterFactory(CoroutineCallAdapterFactory())
     .addConverterFactory(GsonConverterFactory.create())
     .client(okHttpClient)

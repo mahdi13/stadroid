@@ -1,7 +1,6 @@
 package com.stacrypt.stadroid.wallet.data
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.paging.toLiveData
 import com.stacrypt.stadroid.data.*
@@ -115,7 +114,7 @@ object WalletRepository {
 
     private fun refreshBalanceOverview() {
         job = scope.launch {
-            stawalletApiClient.balanceOverview().await().forEach { balanceOverviewDao.save(it) }
+            stemeraldApiClient.balanceOverview().await().forEach { balanceOverviewDao.save(it) }
         }
     }
 

@@ -1,93 +1,10 @@
 package com.stacrypt.stadroid.data
 
+import android.text.format.DateUtils
 import androidx.lifecycle.LiveData
 import kotlinx.coroutines.*
+import java.util.*
 
-
-object MarketRepository {
-    private val marketDao: MarketDao = stemeraldDatabase.marketDao
-    private val klineDao: KlineDao = stemeraldDatabase.klineDao
-    private val bookDao: BookDao = stemeraldDatabase.bookDao
-    private val dealDao: DealDao = stemeraldDatabase.dealDao
-    private val mineDao: MineDao = stemeraldDatabase.mineDao
-
-    private var job: Job? = null
-    private val scope = CoroutineScope(Dispatchers.Default)
-
-    fun getMarket(marketName: String): LiveData<Market> {
-//        refreshMarkets()
-        return marketDao.load(marketName)
-    }
-
-    fun getMarkets(): LiveData<List<Market>> {
-//        refreshMarkets()
-        return marketDao.loadAll()
-    }
-
-    fun getKline(market: String): LiveData<List<Kline>> {
-        refreshKline(market)
-        return klineDao.loadByMarket(market)
-    }
-
-    fun getBook(market: String): LiveData<List<Book>> {
-        refreshBook(market)
-        return bookDao.loadByMarket(market)
-    }
-
-    fun getDeal(market: String): LiveData<List<Deal>> {
-        refreshDeal(market)
-        return dealDao.loadByMarket(market)
-    }
-
-    fun getMine(market: String): LiveData<List<Mine>> {
-        refreshMine(market)
-        return mineDao.loadByMarket(market)
-    }
-
-    private fun refreshMarkets() {
-        MarketRepository.scope.launch {
-            stemeraldV2ApiClient.marketList().await().forEach {
-                it.status = stemeraldV2ApiClient.marketStatus(it.name).await()
-                it.summary = stemeraldV2ApiClient.marketSummary(it.name).await().firstOrNull()
-                it.last = stemeraldV2ApiClient.marketLast(it.name).await()
-                MarketRepository.marketDao.save(it)
-            }
-        }
-    }
-
-    private fun refreshKline(market: String) {
-        MarketRepository.scope.launch {
-            stemeraldV2ApiClient.kline(market).await().forEach {
-                MarketRepository.klineDao.save(it)
-            }
-        }
-    }
-
-    private fun refreshBook(market: String) {
-        MarketRepository.scope.launch {
-            stemeraldApiClient.book(market).await().run { buys + sells }.forEach {
-                MarketRepository.bookDao.save(it)
-            }
-        }
-    }
-
-    private fun refreshDeal(market: String) {
-        MarketRepository.scope.launch {
-            stemeraldApiClient.deal(market).await().forEach {
-                MarketRepository.dealDao.save(it)
-            }
-        }
-    }
-
-    private fun refreshMine(market: String) {
-        MarketRepository.scope.launch {
-            stemeraldApiClient.mine(market).await().forEach {
-                MarketRepository.mineDao.save(it)
-            }
-        }
-    }
-
-}
 
 object UserRepository {
     private val userDao: UserDao = stemeraldDatabase.userDao

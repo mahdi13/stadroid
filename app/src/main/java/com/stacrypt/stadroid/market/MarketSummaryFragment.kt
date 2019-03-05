@@ -28,13 +28,24 @@ class MarketSummaryFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(MarketViewModel::class.java)
-        viewModel.currentMarket.observe(this, Observer<Market?> { market ->
+        viewModel.market.observe(this, Observer<Market?> { market ->
             if (market == null) return@Observer
             rootView?.name?.text = market.name
-            rootView?.open?.text = market.summary?.low24.toString()
-            rootView?.high?.text = market.summary?.high24.toString()
-            rootView?.low?.text = market.summary?.low24.toString()
-            rootView?.close?.text = market.summary?.last24.toString()
+        })
+
+        viewModel.summary.observe(this, Observer {
+            rootView?.open?.text = it?.low24.toString()
+            rootView?.high?.text = it?.high24.toString()
+            rootView?.low?.text = it?.low24.toString()
+            rootView?.close?.text = it?.last24.toString()
+        })
+
+        viewModel.last.observe(this, Observer {
+            rootView?.price?.text = it?.price.toString()
+        })
+
+        viewModel.status.observe(this, Observer {
+            //TODO
         })
     }
 

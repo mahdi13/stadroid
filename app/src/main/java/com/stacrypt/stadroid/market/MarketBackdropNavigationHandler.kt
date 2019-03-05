@@ -49,24 +49,24 @@ class MarketBackdropNavigationHandler @JvmOverloads internal constructor(
         toggleView?.setOnClickListener(this)
 
         sheetList?.adapter = MarketListRecyclerViewAdapter(listOf()) {
-            marketViewModel.currentMarketName.setValue(it)
+            marketViewModel.marketName.setValue(it)
             collapse()
         }
         sheetList?.layoutManager = LinearLayoutManager(context)
 
-        marketViewModel.marketList.observe(context, Observer<List<Market>> { markets ->
+        marketViewModel.allMarkets.observe(context, Observer<List<Market>> { markets ->
             if (markets == null) return@Observer
 
             val marketListAdapter = sheetList?.adapter as MarketListRecyclerViewAdapter?
             marketListAdapter?.items = markets
             marketListAdapter?.notifyDataSetChanged()
 
-//            if (marketViewModel.currentMarketName.value == null && markets.isNotEmpty())
-            if (markets.isNotEmpty())
-                marketViewModel.currentMarketName.setValue(markets[0].name)
+//            if (marketViewModel.marketName.value == null && markets.isNotEmpty())
+//            if (markets.isNotEmpty())
+//                marketViewModel.marketName.setValue(markets[0].name)
         })
 
-        marketViewModel.currentMarketName.observe(context, Observer { marketName ->
+        marketViewModel.marketName.observe(context, Observer { marketName ->
             toggleView?.text = marketName
         })
 

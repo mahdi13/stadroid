@@ -61,7 +61,7 @@ class PageKeyedBalanceHistoryDataSource(private val assetName: String) :
         networkState.postValue(NetworkState.LOADING)
         scope.launch {
             try {
-                val items = stawalletApiClient.balanceHistory(
+                val items = stemeraldApiClient.balanceHistory(
                     assetName = assetName,
                     page = params.key
                 ).await()
@@ -81,7 +81,7 @@ class PageKeyedBalanceHistoryDataSource(private val assetName: String) :
         params: LoadInitialParams<Int>,
         callback: LoadInitialCallback<Int, BalanceHistory>
     ) {
-        val request = stawalletApiClient.balanceHistory(assetName = assetName)
+        val request = stemeraldApiClient.balanceHistory(assetName = assetName)
         networkState.postValue(NetworkState.LOADING)
         initialLoad.postValue(NetworkState.LOADING)
 

@@ -12,10 +12,10 @@ data class Market(
     var money: String,
     var feePrec: Int,
     var minAmount: String,
-    var moneyPrec: Int,
-    @Embedded var status: MarketStatus?,
-    @Embedded var summary: MarketSummary?,
-    @Embedded var last: MarketLast?
+    var moneyPrec: Int
+//    @Embedded var status: MarketStatus?,
+//    @Embedded var summary: MarketSummary?,
+//    @Embedded var last: MarketLast?
 
 )
 
@@ -49,9 +49,6 @@ data class Asset(
     var prec: String
 )
 
-@Entity(
-    primaryKeys = ["market", "time"]
-)
 data class Kline(
     var market: String,
     var time: Long,
@@ -63,9 +60,6 @@ data class Kline(
     var amount: Double
 )
 
-@Entity(
-    primaryKeys = ["market", "i", "side"]
-)
 data class Book(
     var market: String,
     var i: Int,
@@ -74,9 +68,6 @@ data class Book(
     var amount: String
 )
 
-@Entity(
-    primaryKeys = ["market", "id"]
-)
 data class Deal(
     var market: String,
     var id: Int,
@@ -86,9 +77,6 @@ data class Deal(
     var price: String
 )
 
-@Entity(
-    primaryKeys = ["market", "id"]
-)
 data class Mine(
     var id: Int,
     var market: String,
