@@ -30,9 +30,9 @@
 
             <TextView
                     style="@style/TextAppearance.MaterialComponents.Caption"
-                    android:layout_width="100dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
+                    android:gravity="le"
                     android:text="Bitcoin"
                     android:textColor="@color/colorPrimaryLight"
                     android:textStyle="bold"

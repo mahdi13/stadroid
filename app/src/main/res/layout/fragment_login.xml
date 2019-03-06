@@ -37,7 +37,8 @@
             <ImageView
                     android:layout_width="110dp"
                     android:layout_height="110dp"
-                    android:src="@drawable/icons8_transaction_96"
+                    android:backgroundTint="@color/colorAccent"
+                    android:background="@drawable/icons8_transaction_96"
                     android:layout_marginBottom="40dp"/>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -100,10 +101,10 @@
                         android:layout_height="60dp"
                         android:layout_marginTop="16dp"
                         android:text="@string/action_login"
-                        android:textColor="@color/colorPrimaryTextDark"
+                        android:textColor="@color/colorPrimary"
                         android:layout_weight="1"
                         android:textStyle="bold"
-                        android:backgroundTint="@color/colorSecondary"
+                        android:backgroundTint="@color/colorAccent"
                         />
 
                 <com.google.android.material.button.MaterialButton
@@ -115,10 +116,10 @@
                         android:layout_height="60dp"
                         android:layout_marginTop="16dp"
                         android:text="@string/action_register"
-                        android:textColor="@color/colorSecondary"
+                        android:textColor="@color/colorAccent"
                         android:layout_weight="1"
                         android:textStyle="bold"
-                        app:strokeColor="@color/colorSecondary"/>
+                        app:strokeColor="@color/colorAccent"/>
             </LinearLayout>
 
             <LinearLayout
@@ -139,7 +140,7 @@
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                         android:fontFamily="@font/open_sans_bold"
                         android:layout_marginStart="10dp"
-                        android:textColor="@color/colorSecondary"
+                        android:textColor="@color/colorPrimaryLight"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
