@@ -114,13 +114,15 @@ object WalletRepository {
 
     private fun refreshBalanceOverview() {
         job = scope.launch {
-            stemeraldApiClient.balanceOverview().await().forEach { balanceOverviewDao.save(it) }
+//            stemeraldApiClient.balanceOverview().await().forEach { balanceOverviewDao.save(it) }
+            mockStemeraldApiClient.balanceList().await().forEach { balanceOverviewDao.save(it) } // FIXME
         }
     }
 
     private fun refreshAssets() {
         job = scope.launch {
-            stemeraldApiClient.assetList().await().forEach { assetDao.save(it) }
+            //            stemeraldApiClient.assetList().await().forEach { assetDao.save(it) }
+            mockStemeraldApiClient.assetList().await().forEach { assetDao.save(it) } // FIXME
         }
     }
 

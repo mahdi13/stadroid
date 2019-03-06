@@ -11,7 +11,7 @@ import retrofit2.http.*
 import java.nio.charset.Charset
 
 //const val STEMERALD_API_URL = "http://localhost:8070"
-//const val MOCK_STEMERALD_API_URL = "https://my.api.mockaroo.com/"
+const val MOCK_STEMERALD_API_URL = "https://my.api.mockaroo.com/"
 //const val STAWALLET_API_URL = "http://10.0.2.2:7071/apiv2/"
 const val STEMERALD_API_URL = "http://10.0.2.2:7071/apiv2/"
 val EMERALD_API_URL = Base64
@@ -97,14 +97,14 @@ interface StemeraldV2ApiClient {
     ): Deferred<ArrayList<BalanceHistory>>
 
 }
-//
-//@Suppress("DeferredIsResult")
-//interface StemeraldApiClient {
-//    @GET("assets")
-//    fun assetList(): Deferred<ArrayList<Asset>>
 
-//    @GET("balances?key=98063e30")
-//    fun balanceList(): Deferred<ArrayList<BalanceOverview>>
+@Suppress("DeferredIsResult")
+interface MockStemeraldApiClient {
+    @GET("assets")
+    fun assetList(): Deferred<ArrayList<Asset>>
+
+    @GET("balances?key=98063e30")
+    fun balanceList(): Deferred<ArrayList<BalanceOverview>>
 
 //    @GET("market-list?key=98063e30")
 //    fun allMarkets(): Deferred<ArrayList<Market>>
@@ -129,7 +129,7 @@ interface StemeraldV2ApiClient {
 //
 //    @GET("mine/{market}?key=98063e30")
 //    fun mine(@Path("market") market: String): Deferred<ArrayList<Mine>>
-//}
+}
 
 @Suppress("DeferredIsResult")
 interface EmeraldApiClient {
@@ -213,3 +213,11 @@ var emeraldApiClient = Retrofit.Builder()
     .client(okHttpClient)
     .build()
     .create(EmeraldApiClient::class.java)
+
+var mockStemeraldApiClient = Retrofit.Builder()
+    .baseUrl(MOCK_STEMERALD_API_URL)
+    .addCallAdapterFactory(CoroutineCallAdapterFactory())
+    .addConverterFactory(GsonConverterFactory.create())
+    .client(okHttpClient)
+    .build()
+    .create(MockStemeraldApiClient::class.java)
