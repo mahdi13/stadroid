@@ -39,17 +39,18 @@ class AssetBalanceRecyclerViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
         holder.nameView.text = item.assetName
-        holder.totalView.text = (item.available + item.freeze).toString()
+//        holder.totalView.text = (item.available + item.freeze).toString()
         holder.availableView.text = item.available.toString()
         holder.freezeView.text = item.freeze.toString()
-        try {
-            holder.iconView.imageURI =
-                Uri.parse("android.resource://com.stacrypt.stadroid/drawable/ic_${item.assetName}")
-        } catch (e: Exception) {
-            holder.iconView.imageResource =
-                arrayOf(R.drawable.ic_btc, R.drawable.ic_eth, R.drawable.ic_ltc, R.drawable.ic_xrp).random()
-        }   
-
+        holder.iconView.setImageResource(
+            when (item.assetName) {
+                "BTC" -> R.drawable.ic_btc
+                "TBTC" -> R.drawable.ic_btc
+                "ETH" -> R.drawable.ic_eth
+                "TETH" -> R.drawable.ic_eth
+                else -> R.drawable.ic_btc
+            }
+        )
 
 //        with(holder.view) {
 //            tag = item
@@ -64,7 +65,7 @@ class AssetBalanceRecyclerViewAdapter(
         val depositView: Button = view.deposit
         val withdrawView: Button = view.withdraw
         val historyView: Button = view.history
-        val totalView: TextView = view.available
+//        val totalView: TextView = view.available
         val availableView: TextView = view.total
         val freezeView: TextView = view.freeze
         val iconView: ImageView = view.icon

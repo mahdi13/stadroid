@@ -44,6 +44,9 @@ interface BalanceOverviewDao {
     @Query("SELECT * FROM BalanceOverview WHERE assetName = :assetName")
     fun load(assetName: String): LiveData<BalanceOverview>
 
+    @Query("DELETE FROM BalanceOverview")
+    fun deleteAll()
+
     @Query("SELECT * FROM BalanceOverview")
     fun loadAll(): LiveData<List<BalanceOverview>>
 }

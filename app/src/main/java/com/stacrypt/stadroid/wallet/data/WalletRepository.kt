@@ -115,6 +115,7 @@ object WalletRepository {
     private fun refreshBalanceOverview() {
         job = scope.launch {
 //            stemeraldApiClient.balanceOverview().await().forEach { balanceOverviewDao.save(it) }
+            balanceOverviewDao.deleteAll() // FIXME
             mockStemeraldApiClient.balanceList().await().forEach { balanceOverviewDao.save(it) } // FIXME
         }
     }

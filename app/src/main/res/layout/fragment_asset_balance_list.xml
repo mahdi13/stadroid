@@ -7,8 +7,10 @@
         android:name="com.stacrypt.stadroid.wallet.AssetBalanceFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="10dp"
+        android:background="@color/colorPrimaryDark"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:context=".wallet.AssetBalanceFragment"
         tools:listitem="@layout/fragment_asset_balance"/>

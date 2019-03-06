@@ -2,11 +2,11 @@
 <resources>
     <!--<color name="colorPrimary">#233142</color>-->
     <!--<color name="colorPrimaryDark">#00081c</color>-->
-    <color name="colorPrimary">#243445</color>
-    <color name="colorPrimaryDark">#192431</color>
-    <color name="colorPrimaryLight">#4c5a6d</color>
+    <color name="colorPrimary">#242537</color>
+    <color name="colorPrimaryDark">#191b2a</color>
+    <color name="colorPrimaryLight">#3f405c</color>
     <!--<color name="colorAccent">#4c5a6d</color>-->
-    <color name="colorAccent">#02a6f2</color>
+    <color name="colorAccent">#f4ff44</color>
 
     <color name="colorGrayText">#888888</color>
     <color name="colorPrimaryText">#dddddd</color>
