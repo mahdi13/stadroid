@@ -14,7 +14,7 @@
         android:background="@color/colorPrimaryDark"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listheader="@layout/row_balance_detail_header"
-        tools:listitem="@layout/row_balance_detail_header"
+        tools:listitem="@layout/row_balance_detail_history"
         >
 
 
