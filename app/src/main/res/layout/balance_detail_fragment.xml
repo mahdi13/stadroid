@@ -1,47 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.recyclerview.widget.RecyclerView
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/balancedetail"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="wallet.ui.balancedetail.BalanceDetailFragment">
-
-    <android.support.design.widget.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fitsSystemWindows="true"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-        <android.support.design.widget.CollapsingToolbarLayout
-                android:id="@+id/collapsing_toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fitsSystemWindows="true"
-                app:contentScrim="?attr/colorPrimary"
-                app:expandedTitleMarginEnd="64dp"
-                app:expandedTitleMarginStart="48dp"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed">
-
-            <android.support.v7.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    app:layout_scrollFlags="scroll|enterAlways"></android.support.v7.widget.Toolbar>
-
-        </android.support.design.widget.CollapsingToolbarLayout>
-    </android.support.design.widget.AppBarLayout>
+        tools:context="wallet.ui.balancedetail.BalanceDetailFragment"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="10dp"
+        android:background="@color/colorPrimaryDark"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listheader="@layout/row_balance_detail_header"
+        tools:listitem="@layout/row_balance_detail_header"
+        >
 
 
-    <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/balance_history"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="BalanceDetailFragment"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_behavior="@string/bottom_sheet_behavior"/>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.recyclerview.widget.RecyclerView>
