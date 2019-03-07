@@ -6,7 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.paging.PagedList
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.stacrypt.stadroid.R
+import com.stacrypt.stadroid.data.BalanceHistory
+import com.stacrypt.stadroid.data.BalanceOverview
+import kotlinx.android.synthetic.main.balance_detail_fragment.*
 
 class BalanceDetailFragment : Fragment() {
 
@@ -15,6 +21,7 @@ class BalanceDetailFragment : Fragment() {
     }
 
     private lateinit var viewModel: BalanceDetailViewModel
+    private lateinit var adapter: BalanceDetailPagedAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,7 +33,17 @@ class BalanceDetailFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(activity!!).get(BalanceDetailViewModel::class.java)
-        // TODO: Use the ViewModel
+        adapter = BalanceDetailPagedAdapter(viewModel.)
+        list.adapter = adapter
+
+        viewModel.balanceHistory.observe(this, Observer<PagedList<BalanceHistory>> {
+            adapter.submitList(it)
+        })
+        viewModel.balance.observe(this, Observer<BalanceOverview> {
+            adapter.balanceOverview = it
+            adapter.notifyDataSetChanged()
+        })
+        list.layoutManager = LinearLayoutManager(activity)
     }
 
 }
