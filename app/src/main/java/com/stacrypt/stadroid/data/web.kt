@@ -106,6 +106,12 @@ interface MockStemeraldApiClient {
     @GET("balances?key=98063e30")
     fun balanceList(): Deferred<ArrayList<BalanceOverview>>
 
+    @GET("balance-history?key=98063e30")
+    fun balanceHistory(
+        @Query("asset") assetName: String,
+        @Query("page") page: Int = 0
+    ): Deferred<ArrayList<BalanceHistory>>
+
 //    @GET("market-list?key=98063e30")
 //    fun allMarkets(): Deferred<ArrayList<Market>>
 //

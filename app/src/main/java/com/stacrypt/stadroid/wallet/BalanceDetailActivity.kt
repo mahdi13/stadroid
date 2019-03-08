@@ -1,5 +1,6 @@
 package com.stacrypt.stadroid.wallet
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -13,7 +14,7 @@ class BalanceDetailActivity : AppCompatActivity() {
         setContentView(R.layout.balance_detail_activity)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.container, BalanceDetailFragment.newInstance())
+                .replace(R.id.container, BalanceDetailFragment.newInstance(intent.getStringExtra(ARG_ASSET)))
                 .commitNow()
         }
     }
@@ -26,8 +27,8 @@ class BalanceDetailActivity : AppCompatActivity() {
         val ACTION_WITHDRAW = "withdraw"
         val ACTION_HISTORY = "history"
 
-        fun createIntent(asset: String, action: String = "") =
-            Intent().putExtra(ARG_ASSET, asset).putExtra(ARG_ACTION, action)
+        fun createIntent(context: Context, asset: String, action: String = "") =
+            Intent(context, BalanceDetailActivity::class.java).putExtra(ARG_ASSET, asset).putExtra(ARG_ACTION, action)!!
     }
 
 }

@@ -10,8 +10,8 @@ import com.stacrypt.stadroid.wallet.data.WalletRepository
 class BalanceDetailViewModel : ViewModel() {
     val assetName: MutableLiveData<String> = MutableLiveData()
 
-    val asset = map(assetName) { WalletRepository.getAsset(it) }
-    val balance = map(assetName) { WalletRepository.getBalanceOverview(it) }
+    val asset = switchMap(assetName) { WalletRepository.getAsset(it) }
+    val balance = switchMap(assetName) { WalletRepository.getBalanceOverview(it) }
 
     private val balanceHistoryListing = map(assetName) {
         WalletRepository.getBalanceHistory(it)

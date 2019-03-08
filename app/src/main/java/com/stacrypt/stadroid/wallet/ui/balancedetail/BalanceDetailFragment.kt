@@ -16,10 +16,6 @@ import kotlinx.android.synthetic.main.balance_detail_fragment.*
 
 class BalanceDetailFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = BalanceDetailFragment()
-    }
-
     private lateinit var viewModel: BalanceDetailViewModel
     private lateinit var adapter: BalanceDetailPagedAdapter
 
@@ -33,7 +29,7 @@ class BalanceDetailFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(activity!!).get(BalanceDetailViewModel::class.java)
-        adapter = BalanceDetailPagedAdapter(viewModel.)
+        adapter = BalanceDetailPagedAdapter(viewModel.balance.value)
         list.adapter = adapter
 
         viewModel.balanceHistory.observe(this, Observer<PagedList<BalanceHistory>> {
@@ -44,6 +40,15 @@ class BalanceDetailFragment : Fragment() {
             adapter.notifyDataSetChanged()
         })
         list.layoutManager = LinearLayoutManager(activity)
+
+        viewModel.assetName.value = arguments?.getString(ARG_ASSET_NAME)
     }
+
+    companion object {
+        const val ARG_ASSET_NAME = "assetName"
+        fun newInstance(assetName: String) =
+            BalanceDetailFragment().apply { arguments = Bundle().apply { putString(ARG_ASSET_NAME, assetName) } }
+    }
+
 
 }

@@ -17,33 +17,6 @@ object WalletRepository {
     private var job: Job? = null
     private val scope = CoroutineScope(Dispatchers.IO)
 
-    //    fun loadAssets(): NetworkBoundResource<List<Asset>, Asset> = object : NetworkBoundResource<List<Asset>, Asset>() {
-//        override val asLiveData: LiveData<Resource<List<Asset>>>
-//            get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
-//
-//        override fun shouldFetch(data: List<Asset>?): Boolean {
-//            return rateLimiter.canFetch(userId)
-//                    && (data == null || !isFresh(data));
-//        }
-//
-//        override fun onFetchFailed() {
-//            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-//        }
-//
-//        override fun saveCallResult(asset: Asset) {
-//            assetDao!!.save(asset)
-//        }
-//
-//
-//        override fun loadFromDb(): LiveData<List<Asset>> {
-//            return assetDao!!.loadAll()
-//        }
-//
-//        override fun createCall(): LiveData<ApiResponse<Asset>> {
-//            return stemeraldApiClient.assetList().getAsLiveData()
-//        }
-//    }
-
     /**
      * TODO: Think about online and offline
      * Database first, because of too much query
@@ -114,9 +87,10 @@ object WalletRepository {
 
     private fun refreshBalanceOverview() {
         job = scope.launch {
-//            stemeraldApiClient.balanceOverview().await().forEach { balanceOverviewDao.save(it) }
-            balanceOverviewDao.deleteAll() // FIXME
-            mockStemeraldApiClient.balanceList().await().forEach { balanceOverviewDao.save(it) } // FIXME
+            //            stemeraldApiClient.balanceOverview().await().forEach { balanceOverviewDao.save(it) }
+            mockStemeraldApiClient.balanceList().await().apply {
+                balanceOverviewDao.deleteAll() // FIXME
+            }.forEach { balanceOverviewDao.save(it) } // FIXME
         }
     }
 

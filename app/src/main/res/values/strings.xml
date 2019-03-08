@@ -29,4 +29,7 @@
     <string name="error_register_toast">Registration problem. Maybe you have already registered.</string>
     <string name="problem_occurred_toast">Problem occurred.</string>
     <string name="title_activity_profile_setting">ProfileSettingActivity</string>
+
+    <string name="deposit">Deposit</string>
+    <string name="withdraw">Withdraw</string>
 </resources>

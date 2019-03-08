@@ -2,6 +2,8 @@ package com.stacrypt.stadroid.data
 
 import androidx.room.*
 import com.google.gson.annotations.SerializedName
+import java.text.DateFormat
+import java.text.SimpleDateFormat
 import java.util.*
 
 @Entity
@@ -285,3 +287,6 @@ data class BankCard(
     val pan: String,
     val holder: String
 ) : BankId
+
+val dateFormatter by lazy { SimpleDateFormat("dd MMM yyyy HH:mm") }
+fun Date.format() = dateFormatter.format(this)

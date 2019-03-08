@@ -1,5 +1,7 @@
 package com.stacrypt.stadroid.wallet
 
+import android.app.Activity
+import android.app.ActivityOptions
 import android.net.Uri
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
@@ -8,12 +10,14 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import com.stacrypt.stadroid.data.BalanceOverview
 import com.stacrypt.stadroid.R
+import com.stacrypt.stadroid.wallet.BalanceDetailActivity.Companion.ACTION_DEPOSIT
+import com.stacrypt.stadroid.wallet.BalanceDetailActivity.Companion.ACTION_HISTORY
+import com.stacrypt.stadroid.wallet.BalanceDetailActivity.Companion.ACTION_WITHDRAW
 import kotlinx.android.synthetic.main.fragment_asset_balance.view.*
-import org.jetbrains.anko.imageResource
-import org.jetbrains.anko.imageURI
-import java.lang.Exception
+import org.jetbrains.anko.support.v4.startActivity
 
 class AssetBalanceRecyclerViewAdapter(
     var items: List<BalanceOverview>
@@ -30,14 +34,11 @@ class AssetBalanceRecyclerViewAdapter(
 //        }
 //    }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.fragment_asset_balance, parent, false)
-        return ViewHolder(view)
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(parent)
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
+        holder.itemView.tag = item.assetName
         holder.nameView.text = item.assetName
 //        holder.totalView.text = (item.available + item.freeze).toString()
         holder.availableView.text = item.available.toString()
@@ -48,27 +49,70 @@ class AssetBalanceRecyclerViewAdapter(
                 "TBTC" -> R.drawable.ic_btc
                 "ETH" -> R.drawable.ic_eth
                 "TETH" -> R.drawable.ic_eth
+                "IRR" -> R.drawable.ic_irr
+                "TIRR" -> R.drawable.ic_irr
+                "TRY" -> R.drawable.ic_try
+                "TTRY" -> R.drawable.ic_try
                 else -> R.drawable.ic_btc
             }
         )
 
-//        with(holder.view) {
-//            tag = item
-//            setOnClickListener(mOnClickListener)
-//        }
+        holder.itemView.tag = item.assetName
     }
 
     override fun getItemCount(): Int = items.size
 
-    inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
-        val nameView: TextView = view.name
-        val depositView: Button = view.deposit
-        val withdrawView: Button = view.withdraw
-        val historyView: Button = view.history
-//        val totalView: TextView = view.available
-        val availableView: TextView = view.total
-        val freezeView: TextView = view.freeze
-        val iconView: ImageView = view.icon
+    inner class ViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
+        LayoutInflater.from(parent.context)
+            .inflate(R.layout.fragment_asset_balance, parent, false)
+    ) {
+
+        val nameView: TextView = itemView.name
+        val cardView: View = itemView.card
+        val depositView: Button = itemView.deposit
+        val withdrawView: Button = itemView.withdraw
+        val historyView: Button = itemView.history
+        //        val totalView: TextView = itemView.available
+        val availableView: TextView = itemView.total
+        val freezeView: TextView = itemView.freeze
+        val iconView: ImageView = itemView.icon
+
+
+        init {
+            cardView.setOnClickListener {
+                it.context.startActivity(
+                    BalanceDetailActivity.createIntent(itemView.context, itemView.tag as String)
+                )
+            }
+            depositView.setOnClickListener {
+                it.context.startActivity(
+                    BalanceDetailActivity.createIntent(
+                        itemView.context,
+                        itemView.tag as String,
+                        ACTION_DEPOSIT
+                    )
+                )
+            }
+            withdrawView.setOnClickListener {
+                it.context.startActivity(
+                    BalanceDetailActivity.createIntent(
+                        itemView.context,
+                        itemView.tag as String,
+                        ACTION_WITHDRAW
+                    )
+                )
+            }
+            historyView.setOnClickListener {
+                it.context.startActivity(
+                    BalanceDetailActivity.createIntent(
+                        itemView.context,
+                        itemView.tag as String,
+                        ACTION_HISTORY
+                    )
+                )
+            }
+        }
+
 
     }
 }

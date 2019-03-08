@@ -1,22 +1,28 @@
 package com.stacrypt.stadroid.wallet.ui.balancedetail
 
+import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.widget.ImageViewCompat
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.stacrypt.stadroid.R
 import com.stacrypt.stadroid.data.BalanceHistory
 import com.stacrypt.stadroid.data.BalanceOverview
+import com.stacrypt.stadroid.data.format
 import kotlinx.android.synthetic.main.row_balance_detail_history.view.*
+import org.jetbrains.anko.textColorResource
+import org.jetbrains.anko.textResource
 
 class BalanceDetailPagedAdapter(var balanceOverview: BalanceOverview?) :
     PagedListAdapter<BalanceHistory, RecyclerView.ViewHolder>(ITEM_COMPARATOR) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         when (viewType) {
-            R.layout.row_balance_detail_header -> HistoryViewHolder(parent)
-            else -> HeaderViewHolder(parent)
+            R.layout.row_balance_detail_header -> HeaderViewHolder(parent)
+            else -> HistoryViewHolder(parent)
         }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) =
@@ -56,14 +62,36 @@ class BalanceDetailPagedAdapter(var balanceOverview: BalanceOverview?) :
         val dateView: TextView = itemView.date
         val amountView: TextView = itemView.amount
         val valueView: TextView = itemView.value
+        val iconView: ImageView = itemView.icon
 
         fun bindTo(item: BalanceHistory?) {
             if (item == null) return clear()
 
             titleView.text = item.business
-            dateView.text = item.time.toString()
+            dateView.text = item.time.format()
             amountView.text = item.change
             valueView.text = "1234 $" // FIXME
+
+            // TODO: Enhance these color and resource loadings
+            if (item.change.toDouble() >= 0) {
+                titleView.textResource = R.string.deposit
+                titleView.textColorResource = R.color.real_green
+                amountView.textColorResource = R.color.real_green
+                iconView.setImageResource(R.drawable.ic_add_black_24dp)
+                ImageViewCompat.setImageTintList(
+                    iconView,
+                    ColorStateList.valueOf(itemView.resources.getColor(R.color.real_green))
+                )
+            } else {
+                titleView.textResource = R.string.withdraw
+                titleView.textColorResource = R.color.real_red
+                amountView.textColorResource = R.color.real_red
+                iconView.setImageResource(R.drawable.ic_send_black_24dp)
+                ImageViewCompat.setImageTintList(
+                    iconView,
+                    ColorStateList.valueOf(itemView.resources.getColor(R.color.real_red))
+                )
+            }
 
         }
 
