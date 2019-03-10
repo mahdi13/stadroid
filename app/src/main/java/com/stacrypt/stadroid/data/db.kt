@@ -28,6 +28,7 @@ abstract class StemeraldDatabase : RoomDatabase() {
     abstract val marketDao: MarketDao
     abstract val assetDao: AssetDao
     abstract val balanceOverviewDao: BalanceOverviewDao
+    abstract val paymentGatewayDao: PaymentGatewayDao
 //    abstract val klineDao: KlineDao
 //    abstract val bookDao: BookDao
 //    abstract val dealDao: DealDao

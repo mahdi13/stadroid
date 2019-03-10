@@ -13,7 +13,8 @@ import java.nio.charset.Charset
 //const val STEMERALD_API_URL = "http://localhost:8070"
 const val MOCK_STEMERALD_API_URL = "https://my.api.mockaroo.com/"
 //const val STAWALLET_API_URL = "http://10.0.2.2:7071/apiv2/"
-const val STEMERALD_API_URL = "http://10.0.2.2:7071/apiv2/"
+//const val STEMERALD_API_URL = "http://10.0.2.2:7071/apiv2/"
+const val STEMERALD_API_URL = "http://http://116.203.119.119:8080/apiv2/"
 val EMERALD_API_URL = Base64
     .decode("aHR0cH" + "M6Ly9iZXRhLn" + "RyYWRlb2ZmLnRy" + "YWRlL2FwaXYxLw", Base64.DEFAULT)!!
     .toString(Charset.forName("utf-8"))
@@ -107,6 +108,9 @@ interface StemeraldV2ApiClient {
         @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
         @Query("cryptocurrencySymbol") assetName: String
     ): Deferred<DepositInfo>
+
+    @HTTP(method = "GET", path = "transactions/payment-gateways", hasBody = false)
+    fun getPaymentGateways(): Deferred<List<PaymentGateway>>
 
 }
 

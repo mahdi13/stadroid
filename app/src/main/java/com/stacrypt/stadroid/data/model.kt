@@ -297,8 +297,9 @@ data class BankCard(
     val holder: String
 ) : BankId
 
+@Entity
 data class PaymentGateway(
-    val name: String,
+    @PrimaryKey val name: String,
     val cashinMin: Long,
     val cashoutStaticCommission: Long,
     val cashinMax: Long,
@@ -310,7 +311,7 @@ data class PaymentGateway(
     val cashoutPermilleCommission: Long,
     val cashoutMin: Long,
     val fiatSymbol: String,
-    val fiat: Fiat
+    @Embedded(prefix = "fiat_") val fiat: Fiat
 )
 
 data class Fiat(

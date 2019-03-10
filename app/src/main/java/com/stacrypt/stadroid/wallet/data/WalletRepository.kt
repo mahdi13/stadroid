@@ -14,6 +14,7 @@ import retrofit2.HttpException
 // TODO: Add rate limiter
 object WalletRepository {
     private val assetDao = stemeraldDatabase.assetDao
+    private val paymentGatewayDao = stemeraldDatabase.paymentGatewayDao
     private val balanceOverviewDao = stemeraldDatabase.balanceOverviewDao
 
     private var job: Job? = null
@@ -120,6 +121,15 @@ object WalletRepository {
         return assetDao.loadByName(assetName)
     }
 
+    /**
+     *
+     * TODO: Webservice call rate limit
+     */
+    fun getPaymentGateways(): LiveData<List<PaymentGateway>> {
+        refreshPaymentGateways()// TODO: Execute it rarely
+        return paymentGatewayDao.loadAll()
+    }
+
 
     private fun refreshBalanceOverview() {
         job = scope.launch {
@@ -134,6 +144,18 @@ object WalletRepository {
         job = scope.launch {
             //            stemeraldApiClient.assetList().await().forEach { assetDao.save(it) }
             mockStemeraldApiClient.assetList().await().forEach { assetDao.save(it) } // FIXME
+        }
+    }
+
+    private fun refreshPaymentGateways() {
+        job = scope.launch {
+            try {
+                stemeraldApiClient.getPaymentGateways().await()
+                    .apply { paymentGatewayDao.deleteAll() }
+                    .forEach { paymentGatewayDao.save(it) }
+            } catch (e: Exception) {
+                // TODO: Show error
+            }
         }
     }
 

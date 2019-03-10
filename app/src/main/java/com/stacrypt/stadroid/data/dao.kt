@@ -51,6 +51,18 @@ interface BalanceOverviewDao {
     fun loadAll(): LiveData<List<BalanceOverview>>
 }
 
+@Dao
+interface PaymentGatewayDao {
+    @Insert(onConflict = REPLACE)
+    fun save(paymentGateway: PaymentGateway)
+
+    @Query("DELETE FROM PaymentGateway")
+    fun deleteAll()
+
+    @Query("SELECT * FROM PaymentGateway")
+    fun loadAll(): LiveData<List<PaymentGateway>>
+}
+
 //@Dao
 //interface KlineDao {
 //    @Insert(onConflict = REPLACE)
