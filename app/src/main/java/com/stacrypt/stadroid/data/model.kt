@@ -297,5 +297,28 @@ data class BankCard(
     val holder: String
 ) : BankId
 
+data class PaymentGateway(
+    val name: String,
+    val cashinMin: Long,
+    val cashoutStaticCommission: Long,
+    val cashinMax: Long,
+    val cashoutMax: Long,
+    val cashinMaxCommission: Long,
+    val cashinStaticCommission: Long,
+    val cashinPermilleCommission: Long,
+    val cashoutMaxCommission: Long,
+    val cashoutPermilleCommission: Long,
+    val cashoutMin: Long,
+    val fiatSymbol: String,
+    val fiat: Fiat
+)
+
+data class Fiat(
+    val name: String,
+    val type: String,
+    val symbol: String,
+    val divideByTen: Int
+)
+
 val dateFormatter by lazy { SimpleDateFormat("dd MMM yyyy HH:mm") }
 fun Date.format() = dateFormatter.format(this)
