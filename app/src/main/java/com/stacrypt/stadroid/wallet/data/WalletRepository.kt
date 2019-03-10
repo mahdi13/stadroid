@@ -1,6 +1,7 @@
 package com.stacrypt.stadroid.wallet.data
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.paging.toLiveData
 import com.stacrypt.stadroid.data.*
@@ -8,6 +9,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
 
 // TODO: Add rate limiter
 object WalletRepository {
@@ -16,6 +18,40 @@ object WalletRepository {
 
     private var job: Job? = null
     private val scope = CoroutineScope(Dispatchers.IO)
+
+    fun getDepositInfo(assetName: String): LiveData<DepositInfo?> {
+        val liveData = MutableLiveData<DepositInfo?>()
+        scope.launch {
+            try {
+                liveData.postValue(stemeraldApiClient.showDepositInfo(assetName = assetName).await())
+            } catch (e: HttpException) {
+                if (e.code() == 404) { // TODO: More strict if clause (or tell the backend team to handle it there!)
+                    renewDepositInfo(assetName, liveData)
+                } else {
+                    // TODO Show error
+                    liveData.postValue(null)
+                }
+            } catch (e: Exception) {
+                // TODO Show error
+                liveData.postValue(null)
+            } finally {
+            }
+        }
+        return liveData
+    }
+
+    fun renewDepositInfo(assetName: String, depositInfo: MutableLiveData<DepositInfo?>): LiveData<DepositInfo?> {
+        scope.launch {
+            try {
+                depositInfo.postValue(stemeraldApiClient.renewDepositInfo(assetName = assetName).await())
+            } catch (e: Exception) {
+                // TODO Show error
+                depositInfo.postValue(null)
+            } finally {
+            }
+        }
+        return depositInfo
+    }
 
     /**
      * TODO: Think about online and offline

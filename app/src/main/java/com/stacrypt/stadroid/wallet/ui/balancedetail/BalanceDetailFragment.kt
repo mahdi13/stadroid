@@ -41,14 +41,6 @@ class BalanceDetailFragment : Fragment() {
         })
         list.layoutManager = LinearLayoutManager(activity)
 
-        viewModel.assetName.value = arguments?.getString(ARG_ASSET_NAME)
     }
-
-    companion object {
-        const val ARG_ASSET_NAME = "assetName"
-        fun newInstance(assetName: String) =
-            BalanceDetailFragment().apply { arguments = Bundle().apply { putString(ARG_ASSET_NAME, assetName) } }
-    }
-
 
 }

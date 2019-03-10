@@ -96,6 +96,18 @@ interface StemeraldV2ApiClient {
         @Query("page") page: Int = 0
     ): Deferred<ArrayList<BalanceHistory>>
 
+    @HTTP(method = "SHOW", path = "deposits", hasBody = true)
+    fun showDepositInfo(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
+        @Query("cryptocurrencySymbol") assetName: String
+    ): Deferred<DepositInfo>
+
+    @HTTP(method = "RENEW", path = "deposits", hasBody = true)
+    fun renewDepositInfo(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
+        @Query("cryptocurrencySymbol") assetName: String
+    ): Deferred<DepositInfo>
+
 }
 
 @Suppress("DeferredIsResult")

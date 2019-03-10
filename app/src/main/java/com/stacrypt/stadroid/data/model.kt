@@ -109,6 +109,15 @@ data class BalanceHistory(
     @SerializedName("detail") var detail: String
 )
 
+data class DepositInfo(
+    @SerializedName("id") var id: String,
+    @SerializedName("user") var user: String,
+    @SerializedName("extra") var extra: String,
+    @SerializedName("creation") var creation: Date,
+    @SerializedName("expiration") var expiration: Date?,
+    @SerializedName("address") var address: String
+)
+
 @Entity
 data class User(
     val id: Int,

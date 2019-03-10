@@ -19,4 +19,10 @@ class BalanceDetailViewModel : ViewModel() {
     val balanceHistory = switchMap(balanceHistoryListing) { it.pagedList }
     val networkState = switchMap(balanceHistoryListing) { it.networkState }
     val refreshState = switchMap(balanceHistoryListing) { it.refreshState }
+
+    val depositInfo by lazy {
+        map(assetName) {
+            WalletRepository.getDepositInfo(it)
+        }
+    }
 }
