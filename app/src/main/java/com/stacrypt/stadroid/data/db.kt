@@ -19,7 +19,8 @@ import java.util.*
         SecurityLog::class,
         Session::class,
         ShetabAddress::class,
-        ShebaAddress::class
+        ShebaAddress::class,
+        PaymentGateway::class
     ],
     version = 5
 )

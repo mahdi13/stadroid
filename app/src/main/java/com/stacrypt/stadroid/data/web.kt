@@ -112,6 +112,72 @@ interface StemeraldV2ApiClient {
     @HTTP(method = "GET", path = "transactions/payment-gateways", hasBody = false)
     fun getPaymentGateways(): Deferred<List<PaymentGateway>>
 
+    /**
+     * Membership
+     */
+    @HTTP(method = "GET", path = "clients/me", hasBody = false)
+    fun me(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: ""
+    ): Deferred<User>
+
+    @FormUrlEncoded
+    @HTTP(method = "POST", path = "sessions", hasBody = true)
+    fun login(
+        @Field("email") email: String,
+        @Field("password") password: String
+    ): Deferred<TokenResponse>
+
+    @FormUrlEncoded
+    @HTTP(method = "REGISTER", path = "clients", hasBody = true)
+    fun registerNewClient(
+        @Field("email") email: String,
+        @Field("password") password: String
+    ): Deferred<User>
+
+    @FormUrlEncoded
+    @HTTP(method = "SCHEDULE", path = "clients/email-verifications", hasBody = true)
+    fun schedulEmailVerification(): Deferred<Unit>
+
+    @FormUrlEncoded
+    @HTTP(method = "VERIFY", path = "clients/email-verifications", hasBody = true)
+    fun verifyEmailVerification(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
+        @Field("token") token: String
+    ): Deferred<User>
+
+    @HTTP(method = "GET", path = "banking/accounts", hasBody = false)
+    fun getBankAccounts(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
+        @Query("skip") skip: Int = 0,
+        @Query("take") take: Int = 20
+    ): Deferred<List<BankAccount>>
+
+    @HTTP(method = "GET", path = "banking/cards", hasBody = false)
+    fun getBankCards(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
+        @Query("skip") skip: Int = 0,
+        @Query("take") take: Int = 20
+    ): Deferred<List<BankCard>>
+
+    @FormUrlEncoded
+    @HTTP(method = "ADD", path = "banking/accounts", hasBody = true)
+    fun addBankAccount(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
+        @Field("iban") iban: String,
+        @Field("fiatSymbol") fiatSymbol: String,
+        @Field("owner") owner: String
+    ): Deferred<BankAccount>
+
+    @FormUrlEncoded
+    @HTTP(method = "ADD", path = "banking/cards", hasBody = true)
+    fun addBankCard(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
+        @Field("pan") pan: String,
+        @Field("fiatSymbol") fiatSymbol: String,
+        @Field("holder") holder: String
+    ): Deferred<BankCard>
+
+
 }
 
 @Suppress("DeferredIsResult")
@@ -153,60 +219,11 @@ interface MockStemeraldApiClient {
 //    fun mine(@Path("market") market: String): Deferred<ArrayList<Mine>>
 }
 
-@Suppress("DeferredIsResult")
-interface EmeraldApiClient {
-
-    @HTTP(method = "GET", path = "clients/me", hasBody = false)
-    fun me(
-        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: ""
-    ): Deferred<User>
-
-    @FormUrlEncoded
-    @HTTP(method = "POST", path = "sessions", hasBody = true)
-    fun login(
-        @Field("email") email: String,
-        @Field("password") password: String
-    ): Deferred<TokenResponse>
-
-    @FormUrlEncoded
-    @HTTP(method = "REGISTER", path = "clients", hasBody = true)
-    fun registerNewClient(
-        @Field("email") email: String,
-        @Field("password") password: String
-    ): Deferred<User>
-
-    @HTTP(method = "GET", path = "banking/accounts", hasBody = false)
-    fun getBankAccounts(
-        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
-        @Query("skip") skip: Int = 0,
-        @Query("take") take: Int = 20
-    ): Deferred<List<BankAccount>>
-
-    @HTTP(method = "GET", path = "banking/cards", hasBody = false)
-    fun getBankCards(
-        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
-        @Query("skip") skip: Int = 0,
-        @Query("take") take: Int = 20
-    ): Deferred<List<BankCard>>
-
-    @FormUrlEncoded
-    @HTTP(method = "ADD", path = "banking/accounts", hasBody = true)
-    fun addBankAccount(
-        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
-        @Field("iban") iban: String,
-        @Field("fiatSymbol") fiatSymbol: String,
-        @Field("owner") owner: String
-    ): Deferred<BankAccount>
-
-    @FormUrlEncoded
-    @HTTP(method = "ADD", path = "banking/cards", hasBody = true)
-    fun addBankCard(
-        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
-        @Field("pan") pan: String,
-        @Field("fiatSymbol") fiatSymbol: String,
-        @Field("holder") holder: String
-    ): Deferred<BankCard>
-}
+//@Suppress("DeferredIsResult")
+//interface EmeraldApiClient {
+//
+//
+//}
 
 var okHttpClient = OkHttpClient.Builder()
     .addInterceptor(HttpLoggingInterceptor())
@@ -228,13 +245,13 @@ var stemeraldApiClient = Retrofit.Builder()
     .build()
     .create(StemeraldV2ApiClient::class.java)
 
-var emeraldApiClient = Retrofit.Builder()
-    .baseUrl(EMERALD_API_URL)
-    .addCallAdapterFactory(CoroutineCallAdapterFactory())
-    .addConverterFactory(GsonConverterFactory.create())
-    .client(okHttpClient)
-    .build()
-    .create(EmeraldApiClient::class.java)
+//var emeraldApiClient = Retrofit.Builder()
+//    .baseUrl(EMERALD_API_URL)
+//    .addCallAdapterFactory(CoroutineCallAdapterFactory())
+//    .addConverterFactory(GsonConverterFactory.create())
+//    .client(okHttpClient)
+//    .build()
+//    .create(EmeraldApiClient::class.java)
 
 var mockStemeraldApiClient = Retrofit.Builder()
     .baseUrl(MOCK_STEMERALD_API_URL)

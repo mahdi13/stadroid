@@ -9,10 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 
 import com.stacrypt.stadroid.R
-import com.stacrypt.stadroid.data.TokenResponse
-import com.stacrypt.stadroid.data.User
-import com.stacrypt.stadroid.data.emeraldApiClient
-import com.stacrypt.stadroid.data.sessionManager
+import com.stacrypt.stadroid.data.*
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_login.view.*
 import kotlinx.coroutines.*
@@ -36,7 +33,7 @@ class LoginFragment : Fragment() {
                 try {
                     progress.visibility = View.VISIBLE
                     val token: TokenResponse =
-                        emeraldApiClient.login(email.text.toString(), password.text.toString()).await()
+                        stemeraldApiClient.login(email.text.toString(), password.text.toString()).await()
                     sessionManager.login(token.token)
                     toast(getString(R.string.already_logged_in_toast))
                     listener?.onLoggedIn()
@@ -53,7 +50,7 @@ class LoginFragment : Fragment() {
             singletonAsync {
                 try {
                     progress.visibility = View.VISIBLE
-                    val user: User = emeraldApiClient.registerNewClient(
+                    val user: User = stemeraldApiClient.registerNewClient(
                         email.text.toString(),
                         password.text.toString()
                     ).await()

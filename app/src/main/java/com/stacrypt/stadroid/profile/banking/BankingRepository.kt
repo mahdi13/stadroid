@@ -84,7 +84,7 @@ object BankingRepository {
         scope.launch {
             try {
                 liveData.postValue(
-                    emeraldApiClient.addBankAccount(iban = iban, owner = owner, fiatSymbol = fiatSymbol).await()
+                    stemeraldApiClient.addBankAccount(iban = iban, owner = owner, fiatSymbol = fiatSymbol).await()
                 )
             } catch (e: Exception) {
                 // TODO Show error
@@ -107,7 +107,7 @@ object BankingRepository {
         scope.launch {
             try {
                 liveData.postValue(
-                    emeraldApiClient.addBankCard(pan = pan, holder = holder, fiatSymbol = fiatSymbol).await()
+                    stemeraldApiClient.addBankCard(pan = pan, holder = holder, fiatSymbol = fiatSymbol).await()
                 )
             } catch (e: Exception) {
                 // TODO Show error

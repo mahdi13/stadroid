@@ -69,11 +69,11 @@ class PageKeyedBankIdDataSource(private val type: BankIdType) :
         scope.launch {
             try {
                 val items = when (type) {
-                    BankIdType.ACCOUNT -> emeraldApiClient.getBankAccounts(
+                    BankIdType.ACCOUNT -> stemeraldApiClient.getBankAccounts(
                         take = params.requestedLoadSize,
                         skip = params.key
                     ).await()
-                    BankIdType.CARD -> emeraldApiClient.getBankCards(
+                    BankIdType.CARD -> stemeraldApiClient.getBankCards(
                         take = params.requestedLoadSize,
                         skip = params.key
                     ).await()
@@ -101,11 +101,11 @@ class PageKeyedBankIdDataSource(private val type: BankIdType) :
         try {
             val items = runBlocking {
                 when (type) {
-                    BankIdType.ACCOUNT -> emeraldApiClient.getBankAccounts(
+                    BankIdType.ACCOUNT -> stemeraldApiClient.getBankAccounts(
                         take = params.requestedLoadSize,
                         skip = 0
                     ).await()
-                    BankIdType.CARD -> emeraldApiClient.getBankCards(
+                    BankIdType.CARD -> stemeraldApiClient.getBankCards(
                         take = params.requestedLoadSize,
                         skip = 0
                     ).await()

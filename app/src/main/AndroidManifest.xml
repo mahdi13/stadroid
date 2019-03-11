@@ -13,6 +13,19 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/Theme.Stadroid">
+        <activity android:name=".profile.verification.DoVerifyEmailActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"></action>
+
+                <category android:name="android.intent.category.DEFAULT"></category>
+                <category android:name="android.intent.category.BROWSABLE"></category>
+
+                <data
+                        android:host="stacrypt.io"
+                        android:path="/email_verification"
+                        android:scheme="https"></data>
+            </intent-filter>
+        </activity>
         <activity
                 android:name=".profile.ProfileSettingActivity"
                 android:label="@string/title_activity_profile_setting">
@@ -35,9 +48,9 @@
             </intent-filter>
         </activity>
         <activity
-                android:launchMode="singleTop"
                 android:name=".MainActivity"
-                android:label="@string/app_name">
+                android:label="@string/app_name"
+                android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

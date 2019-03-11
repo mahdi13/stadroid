@@ -19,7 +19,7 @@ object UserRepository {
 
     private fun refreshMe() {
         UserRepository.scope.launch {
-            emeraldApiClient.me().await().let {
+            stemeraldApiClient.me().await().let {
                 UserRepository.userDao.save(it)
             }
         }
