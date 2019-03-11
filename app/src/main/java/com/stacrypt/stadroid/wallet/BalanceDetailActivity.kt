@@ -26,7 +26,7 @@ class BalanceDetailActivity : AppCompatActivity() {
                 .replace(R.id.container, BalanceDetailFragment())
                 .commitNow()
 
-            when (intent.getStringExtra(ARG_ASSET)) {
+            when (intent.getStringExtra(ARG_ACTION)) {
                 ACTION_DEPOSIT -> DepositFragment()
                 else -> null
             }?.let {

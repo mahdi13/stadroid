@@ -13,19 +13,21 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true">
 
-        <View   android:id="@+id/bg_left"
+        <View
+                android:id="@+id/bg_left"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:paddingEnd="10dp"
-                android:background="@color/green_500"/>
+                android:background="@color/real_green"/>
 
-        <View android:id="@+id/bg_right"
+        <View
+                android:id="@+id/bg_right"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:paddingStart="10dp"
-                android:background="@color/red_500"/>
+                android:background="@color/real_red"/>
 
     </LinearLayout>
 

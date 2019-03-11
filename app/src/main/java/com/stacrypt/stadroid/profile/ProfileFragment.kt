@@ -42,6 +42,8 @@ class ProfileFragment : Fragment() {
             startActivity<ProfileSettingActivity>(ARG_TARGET to TARGET_BANK_CARDS)
         }
 
+        view.email.text = sessionManager.getPayload().email
+
         return view
     }
 

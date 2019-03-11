@@ -41,6 +41,13 @@ class BalanceDetailFragment : Fragment() {
         })
         list.layoutManager = LinearLayoutManager(activity)
 
+
+        adapter.onDepositClicked = {
+            // TODO
+        }
+        adapter.onWithdrawClicked = {
+            // TODO
+        }
     }
 
 }

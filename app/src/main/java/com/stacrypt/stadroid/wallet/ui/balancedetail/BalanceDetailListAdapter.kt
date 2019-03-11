@@ -13,12 +13,17 @@ import com.stacrypt.stadroid.R
 import com.stacrypt.stadroid.data.BalanceHistory
 import com.stacrypt.stadroid.data.BalanceOverview
 import com.stacrypt.stadroid.data.format
+import kotlinx.android.synthetic.main.row_balance_detail_header.view.*
 import kotlinx.android.synthetic.main.row_balance_detail_history.view.*
 import org.jetbrains.anko.textColorResource
 import org.jetbrains.anko.textResource
 
 class BalanceDetailPagedAdapter(var balanceOverview: BalanceOverview?) :
     PagedListAdapter<BalanceHistory, RecyclerView.ViewHolder>(ITEM_COMPARATOR) {
+
+    var onDepositClicked: ((String) -> Unit)? = null
+    var onWithdrawClicked: ((String) -> Unit)? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         when (viewType) {
             R.layout.row_balance_detail_header -> HeaderViewHolder(parent)
@@ -40,16 +45,23 @@ class BalanceDetailPagedAdapter(var balanceOverview: BalanceOverview?) :
         LayoutInflater.from(parent.context)
             .inflate(R.layout.row_balance_detail_header, parent, false)
     ) {
-        val titleView: TextView = itemView.title
-        val amountView: TextView = itemView.amount
-        val valueView: TextView = itemView.value
+        val titleView: TextView = itemView.header_title
+        val amountView: TextView = itemView.header_amount
+        val valueView: TextView = itemView.header_value
+        val depositView: TextView = itemView.deposit
+        val withdrawView: TextView = itemView.withdraw
+
+        init {
+            depositView.setOnClickListener { onDepositClicked?.invoke(itemView.tag.toString()) }
+            withdrawView.setOnClickListener { onWithdrawClicked?.invoke(itemView.tag.toString()) }
+        }
 
         fun bindTo(item: BalanceOverview?) {
             if (item == null) return
             titleView.text = "Your ${item.assetName} Balance:"
             amountView.text = item.available.toString()
             valueView.text = "1234 $" // FIXME
-
+            itemView.tag = item.assetName
         }
 
     }
