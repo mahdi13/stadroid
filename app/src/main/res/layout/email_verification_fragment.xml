@@ -75,6 +75,7 @@
                     android:textColor="@color/colorGrayText"/>
 
             <TextView
+                    android:id="@+id/email"
                     android:fontFamily="@font/roboto_mono_regular"
                     android:textStyle="bold"
                     android:layout_gravity="center"
@@ -88,6 +89,7 @@
                     android:text="MY@EMAIL.COM"/>
 
             <com.google.android.material.button.MaterialButton
+                    android:id="@+id/verify"
                     style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

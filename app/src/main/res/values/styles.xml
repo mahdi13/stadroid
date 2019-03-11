@@ -7,7 +7,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:colorForeground">#FFFFFF</item>
         <item name="android:windowBackground">@color/colorPrimary</item>
-        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <!--<item name="android:windowLightStatusBar" tools:targetApi="m">true</item>-->
         <item name="colorControlActivated">@color/colorAccent</item>
         <item name="android:textColorPrimary">#FFFFFF</item>
     </style>

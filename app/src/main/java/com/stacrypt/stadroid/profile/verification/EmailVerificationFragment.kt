@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 
 import com.stacrypt.stadroid.R
+import com.stacrypt.stadroid.data.sessionManager
 import kotlinx.android.synthetic.main.email_verification_fragment.*
 import kotlinx.android.synthetic.main.email_verification_fragment.view.*
 
@@ -30,6 +31,9 @@ class EmailVerificationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         (activity as AppCompatActivity).setSupportActionBar(view.toolbar)
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        (activity as AppCompatActivity).title = ""
+
+        view.email.text = sessionManager.getPayload().email
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
