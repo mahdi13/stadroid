@@ -14,6 +14,9 @@
                 android:id="@+id/action_settings_entrypoint_fragment_to_bank_cards_fragment"
                 app:destination="@id/bank_cards_fragment"
                 app:popUpToInclusive="true"/>
+        <action
+                android:id="@+id/action_settings_entrypoint_fragment_to_emailVerificationFragment"
+                app:destination="@id/emailVerificationFragment"/>
     </fragment>
 
 
@@ -38,7 +41,13 @@
             android:id="@+id/addBankCardFragment"
             android:name="com.stacrypt.stadroid.profile.banking.AddBankCardFragment"
             android:label="Blank"
-            tools:layout="@layout/add_bank_card_fragment"/><action android:id="@+id/action_global_settings_entrypoint_fragment" app:destination="@id/settings_entrypoint_fragment"/>
+            tools:layout="@layout/add_bank_card_fragment"/>
+
+    <fragment
+            android:id="@+id/emailVerificationFragment"
+            android:name="com.stacrypt.stadroid.profile.verification.EmailVerificationFragment"
+            tools:layout="@layout/email_verification_fragment"
+            android:label="EmailVerificationFragment"/>
 
 
 </navigation>
