@@ -4,6 +4,7 @@
     <style name="Theme.Stadroid" parent="Theme.MaterialComponents.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorOnPrimary">#cccccc</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:colorForeground">#FFFFFF</item>
         <item name="android:windowBackground">@color/colorPrimary</item>

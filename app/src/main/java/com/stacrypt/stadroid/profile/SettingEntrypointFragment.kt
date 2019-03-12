@@ -25,7 +25,6 @@ class SettingEntrypointFragment : Fragment() {
                 else -> throw IllegalArgumentException("Bad target")
             }
             NavHostFragment.findNavController(this).navigate(targetNavigationId)
-            NavHostFragment.findNavController(this).popBackStack()
         }
     }
 

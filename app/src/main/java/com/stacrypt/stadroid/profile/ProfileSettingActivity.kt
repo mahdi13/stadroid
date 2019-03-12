@@ -3,6 +3,7 @@ package com.stacrypt.stadroid.profile
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.stacrypt.stadroid.R
+import kotlinx.android.synthetic.main.activity_profile_setting.*
 
 class ProfileSettingActivity : AppCompatActivity() {
 
@@ -10,6 +11,11 @@ class ProfileSettingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile_setting)
         actionBar?.setDisplayHomeAsUpEnabled(true)
+
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        supportActionBar?.title = ""
+
     }
 
     companion object {

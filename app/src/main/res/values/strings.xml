@@ -32,4 +32,11 @@
 
     <string name="deposit">Deposit</string>
     <string name="withdraw">Withdraw</string>
+
+    <string name="error_invalid_bank_card_number">This is not a valid bank card number</string>
+    <string name="error_invalid_bank_card_holder">This is not a valid bank card holder name</string>
+    <string name="error_invalid_bank_account_number">This is not a valid bank account owner name</string>
+    <string name="error_invalid_bank_account_owner">This is not a valid bank account IBAN number</string>
+    <string name="toast_bank_card_added_successfully">Bank card added successfully</string>
+
 </resources>

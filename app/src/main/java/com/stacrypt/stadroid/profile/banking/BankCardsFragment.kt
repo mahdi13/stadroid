@@ -6,16 +6,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.NavHostFragment
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.stacrypt.stadroid.R
 import com.stacrypt.stadroid.data.BankCard
+import kotlinx.android.synthetic.main.activity_profile_setting.*
 import kotlinx.android.synthetic.main.bank_cards_fragment.*
-import kotlinx.android.synthetic.main.email_verification_fragment.view.*
 
 class BankCardsFragment : Fragment() {
 
@@ -30,9 +31,14 @@ class BankCardsFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        (activity as AppCompatActivity).setSupportActionBar(view.toolbar)
-        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        (activity as AppCompatActivity).supportActionBar?.title = "My Cards"
+        activity!!.add.isVisible = true
+        activity!!.back.isVisible = true
+        activity!!.add.setOnClickListener {
+            NavHostFragment.findNavController(this@BankCardsFragment).navigate(R.id.addBankCardFragment)
+        }
+        activity!!.back.setOnClickListener {
+            NavHostFragment.findNavController(this@BankCardsFragment).navigateUp()
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -46,8 +52,6 @@ class BankCardsFragment : Fragment() {
             adapter.submitList(it)
         })
         list.layoutManager = LinearLayoutManager(activity)
-
-        add.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.addBankCardFragment, null))
 
     }
 
