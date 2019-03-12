@@ -28,7 +28,8 @@
         </activity>
         <activity
                 android:name=".profile.ProfileSettingActivity"
-                android:label="@string/title_activity_profile_setting">
+                android:label="@string/title_activity_profile_setting"
+                android:launchMode="singleInstance">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value="com.stacrypt.stadroid.MainActivity"/>

@@ -8,8 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import androidx.paging.PagedList
-import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.stacrypt.stadroid.R
@@ -46,6 +46,8 @@ class BankCardsFragment : Fragment() {
             adapter.submitList(it)
         })
         list.layoutManager = LinearLayoutManager(activity)
+
+        add.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.addBankCardFragment, null))
 
     }
 

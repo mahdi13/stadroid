@@ -2,10 +2,7 @@ package com.stacrypt.stadroid.profile
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import com.stacrypt.stadroid.R
-import com.stacrypt.stadroid.profile.banking.BankCardsFragment
-import com.stacrypt.stadroid.profile.verification.EmailVerificationFragment
 
 class ProfileSettingActivity : AppCompatActivity() {
 
@@ -13,23 +10,37 @@ class ProfileSettingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile_setting)
         actionBar?.setDisplayHomeAsUpEnabled(true)
-
-        val contentFragment: Fragment = when (intent.extras!![ARG_TARGET]) {
-            TARGET_VERIFICATION_EMAIL -> EmailVerificationFragment()
-            TARGET_BANK_CARDS -> BankCardsFragment()
-            else -> throw IllegalArgumentException("Bad target")
-        }
-
-        val tx = supportFragmentManager.beginTransaction()
-        tx.replace(R.id.container, contentFragment)
-        tx.commitNow()
     }
-
 
     companion object {
         val ARG_TARGET = "target"
+
         val TARGET_VERIFICATION_EMAIL = "email_verification"
+        val TARGET_FIXED_PHONE_VERIFICATION = "mobile_phone_verification"
+        val TARGET_MOBILE_PHONE_VERIFICATION = "fixed_phone_verification"
+        val TARGET_EVIDENCE_VERIFICATION = "evidence_verification"
+
         val TARGET_BANK_CARDS = "bank_cards"
+        val TARGET_ADD_BANK_CARD = "add_bank_card"
+        val TARGET_BANK_ACCOUNTS = "bank_accounts"
+        val TARGET_ADD_BANK_ACCOUNT = "bank_accounts"
+
+        val TARGET_APPLICATION_PIN = "application_pin"
+        val TARGET_WIPE_CACHE = "whip_cache"
+
+        val TARGET_WITHDRAWAL_PIN = "withdrawal_pin"
+        val TARGET_WITHDRAW_LIMITAITONS = "withdrawal_limitations"
+
+        val TARGET_SESSIONS = "bank_accounts"
+        val TARGET_SECOND_FACTOR = "second_factor"
+        val TARGET_API_KEYS = "second_factor"
+        val TARGET_IP_WHITELIST = "second_factor"
+        val TARGET_SECURITY_LOGS = "second_factor"
+        val TARGET_CHANEG_PASSWORD = "second_factor"
+
+        val TARGET_TICKETS = "tickets"
+        val TARGET_TICKET_THREAD = "ticket_thread"
+        val TARGET_NEW_TICKETS = "new_ticker"
     }
 
 }

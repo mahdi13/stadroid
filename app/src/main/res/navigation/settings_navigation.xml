@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/storyboard"
+            app:startDestination="@id/settings_entrypoint_fragment">
+
+
+    <fragment
+            android:id="@+id/settings_entrypoint_fragment"
+            android:name="com.stacrypt.stadroid.profile.SettingEntrypointFragment"
+            android:label="Blank">
+        <action
+                android:id="@+id/action_settings_entrypoint_fragment_to_bank_cards_fragment"
+                app:destination="@id/bank_cards_fragment"
+                app:popUpToInclusive="true"/>
+    </fragment>
+
+
+    <fragment
+            android:id="@+id/bank_cards_fragment"
+            android:name="com.stacrypt.stadroid.profile.banking.BankCardsFragment"
+            android:label="Blank"
+            tools:layout="@layout/bank_cards_fragment">
+        <action
+                android:id="@+id/action_bankCardsFragment_to_addBankCardFragment"
+                app:destination="@id/addBankCardFragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim"
+                app:popUpTo="@+id/addBankCardFragment"
+                app:popUpToInclusive="true"
+                />
+    </fragment>
+
+    <fragment
+            android:id="@+id/addBankCardFragment"
+            android:name="com.stacrypt.stadroid.profile.banking.AddBankCardFragment"
+            android:label="Blank"
+            tools:layout="@layout/add_bank_card_fragment"/><action android:id="@+id/action_global_settings_entrypoint_fragment" app:destination="@id/settings_entrypoint_fragment"/>
+
+
+</navigation>

@@ -16,7 +16,6 @@ import java.util.*
         User::class,
         Ticket::class,
         TicketMessage::class,
-        Session::class,
         ShetabAddress::class,
         ShebaAddress::class,
         PaymentGateway::class
