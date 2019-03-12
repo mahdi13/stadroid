@@ -30,25 +30,25 @@ class MarketMineRecyclerViewAdapter(
         val item = items[position]
         holder.priceView.text = item.price
         holder.amountView.text = item.amount
-        holder.feeView.text = item.fee
-        holder.dateView.text = sdf.format(item.time)
-
-        holder.statusView.text = "Active"
-        holder.statusView.textColorResource = R.color.greenLight
-
-        if (item.side == "1") {
-            holder.sideView.text = "Bye"
-            holder.sideView.textColorResource = R.color.greenLight
-        } else {
-            holder.sideView.text = "Sell"
-            holder.sideView.textColorResource = R.color.redLight
-        }
-
-        if (item.role == "1") {
-            holder.roleView.text = "Maker"
-        } else {
-            holder.roleView.text = "Taker"
-        }
+//        holder.feeView.text = item.fee
+//        holder.dateView.text = sdf.format(item.time)
+//
+//        holder.statusView.text = "Active"
+//        holder.statusView.textColorResource = R.color.greenLight
+//
+//        if (item.side == "1") {
+//            holder.sideView.text = "Bye"
+//            holder.sideView.textColorResource = R.color.greenLight
+//        } else {
+//            holder.sideView.text = "Sell"
+//            holder.sideView.textColorResource = R.color.redLight
+//        }
+//
+//        if (item.role == "1") {
+//            holder.roleView.text = "Maker"
+//        } else {
+//            holder.roleView.text = "Taker"
+//        }
 
     }
 
@@ -57,11 +57,11 @@ class MarketMineRecyclerViewAdapter(
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
         val priceView: TextView = mView.price
         val amountView: TextView = mView.amount
-        val feeView: TextView = mView.fee
-        val statusView: TextView = mView.status
-        val dateView: TextView = mView.date
-        val editView: TextView = mView.edit
-        val roleView: TextView = mView.role
-        val sideView: TextView = mView.side
+//        val feeView: TextView = mView.fee
+//        val statusView: TextView = mView.status
+//        val dateView: TextView = mView.date
+//        val editView: TextView = mView.edit
+//        val roleView: TextView = mView.role
+//        val sideView: TextView = mView.side
     }
 }

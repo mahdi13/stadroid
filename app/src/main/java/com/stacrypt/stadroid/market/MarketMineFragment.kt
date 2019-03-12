@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.stacrypt.stadroid.R
 import com.stacrypt.stadroid.data.Mine
+import kotlinx.android.synthetic.main.fragment_market_mine_list.view.*
 
 
 class MarketMineFragment : Fragment() {
@@ -22,13 +23,14 @@ class MarketMineFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val recyclerView = inflater.inflate(R.layout.fragment_market_mine_list, container, false) as RecyclerView
+        val rootView = inflater.inflate(R.layout.fragment_market_mine_list, container, false)
+        val recyclerView = rootView.list
 
         adapter = MarketMineRecyclerViewAdapter(ArrayList())
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = adapter
 
-        return recyclerView
+        return rootView
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

@@ -336,29 +336,29 @@ interface MockStemeraldApiClient {
         @Query("page") page: Int = 0
     ): Deferred<ArrayList<BalanceHistory>>
 
-//    @GET("market-list?key=98063e30")
-//    fun allMarkets(): Deferred<ArrayList<Market>>
-//
-//    @GET("market-status/{market}?key=98063e30")
-//    fun marketStatus(@Path("market") market: String): Deferred<MarketStatus>
-//
-//    @GET("market-summary/{market}?key=98063e30")
-//    fun marketSummary(@Path("market") market: String, @Query("period") period: Long = 86400): Deferred<ArrayList<MarketSummary>>
-//
-//    @GET("market-last/{market}?key=98063e30")
-//    fun marketLast(@Path("market") market: String): Deferred<MarketLast>
+    @GET("market-list?key=98063e30")
+    fun allMarkets(): Deferred<ArrayList<Market>>
 
-//    @GET("kline/{market}?key=98063e30")
-//    fun kline(@Path("market") market: String): Deferred<ArrayList<Kline>>
+    @GET("market-status/{market}?key=98063e30")
+    fun marketStatus(@Path("market") market: String): Deferred<MarketStatus>
 
-//    @GET("order-book/{market}?key=98063e30")
-//    fun book(@Path("market") market: String): Deferred<BookResponse>
-//
-//    @GET("deals/{market}?key=98063e30")
-//    fun deal(@Path("market") market: String): Deferred<ArrayList<Deal>>
-//
-//    @GET("mine/{market}?key=98063e30")
-//    fun mine(@Path("market") market: String): Deferred<ArrayList<Mine>>
+    @GET("market-summary/{market}?key=98063e30")
+    fun marketSummary(@Path("market") market: String, @Query("period") period: Long = 86400): Deferred<ArrayList<MarketSummary>>
+
+    @GET("market-last/{market}?key=98063e30")
+    fun marketLast(@Path("market") market: String): Deferred<MarketLast>
+
+    @GET("kline/{market}?key=98063e30")
+    fun kline(@Path("market") market: String): Deferred<ArrayList<Kline>>
+
+    @GET("order-book/{market}?key=98063e30")
+    fun book(@Path("market") market: String): Deferred<BookResponse>
+
+    @GET("deals/{market}?key=98063e30")
+    fun deal(@Path("market") market: String): Deferred<ArrayList<Deal>>
+
+    @GET("mine/{market}?key=98063e30")
+    fun mine(@Path("market") market: String): Deferred<ArrayList<Mine>>
 }
 
 //@Suppress("DeferredIsResult")
