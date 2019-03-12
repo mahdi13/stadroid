@@ -3,7 +3,7 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context=".market.MarketCandlestickFragment">
+             tools:context=".market.chart.MarketCandlestickFragment">
 
     <com.github.mikephil.charting.charts.CandleStickChart
             android:id="@+id/chart"

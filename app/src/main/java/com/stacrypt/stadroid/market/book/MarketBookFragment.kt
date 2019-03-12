@@ -1,4 +1,4 @@
-package com.stacrypt.stadroid.market
+package com.stacrypt.stadroid.market.book
 
 import android.os.Bundle
 import androidx.recyclerview.widget.RecyclerView
@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.stacrypt.stadroid.R
 import com.stacrypt.stadroid.data.Book
 import com.stacrypt.stadroid.data.BookResponse
+import com.stacrypt.stadroid.market.MarketViewModel
 import kotlin.math.max
 
 

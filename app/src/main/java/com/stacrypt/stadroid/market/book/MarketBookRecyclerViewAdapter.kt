@@ -1,10 +1,5 @@
-package com.stacrypt.stadroid.market
+package com.stacrypt.stadroid.market.book
 
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
-import android.graphics.Rect
-import android.graphics.drawable.Drawable
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -14,17 +9,7 @@ import com.stacrypt.stadroid.R
 import com.stacrypt.stadroid.data.Book
 
 import kotlinx.android.synthetic.main.fragment_market_book.view.*
-import android.graphics.drawable.GradientDrawable
-import android.graphics.drawable.LayerDrawable
-import android.graphics.drawable.ShapeDrawable
-import android.graphics.drawable.shapes.RectShape
-import android.view.Gravity
-import androidx.appcompat.widget.DrawableUtils
-import androidx.constraintlayout.solver.widgets.Rectangle
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
-import org.jetbrains.anko.backgroundColor
-import org.jetbrains.anko.leftPadding
-import org.jetbrains.anko.rightPadding
 
 
 class MarketBookRecyclerViewAdapter(

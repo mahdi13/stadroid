@@ -10,5 +10,5 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         app:layoutManager="LinearLayoutManager"
-        tools:context=".market.MarketBookFragment"
+        tools:context=".market.book.MarketBookFragment"
         tools:listitem="@layout/fragment_market_book"/>

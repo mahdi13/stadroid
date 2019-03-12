@@ -9,6 +9,8 @@ import androidx.fragment.app.FragmentPagerAdapter
 import com.stacrypt.stadroid.R
 import kotlinx.android.synthetic.main.fragment_market.*
 import com.google.android.material.tabs.TabLayout
+import com.stacrypt.stadroid.market.book.MarketBookFragment
+import com.stacrypt.stadroid.market.chart.MarketCandlestickFragment
 import com.stacrypt.stadroid.market.history.MarketHistoryFragment
 import com.stacrypt.stadroid.market.mine.MarketMineFragment
 import java.lang.IndexOutOfBoundsException

@@ -1,4 +1,4 @@
-package com.stacrypt.stadroid.market
+package com.stacrypt.stadroid.market.chart
 
 
 import android.graphics.Color
@@ -20,6 +20,7 @@ import com.github.mikephil.charting.utils.ColorTemplate
 import com.stacrypt.stadroid.data.Kline
 import kotlinx.android.synthetic.main.fragment_market_candlestick.*
 import com.stacrypt.stadroid.R
+import com.stacrypt.stadroid.market.MarketViewModel
 
 
 // TODO: Rename parameter arguments, choose names that match
