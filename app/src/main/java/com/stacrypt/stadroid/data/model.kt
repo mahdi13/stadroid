@@ -136,6 +136,27 @@ data class TokenResponse(
     val token: String
 )
 
+enum class Gender { MALE, FEMALE }
+
+data class Evidence(
+    val clientId: Int,
+    val cityId: Int,
+    val type: String,
+    val gender: Gender?,
+    val birthday: Date?,
+    val mobilePhone: String?,
+    val fixedPhone: String?,
+    val address: String?,
+    val createdAt: Date?,
+    val modifiedAt: Date?,
+    val firstName: String?,
+    val lastName: String?,
+    val nationalCode: String?,
+    val error: String?,
+    val idCard: String?,
+    val idCardSecondary: String?
+)
+
 @Entity
 data class Ticket(
     @PrimaryKey var id: Int,

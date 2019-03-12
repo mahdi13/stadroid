@@ -39,9 +39,36 @@ data class BookResponse(val buys: List<Book>, val sells: List<Book>)
 
 @Suppress("DeferredIsResult")
 interface StemeraldV2ApiClient {
+
+    /**
+     * Assets
+     */
     @HTTP(method = "LIST", path = "assets", hasBody = true)
     fun assetList(): Deferred<ArrayList<Asset>>
 
+    /**
+     * Balances
+     */
+    @HTTP(method = "OVERVIEW", path = "balances", hasBody = true)
+    fun balanceList(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: ""
+    ): Deferred<ArrayList<BalanceOverview>>
+
+    @HTTP(method = "OVERVIEW", path = "balances", hasBody = true)
+    fun balanceOverview(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: ""
+    ): Deferred<ArrayList<BalanceOverview>>
+
+    @HTTP(method = "HISTORY", path = "balances", hasBody = true)
+    fun balanceHistory(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
+        @Query("asset") assetName: String,
+        @Query("page") page: Int = 0
+    ): Deferred<ArrayList<BalanceHistory>>
+
+    /**
+     * Markets
+     */
     @HTTP(method = "LIST", path = "markets", hasBody = true)
     fun marketList(): Deferred<ArrayList<Market>>
 
@@ -80,23 +107,6 @@ interface StemeraldV2ApiClient {
         @Query("limit") take: Int = 20
     ): Deferred<ArrayList<Mine>>
 
-    @HTTP(method = "OVERVIEW", path = "balances", hasBody = true)
-    fun balanceList(
-        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: ""
-    ): Deferred<ArrayList<BalanceOverview>>
-
-    @HTTP(method = "OVERVIEW", path = "balances", hasBody = true)
-    fun balanceOverview(
-        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: ""
-    ): Deferred<ArrayList<BalanceOverview>>
-
-    @HTTP(method = "HISTORY", path = "balances", hasBody = true)
-    fun balanceHistory(
-        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
-        @Query("asset") assetName: String,
-        @Query("page") page: Int = 0
-    ): Deferred<ArrayList<BalanceHistory>>
-
     @HTTP(method = "SHOW", path = "deposits", hasBody = true)
     fun showDepositInfo(
         @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
@@ -134,9 +144,15 @@ interface StemeraldV2ApiClient {
         @Field("password") password: String
     ): Deferred<User>
 
+
+    /**
+     * Email verification
+     */
     @FormUrlEncoded
     @HTTP(method = "SCHEDULE", path = "clients/email-verifications", hasBody = true)
-    fun schedulEmailVerification(): Deferred<Unit>
+    fun schedulEmailVerification(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: ""
+    ): Deferred<Unit>
 
     @FormUrlEncoded
     @HTTP(method = "VERIFY", path = "clients/email-verifications", hasBody = true)
@@ -145,6 +161,42 @@ interface StemeraldV2ApiClient {
         @Field("token") token: String
     ): Deferred<User>
 
+    /**
+     * Phone verification
+     */
+    @FormUrlEncoded
+    @HTTP(method = "SCHEDULE", path = "clients/mobile-phone-verifications", hasBody = true)
+    fun schedulMobilePhoneVerification(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
+        @Field("phone") phone: String
+    ): Deferred<Unit>
+
+    @FormUrlEncoded
+    @HTTP(method = "SCHEDULE", path = "clients/fixed-phone-verifications", hasBody = true)
+    fun schedulFixedPhoneVerification(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
+        @Field("phone") phone: String
+    ): Deferred<Unit>
+
+    @FormUrlEncoded
+    @HTTP(method = "VERIFY", path = "clients/mobile-phone-verifications", hasBody = true)
+    fun verifyMobilePhoneVerification(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
+        @Field("phone") phone: String,
+        @Field("code") code: String
+    ): Deferred<User>
+
+    @FormUrlEncoded
+    @HTTP(method = "VERIFY", path = "clients/fixed-phone-verifications", hasBody = true)
+    fun verifyFixedPhoneVerification(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
+        @Field("phone") phone: String,
+        @Field("code") code: String
+    ): Deferred<User>
+
+    /**
+     * Bank Accounts
+     */
     @HTTP(method = "GET", path = "banking/accounts", hasBody = false)
     fun getBankAccounts(
         @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
@@ -152,12 +204,6 @@ interface StemeraldV2ApiClient {
         @Query("take") take: Int = 20
     ): Deferred<List<BankAccount>>
 
-    @HTTP(method = "GET", path = "banking/cards", hasBody = false)
-    fun getBankCards(
-        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
-        @Query("skip") skip: Int = 0,
-        @Query("take") take: Int = 20
-    ): Deferred<List<BankCard>>
 
     @FormUrlEncoded
     @HTTP(method = "ADD", path = "banking/accounts", hasBody = true)
@@ -168,6 +214,16 @@ interface StemeraldV2ApiClient {
         @Field("owner") owner: String
     ): Deferred<BankAccount>
 
+    /**
+     * Bank Cards
+     */
+    @HTTP(method = "GET", path = "banking/cards", hasBody = false)
+    fun getBankCards(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
+        @Query("skip") skip: Int = 0,
+        @Query("take") take: Int = 20
+    ): Deferred<List<BankCard>>
+
     @FormUrlEncoded
     @HTTP(method = "ADD", path = "banking/cards", hasBody = true)
     fun addBankCard(
@@ -177,6 +233,48 @@ interface StemeraldV2ApiClient {
         @Field("holder") holder: String
     ): Deferred<BankCard>
 
+    /**
+     * Evidences
+     */
+    @HTTP(method = "GET", path = "clients/me/evidences", hasBody = false)
+    fun getMyEvidences(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
+        ): Deferred<Evidence>
+
+    /**
+     * Password
+     */
+    @FormUrlEncoded
+    @HTTP(method = "CHANGE", path = "clients/passwords", hasBody = true)
+    fun changePassword(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
+        @Field("currentPassword") currentPassword: String,
+        @Field("newPassword") newPassword: String
+    ): Deferred<User>
+
+    @FormUrlEncoded
+    @HTTP(method = "RESET", path = "clients/passwords", hasBody = true)
+    fun doResetPasswordPassword(
+        @Field("token") token: String,
+        @Field("password") password: String
+    ): Deferred<Unit>
+
+    /**
+     * Second Factor
+     */
+    @FormUrlEncoded
+    @HTTP(method = "ENABLE", path = "clients/secondfactors", hasBody = true)
+    fun enableSecondFactor(@Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: ""): Deferred<Unit>
+
+    @FormUrlEncoded
+    @HTTP(method = "PROVISION", path = "clients/secondfactors", hasBody = true)
+    fun provisionSecondFactor(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: ""
+    ): Deferred<String>
+
+    @FormUrlEncoded
+    @HTTP(method = "DISABLE", path = "clients/secondfactors", hasBody = true)
+    fun disableSecondFactor(@Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: ""): Deferred<Unit>
 
 }
 
