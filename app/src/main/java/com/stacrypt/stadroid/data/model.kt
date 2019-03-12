@@ -51,6 +51,31 @@ data class Asset(
     var prec: String
 )
 
+enum class CurrencyType { FIAT, CRYPTOCURRENCY }
+
+data class Currency(
+    var name: String,
+    var symbol: String,
+    var type: CurrencyType,
+    var divideByTen: Int,
+
+    /**
+     * Just for crypto:
+     */
+    var depositMin: Long?,
+    var depositMax: Long?,
+    var withdrawMin: Long?,
+    var withdrawMax: Long?,
+    var depositMaxCommission: Long?,
+    var withdrawMaxCommission: Long?,
+    var depositStaticCommission: Long?,
+    var withdrawStaticCommission: Long?,
+    var depositPermilleCommission: Long?,
+    var withdrawPermilleCommission: Long?,
+    var walletId: Int?
+
+)
+
 data class Kline(
     var market: String,
     var time: Long,
@@ -197,9 +222,8 @@ data class TicketDepartment(
     var title: String
 )
 
-@Entity
 data class Session(
-    @PrimaryKey var id: String,
+    var id: String,
     var remoteAddress: String?,
     var machine: String?,
     var os: String?,
@@ -209,9 +233,8 @@ data class Session(
     var lastActivity: Date?
 )
 
-@Entity
 data class SecurityLog(
-    @PrimaryKey var id: Int,
+    var id: Int,
     var clientId: Int?,
     var type: String?,
     var details: String?,

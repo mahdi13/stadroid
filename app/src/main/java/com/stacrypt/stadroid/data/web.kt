@@ -8,7 +8,9 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
+import java.io.File
 import java.nio.charset.Charset
+import java.util.*
 
 //const val STEMERALD_API_URL = "http://localhost:8070"
 const val MOCK_STEMERALD_API_URL = "https://my.api.mockaroo.com/"
@@ -45,6 +47,9 @@ interface StemeraldV2ApiClient {
      */
     @HTTP(method = "LIST", path = "assets", hasBody = true)
     fun assetList(): Deferred<ArrayList<Asset>>
+
+    @HTTP(method = "LIST", path = "assets", hasBody = true)
+    fun currencyList(): Deferred<ArrayList<Asset>>
 
     /**
      * Balances
@@ -238,8 +243,24 @@ interface StemeraldV2ApiClient {
      */
     @HTTP(method = "GET", path = "clients/me/evidences", hasBody = false)
     fun getMyEvidences(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: ""
+    ): Deferred<Evidence>
+
+    @Multipart
+    @HTTP(method = "SUBMIT", path = "clients/evidences", hasBody = true)
+    fun getMyEvidences(
         @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
-        ): Deferred<Evidence>
+        @Part("firstName") firstName: String,
+        @Part("lastName") lastName: String,
+        @Part("gender") gender: Gender,
+        @Part("birthday") birthday: Date,
+        @Part("cityId") cityId: Int,
+        @Part("nationalCode") nationalCode: String,
+        @Part("address") address: String,
+        @Part("idCard") idCard: File,
+        @Part("idCardSecondary") idCardSecondary: File,
+        @Part("holder") holder: String
+    ): Deferred<Evidence>
 
     /**
      * Password
@@ -275,6 +296,29 @@ interface StemeraldV2ApiClient {
     @FormUrlEncoded
     @HTTP(method = "DISABLE", path = "clients/secondfactors", hasBody = true)
     fun disableSecondFactor(@Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: ""): Deferred<Unit>
+
+    /**
+     * Security logs
+     */
+    @HTTP(method = "GET", path = "logs", hasBody = false)
+    fun getSecurityLogs(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: ""
+    ): Deferred<List<SecurityLog>>
+
+    /**
+     * Sessions
+     */
+    @HTTP(method = "GET", path = "sessions", hasBody = false)
+    fun getSessions(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: ""
+    ): Deferred<List<Session>>
+
+    @HTTP(method = "GET", path = "sessions/{sessionId}", hasBody = true)
+    fun terminateSessions(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
+        @Path("sessionId") sessionId: String
+    ): Deferred<Unit>
+
 
 }
 

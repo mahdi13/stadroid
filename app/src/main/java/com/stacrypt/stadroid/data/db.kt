@@ -16,7 +16,6 @@ import java.util.*
         User::class,
         Ticket::class,
         TicketMessage::class,
-        SecurityLog::class,
         Session::class,
         ShetabAddress::class,
         ShebaAddress::class,
