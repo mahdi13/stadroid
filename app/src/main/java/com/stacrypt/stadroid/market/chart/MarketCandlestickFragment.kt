@@ -21,6 +21,7 @@ import com.stacrypt.stadroid.data.Kline
 import kotlinx.android.synthetic.main.fragment_market_candlestick.*
 import com.stacrypt.stadroid.R
 import com.stacrypt.stadroid.market.MarketViewModel
+import com.stacrypt.stadroid.ui.dinMediumTypeface
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -67,13 +68,14 @@ class MarketCandlestickFragment : Fragment() {
         dataset.shadowColorSameAsCandle = true
         dataset.shadowWidth = 1f
         dataset.valueTextColor = Color.WHITE
-        dataset.decreasingColor = resources.getColor(R.color.pink_A400)
+        dataset.decreasingColor = resources.getColor(R.color.real_red)
         dataset.decreasingPaintStyle = Paint.Style.FILL
-        dataset.increasingColor = resources.getColor(R.color.green_A400)
+        dataset.increasingColor = resources.getColor(R.color.real_green)
         dataset.increasingPaintStyle = Paint.Style.FILL
         dataset.neutralColor = Color.BLUE
 
         dataset.colors = ColorTemplate.VORDIPLOM_COLORS.toList()
+        dataset.valueTypeface = dinMediumTypeface
 
         return dataset
     }
@@ -101,6 +103,7 @@ class MarketCandlestickFragment : Fragment() {
             chart.description.isEnabled = false
             chart.isScaleYEnabled = false
             chart.isScaleXEnabled = true
+            chart.setNoDataTextTypeface(dinMediumTypeface)
         }
 
         // Colors
@@ -121,6 +124,7 @@ class MarketCandlestickFragment : Fragment() {
         xAxis.setAvoidFirstLastClipping(true)
         xAxis.axisLineColor = Color.WHITE
         xAxis.textColor = Color.WHITE
+        xAxis.typeface = dinMediumTypeface
         xAxis.setValueFormatter { value, axis ->
             "${((value * 5) / 60).toInt() % 24}:${(value * 5).toInt() % 60}"
         }
@@ -135,8 +139,7 @@ class MarketCandlestickFragment : Fragment() {
         leftAxis.setDrawAxisLine(false)
         leftAxis.axisLineColor = Color.WHITE
         leftAxis.textColor = Color.WHITE
-
-
+        leftAxis.typeface = dinMediumTypeface
 
         chart.isHighlightPerDragEnabled = true
 

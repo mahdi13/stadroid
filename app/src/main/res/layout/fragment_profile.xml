@@ -80,6 +80,7 @@
                                         android:drawableTint="@color/real_green"
                                         android:textAllCaps="false"
                                         android:layout_gravity="center"
+                                        android:fontFamily="@font/din_medium"
                                         android:gravity="center_vertical"/>
 
                             </LinearLayout>
@@ -102,6 +103,7 @@
                                 android:layout_marginBottom="10dp"
                                 android:layout_marginTop="10dp"
                                 android:textColor="@color/colorPrimaryTextLight"
+                                android:fontFamily="@font/din_medium"
                                 android:text="Last Login On: 2019-02-12   By: 192.169.1.1"/>
 
 

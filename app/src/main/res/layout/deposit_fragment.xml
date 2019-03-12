@@ -55,6 +55,7 @@
                             android:gravity="center"
                             android:textColor="@color/real_red"
                             android:textStyle="bold"
+                            android:fontFamily="@font/din_medium"
                             android:text="Minimum"/>
 
                     <View
@@ -71,6 +72,7 @@
                             android:gravity="center"
                             android:textColor="@color/real_blue"
                             android:textStyle="bold"
+                            android:fontFamily="@font/din_medium"
                             android:text="Maximum"/>
 
                     <View
@@ -87,6 +89,7 @@
                             android:gravity="center"
                             android:textColor="@color/colorAccent"
                             android:textStyle="bold"
+                            android:fontFamily="@font/din_medium"
                             android:text="Commission"/>
 
 
@@ -112,6 +115,7 @@
                             android:gravity="center"
                             android:textColor="@color/real_red"
                             android:textStyle="bold"
+                            android:fontFamily="@font/din_medium"
                             android:text="0.000001 BTC"/>
 
                     <View
@@ -128,6 +132,7 @@
                             android:gravity="center"
                             android:textColor="@color/real_blue"
                             android:textStyle="bold"
+                            android:fontFamily="@font/din_medium"
                             android:text="100.0 BTC"/>
 
                     <View
@@ -145,6 +150,7 @@
                             android:gravity="center"
                             android:textColor="@color/colorAccent"
                             android:textStyle="bold"
+                            android:fontFamily="@font/din_medium"
                             android:text="0.4 %"/>
 
 
@@ -177,6 +183,7 @@
                         android:text="Address"
                         android:paddingStart="10dp"
                         android:textColor="@color/colorPrimaryLight"
+                        android:fontFamily="@font/din_medium"
                         android:layout_marginBottom="5dp"/>
 
                 <View
@@ -287,6 +294,7 @@
                         android:text="Tag"
                         android:paddingStart="10dp"
                         android:textColor="@color/colorPrimaryLight"
+                        android:fontFamily="@font/din_medium"
                         android:layout_marginBottom="5dp"/>
 
                 <View

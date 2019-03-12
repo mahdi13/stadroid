@@ -11,6 +11,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="0.343411"
+            android:fontFamily="@font/din_medium"
             android:textAppearance="?attr/textAppearanceListItem"/>
 
     <TextView
@@ -21,6 +22,7 @@
             android:gravity="center"
             android:text="2562.98"
             android:textColor="@color/pink_600"
+            android:fontFamily="@font/din_medium"
             android:textAppearance="?attr/textAppearanceListItem"/>
 
     <TextView
@@ -30,6 +32,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:textColor="@color/green_600"
+            android:fontFamily="@font/din_medium"
             android:text="0.23%"
             android:textAppearance="?attr/textAppearanceListItem"/>
 </LinearLayout>

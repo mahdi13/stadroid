@@ -20,6 +20,7 @@
                 android:gravity="center"
                 android:textStyle="bold"
                 android:textSize="20sp"
+                android:fontFamily="@font/din_medium"
                 android:text="BTC / USD"/>
 
         <TextView
@@ -29,6 +30,7 @@
                 android:id="@+id/volume"
                 android:gravity="center"
                 android:textStyle="bold"
+                android:fontFamily="@font/din_medium"
                 android:text="23.47653 BTC"/>
 
     </LinearLayout>
@@ -49,6 +51,7 @@
                 android:gravity="center"
                 android:textStyle="bold"
                 android:textSize="18sp"
+                android:fontFamily="@font/din_medium"
                 android:text="Price: 1234.56 (+ 2.34 %)"/>
 
         <TextView
@@ -58,6 +61,7 @@
                 android:id="@+id/deal"
                 android:gravity="center"
                 android:textColor="@color/colorGrayText"
+                android:fontFamily="@font/din_medium"
                 android:text="47562532 $"/>
 
     </LinearLayout>
@@ -83,6 +87,7 @@
                     android:gravity="center"
                     android:textStyle="bold"
                     android:textSize="16sp"
+                    android:fontFamily="@font/din_medium"
                     android:text="12345.76"/>
 
             <TextView
@@ -91,6 +96,7 @@
                     android:gravity="center"
                     android:textColor="@color/colorGrayText"
                     android:textSize="10sp"
+                    android:fontFamily="@font/din_medium"
                     android:text="Open"/>
 
         </LinearLayout>
@@ -108,6 +114,7 @@
                     android:gravity="center"
                     android:textStyle="bold"
                     android:textSize="16sp"
+                    android:fontFamily="@font/din_medium"
                     android:text="12345.76"/>
 
             <TextView
@@ -116,6 +123,7 @@
                     android:gravity="center"
                     android:textColor="@color/colorGrayText"
                     android:textSize="10sp"
+                    android:fontFamily="@font/din_medium"
                     android:text="High"/>
 
         </LinearLayout>
@@ -133,6 +141,7 @@
                     android:gravity="center"
                     android:textStyle="bold"
                     android:textSize="16sp"
+                    android:fontFamily="@font/din_medium"
                     android:text="12345.76"/>
 
             <TextView
@@ -141,6 +150,7 @@
                     android:gravity="center"
                     android:textColor="@color/colorGrayText"
                     android:textSize="10sp"
+                    android:fontFamily="@font/din_medium"
                     android:text="Low"/>
 
         </LinearLayout>
@@ -158,6 +168,7 @@
                     android:gravity="center"
                     android:textStyle="bold"
                     android:textSize="16sp"
+                    android:fontFamily="@font/din_medium"
                     android:text="12345.76"/>
 
             <TextView
@@ -166,6 +177,7 @@
                     android:gravity="center"
                     android:textColor="@color/colorGrayText"
                     android:textSize="10sp"
+                    android:fontFamily="@font/din_medium"
                     android:text="Close"/>
 
         </LinearLayout>

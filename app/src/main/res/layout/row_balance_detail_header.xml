@@ -38,7 +38,7 @@
                     android:layout_margin="3dp"
                     android:gravity="center"
                     android:textColor="@color/colorPrimaryText"
-                    android:fontFamily="@font/kameron_bold"
+                    android:fontFamily="@font/din_medium"
                     android:maxLength="8"
                     android:lines="1"
                     android:paddingStart="10dp"
@@ -48,6 +48,7 @@
             <TextView
                     android:id="@+id/header_title"
                     style="@style/TextAppearance.MaterialComponents.Caption"
+                    android:fontFamily="@font/din_medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
@@ -68,7 +69,7 @@
                     android:layout_below="@+id/header_amount"
                     android:text=" ≃12345 $"
                     android:textColor="@color/colorPrimaryLight"
-                    android:fontFamily="@font/kameron_bold"
+                    android:fontFamily="@font/din_medium"
                     android:lines="1"
                     android:textSize="12dp"
                     />
@@ -117,6 +118,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/din_medium"
             android:text="History"
             android:textColor="@color/colorPrimaryLight"
             android:layout_marginTop="10dp"

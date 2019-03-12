@@ -26,6 +26,7 @@
             app:tabTextColor="#ffffff"
             app:tabIndicatorColor="#ffffff"
             app:tabRippleColor="#ffffff"
+            android:background="@color/colorPrimaryDark"
             >
 
         <com.google.android.material.tabs.TabItem

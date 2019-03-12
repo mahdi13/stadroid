@@ -37,6 +37,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/real_green"
+                    android:fontFamily="@font/din_medium"
                     android:text="Deposit"/>
 
             <TextView
@@ -44,6 +45,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="10 jan 2019 16:40"
+                    android:fontFamily="@font/din_medium"
                     android:textColor="@color/colorPrimaryLight"/>
 
         </LinearLayout>
@@ -62,7 +64,7 @@
                     android:textColor="@color/colorAccent"
                     android:layout_margin="3dp"
                     android:textStyle="bold"
-                    android:fontFamily="@font/kameron_bold"
+                    android:fontFamily="@font/din_medium"
                     android:maxLength="8"
                     android:lines="1"
                     android:text="2.42356 BTC"
@@ -74,6 +76,7 @@
                     android:layout_height="wrap_content"
                     android:text=" ≃12345 $"
                     android:textColor="@color/colorPrimaryLight"
+                    android:fontFamily="@font/din_medium"
                     android:layout_marginEnd="10dp"/>
 
         </LinearLayout>
