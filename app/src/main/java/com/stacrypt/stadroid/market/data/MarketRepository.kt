@@ -78,10 +78,11 @@ object MarketRepository {
         scope.launch {
             try {
                 liveData.postValue(
-                    BookResponse(
-                        buys = stemeraldApiClient.book(market, "buy").await(),
-                        sells = stemeraldApiClient.book(market, "sell").await()
-                    )
+//                    BookResponse(
+//                        buys = stemeraldApiClient.book(market, "buy").await(),
+//                        sells = stemeraldApiClient.book(market, "sell").await()
+//                    )
+                    mockStemeraldApiClient.book(market).await()
                 )
             } catch (e: Exception) {
                 // TODO: Try again

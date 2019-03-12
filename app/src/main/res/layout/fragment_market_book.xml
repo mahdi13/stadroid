@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
-                android:layout_height="50dp">
+                android:layout_height="40dp">
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -13,21 +14,31 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true">
 
-        <View
+        <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
                 android:id="@+id/bg_left"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:paddingEnd="10dp"
-                android:background="@color/real_green"/>
+                app:rcProgress="34"
+                app:rcMax="100"
+                app:rcRadius="0dp"
+                app:rcBackgroundPadding="1dp"
+                app:rcReverse="true"
+                app:rcProgressColor="#5574a700"
+                app:rcBackgroundColor="@color/colorPrimary"/>
 
-        <View
+        <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
                 android:id="@+id/bg_right"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:paddingStart="10dp"
-                android:background="@color/real_red"/>
+                app:rcProgress="34"
+                app:rcMax="100"
+                app:rcRadius="0dp"
+                app:rcBackgroundPadding="1dp"
+                app:rcReverse="false"
+                app:rcProgressColor="#55e50370"
+                app:rcBackgroundColor="@color/colorPrimary"/>
 
     </LinearLayout>
 
@@ -45,7 +56,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_margin="@dimen/text_margin"
+                android:gravity="center"
                 android:text="345.12"
                 android:textAppearance="?attr/textAppearanceListItem"/>
 
@@ -54,7 +65,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_margin="@dimen/text_margin"
+                android:gravity="center"
                 android:text="2.43498573"
                 android:textAppearance="?attr/textAppearanceListItem"/>
 
@@ -63,7 +74,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_margin="@dimen/text_margin"
+                android:gravity="center"
                 android:text="345.12"
                 android:textAppearance="?attr/textAppearanceListItem"/>
 
@@ -72,7 +83,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_margin="@dimen/text_margin"
+                android:gravity="center"
                 android:text="2.43498573"
                 android:textAppearance="?attr/textAppearanceListItem"/>
 

@@ -21,6 +21,7 @@ import android.graphics.drawable.shapes.RectShape
 import android.view.Gravity
 import androidx.appcompat.widget.DrawableUtils
 import androidx.constraintlayout.solver.widgets.Rectangle
+import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
 import org.jetbrains.anko.backgroundColor
 import org.jetbrains.anko.leftPadding
 import org.jetbrains.anko.rightPadding
@@ -43,6 +44,13 @@ class MarketBookRecyclerViewAdapter(
         holder.leftAmountView.text = leftItem?.amount ?: ""
         holder.rightPriceView.text = rightItem?.price ?: ""
         holder.rightAmountView.text = rightItem?.amount ?: ""
+        holder.rightAmountView.text = rightItem?.amount ?: ""
+
+        holder.leftProgressView.max = items.map { it.first?.amount?.toFloat() ?: 0F }.max()!!
+        holder.leftProgressView.progress = leftItem?.amount?.toFloat() ?: 0F
+
+        holder.rightProgressView.max = items.map { it.second?.amount?.toFloat() ?: 0F }.max()!!
+        holder.rightProgressView.progress = rightItem?.amount?.toFloat() ?: 0F
 
 //        val layerDrawable = holder.containerView.resources.getDrawable(R.drawable.test_shape) as LayerDrawable
 //        val leftLayer = layerDrawable.findDrawableByLayerId(R.id.left) as Drawable
@@ -74,8 +82,8 @@ class MarketBookRecyclerViewAdapter(
     override fun getItemCount(): Int = items.size
 
     inner class ViewHolder(mView: View) : RecyclerView.ViewHolder(mView) {
-        val leftContainerView: View = mView.bg_left
-        val rightContainerView: View = mView.bg_right
+        val leftProgressView: RoundCornerProgressBar = mView.bg_left
+        val rightProgressView: RoundCornerProgressBar = mView.bg_right
         val leftPriceView: TextView = mView.price_left
         val leftAmountView: TextView = mView.amount_left
         val rightPriceView: TextView = mView.price_right

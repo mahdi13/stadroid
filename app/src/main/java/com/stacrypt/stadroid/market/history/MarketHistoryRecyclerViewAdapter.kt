@@ -1,4 +1,4 @@
-package com.stacrypt.stadroid.market
+package com.stacrypt.stadroid.market.history
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater

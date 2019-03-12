@@ -1,8 +1,7 @@
-package com.stacrypt.stadroid.market
+package com.stacrypt.stadroid.market.mine
 
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.stacrypt.stadroid.R
 import com.stacrypt.stadroid.data.Mine
+import com.stacrypt.stadroid.market.MarketViewModel
 import kotlinx.android.synthetic.main.fragment_market_mine_list.view.*
 
 

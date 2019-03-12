@@ -1,4 +1,4 @@
-package com.stacrypt.stadroid.market
+package com.stacrypt.stadroid.market.mine
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
@@ -10,7 +10,6 @@ import com.stacrypt.stadroid.data.Mine
 
 
 import kotlinx.android.synthetic.main.fragment_market_mine.view.*
-import org.jetbrains.anko.textColorResource
 import java.text.SimpleDateFormat
 
 

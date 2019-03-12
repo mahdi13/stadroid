@@ -10,5 +10,5 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         app:layoutManager="LinearLayoutManager"
-        tools:context=".market.MarketHistoryFragment"
+        tools:context=".market.history.MarketHistoryFragment"
         tools:listitem="@layout/fragment_market_history"/>

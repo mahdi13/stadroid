@@ -1,4 +1,4 @@
-package com.stacrypt.stadroid.market
+package com.stacrypt.stadroid.market.history
 
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,7 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.stacrypt.stadroid.R
 import com.stacrypt.stadroid.data.Deal
-import org.jetbrains.anko.support.v4.toast
+import com.stacrypt.stadroid.market.MarketViewModel
 
 class MarketHistoryFragment : Fragment() {
 
