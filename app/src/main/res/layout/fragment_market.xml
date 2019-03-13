@@ -8,14 +8,17 @@
         tools:context=".market.MarketFragment"
         android:layout_marginTop="56dp">
 
-    <FrameLayout
+    <fragment
             android:id="@+id/summary"
+            class="com.stacrypt.stadroid.market.MarketSummaryFragment"
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:layout_alignParentTop="true"
-            android:background="@color/colorPrimary">
+            android:background="@color/colorPrimary"
+            tools:context=".market.MarketSummaryFragment"
+            tools:layout="@layout/fragment_market_summary">
 
-    </FrameLayout>
+    </fragment>
 
     <com.google.android.material.tabs.TabLayout
             style="@style/Widget.MaterialComponents.TabLayout.Colored"
@@ -33,28 +36,28 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:id="@+id/mine_tab"
-                android:text="Mine"
+                android:text="@string/chart"
                 />
 
         <com.google.android.material.tabs.TabItem
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:id="@+id/book_tab"
-                android:text="Book"
+                android:text="@string/book"
                 />
 
         <com.google.android.material.tabs.TabItem
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:id="@+id/chart_tab"
-                android:text="Chart"
+                android:text="@string/mine"
                 />
 
         <com.google.android.material.tabs.TabItem
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:id="@+id/history_tab"
-                android:text="History"
+                android:text="@string/history"
                 />
 
 
@@ -69,12 +72,15 @@
             android:layout_above="@+id/new_order"/>
 
 
-    <FrameLayout
+    <fragment
             android:id="@+id/new_order"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_alignParentBottom="true"
-            android:background="@color/colorPrimaryDark"></FrameLayout>
+            class="com.stacrypt.stadroid.market.NewOrderFragment"
+            android:background="@color/colorPrimaryDark"
+            tools:context=".market.NewOrderFragment"
+            tools:layout="@layout/new_order_fragment"/>
 
 
 </RelativeLayout>

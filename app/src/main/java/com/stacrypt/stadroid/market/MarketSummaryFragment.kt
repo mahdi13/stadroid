@@ -106,6 +106,8 @@ class MarketSummaryFragment : Fragment() {
         mini_chart.setBorderWidth(0F)
 //        mini_chart.setBorderColor(resources.getColor(R.color.colorLightGray))
         mini_chart.legend.isEnabled = false
+        mini_chart.isFocusableInTouchMode = false
+        mini_chart.setTouchEnabled(false)
 
 
     }
@@ -116,7 +118,7 @@ class MarketSummaryFragment : Fragment() {
         viewModel = ViewModelProviders.of(activity!!).get(MarketViewModel::class.java)
         viewModel.market.observe(this, Observer<Market?> { market ->
             if (market == null) return@Observer
-            rootView?.name?.text = market.name
+            rootView?.name?.text = market.name.replace("_", " / ")
         })
 
         viewModel.summary.observe(this, Observer {
@@ -124,6 +126,8 @@ class MarketSummaryFragment : Fragment() {
             rootView?.high?.text = it?.high24.toString()
             rootView?.low?.text = it?.low24.toString()
             rootView?.close?.text = it?.last24.toString()
+            rootView?.volume?.text =
+                it?.volume24.toString() + " " + (viewModel?.marketName?.value?.split("_")?.get(1) ?: "")
         })
 
         viewModel.last.observe(this, Observer {

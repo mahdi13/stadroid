@@ -24,7 +24,9 @@
             android:id="@+id/mini_chart"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginEnd="4dp"/>
+            android:layout_marginLeft="-15dp"
+            android:layout_marginBottom="-15dp"
+            android:layout_marginRight="-15dp"/>
 
 
 
@@ -44,7 +46,7 @@
                 android:textStyle="bold"
                 android:textSize="20sp"
                 android:fontFamily="@font/din_medium"
-                android:text="BTC / USD"/>
+                tools:text="BTC / USD"/>
 
         <TextView
                 android:layout_width="0dp"
@@ -54,7 +56,7 @@
                 android:gravity="center"
                 android:textStyle="bold"
                 android:fontFamily="@font/din_medium"
-                android:text="23.47653 BTC"/>
+                tools:text="23.47653 BTC"/>
 
     </LinearLayout>
 

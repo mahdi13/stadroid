@@ -38,5 +38,16 @@
     <string name="error_invalid_bank_account_number">This is not a valid bank account owner name</string>
     <string name="error_invalid_bank_account_owner">This is not a valid bank account IBAN number</string>
     <string name="toast_bank_card_added_successfully">Bank card added successfully</string>
+    <string name="chart">Chart</string>
+    <string name="book">Book</string>
+    <string name="mine">Mine</string>
+    <string name="history">History</string>
+    <string name="market_order">Market Order</string>
+    <string name="minus">-</string>
+    <string name="plus">+</string>
+    <string name="price">Price</string>
+    <string name="limit_order">Limit Order</string>
+    <string name="sell">sell</string>
+    <string name="buy">buy</string>
 
 </resources>

@@ -35,9 +35,9 @@ class MarketFragment : Fragment() {
         viewpager.adapter = object : FragmentPagerAdapter(childFragmentManager) {
             override fun getItem(position: Int): Fragment {
                 return when (position) {
-                    0 -> MarketMineFragment()
+                    0 -> MarketCandlestickFragment.newInstance("", "")
                     1 -> MarketBookFragment()
-                    2 -> MarketCandlestickFragment.newInstance("", "")
+                    2 -> MarketMineFragment()
                     3 -> MarketHistoryFragment()
                     else -> throw IndexOutOfBoundsException()
                 }
@@ -45,9 +45,6 @@ class MarketFragment : Fragment() {
 
             override fun getCount(): Int = 4
         }
-
-        childFragmentManager.beginTransaction().replace(R.id.summary, MarketSummaryFragment()).commitNow()
-        childFragmentManager.beginTransaction().replace(R.id.new_order, NewOrderFragment()).commitNow()
 
     }
 
