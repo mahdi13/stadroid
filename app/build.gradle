@@ -12,7 +12,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.stacrypt.stadroid"
-        minSdkVersion 21
+        minSdkVersion 22
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -96,8 +96,12 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.8.0'
     kapt 'com.github.bumptech.glide:compiler:4.8.0'
 
-    // Chart -> MpAndroidChart
+    // Chart
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0-alpha'
+//    implementation 'com.github.esaounkine:airgraph-android:-SNAPSHOT'
+//    implementation 'com.github.JastAir:Android-BackgroundChart:1.0'
+//    implementation 'com.bandiago.libs:simplegraph:0.0.2'
+//    implementation 'com.github.esaounkine:airgraph-android:master-SNAPSHOT'
 
     // Websocket -> Scarlet
     implementation 'com.github.tinder.scarlet:scarlet:0.1.7'

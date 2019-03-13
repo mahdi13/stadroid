@@ -3,7 +3,30 @@
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 tools:context=".market.MarketSummaryFragment">
+
+    <!--<com.bandiago.libs.simplegraph.LineGraph-->
+            <!--xmlns:linegraph="http://schemas.android.com/apk/res-auto"-->
+            <!--android:id="@+id/mini_chart"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--linegraph:lineThickness="5"-->
+            <!--linegraph:lineColor="@color/colorAccent"-->
+            <!--android:background="@color/colorPrimary"/>-->
+
+    <!--<air.graph.line.GraphView-->
+            <!--android:id="@+id/mini_chart"-->
+            <!--style="@style/RemainderVertical.AirGraph"-->
+            <!--app:graph_title="Weather Report"/>-->
+
+    <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/mini_chart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="4dp"/>
+
+
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -183,15 +206,6 @@
         </LinearLayout>
 
     </LinearLayout>
-
-    <com.github.mikephil.charting.charts.CandleStickChart
-            android:id="@+id/mini_chart"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentBottom="true"/>
 
 
 </RelativeLayout>

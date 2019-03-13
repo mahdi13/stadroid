@@ -1,5 +1,6 @@
 package com.stacrypt.stadroid.market
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,10 +9,20 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 
 import androidx.lifecycle.ViewModelProviders
-import com.stacrypt.stadroid.R
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.utils.ColorTemplate
 import com.stacrypt.stadroid.data.Market
 import kotlinx.android.synthetic.main.fragment_market_summary.view.*
+import com.stacrypt.stadroid.R
+import com.stacrypt.stadroid.data.Kline
+import com.stacrypt.stadroid.ui.dinMediumTypeface
+import kotlinx.android.synthetic.main.fragment_market_summary.*
 
+
+const val SHOWING_ITEMS = 20
 
 class MarketSummaryFragment : Fragment() {
     private lateinit var viewModel: MarketViewModel
@@ -24,6 +35,60 @@ class MarketSummaryFragment : Fragment() {
         rootView = inflater.inflate(R.layout.fragment_market_summary, container, false)!!
         return rootView
     }
+    
+    private fun initDataset(items: List<Kline>?): LineDataSet? {
+        val values = ArrayList<Entry>()
+        items?.forEachIndexed { i, it -> values.add(Entry(i.toFloat(), it.volume.toFloat())) }
+        if (values.isNullOrEmpty()) return null
+        val dataset = LineDataSet(values, "")
+        dataset.setDrawIcons(false)
+        dataset.colors = ColorTemplate.VORDIPLOM_COLORS.toList()
+        return dataset
+    }
+
+    private fun initChart(dataset: LineDataSet?) {
+        // Set dataset
+        if (dataset != null) {
+            mini_chart.data = LineData(dataset)
+            mini_chart.notifyDataSetChanged()
+            //        mini_chart.setVisibleYRangeMinimum(1_000F, YAxis.AxisDependency.RIGHT)
+//        mini_chart.setVisibleYRangeMaximum(10_000F, YAxis.AxisDependency.RIGHT)
+//        mini_chart.setVisibleYRangeMinimum(1_000F, YAxis.AxisDependency.LEFT)
+//        mini_chart.setVisibleYRangeMaximum(10_000F, YAxis.AxisDependency.LEFT)
+            mini_chart.invalidate()
+//        mini_chart.setMaxVisibleValueCount(100)
+//        mini_chart.zoom(1F, 1F, 100F, 100F)
+            // scaling can now only be done on x- and y-axis separately
+            mini_chart.setPinchZoom(true)
+            mini_chart.isDoubleTapToZoomEnabled = false
+            mini_chart.isNestedScrollingEnabled = false
+            mini_chart.isHorizontalScrollBarEnabled = false
+            mini_chart.isVerticalScrollBarEnabled = false
+            mini_chart.setVisibleXRange(SHOWING_ITEMS.toFloat(), SHOWING_ITEMS.toFloat())
+            mini_chart.moveViewToX((dataset.values.size - SHOWING_ITEMS / 2).toFloat())
+            mini_chart.description.isEnabled = false
+            mini_chart.isScaleYEnabled = false
+            mini_chart.isScaleXEnabled = false
+        }
+
+        // Colors
+        mini_chart.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+
+        // Touch
+        mini_chart.requestDisallowInterceptTouchEvent(false)
+        mini_chart.axisRight.isEnabled = false
+        mini_chart.axisLeft.isEnabled = false
+        mini_chart.xAxis.isEnabled = false
+        mini_chart.isHighlightPerDragEnabled = false
+
+        mini_chart.setDrawBorders(false)
+        mini_chart.setBorderWidth(0F)
+//        mini_chart.setBorderColor(resources.getColor(R.color.colorLightGray))
+        mini_chart.legend.isEnabled = false
+
+
+    }
+
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -46,6 +111,10 @@ class MarketSummaryFragment : Fragment() {
 
         viewModel.status.observe(this, Observer {
             //TODO
+        })
+
+        viewModel.kline.observe(this, Observer {
+            initChart(initDataset(it))
         })
     }
 
