@@ -12,9 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
-import com.github.mikephil.charting.data.CandleData
-import com.github.mikephil.charting.data.CandleDataSet
-import com.github.mikephil.charting.data.CandleEntry
+import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.utils.ColorTemplate
 
 import com.stacrypt.stadroid.data.Kline
@@ -22,6 +20,10 @@ import kotlinx.android.synthetic.main.fragment_market_candlestick.*
 import com.stacrypt.stadroid.R
 import com.stacrypt.stadroid.market.MarketViewModel
 import com.stacrypt.stadroid.ui.dinMediumTypeface
+import com.github.mikephil.charting.charts.CombinedChart.DrawOrder
+import com.github.mikephil.charting.interfaces.dataprovider.LineDataProvider
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
+import com.github.mikephil.charting.formatter.IFillFormatter
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -43,6 +45,48 @@ class MarketCandlestickFragment : Fragment() {
     private var param2: String? = null
 
     private lateinit var viewModel: MarketViewModel
+
+    private fun initBarDataset(items: List<Kline>?): BarDataSet? {
+        val values = ArrayList<BarEntry>()
+
+        val maxPrice = items?.maxBy { it.h }?.h
+        val maxVolume = items?.maxBy { it.volume }?.volume
+        items?.forEachIndexed { i, it ->
+            values.add(
+                BarEntry(
+                    i.toFloat(),
+                    ((it.volume * maxPrice!!) / maxVolume!!).toFloat() / 5f
+                )
+            )
+        }
+
+        if (values.isNullOrEmpty()) return null
+
+        val dataset = BarDataSet(values, "")
+
+        dataset.setDrawIcons(false)
+        dataset.axisDependency = YAxis.AxisDependency.LEFT
+//        dataset.shadowColorSameAsCandle = true
+//        dataset.shadowWidth = 1f
+        dataset.valueTextColor = Color.WHITE
+//        dataset.decreasingColor = resources.getColor(R.color.real_red)
+//        dataset.decreasingPaintStyle = Paint.Style.FILL
+//        dataset.increasingColor = resources.getColor(R.color.real_green)
+//        dataset.increasingPaintStyle = Paint.Style.FILL
+//        dataset.neutralColor = Color.BLUE
+        dataset.axisDependency = YAxis.AxisDependency.LEFT
+//        dataset.color = Color.rgb(255, 241, 46)
+        dataset.color = Color.argb(20, 220, 220, 78)
+//        dataset.valueTextColor = Color.rgb(60, 220, 78)
+        dataset.valueTextSize = 0f
+        dataset.axisDependency = YAxis.AxisDependency.LEFT
+        dataset.formLineWidth = 2f
+
+//        dataset.colors = ColorTemplate.VORDIPLOM_COLORS.toList()
+        dataset.valueTypeface = dinMediumTypeface
+
+        return dataset
+    }
 
     private fun initDataset(items: List<Kline>?): CandleDataSet? {
         val values = ArrayList<CandleEntry>()
@@ -73,6 +117,8 @@ class MarketCandlestickFragment : Fragment() {
         dataset.increasingColor = resources.getColor(R.color.real_green)
         dataset.increasingPaintStyle = Paint.Style.FILL
         dataset.neutralColor = Color.BLUE
+        dataset.valueTextSize = 0f
+        dataset.barSpace = 0.2f
 
         dataset.colors = ColorTemplate.VORDIPLOM_COLORS.toList()
         dataset.valueTypeface = dinMediumTypeface
@@ -80,10 +126,12 @@ class MarketCandlestickFragment : Fragment() {
         return dataset
     }
 
-    private fun initChart(dataset: CandleDataSet?) {
+    private fun initChart(dataset: CandleDataSet?, barDataSet: BarDataSet?) {
         // Set dataset
         if (dataset != null) {
-            chart.data = CandleData(dataset)
+            chart.drawOrder =
+                arrayOf(DrawOrder.BAR, DrawOrder.BUBBLE, DrawOrder.CANDLE, DrawOrder.LINE, DrawOrder.SCATTER)
+            chart.data = CombinedData().apply { setData(CandleData(dataset)) }.apply { setData(BarData(barDataSet)) }
             chart.notifyDataSetChanged()
             //        chart.setVisibleYRangeMinimum(1_000F, YAxis.AxisDependency.RIGHT)
 //        chart.setVisibleYRangeMaximum(10_000F, YAxis.AxisDependency.RIGHT)
@@ -168,7 +216,7 @@ class MarketCandlestickFragment : Fragment() {
         viewModel.kline.observe(this,
             Observer<List<Kline>> { klineItems ->
                 // FIXME: This method is called several times and reload the existing data
-                initChart(initDataset(klineItems))
+                initChart(initDataset(klineItems), initBarDataset(klineItems))
                 //                adapter.items = balances!!
 //                adapter.notifyDataSetChanged()
             })

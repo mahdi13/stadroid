@@ -9,17 +9,16 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 
 import androidx.lifecycle.ViewModelProviders
-import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.stacrypt.stadroid.data.Market
 import kotlinx.android.synthetic.main.fragment_market_summary.view.*
-import com.stacrypt.stadroid.R
 import com.stacrypt.stadroid.data.Kline
-import com.stacrypt.stadroid.ui.dinMediumTypeface
 import kotlinx.android.synthetic.main.fragment_market_summary.*
+import com.github.mikephil.charting.formatter.IFillFormatter
+import com.stacrypt.stadroid.R
 
 
 const val SHOWING_ITEMS = 20
@@ -35,14 +34,36 @@ class MarketSummaryFragment : Fragment() {
         rootView = inflater.inflate(R.layout.fragment_market_summary, container, false)!!
         return rootView
     }
-    
+
     private fun initDataset(items: List<Kline>?): LineDataSet? {
         val values = ArrayList<Entry>()
-        items?.forEachIndexed { i, it -> values.add(Entry(i.toFloat(), it.volume.toFloat())) }
+        items?.forEachIndexed { i, it ->
+            values.add(
+                Entry(
+                    i.toFloat(), (it.l + it.h).toFloat() / 2f
+                )
+            )
+        }
         if (values.isNullOrEmpty()) return null
         val dataset = LineDataSet(values, "")
         dataset.setDrawIcons(false)
-        dataset.colors = ColorTemplate.VORDIPLOM_COLORS.toList()
+        dataset.mode = LineDataSet.Mode.CUBIC_BEZIER
+        dataset.cubicIntensity = 0.2f
+        dataset.colors = listOf(resources.getColor(R.color.colorPrimaryLight))
+        dataset.valueTextSize = 0f
+        dataset.fillAlpha = 255
+        dataset.setDrawFilled(true)
+        dataset.setDrawCircleHole(false)
+        dataset.setDrawCircles(false)
+        dataset.fillColor = resources.getColor(R.color.colorPrimaryLight)
+        dataset.highLightColor = resources.getColor(R.color.colorPrimaryLight)
+        dataset.setDrawCircleHole(false)
+        dataset.fillFormatter = IFillFormatter { _, _ ->
+            // change the return value here to better understand the effect
+            // return 0;
+            mini_chart.axisLeft.axisMinimum
+        }
+
         return dataset
     }
 
