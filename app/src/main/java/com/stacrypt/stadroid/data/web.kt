@@ -248,7 +248,7 @@ interface StemeraldV2ApiClient {
 
     @Multipart
     @HTTP(method = "SUBMIT", path = "clients/evidences", hasBody = true)
-    fun getMyEvidences(
+    fun submitMyEvidences(
         @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
         @Part("firstName") firstName: String,
         @Part("lastName") lastName: String,

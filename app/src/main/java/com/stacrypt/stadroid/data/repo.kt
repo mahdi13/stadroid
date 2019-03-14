@@ -2,6 +2,7 @@ package com.stacrypt.stadroid.data
 
 import android.text.format.DateUtils
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.*
 import java.util.*
 
@@ -15,6 +16,18 @@ object UserRepository {
     fun getMe(): LiveData<User> {
         UserRepository.refreshMe()
         return UserRepository.userDao.loadByEmail(sessionManager.getPayload().email)
+    }
+
+    fun getMyEvidences(): LiveData<Evidence> {
+        val liveData = MutableLiveData<Evidence>()
+        job = scope.launch {
+            try {
+                liveData.postValue(stemeraldApiClient.getMyEvidences().await())
+            } catch (e: Exception) {
+                // TODO: Show error
+            }
+        }
+        return liveData
     }
 
     private fun refreshMe() {

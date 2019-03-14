@@ -21,6 +21,7 @@ class ProfileSettingActivity : AppCompatActivity() {
     companion object {
         val ARG_TARGET = "target"
 
+        val TARGET_VERIFICATION_PROCESS = "verification_process"
         val TARGET_VERIFICATION_EMAIL = "email_verification"
         val TARGET_FIXED_PHONE_VERIFICATION = "mobile_phone_verification"
         val TARGET_MOBILE_PHONE_VERIFICATION = "fixed_phone_verification"

@@ -23,6 +23,9 @@
         <action
                 android:id="@+id/action_settings_entrypoint_fragment_to_change_password_fragment"
                 app:destination="@id/change_password_fragment"/>
+        <action
+                android:id="@+id/action_settings_entrypoint_fragment_to_verification_process_fragment"
+                app:destination="@id/verification_process_fragment"/>
     </fragment>
 
 
@@ -42,6 +45,12 @@
                 app:popUpToInclusive="true"
                 />
     </fragment>
+
+    <fragment
+            android:id="@+id/verification_process_fragment"
+            android:name="com.stacrypt.stadroid.profile.verification.VerificationProcessFragment"
+            android:label="Blank"
+            tools:layout="@layout/verification_process_fragment"/>
 
     <fragment
             android:id="@+id/addBankCardFragment"

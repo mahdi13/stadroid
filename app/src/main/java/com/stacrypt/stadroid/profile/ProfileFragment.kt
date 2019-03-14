@@ -18,6 +18,7 @@ import com.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_APP
 import com.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_BANK_CARDS
 import com.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_CHANEG_PASSWORD
 import com.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_VERIFICATION_EMAIL
+import com.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_VERIFICATION_PROCESS
 import kotlinx.android.synthetic.main.fragment_profile.view.*
 import org.jetbrains.anko.support.v4.startActivity
 
@@ -40,7 +41,7 @@ class ProfileFragment : Fragment() {
             listener?.onLoggedOut()
         }
 
-        email_verify.setTarget(TARGET_BANK_CARDS)
+        verification.setTarget(TARGET_VERIFICATION_PROCESS)
         bank_cards.setTarget(TARGET_BANK_CARDS)
         pin.setTarget(TARGET_APPLICATION_PIN)
         change_password.setTarget(TARGET_CHANEG_PASSWORD)
