@@ -11,6 +11,7 @@ import android.view.animation.Interpolator
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,7 +27,7 @@ class MarketBackdropNavigationHandler @JvmOverloads internal constructor(
     @param:Nullable private val interpolator: Interpolator? = null,
     @param:Nullable private val openIcon: Drawable? = null,
     @param:Nullable private val closeIcon: Drawable? = null,
-    @param:Nullable private val toggleView: TextView? = null,
+    @param:Nullable private val toggleView: Toolbar? = null,
     @param:Nullable private val sheetList: RecyclerView? = null,
     @param:Nullable private val loadingText: String? = null
 ) : View.OnClickListener {
@@ -45,7 +46,7 @@ class MarketBackdropNavigationHandler @JvmOverloads internal constructor(
         marketViewModel = ViewModelProviders.of(context as AppCompatActivity).get(MarketViewModel::class.java)
         height = displayMetrics.heightPixels
 
-        toggleView?.text = loadingText
+        toggleView?.title = loadingText
         toggleView?.setOnClickListener(this)
 
         sheetList?.adapter = MarketListRecyclerViewAdapter(listOf()) {
@@ -67,7 +68,7 @@ class MarketBackdropNavigationHandler @JvmOverloads internal constructor(
         })
 
         marketViewModel.marketName.observe(context, Observer { marketName ->
-            toggleView?.text = marketName
+            toggleView?.title = marketName
         })
 
     }

@@ -119,13 +119,16 @@
 
     </FrameLayout>
 
-    <com.google.android.material.button.MaterialButton
+    <androidx.appcompat.widget.Toolbar
             style="@style/Widget.MaterialComponents.PopupMenu.Overflow"
             android:id="@+id/backdrop_toggle"
             android:textColor="@color/colorSecondaryLight"
             android:layout_width="match_parent"
             android:layout_height="56dp"
+            app:navigationIcon="@drawable/ic_menu_black_24dp"
             app:layout_constraintTop_toTopOf="parent"
+            app:titleTextColor="@color/colorSecondary"
+            app:title="BTC / USD"
             android:text="BTC / USD"
             />
 

@@ -67,6 +67,13 @@ class MainActivity : AppCompatActivity(),
             StemeraldDatabase::class.java, "stemerald_db"
         ).build()
 
+//        setSupportActionBar(backdrop_toggle)
+//        supportActionBar?.apply {
+//            setDisplayHomeAsUpEnabled(true)
+//            setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp)
+//        }
+
+
         marketBackdropNavigationHandler = MarketBackdropNavigationHandler(
             this,
             nested_content,

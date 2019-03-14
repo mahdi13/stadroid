@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                tools:context=".market.MarketSummaryFragment">
+                tools:context=".market.MarketSummaryFragment"
+                android:background="@color/colorPrimary">
 
     <!--<com.bandiago.libs.simplegraph.LineGraph-->
-            <!--xmlns:linegraph="http://schemas.android.com/apk/res-auto"-->
-            <!--android:id="@+id/mini_chart"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--linegraph:lineThickness="5"-->
-            <!--linegraph:lineColor="@color/colorAccent"-->
-            <!--android:background="@color/colorPrimary"/>-->
+    <!--xmlns:linegraph="http://schemas.android.com/apk/res-auto"-->
+    <!--android:id="@+id/mini_chart"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--linegraph:lineThickness="5"-->
+    <!--linegraph:lineColor="@color/colorAccent"-->
+    <!--android:background="@color/colorPrimary"/>-->
 
     <!--<air.graph.line.GraphView-->
-            <!--android:id="@+id/mini_chart"-->
-            <!--style="@style/RemainderVertical.AirGraph"-->
-            <!--app:graph_title="Weather Report"/>-->
+    <!--android:id="@+id/mini_chart"-->
+    <!--style="@style/RemainderVertical.AirGraph"-->
+    <!--app:graph_title="Weather Report"/>-->
 
     <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/mini_chart"
@@ -27,7 +28,6 @@
             android:layout_marginLeft="-15dp"
             android:layout_marginBottom="-15dp"
             android:layout_marginRight="-15dp"/>
-
 
 
     <LinearLayout
