@@ -74,28 +74,25 @@ class MainActivity : AppCompatActivity(),
 //        }
 
 
-        marketBackdropNavigationHandler = MarketBackdropNavigationHandler(
-            this,
-            nested_content,
-            interpolator = AccelerateDecelerateInterpolator(),
-            toggleView = backdrop_toggle,
-            sheetList = backdrop_list,
-            loadingText = "Loading..."
+//        marketBackdropNavigationHandler = MarketBackdropNavigationHandler(
+//            this,
+//            nested_content,
+//            interpolator = AccelerateDecelerateInterpolator(),
+//            toggleView = backdrop_toggle,
+//            sheetList = backdrop_list,
+//            loadingText = "Loading..."
         )
         buildFragmentsList()
 
         navigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.navigation_wallet -> {
-                    backdrop_toggle.visibility = View.GONE
                     switchFragment(0, "0")
                 }
                 R.id.navigation_market -> {
                     switchFragment(1, "1")
-                    backdrop_toggle.visibility = View.VISIBLE
                 }
                 R.id.navigation_profile -> {
-                    backdrop_toggle.visibility = View.GONE
                     if (sessionManager.isLoggedIn()) switchFragment(2, "2")
                     else switchFragment(3, "3")
                 }
