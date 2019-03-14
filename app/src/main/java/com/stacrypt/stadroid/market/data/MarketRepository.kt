@@ -48,19 +48,18 @@ object MarketRepository {
         val liveData = MutableLiveData<List<Kline>>()
         scope.launch {
             try {
-                val time = Calendar.getInstance().time
-                liveData.postValue(
-//                    stemeraldApiClient.kline(
-//                        market = market,
-//                        start = (time.time - DateUtils.WEEK_IN_MILLIS).toInt(),
-//                        end = time.time.toInt(),
-//                        interval = (DateUtils.MINUTE_IN_MILLIS * 5).toInt()
+//                val time = Calendar.getInstance().time
+//                liveData.postValue(
+////                    stemeraldApiClient.kline(
+////                        market = market,
+////                        start = (time.time - DateUtils.WEEK_IN_MILLIS).toInt(),
+////                        end = time.time.toInt(),
+////                        interval = (DateUtils.MINUTE_IN_MILLIS * 5).toInt()
+////                    ).await()
+//                    mockStemeraldApiClient.kline(
+//                        market = market
 //                    ).await()
-                    // FIXME: Mock
-                    mockStemeraldApiClient.kline(
-                        market = market
-                    ).await()
-                )
+//                )
             } catch (e: Exception) {
                 // TODO: Try again
             }
@@ -77,13 +76,13 @@ object MarketRepository {
         val liveData = MutableLiveData<BookResponse>()
         scope.launch {
             try {
-                liveData.postValue(
-//                    BookResponse(
-//                        buys = stemeraldApiClient.book(market, "buy").await(),
-//                        sells = stemeraldApiClient.book(market, "sell").await()
-//                    )
-                    mockStemeraldApiClient.book(market).await()
-                )
+//                liveData.postValue(
+////                    BookResponse(
+////                        buys = stemeraldApiClient.book(market, "buy").await(),
+////                        sells = stemeraldApiClient.book(market, "sell").await()
+////                    )
+//                    mockStemeraldApiClient.book(market).await()
+//                )
             } catch (e: Exception) {
                 // TODO: Try again
             }
@@ -118,7 +117,7 @@ object MarketRepository {
         scope.launch {
             try {
 //                liveData.postValue(stemeraldApiClient.mine(market = market, take = 50, skip = 0).await())
-                liveData.postValue(mockStemeraldApiClient.mine(market = market).await())
+//                liveData.postValue(mockStemeraldApiClient.mine(market = market).await())
             } catch (e: Exception) {
                 // TODO: Try again
             }

@@ -150,6 +150,7 @@
                         style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
                         android:id="@+id/email_verify"
                         android:text="Verify Email Address"/>
+
             </TableRow>
 
             <TableRow>

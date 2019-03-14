@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import com.stacrypt.stadroid.R
 import com.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.ARG_TARGET
+import com.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_APPLICATION_PIN
 import com.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_BANK_CARDS
 import com.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_VERIFICATION_EMAIL
 
@@ -22,6 +23,7 @@ class SettingEntrypointFragment : Fragment() {
             val targetNavigationId: Int = when (context.intent.extras!![ARG_TARGET] as String) {
                 TARGET_VERIFICATION_EMAIL -> R.id.action_settings_entrypoint_fragment_to_bank_cards_fragment
                 TARGET_BANK_CARDS -> R.id.action_settings_entrypoint_fragment_to_bank_cards_fragment
+                TARGET_APPLICATION_PIN -> R.id.action_settings_entrypoint_fragment_to_app_security_fragment
                 else -> throw IllegalArgumentException("Bad target")
             }
             NavHostFragment.findNavController(this).navigate(targetNavigationId)

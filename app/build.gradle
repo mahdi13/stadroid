@@ -12,7 +12,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.stacrypt.stadroid"
-        minSdkVersion 22
+        minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -115,6 +115,15 @@ dependencies {
 
     // Progress
     implementation 'com.akexorcist:RoundCornerProgressBar:2.0.3'
+
+    // Dialog
+    implementation 'com.github.javiersantos:MaterialStyledDialogs:2.1'
+
+    // Security
+    // TODO: Too many untrusted third-party library. Should be reviewed.
+    implementation 'com.github.omadahealth:lollipin:2.1.0@aar' //{ transitive = true }
+    implementation 'com.andrognito.patternlockview:patternlockview:1.0.0'
+    implementation 'com.github.traex.rippleeffect:library:1.3'
 
     testImplementation 'junit:junit:4.12'
     testImplementation "androidx.arch.core:core-testing:2.0.0"

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.startActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -13,6 +14,7 @@ import com.stacrypt.stadroid.R
 import com.stacrypt.stadroid.data.User
 import com.stacrypt.stadroid.data.sessionManager
 import com.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.ARG_TARGET
+import com.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_APPLICATION_PIN
 import com.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_BANK_CARDS
 import com.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_VERIFICATION_EMAIL
 import kotlinx.android.synthetic.main.fragment_profile.view.*
@@ -25,26 +27,17 @@ class ProfileFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_profile, container, false)
+    ): View? = inflater.inflate(R.layout.fragment_profile, container, false).apply {
 
-        view.logout.setOnClickListener {
+        logout.setOnClickListener {
             sessionManager.logout()
             // TODO: Clear entire db
             listener?.onLoggedOut()
         }
 
-        view.email_verify.setOnClickListener {
-            startActivity<ProfileSettingActivity>(ARG_TARGET to TARGET_VERIFICATION_EMAIL)
-        }
-
-        view.bank_cards.setOnClickListener {
-            startActivity<ProfileSettingActivity>(ARG_TARGET to TARGET_BANK_CARDS)
-        }
-
-        view.email.text = sessionManager.getPayload().email
-
-        return view
+        email_verify.setTarget(TARGET_BANK_CARDS)
+        bank_cards.setTarget(TARGET_BANK_CARDS)
+        pin.setTarget(TARGET_BANK_CARDS)
     }
 
     override fun onAttach(context: Context) {
@@ -75,4 +68,8 @@ class ProfileFragment : Fragment() {
         fun onLoggedOut()
     }
 
+}
+
+fun View.setTarget(target: String) = setOnClickListener {
+    (it.context as Fragment).startActivity<ProfileSettingActivity>(ARG_TARGET to target)
 }
