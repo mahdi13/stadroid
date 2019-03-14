@@ -30,7 +30,8 @@ class VerificationProcessFragment : Fragment() {
             if (!it.isEmailVerified) {
                 // Step 1
                 stepper.currentStep = 1
-                childFragmentManager.beginTransaction().replace(R.id.verification_container, MobilePhoneVerificationFragment()).commitNow()
+//                childFragmentManager.beginTransaction().replace(R.id.verification_container, MobilePhoneVerificationFragment()).commitNow()
+                childFragmentManager.beginTransaction().replace(R.id.verification_container, DoMobilePhoneVerificationFragment()).commitNow()
             } else {
                 stepper.currentStep = 1
             }
