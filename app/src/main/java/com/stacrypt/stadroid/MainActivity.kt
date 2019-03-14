@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity(),
     LoginFragment.OnLoginInteractionListener,
     ProfileFragment.OnProfileInteractionListener {
 
-    private lateinit var marketBackdropNavigationHandler: MarketBackdropNavigationHandler
+//    private lateinit var marketBackdropNavigationHandler: MarketBackdropNavigationHandler
 
     override fun onLoggedOut() {
         switchFragment(3, "3")
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity(),
 
 
     private fun switchFragment(pos: Int, tag: String) {
-        marketBackdropNavigationHandler.collapse(true)
+//        marketBackdropNavigationHandler.collapse(true)
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.nested_content, pages[pos], tag)
@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity(),
 //            toggleView = backdrop_toggle,
 //            sheetList = backdrop_list,
 //            loadingText = "Loading..."
-        )
+//        )
         buildFragmentsList()
 
         navigation.setOnNavigationItemSelectedListener {

@@ -11,7 +11,14 @@
         <!--<item name="android:windowLightStatusBar" tools:targetApi="m">true</item>-->
         <item name="colorControlActivated">@color/colorAccent</item>
         <item name="android:textColorPrimary">#FFFFFF</item>
+        <item name="android:dropDownListViewStyle">@style/Widget.Stadroid.Spinner</item>
     </style>
+
+    <style name="Widget.Stadroid.Spinner" parent="Widget.AppCompat.ListView.DropDown">
+        <item name="android:divider">@color/colorPrimary</item>
+        <item name="android:dividerHeight">2dp</item>
+    </style>
+
 
     <style name="Widget.Stadroid.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="hintTextAppearance">@style/TextAppearance.Stadroid.TextInputLayout.HintText</item>

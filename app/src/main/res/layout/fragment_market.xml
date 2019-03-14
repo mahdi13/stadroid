@@ -5,20 +5,29 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".market.MarketFragment"
-        android:layout_marginTop="56dp">
+        tools:context=".market.MarketFragment">
 
     <fragment
             android:id="@+id/summary"
             class="com.stacrypt.stadroid.market.MarketSummaryFragment"
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="150dp"
             android:layout_alignParentTop="true"
-            android:background="@color/colorPrimary"
+            android:background="@color/colorPrimaryDark"
             tools:context=".market.MarketSummaryFragment"
             tools:layout="@layout/fragment_market_summary">
 
     </fragment>
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorPrimary"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_above="@+id/tabs"/>
 
     <com.google.android.material.tabs.TabLayout
             style="@style/Widget.MaterialComponents.TabLayout.Colored"

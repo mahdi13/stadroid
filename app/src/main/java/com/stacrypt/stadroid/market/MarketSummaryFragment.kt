@@ -5,6 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.ListAdapter
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 
@@ -49,14 +53,14 @@ class MarketSummaryFragment : Fragment() {
         dataset.setDrawIcons(false)
         dataset.mode = LineDataSet.Mode.CUBIC_BEZIER
         dataset.cubicIntensity = 0.2f
-        dataset.colors = listOf(resources.getColor(R.color.colorPrimaryLight))
+        dataset.colors = listOf(resources.getColor(R.color.colorPrimaryDark))
         dataset.valueTextSize = 0f
         dataset.fillAlpha = 255
         dataset.setDrawFilled(true)
         dataset.setDrawCircleHole(false)
         dataset.setDrawCircles(false)
-        dataset.fillColor = resources.getColor(R.color.colorPrimaryLight)
-        dataset.highLightColor = resources.getColor(R.color.colorPrimaryLight)
+        dataset.fillColor = resources.getColor(R.color.colorPrimaryDark)
+        dataset.highLightColor = resources.getColor(R.color.colorPrimary)
         dataset.setDrawCircleHole(false)
         dataset.fillFormatter = IFillFormatter { _, _ ->
             // change the return value here to better understand the effect
@@ -109,7 +113,6 @@ class MarketSummaryFragment : Fragment() {
         mini_chart.isFocusableInTouchMode = false
         mini_chart.setTouchEnabled(false)
 
-
     }
 
 
@@ -118,8 +121,38 @@ class MarketSummaryFragment : Fragment() {
         viewModel = ViewModelProviders.of(activity!!).get(MarketViewModel::class.java)
         viewModel.market.observe(this, Observer<Market?> { market ->
             if (market == null) return@Observer
-            rootView?.name?.text = market.name.replace("_", " / ")
+//            rootView?.name?.text = market.name.replace("_", " / ")
+            rootView?.name_spinner?.setSelection(
+                viewModel.allMarkets.value?.indexOf(market) ?: 0
+            )
         })
+
+        viewModel.allMarkets.observe(this, Observer<List<Market>> { markets ->
+            rootView?.name_spinner?.adapter =
+                ArrayAdapter<String>(
+                    activity!!, R.layout.spinner_market_row, R.id.name, markets.map { it.name.replace("_", " / ") }
+                )
+            rootView?.name_spinner?.setSelection(
+                markets.indexOf(markets.findLast { it.name == viewModel.marketName.value })
+            )
+        })
+
+        rootView?.name_spinner?.onItemSelectedListener = object : AdapterView.OnItemClickListener,
+            AdapterView.OnItemSelectedListener {
+            override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                viewModel.marketName.postValue(
+                    (rootView?.name_spinner?.getItemAtPosition(position) as String).replace(" / ", "_")
+                )
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // Not possible
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+            }
+
+        }
 
         viewModel.summary.observe(this, Observer {
             rootView?.open?.text = it?.low24.toString()
