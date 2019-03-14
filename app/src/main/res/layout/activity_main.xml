@@ -133,14 +133,16 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/navigation"
             android:layout_width="0dp"
-            android:layout_height="56dp"
+            android:layout_height="57dp"
             android:background="?android:attr/windowBackground"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:backgroundTint="@color/colorPrimaryDark"
-            app:backgroundTint="@color/colorPrimaryDark"
+            android:backgroundTint="@color/colorPrimary"
+            app:backgroundTint="@color/colorPrimaryDarkDark"
+            android:foregroundTint="@color/white"
+            app:itemRippleColor="@color/colorSecondary"
             app:menu="@menu/navigation"
-            style="@style/Widget.MaterialComponents.BottomNavigationView"/>
+            style="@style/Widget.Stadroid.BottomNavigationView"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
