@@ -115,6 +115,10 @@ dependencies {
 
     // Progress
     implementation 'com.akexorcist:RoundCornerProgressBar:2.0.3'
+//    implementation 'devlight.io:arcprogressstackview:1.0.4'
+//    implementation 'com.github.lzyzsd:circleprogress:1.2.1'
+//    implementation 'com.mikhaellopez:circularprogressbar:2.0.0'
+    implementation 'com.github.VaibhavLakhera:Circular-Progress-View:0.1.2'
 
     // Dialog
     implementation 'com.github.javiersantos:MaterialStyledDialogs:2.1'

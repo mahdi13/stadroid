@@ -1,8 +1,189 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context=".wallet.WalletFragment"
-             android:id="@+id/asset_balance_container"
-             android:background="@color/colorPrimary"/>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              tools:context=".wallet.WalletFragment"
+              android:background="@color/colorPrimaryDark"
+              android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimary"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="10dp">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                <!--<devlight.io.library.ArcProgressStackView-->
+                <!--android:layout_width="70dp"-->
+                <!--android:layout_height="70dp"-->
+                <!--app:apsv_rounded="true"-->
+                <!--app:apsv_shadowed="true"-->
+                <!--app:apsv_animated="true"-->
+                <!--app:apsv_dragged="true"-->
+                <!--app:apsv_leveled="true"-->
+                <!--app:apsv_text_color="#fff"-->
+                <!--app:apsv_shadow_distance="5dp"-->
+                <!--app:apsv_shadow_angle="90"-->
+                <!--app:apsv_shadow_radius="10dp"-->
+                <!--app:apsv_shadow_color="#000"-->
+                <!--app:apsv_animation_duration="1000"-->
+                <!--app:apsv_interpolator="@android:anim/bounce_interpolator"-->
+                <!--app:apsv_draw_width="75%"-->
+                <!--app:apsv_model_offset="5dp"-->
+                <!--app:apsv_model_bg_enabled="true"-->
+                <!--app:apsv_start_angle="270"-->
+                <!--app:apsv_sweep_angle="360"-->
+                <!--app:apsv_indicator_orientation="vertical"-->
+                <!--app:apsv_preview_colors="@array/default_preview"-->
+                <!--app:apsv_preview_bg="#ccc"/>-->
+
+                <!--<devlight.io.library.ArcProgressStackView-->
+                <!--android:id="@+id/apsv_presentation"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--app:apsv_animated="true"-->
+                <!--app:apsv_dragged="false"-->
+                <!--app:apsv_draw_width="70dp"-->
+                <!--app:apsv_leveled="true"-->
+                <!--app:apsv_model_bg_enabled="true"-->
+                <!--app:apsv_model_offset="-2dp"-->
+                <!--app:apsv_preview_bg="#34ffa70b"-->
+                <!--app:apsv_rounded="true"-->
+                <!--app:apsv_shadowed="false"-->
+                <!--app:apsv_text_color="#00000000"/>-->
+
+                <com.vaibhavlakhera.circularprogressview.CircularProgressView
+                        android:id="@+id/blocked_indicator"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        app:animate="true"
+                        app:animateDuration="600"
+                        app:fillColor="@color/colorPrimary"
+                        app:progressValue="70"
+                        app:progressColor="@color/real_red"
+                        app:progressInterpolator="@android:anim/accelerate_decelerate_interpolator"
+                        app:progressRoundCap="true"
+                        app:progressTextColor="@color/real_red"
+                        app:progressTextEnabled="true"
+                        app:progressTextSize="20sp"
+                        app:progressTextType="percent"
+                        app:progressWidth="4dp"
+                        app:startAngle="270"
+                        app:totalValue="100"
+                        app:totalColor="@color/colorPrimaryDark"
+                        app:totalWidth="20dp"/>
+
+                <com.vaibhavlakhera.circularprogressview.CircularProgressView
+                        android:id="@+id/value_indicator"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        app:animate="true"
+                        app:animateDuration="600"
+                        app:fillColor="@color/colorPrimary"
+                        app:progressValue="100"
+                        app:progressColor="@color/colorSecondary"
+                        app:progressInterpolator="@android:anim/accelerate_decelerate_interpolator"
+                        app:progressRoundCap="true"
+                        app:progressTextColor="@color/colorSecondary"
+                        app:progressTextEnabled="true"
+                        app:progressTextSize="25sp"
+                        app:progressTextType="progress"
+                        app:progressWidth="8dp"
+                        app:startAngle="270"
+                        app:totalValue="100"
+                        app:totalColor="@color/colorPrimaryDark"
+                        app:totalWidth="20dp"
+                        />
+
+                <com.vaibhavlakhera.circularprogressview.CircularProgressView
+                        android:id="@+id/crypto_indicator"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        app:animate="true"
+                        app:animateDuration="600"
+                        app:fillColor="@color/colorPrimary"
+                        app:progressValue="10"
+                        app:progressColor="@color/real_green"
+                        app:progressInterpolator="@android:anim/accelerate_decelerate_interpolator"
+                        app:progressRoundCap="true"
+                        app:progressTextColor="@color/real_green"
+                        app:progressTextEnabled="true"
+                        app:progressTextSize="20sp"
+                        app:progressTextType="percent"
+                        app:progressWidth="4dp"
+                        app:startAngle="270"
+                        app:totalValue="100"
+                        app:totalColor="@color/colorPrimaryDark"
+                        app:totalWidth="10dp"
+                        />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                <TextView
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                        android:fontFamily="@font/din_medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textColor="@color/real_red"
+                        android:text="Blocked"
+                        android:textAllCaps="true"/>
+
+                <TextView
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                        android:fontFamily="@font/din_medium"
+                        android:layout_width="160dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textColor="@color/colorSecondary"
+                        android:text="Value"
+                        android:textAllCaps="true"/>
+
+                <TextView
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                        android:fontFamily="@font/din_medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textColor="@color/real_green"
+                        android:text="Crypto"
+                        android:textAllCaps="true"/>
+            </LinearLayout>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/asset_balance_container"
+            android:background="@color/colorPrimary"/>
+
+
+</LinearLayout>

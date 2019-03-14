@@ -7,11 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.stacrypt.stadroid.LoadingFragment
 
+import kotlinx.android.synthetic.main.fragment_wallet.*
+import android.view.animation.DecelerateInterpolator
+import android.animation.ObjectAnimator
+import android.widget.ProgressBar
 import com.stacrypt.stadroid.R
-import com.stacrypt.stadroid.market.NewOrderFragment
-import kotlinx.android.synthetic.main.fragment_wallet.view.*
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -57,7 +58,72 @@ class WalletFragment : Fragment() {
 //            ft.replace(R.id.asset_balance_container, LoadingFragment())
 //            ft.commit()
 
-        childFragmentManager.beginTransaction().replace(R.id.asset_balance_container, AssetBalanceFragment()).commitNow()
+        childFragmentManager.beginTransaction().replace(R.id.asset_balance_container, AssetBalanceFragment())
+            .commitNow()
+
+//        view.apsv_presentation.shadowColor = Color.argb(200, 0, 0, 0)
+//        view.apsv_presentation.animationDuration = 1000
+//        view.apsv_presentation.sweepAngle = 270F
+//
+////        val colors = IntArray(MODEL_COUNT)
+////        val bgColors = IntArray(MODEL_COUNT)
+////        for (i in 0 until MODEL_COUNT) {
+////            colors[i] = Color.parseColor(stringColors[i])
+////            bgColors[i] = Color.parseColor(stringBgColors[i])
+////        }
+//
+//        val models = ArrayList<ArcProgressStackView.Model>()
+//        models.add(ArcProgressStackView.Model("STRATEGY", 0.7F, Color.BLUE, Color.RED))
+////        models.add(Model("STRATEGY", 1, bgColors[0], colors[0]))
+////        models.add(ArcProgressStackView.Model("DESIGN", 1, bgColors[1], colors[1]))
+////        models.add(Model("DEVELOPMENT", 1, bgColors[2], colors[2]))
+////        models.add(Model("QA", 1, bgColors[3], colors[3]))
+//        view.apsv_presentation.models = models
+//
+//
+//        val valueAnimator = ValueAnimator.ofFloat(1.0f, 105.0f)
+//        valueAnimator.duration = 800
+//        valueAnimator.startDelay = 200
+//        valueAnimator.repeatMode = ValueAnimator.RESTART
+//        valueAnimator.repeatCount = 1
+//        valueAnimator.addListener(object : AnimatorListenerAdapter() {
+//            override fun onAnimationEnd(animation: Animator) {
+//                animation.removeListener(this)
+//                animation.addListener(this)
+//
+//                for (model in apsv_presentation.models) model.setProgress(0.8F)
+//                apsv_presentation.animateProgress()
+//            }
+//
+//            override fun onAnimationRepeat(animation: Animator) {
+//            }
+//        })
+//        valueAnimator.addUpdateListener { animation ->
+//            apsv_presentation.getModels().get(Math.min(0, 0))
+//                .setProgress(animation.animatedValue as Float)
+//            apsv_presentation.postInvalidate()
+//        }
+//
+//        apsv_presentation.setOnClickListener(View.OnClickListener {
+//            if (valueAnimator.isRunning) return@OnClickListener
+//            if (apsv_presentation.getProgressAnimator().isRunning()) return@OnClickListener
+//            valueAnimator.start()
+//        })
+
+//        fun animateIndicator(indicator: ProgressBar, toVal: Int) = ObjectAnimator.ofInt(
+//            indicator, "progress", 0, toVal
+//        ).apply {
+//            duration = 1_000 // in milliseconds
+//            interpolator = DecelerateInterpolator()
+//            start()
+//
+//        }
+//
+//        value_indicator.suffixText = "$"
+//        animateIndicator(value_indicator, 100)
+//        animateIndicator(crypto_indicator, 60)
+//        animateIndicator(blocked_indicator, 40)
+
 
 //        val ft = childFragmentManager.beginTransaction()
 //        ft.replace(R.id.asset_balance_container, AssetBalanceFragment())
