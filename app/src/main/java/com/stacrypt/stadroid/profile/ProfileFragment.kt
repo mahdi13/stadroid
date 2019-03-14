@@ -16,6 +16,7 @@ import com.stacrypt.stadroid.data.sessionManager
 import com.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.ARG_TARGET
 import com.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_APPLICATION_PIN
 import com.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_BANK_CARDS
+import com.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_CHANEG_PASSWORD
 import com.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_VERIFICATION_EMAIL
 import kotlinx.android.synthetic.main.fragment_profile.view.*
 import org.jetbrains.anko.support.v4.startActivity
@@ -23,6 +24,10 @@ import org.jetbrains.anko.support.v4.startActivity
 class ProfileFragment : Fragment() {
     private lateinit var viewModel: ProfileViewModel
     private var listener: OnProfileInteractionListener? = null
+
+    private fun View.setTarget(target: String) = setOnClickListener {
+        startActivity<ProfileSettingActivity>(ARG_TARGET to target)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,7 +42,8 @@ class ProfileFragment : Fragment() {
 
         email_verify.setTarget(TARGET_BANK_CARDS)
         bank_cards.setTarget(TARGET_BANK_CARDS)
-        pin.setTarget(TARGET_BANK_CARDS)
+        pin.setTarget(TARGET_APPLICATION_PIN)
+        change_password.setTarget(TARGET_CHANEG_PASSWORD)
     }
 
     override fun onAttach(context: Context) {
@@ -68,8 +74,4 @@ class ProfileFragment : Fragment() {
         fun onLoggedOut()
     }
 
-}
-
-fun View.setTarget(target: String) = setOnClickListener {
-    (it.context as Fragment).startActivity<ProfileSettingActivity>(ARG_TARGET to target)
 }

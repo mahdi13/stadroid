@@ -1,4 +1,4 @@
-package com.stacrypt.stadroid.profile.banking
+    package com.stacrypt.stadroid.profile.banking
 
 import android.view.LayoutInflater
 import android.view.View

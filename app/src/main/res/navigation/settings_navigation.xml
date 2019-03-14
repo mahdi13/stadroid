@@ -20,6 +20,9 @@
         <action
                 android:id="@+id/action_settings_entrypoint_fragment_to_app_security_fragment"
                 app:destination="@id/app_security_fragment"/>
+        <action
+                android:id="@+id/action_settings_entrypoint_fragment_to_change_password_fragment"
+                app:destination="@id/change_password_fragment"/>
     </fragment>
 
 
@@ -51,6 +54,12 @@
             android:name="com.stacrypt.stadroid.profile.appsec.AppSecurityFragment"
             android:label="Blank"
             tools:layout="@layout/fragment_set_pattern"/>
+
+    <fragment
+            android:id="@+id/change_password_fragment"
+            android:name="com.stacrypt.stadroid.profile.security.ChangePasswordFragment"
+            android:label="Blank"
+            tools:layout="@layout/fragment_change_password"/>
 
     <fragment
             android:id="@+id/emailVerificationFragment"
