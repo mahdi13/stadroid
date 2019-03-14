@@ -53,5 +53,7 @@
     <string name="new_password">New Password</string>
     <string name="repeat_password">Repeat Password</string>
     <string name="change_password">Change Password</string>
+    <string name="mobile_verification_description">Please enter your mobile number to receive a verification code</string>
+    <string name="phone_number">Phone Number</string>
 
 </resources>

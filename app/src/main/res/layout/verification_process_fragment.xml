@@ -10,7 +10,7 @@
 
     <com.badoualy.stepperindicator.StepperIndicator
             android:id="@+id/stepper"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:stpi_stepCount="6"
@@ -19,7 +19,7 @@
             />
 
     <FrameLayout
-            android:id="@+id/container"
+            android:id="@+id/verification_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:layout="@layout/email_verification_fragment">

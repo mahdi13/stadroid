@@ -128,6 +128,10 @@ dependencies {
     // Stepper
     implementation 'com.github.badoualy:stepper-indicator:1.0.7'
 
+    // Phone Field
+    implementation 'com.hbb20:ccp:2.2.4'
+
+
     testImplementation 'junit:junit:4.12'
     testImplementation "androidx.arch.core:core-testing:2.0.0"
     testImplementation "androidx.room:room-testing:2.1.0-alpha04"
