@@ -1,6 +1,5 @@
 package com.stacrypt.stadroid.wallet.deposit
 
-import android.graphics.Bitmap
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,18 +7,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import com.google.zxing.BarcodeFormat
 
 import com.stacrypt.stadroid.R
 import com.stacrypt.stadroid.wallet.ui.balancedetail.BalanceDetailViewModel
-import android.widget.ImageView
-import com.google.zxing.WriterException
-import net.glxn.qrgen.android.QRCode
+import kotlinx.android.synthetic.main.deposit_fragment.view.*
+import kotlinx.android.synthetic.main.new_order_fragment.view.*
 
 
 class DepositFragment : Fragment() {
 
-    private lateinit var viewModel: DepositViewModel
+    private lateinit var viewModel: BalanceDetailViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,10 +38,26 @@ class DepositFragment : Fragment() {
 //        })
 
     }
-        override fun onActivityCreated(savedInstanceState: Bundle?) {
-            super.onActivityCreated(savedInstanceState)
-            viewModel = ViewModelProviders.of(activity!!).get(DepositViewModel::class.java)
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        // TODO: Refresh deposit info
+        viewModel.depositInfo.observe(this, Observer {
+            view.address_view.text = it?.address
+
+            if (it?.extra == null || it.extra!!.isEmpty()) {
+                view.tag_container.visibility = View.GONE
+            } else {
+                view.tag_container.visibility = View.VISIBLE
+                view.tag_view.text = it.extra
+            }
+
+            viewModel.asset
+        })
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModel = ViewModelProviders.of(activity!!).get(BalanceDetailViewModel::class.java)
 
     }
 }

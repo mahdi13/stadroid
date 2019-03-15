@@ -53,9 +53,10 @@ data class Asset(
 
 enum class CurrencyType { FIAT, CRYPTOCURRENCY }
 
+@Entity
 data class Currency(
     var name: String,
-    var symbol: String,
+    @PrimaryKey var symbol: String,
     var type: CurrencyType,
     var divideByTen: Int,
 
@@ -137,7 +138,7 @@ data class BalanceHistory(
 data class DepositInfo(
     @SerializedName("id") var id: String,
     @SerializedName("user") var user: String,
-    @SerializedName("extra") var extra: String,
+    @SerializedName("extra") var extra: String?,
     @SerializedName("creation") var creation: Date,
     @SerializedName("expiration") var expiration: Date?,
     @SerializedName("address") var address: String

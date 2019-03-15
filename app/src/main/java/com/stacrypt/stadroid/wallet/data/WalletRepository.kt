@@ -14,6 +14,7 @@ import retrofit2.HttpException
 // TODO: Add rate limiter
 object WalletRepository {
     private val assetDao = stemeraldDatabase.assetDao
+    private val currencyDao = stemeraldDatabase.currencyDao
     private val paymentGatewayDao = stemeraldDatabase.paymentGatewayDao
     private val balanceOverviewDao = stemeraldDatabase.balanceOverviewDao
 
@@ -113,6 +114,15 @@ object WalletRepository {
     }
 
     /**
+     * Currency list changes rarely, so we trust the database stored data to load faster.
+     * It will be automatically updated if any change happens.
+     */
+    fun getCurrencyList(): LiveData<List<Currency>> {
+        refreshCurrencies() // TODO: Execute it rarely
+        return currencyDao.loadAll()
+    }
+
+    /**
      * Asset changes rarely, so we trust the database stored data to load faster.
      * It will be automatically updated if any change happens.
      */
@@ -122,12 +132,21 @@ object WalletRepository {
     }
 
     /**
+     * Currency changes rarely, so we trust the database stored data to load faster.
+     * It will be automatically updated if any change happens.
+     */
+    fun getCurrency(symbol: String): LiveData<Currency> {
+        refreshCurrencies()// TODO: Execute it rarely
+        return currencyDao.loadBySymbol(symbol)
+    }
+
+    /**
      *
      * TODO: Webservice call rate limit
      */
-    fun getPaymentGateways(): LiveData<List<PaymentGateway>> {
+    fun getPaymentGateways(symbol: String): LiveData<List<PaymentGateway>> {
         refreshPaymentGateways()// TODO: Execute it rarely
-        return paymentGatewayDao.loadAll()
+        return paymentGatewayDao.loadByFiatSymbol(symbol)
     }
 
 
@@ -147,6 +166,16 @@ object WalletRepository {
         job = scope.launch {
             try {
                 stemeraldApiClient.assetList().await().forEach { assetDao.save(it) }
+            } catch (e: Exception) {
+                // TODO: Show error
+            }
+        }
+    }
+
+    private fun refreshCurrencies() {
+        job = scope.launch {
+            try {
+                stemeraldApiClient.currencyList().await().forEach { currencyDao.save(it) }
             } catch (e: Exception) {
                 // TODO: Show error
             }

@@ -48,8 +48,8 @@ interface StemeraldV2ApiClient {
     @HTTP(method = "LIST", path = "assets", hasBody = true)
     fun assetList(): Deferred<ArrayList<Asset>>
 
-    @HTTP(method = "LIST", path = "assets", hasBody = true)
-    fun currencyList(): Deferred<ArrayList<Asset>>
+    @HTTP(method = "GET", path = "currencies", hasBody = false)
+    fun currencyList(): Deferred<ArrayList<Currency>>
 
     /**
      * Balances

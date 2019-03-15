@@ -11,6 +11,7 @@ import java.util.*
     entities = [
         Market::class,
         Asset::class,
+        Currency::class,
         BalanceOverview::class,
 
         User::class,
@@ -26,9 +27,10 @@ import java.util.*
 abstract class StemeraldDatabase : RoomDatabase() {
     abstract val marketDao: MarketDao
     abstract val assetDao: AssetDao
+    abstract val currencyDao: CurrencyDao
     abstract val balanceOverviewDao: BalanceOverviewDao
     abstract val paymentGatewayDao: PaymentGatewayDao
-//    abstract val klineDao: KlineDao
+    //    abstract val klineDao: KlineDao
 //    abstract val bookDao: BookDao
 //    abstract val dealDao: DealDao
 //    abstract val mineDao: MineDao

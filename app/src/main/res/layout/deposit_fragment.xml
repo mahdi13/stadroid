@@ -38,7 +38,7 @@
                         android:layout_height="wrap_content"
                         android:text="Deposit Rules"
                         android:paddingStart="10dp"
-                        android:textColor="@color/colorPrimaryLight"
+                        android:textColor="@color/colorPrimaryLightLight"
                         android:layout_marginBottom="15dp"/>
 
                 <LinearLayout
@@ -53,7 +53,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:textColor="@color/real_red"
+                            android:textColor="@color/white"
                             android:textStyle="bold"
                             android:fontFamily="@font/din_medium"
                             android:text="Minimum"/>
@@ -70,7 +70,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:textColor="@color/real_blue"
+                            android:textColor="@color/white"
                             android:textStyle="bold"
                             android:fontFamily="@font/din_medium"
                             android:text="Maximum"/>
@@ -87,7 +87,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:textColor="@color/colorAccent"
+                            android:textColor="@color/white"
                             android:textStyle="bold"
                             android:fontFamily="@font/din_medium"
                             android:text="Commission"/>
@@ -109,6 +109,7 @@
 
 
                     <TextView
+                            android:id="@+id/min_limit"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
@@ -126,6 +127,7 @@
 
 
                     <TextView
+                            android:id="@+id/max_limit"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
@@ -144,6 +146,7 @@
 
 
                     <TextView
+                            android:id="@+id/fee"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
@@ -182,7 +185,7 @@
                         android:layout_height="wrap_content"
                         android:text="Address"
                         android:paddingStart="10dp"
-                        android:textColor="@color/colorPrimaryLight"
+                        android:textColor="@color/colorPrimaryLightLight"
                         android:fontFamily="@font/din_medium"
                         android:layout_marginBottom="5dp"/>
 
@@ -192,6 +195,7 @@
                         android:background="@color/colorAccent"/>
 
                 <TextView
+                        android:id="@+id/address_view"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                         android:textColor="@color/white"
                         android:layout_width="match_parent"
@@ -271,6 +275,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+                android:id="@+id/tag_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/colorPrimary"
@@ -293,7 +298,7 @@
                         android:layout_height="wrap_content"
                         android:text="Tag"
                         android:paddingStart="10dp"
-                        android:textColor="@color/colorPrimaryLight"
+                        android:textColor="@color/colorPrimaryLightLight"
                         android:fontFamily="@font/din_medium"
                         android:layout_marginBottom="5dp"/>
 
@@ -303,6 +308,7 @@
                         android:background="@color/colorAccent"/>
 
                 <TextView
+                        android:id="@+id/tag_view"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
                         android:textColor="@color/white"
                         android:layout_width="match_parent"

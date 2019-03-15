@@ -12,6 +12,7 @@ class BalanceDetailViewModel : ViewModel() {
 
     val asset = switchMap(assetName) { WalletRepository.getAsset(it) }
     val balance = switchMap(assetName) { WalletRepository.getBalanceOverview(it) }
+    val currency = switchMap(assetName) { WalletRepository.getCurrency(it) }
 
     private val balanceHistoryListing = map(assetName) {
         WalletRepository.getBalanceHistory(it)
@@ -19,5 +20,13 @@ class BalanceDetailViewModel : ViewModel() {
     val balanceHistory = switchMap(balanceHistoryListing) { it.pagedList }
     val networkState = switchMap(balanceHistoryListing) { it.networkState }
     val refreshState = switchMap(balanceHistoryListing) { it.refreshState }
+
+    val depositInfo by lazy {
+        switchMap(assetName) {
+            WalletRepository.getDepositInfo(it)
+        }
+    }
+
+    val paymentGateways by lazy { switchMap(assetName) { WalletRepository.getPaymentGateways(it) } }
 
 }

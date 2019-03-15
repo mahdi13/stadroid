@@ -37,6 +37,18 @@ interface AssetDao {
 }
 
 @Dao
+interface CurrencyDao {
+    @Insert(onConflict = REPLACE)
+    fun save(currency: Currency)
+
+    @Query("SELECT * FROM Currency")
+    fun loadAll(): LiveData<List<Currency>>
+
+    @Query("SELECT * FROM Currency WHERE name = :symbol")
+    fun loadBySymbol(symbol: String): LiveData<Currency>
+}
+
+@Dao
 interface BalanceOverviewDao {
     @Insert(onConflict = REPLACE)
     fun save(balanceOverview: BalanceOverview)
@@ -61,6 +73,9 @@ interface PaymentGatewayDao {
 
     @Query("SELECT * FROM PaymentGateway")
     fun loadAll(): LiveData<List<PaymentGateway>>
+
+    @Query("SELECT * FROM PaymentGateway WHERE fiatSymbol = :fiatSymbol")
+    fun loadByFiatSymbol(fiatSymbol: String): LiveData<List<PaymentGateway>>
 }
 
 //@Dao
