@@ -11,7 +11,6 @@ import androidx.lifecycle.Observer
 import com.stacrypt.stadroid.R
 import com.stacrypt.stadroid.wallet.ui.balancedetail.BalanceDetailViewModel
 import kotlinx.android.synthetic.main.deposit_fragment.view.*
-import kotlinx.android.synthetic.main.new_order_fragment.view.*
 
 
 class DepositFragment : Fragment() {
@@ -50,8 +49,12 @@ class DepositFragment : Fragment() {
                 view.tag_container.visibility = View.VISIBLE
                 view.tag_view.text = it.extra
             }
+        })
 
-            viewModel.asset
+        viewModel.currency.observe(this, Observer {
+            view.min_limit.text = it.depositMin?.toString() ?: "No limit"
+            view.max_limit.text = it.depositMax?.toString() ?: "No limit"
+            view.fee.text = "${(it.depositStaticCommission) ?: 0} + ${(it.depositPermilleCommission ?: 0) / 10f}%"
         })
     }
 
