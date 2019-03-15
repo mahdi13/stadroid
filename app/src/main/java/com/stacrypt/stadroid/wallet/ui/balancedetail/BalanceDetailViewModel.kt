@@ -27,6 +27,10 @@ class BalanceDetailViewModel : ViewModel() {
         }
     }
 
+//    fun renewDepositInfo(){
+//        WalletRepository.renewDepositInfo(assetName.value!!, depositInfo)
+//    }
+
     val paymentGateways by lazy { switchMap(assetName) { WalletRepository.getPaymentGateways(it) } }
 
 }

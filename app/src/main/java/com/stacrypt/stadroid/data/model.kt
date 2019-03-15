@@ -51,13 +51,11 @@ data class Asset(
     var prec: String
 )
 
-enum class CurrencyType { FIAT, CRYPTOCURRENCY }
-
 @Entity
 data class Currency(
     var name: String,
     @PrimaryKey var symbol: String,
-    var type: CurrencyType,
+    var type: String, // fiat / cryptocurrency
     var divideByTen: Int,
 
     /**

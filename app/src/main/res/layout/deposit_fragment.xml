@@ -207,6 +207,13 @@
                         android:fontFamily="@font/roboto_mono_regular"
                         android:text="1JuUGEWXjN5Q2rFHDSrsKPzNGF462VALVX"/>
 
+                <ImageView
+                        android:id="@+id/address_qrcode_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="20dp"
+                        />
 
                 <LinearLayout
                         android:layout_width="match_parent"
@@ -216,6 +223,7 @@
 
 
                     <com.google.android.material.button.MaterialButton
+                            android:id="@+id/address_renew"
                             style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
@@ -231,6 +239,7 @@
 
 
                     <com.google.android.material.button.MaterialButton
+                            android:id="@+id/address_copy"
                             style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
@@ -246,6 +255,7 @@
 
 
                     <com.google.android.material.button.MaterialButton
+                            android:id="@+id/address_share"
                             style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
@@ -253,20 +263,21 @@
                             android:gravity="center"
                             android:text="Share"/>
 
-                    <View
-                            android:layout_width="5dp"
-                            android:layout_height="match_parent"
-                            android:background="@color/colorPrimary"
-                            android:layout_marginTop="10dp"/>
+                    <!--<View-->
+                            <!--android:layout_width="5dp"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:background="@color/colorPrimary"-->
+                            <!--android:layout_marginTop="10dp"/>-->
 
 
-                    <com.google.android.material.button.MaterialButton
-                            style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="QRCode"/>
+                    <!--<com.google.android.material.button.MaterialButton-->
+                            <!--android:id="@+id/address_qrcode"-->
+                            <!--style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"-->
+                            <!--android:layout_width="0dp"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:gravity="center"-->
+                            <!--android:text="QRCode"/>-->
 
 
                 </LinearLayout>
@@ -319,6 +330,15 @@
                         android:text="9054893"/>
 
 
+                <ImageView
+                        android:id="@+id/tag_qrcode_image"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="20dp"
+                        />
+
+
                 <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -327,6 +347,7 @@
 
 
                     <com.google.android.material.button.MaterialButton
+                            android:id="@+id/tag_renew"
                             style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
@@ -342,6 +363,7 @@
 
 
                     <com.google.android.material.button.MaterialButton
+                            android:id="@+id/tag_copy"
                             style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
@@ -357,6 +379,7 @@
 
 
                     <com.google.android.material.button.MaterialButton
+                            android:id="@+id/tag_share"
                             style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
@@ -364,20 +387,21 @@
                             android:gravity="center"
                             android:text="Share"/>
 
-                    <View
-                            android:layout_width="5dp"
-                            android:layout_height="match_parent"
-                            android:background="@color/colorPrimary"
-                            android:layout_marginTop="10dp"/>
+                    <!--<View-->
+                            <!--android:layout_width="5dp"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:background="@color/colorPrimary"-->
+                            <!--android:layout_marginTop="10dp"/>-->
 
 
-                    <com.google.android.material.button.MaterialButton
-                            style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="QRCode"/>
+                    <!--<com.google.android.material.button.MaterialButton-->
+                            <!--android:id="@+id/tag_qrcode"-->
+                            <!--style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"-->
+                            <!--android:layout_width="0dp"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:gravity="center"-->
+                            <!--android:text="QRCode"/>-->
 
 
                 </LinearLayout>
