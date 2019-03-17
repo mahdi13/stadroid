@@ -71,7 +71,7 @@ class DepositFragment : Fragment() {
             }
 
             renewButton?.setOnClickListener {
-                viewModel.
+//                viewModel.
             }
 
         })

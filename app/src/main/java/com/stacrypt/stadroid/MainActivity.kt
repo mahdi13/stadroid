@@ -1,10 +1,8 @@
 package com.stacrypt.stadroid
 
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.fragment.app.Fragment
 import com.stacrypt.stadroid.data.StemeraldDatabase
 import com.stacrypt.stadroid.data.stemeraldDatabase
@@ -14,7 +12,7 @@ import androidx.room.Room
 import com.stacrypt.stadroid.data.sessionManager
 import com.stacrypt.stadroid.market.*
 import com.stacrypt.stadroid.profile.LoginFragment
-import org.jetbrains.anko.toast
+import org.jetbrains.anko.*
 
 
 class MainActivity : AppCompatActivity(),
