@@ -26,6 +26,9 @@
         <action
                 android:id="@+id/action_settings_entrypoint_fragment_to_verification_process_fragment"
                 app:destination="@id/verification_process_fragment"/>
+        <action
+                android:id="@+id/action_settings_entrypoint_fragment_to_do_verify_email_fragment"
+                app:destination="@id/do_verify_email_fragment"/>
     </fragment>
 
 
@@ -75,6 +78,12 @@
             android:name="com.stacrypt.stadroid.profile.verification.EmailVerificationFragment"
             tools:layout="@layout/email_verification_fragment"
             android:label="EmailVerificationFragment"/>
+
+    <fragment
+            android:id="@+id/do_verify_email_fragment"
+            android:name="com.stacrypt.stadroid.profile.verification.DoVerifyEmailFragment"
+            tools:layout="@layout/fragment_do_verify_email"
+            android:label="DoVerifyEmailFragment"/>
 
 
 </navigation>
