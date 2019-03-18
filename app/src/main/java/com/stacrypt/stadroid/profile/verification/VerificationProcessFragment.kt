@@ -26,7 +26,7 @@ class VerificationProcessFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(activity!!).get(VerificationProcessViewModel::class.java)
 
-        viewModel.client.observe(this, Observer {
+                viewModel.client.observe(this, Observer {
             if (!it.isEmailVerified) {
                 // Step 1
                 stepper.currentStep = 1
