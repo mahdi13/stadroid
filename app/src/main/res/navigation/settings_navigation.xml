@@ -8,7 +8,7 @@
 
     <fragment
             android:id="@+id/settings_entrypoint_fragment"
-            android:name="com.stacrypt.stadroid.profile.SettingEntrypointFragment"
+            android:name="io.stacrypt.stadroid.profile.SettingEntrypointFragment"
             android:label="Blank">
         <action
                 android:id="@+id/action_settings_entrypoint_fragment_to_bank_cards_fragment"
@@ -34,7 +34,7 @@
 
     <fragment
             android:id="@+id/bank_cards_fragment"
-            android:name="com.stacrypt.stadroid.profile.banking.BankCardsFragment"
+            android:name="io.stacrypt.stadroid.profile.banking.BankCardsFragment"
             android:label="Blank"
             tools:layout="@layout/bank_cards_fragment">
         <action
@@ -51,37 +51,37 @@
 
     <fragment
             android:id="@+id/verification_process_fragment"
-            android:name="com.stacrypt.stadroid.profile.verification.VerificationProcessFragment"
+            android:name="io.stacrypt.stadroid.profile.verification.VerificationProcessFragment"
             android:label="Blank"
             tools:layout="@layout/verification_process_fragment"/>
 
     <fragment
             android:id="@+id/addBankCardFragment"
-            android:name="com.stacrypt.stadroid.profile.banking.AddBankCardFragment"
+            android:name="io.stacrypt.stadroid.profile.banking.AddBankCardFragment"
             android:label="Blank"
             tools:layout="@layout/add_bank_card_fragment"/>
 
     <fragment
             android:id="@+id/app_security_fragment"
-            android:name="com.stacrypt.stadroid.profile.appsec.AppSecurityFragment"
+            android:name="io.stacrypt.stadroid.profile.appsec.AppSecurityFragment"
             android:label="Blank"
             tools:layout="@layout/fragment_set_pattern"/>
 
     <fragment
             android:id="@+id/change_password_fragment"
-            android:name="com.stacrypt.stadroid.profile.security.ChangePasswordFragment"
+            android:name="io.stacrypt.stadroid.profile.security.ChangePasswordFragment"
             android:label="Blank"
             tools:layout="@layout/fragment_change_password"/>
 
     <fragment
             android:id="@+id/emailVerificationFragment"
-            android:name="com.stacrypt.stadroid.profile.verification.EmailVerificationFragment"
+            android:name="io.stacrypt.stadroid.profile.verification.EmailVerificationFragment"
             tools:layout="@layout/email_verification_fragment"
             android:label="EmailVerificationFragment"/>
 
     <fragment
             android:id="@+id/do_verify_email_fragment"
-            android:name="com.stacrypt.stadroid.profile.verification.DoVerifyEmailFragment"
+            android:name="io.stacrypt.stadroid.profile.verification.DoVerifyEmailFragment"
             tools:layout="@layout/fragment_do_verify_email"
             android:label="DoVerifyEmailFragment"/>
 

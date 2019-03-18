@@ -9,7 +9,7 @@
 
     <fragment
             android:id="@+id/summary"
-            class="com.stacrypt.stadroid.market.MarketSummaryFragment"
+            class="io.stacrypt.stadroid.market.MarketSummaryFragment"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_alignParentTop="true"
@@ -86,7 +86,7 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_alignParentBottom="true"
-            class="com.stacrypt.stadroid.market.NewOrderFragment"
+            class="io.stacrypt.stadroid.market.NewOrderFragment"
             android:background="@color/colorPrimaryDark"
             tools:context=".market.NewOrderFragment"
             tools:layout="@layout/new_order_fragment"/>

@@ -13,3 +13,11 @@
 .externalNativeBuild
 
 .idea
+
+fastlane
+app/fabric.properties
+app/google-services.json
+app/debug
+app/release
+*.jks
+app/*.jks

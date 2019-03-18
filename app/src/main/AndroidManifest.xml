@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.stacrypt.stadroid">
+          package="io.stacrypt.stadroid">
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
@@ -13,15 +13,21 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/Theme.Stadroid">
+
+        <meta-data
+                android:name="io.fabric.ApiKey"
+                android:value="0f49544f6db8538699c5fe60faca48d1cd16a47a"
+                />
+
         <activity android:name=".profile.verification.DoVerifyEmailActivity">
         </activity>
         <activity
                 android:name=".profile.ProfileSettingActivity"
                 android:label="@string/title_activity_profile_setting"
-                android:launchMode="singleInstance">
+                android:launchMode="singleTask">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.stacrypt.stadroid.MainActivity"/>
+                    android:value="io.stacrypt.stadroid.MainActivity"/>
 
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
@@ -48,7 +54,6 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
@@ -67,7 +72,6 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
     </application>
