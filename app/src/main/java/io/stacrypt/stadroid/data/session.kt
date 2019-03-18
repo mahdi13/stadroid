@@ -31,6 +31,8 @@ object sessionManager {
 
     fun logout() {
         jwtToken = null
+        cookieJar.clear()
+        cookieJar.clearSession()
     }
 
     fun isLoggedIn() = jwtToken != null

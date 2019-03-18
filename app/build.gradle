@@ -110,6 +110,7 @@ dependencies {
     // OkHttp
     implementation 'com.squareup.okhttp3:okhttp:3.13.1'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.9.0'
+    implementation 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
 
     // Android Support
     implementation 'com.android.support.constraint:constraint-layout:2.0.0-alpha3'

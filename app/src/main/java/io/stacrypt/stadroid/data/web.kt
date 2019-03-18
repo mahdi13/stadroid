@@ -3,7 +3,6 @@ package io.stacrypt.stadroid.data
 import android.util.Base64
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.Deferred
-import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -11,6 +10,14 @@ import retrofit2.http.*
 import java.io.File
 import java.nio.charset.Charset
 import java.util.*
+import io.fabric.sdk.android.services.settings.IconRequest.build
+import okhttp3.*
+import java.io.IOException
+import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor
+import com.franmontiel.persistentcookiejar.cache.SetCookieCache
+import com.franmontiel.persistentcookiejar.PersistentCookieJar
+import io.stacrypt.stadroid.application
+
 
 //const val STEMERALD_API_URL = "http://localhost:8070"
 const val MOCK_STEMERALD_API_URL = "https://my.api.mockaroo.com/"
@@ -366,9 +373,29 @@ interface MockStemeraldApiClient {
 //
 //}
 
-var okHttpClient = OkHttpClient.Builder()
-    .addInterceptor(HttpLoggingInterceptor())
-    .build()
+val cookieJar by lazy { PersistentCookieJar(SetCookieCache(), SharedPrefsCookiePersistor(application)) }
+
+val okHttpClient by lazy {
+    OkHttpClient.Builder()
+        .cookieJar(cookieJar)
+        .addInterceptor { chain ->
+            val response = chain.proceed(chain.request())
+
+            val newToken = response.header("X-New-JWT-Token")
+            if (newToken != null) {
+                sessionManager.login(newToken)
+            }
+
+            if (response.code() == 401) {
+                // TODO: Force logout
+                sessionManager.logout()
+            }
+            return@addInterceptor response
+
+        }
+        .addInterceptor(HttpLoggingInterceptor())
+        .build()
+}
 
 //var stemeraldApiClient = Retrofit.Builder()
 //    .baseUrl(STEMERALD_API_URL)
@@ -401,3 +428,32 @@ var mockStemeraldApiClient = Retrofit.Builder()
     .client(okHttpClient)
     .build()
     .create(MockStemeraldApiClient::class.java)
+
+
+//class TokenAuthenticator : Authenticator {
+//    override fun authenticate(route: Route?, response: Response): Request? {
+//        if (response.header("X-New-JWT-Token") == 200) {
+//
+//        } else if (response.code() == 401) {
+//            val refreshCall = refereshAccessToken(refereshToken)
+//
+//            //make it as retrofit synchronous call
+//            val refreshResponse = refreshCall.execute()
+//            if (refreshResponse != null && refreshResponse.code() == 200) {
+//                //read new JWT value from response body or interceptor depending upon your JWT availability logic
+//                newCookieValue = readNewJwtValue()
+//                return response.request().newBuilder()
+//                    .header("basic-auth", newCookieValue)
+//                    .build()
+//            } else {
+//                // TODO Handle
+//                return null
+//            }
+//        }
+//    }
+//
+//    @Throws(IOException::class)
+//    fun authenticate(route: Route, response: Response<*>): Request? {
+//
+//    }
+//}
