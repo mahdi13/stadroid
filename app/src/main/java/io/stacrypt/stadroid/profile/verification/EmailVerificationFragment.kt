@@ -25,12 +25,6 @@ import java.lang.Exception
 
 class EmailVerificationFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = EmailVerificationFragment()
-    }
-
-    private lateinit var viewModel: EmailVerificationViewModel
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -81,12 +75,6 @@ class EmailVerificationFragment : Fragment() {
         }
 
 
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(activity!!).get(EmailVerificationViewModel::class.java)
-        // TODO: Use the ViewModel
     }
 
 }

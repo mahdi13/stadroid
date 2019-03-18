@@ -19,8 +19,6 @@
                 android:value="0f49544f6db8538699c5fe60faca48d1cd16a47a"
                 />
 
-        <activity android:name=".profile.verification.DoVerifyEmailActivity">
-        </activity>
         <activity
                 android:name=".profile.ProfileSettingActivity"
                 android:label="@string/title_activity_profile_setting"

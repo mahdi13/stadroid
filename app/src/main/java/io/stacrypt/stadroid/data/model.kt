@@ -163,7 +163,7 @@ enum class Gender { MALE, FEMALE }
 
 data class Evidence(
     val clientId: Int,
-    val cityId: Int,
+    val cityId: Int?,
     val type: String,
     val gender: Gender?,
     val birthday: Date?,

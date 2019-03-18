@@ -17,9 +17,9 @@ class Application : android.app.Application() {
     override fun onCreate() {
         super.onCreate()
         Fabric.with(this, Crashlytics())
-        Instabug.Builder(this, "5b0b628ed1c493b59e0e059e03506dbb")
-            .setInvocationEvents(InstabugInvocationEvent.FLOATING_BUTTON, InstabugInvocationEvent.SCREENSHOT)
-            .build()
+//        Instabug.Builder(this, "5b0b628ed1c493b59e0e059e03506dbb")
+//            .setInvocationEvents(InstabugInvocationEvent.FLOATING_BUTTON, InstabugInvocationEvent.SCREENSHOT)
+//            .build()
 
     }
 }

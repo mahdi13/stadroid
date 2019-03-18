@@ -27,12 +27,12 @@ object WalletRepository {
             try {
                 liveData.postValue(stemeraldApiClient.showDepositInfo(assetName = assetName).await())
             } catch (e: HttpException) {
-                if (e.code() == 404) { // TODO: More strict if clause (or tell the backend team to handle it there!)
-                    renewDepositInfo(assetName, liveData)
-                } else {
+//                if (e.code() == 404) { // TODO: More strict if clause (or tell the backend team to handle it there!)
+//                    renewDepositInfo(assetName, liveData)
+//                } else {
                     // TODO Show error
                     liveData.postValue(null)
-                }
+//                }
             } catch (e: Exception) {
                 // TODO Show error
                 liveData.postValue(null)
