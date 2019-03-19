@@ -34,7 +34,9 @@ class MobilePhoneVerificationFragment : Fragment() {
         verify.setOnClickListener {
             try {
                 GlobalScope.launch(Dispatchers.Main) {
-                    stemeraldApiClient.schedulMobilePhoneVerification(phone = phone_number.text.toString()).await()
+                    stemeraldApiClient.schedulMobilePhoneVerification(
+                        phone = ccp.selectedCountryCodeWithPlus + phone_number.text.toString()
+                    ).await()
                     view.longSnackbar("SMS Sent!")
                 }
             } catch (e: Exception) {
