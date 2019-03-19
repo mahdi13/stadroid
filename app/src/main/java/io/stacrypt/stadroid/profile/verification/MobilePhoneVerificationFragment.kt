@@ -9,8 +9,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 
 import io.stacrypt.stadroid.R
+import io.stacrypt.stadroid.data.stemeraldApiClient
 import kotlinx.android.synthetic.main.fragment_mobile_phone_verification.*
 import kotlinx.android.synthetic.main.fragment_mobile_phone_verification.view.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import org.jetbrains.anko.design.longSnackbar
 
 
 class MobilePhoneVerificationFragment : Fragment() {
@@ -26,6 +31,17 @@ class MobilePhoneVerificationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         view.ccp.registerCarrierNumberEditText(phone_number)
+        verify.setOnClickListener {
+            try {
+                GlobalScope.launch(Dispatchers.Main) {
+                    stemeraldApiClient.schedulMobilePhoneVerification(phone = phone_number.text.toString()).await()
+                    view.longSnackbar("SMS Sent!")
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                view.longSnackbar("Error occurred!")
+            }
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event

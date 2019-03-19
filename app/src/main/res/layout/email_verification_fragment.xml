@@ -116,7 +116,8 @@
                 android:gravity="center"
                 android:layout_gravity="center"
                 android:textAllCaps="true"
-                android:backgroundTint="@color/colorSecondary"
+                android:background="@drawable/button_shape_default_rounded"
+                android:textColor="@color/colorSecondary"
                 app:spinning_bar_width="4dp"
                 app:spinning_bar_color="#FFF"
                 app:spinning_bar_padding="6dp"/>

@@ -72,16 +72,21 @@
     </LinearLayout>
 
 
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+    <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
+            android:id="@+id/verify"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:strokeColor="@color/colorSecondary"
             android:layout_marginTop="30dp"
-            app:strokeWidth="1dp"
+            android:minWidth="200dp"
+            android:maxWidth="400dp"
+            android:padding="20dp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:background="@drawable/button_shape_default_rounded"
+            android:text="Send me SMS"
             android:textColor="@color/colorSecondary"
-            android:backgroundTint="@color/colorPrimary"
-            app:icon="@drawable/ic_check_circle_black_24dp"
-            app:iconTint="@color/colorSecondary"
-            android:text="Send Me Sms"/>
+            app:spinning_bar_width="4dp"
+            app:spinning_bar_color="#FFF"
+            app:spinning_bar_padding="6dp"/>
 
 </LinearLayout>

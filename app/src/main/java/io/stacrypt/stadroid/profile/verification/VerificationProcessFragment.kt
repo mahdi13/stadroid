@@ -29,6 +29,7 @@ class VerificationProcessFragment : Fragment() {
         viewModel.client.observe(this, Observer {
             if (!it.isEmailVerified) {
                 // Step 1
+                stepper.stepCount = 5
                 stepper.currentStep = 0
                 childFragmentManager.beginTransaction()
                     .replace(R.id.verification_container, EmailVerificationFragment()).commitNow()
@@ -36,6 +37,7 @@ class VerificationProcessFragment : Fragment() {
 //                childFragmentManager.beginTransaction().replace(R.id.verification_container, DoMobilePhoneVerificationFragment()).commitNow()
             } else {
                 viewModel.evidence.observe(this, Observer { evidence ->
+                    stepper.stepCount = 5
                     if (evidence.mobilePhone == null) {
                         stepper.currentStep = 1
                         childFragmentManager.beginTransaction()
