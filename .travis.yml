@@ -22,10 +22,8 @@ cache:
   - "$HOME/.gradle/caches/"
   - "$HOME/.gradle/wrapper/"
   - "$HOME/.android/build-cache"
-script: "./gradlew test --stacktrace --no-daemon"
+script: "./gradlew clean assemble test --stacktrace --no-daemon"
 before_install:
-- openssl aes-256-cbc -K $encrypted_faef0200f584_key -iv $encrypted_faef0200f584_iv
-  -in fabric.properties.enc -out app/fabric.properties -d
 - openssl aes-256-cbc -K $encrypted_faef0200f584_key -iv $encrypted_faef0200f584_iv
   -in stadroid-dev.jks.enc -out app/stadroid-dev.jks -d
 - "./gradlew assembleRelease --stacktrace --no-daemon"
@@ -35,3 +33,6 @@ deploy:
   script: "./gradlew crashlyticsUploadDistributionRelease"
   on:
     branch: master
+env:
+  global:
+    secure: cyMV2+MdATul729IuEe8D8KjauIoMTsTkwD02shr87rHBp9unuOU43PsUBUGKoeU4dhKzLKycl2RRr5kS7XOYsQGMCc4R8a+urs8wIdaCDmibiPFU8bv6avqzNLoDGN6cv3EpdnGVppgIiCtH5RtG8JPvayiWkumZ49PNYF9TfbBm7+KMtb3ZUlnTeH2DozzDPftPksPazi0j1dfZy2v7KqXUTiSYag/KFdlbPhuKzezCaSTNzLcEBvvvMRQW45CK5WuQ/p3hyi2a1gBsYiyWhMXSInhedZ3wOO5zNJJC1qpXAnFE/rN7qelrn9Fb4xEHN7+cjWT0n4DfckFpI9x3maCYw0hC3QTqVv+px6viM1i07xX9r36N1An9JmAjI3s1R7z9VE5IhYM9F4oScrchpDtJ4WIQ63xg2JmaF/2MKFKApn6DjUZCrtbOWshp/sQljhcySOrckoMj5Hb4sixL4zTRIFrRDYtz+Ba3fE9EcJdIjXxCeTaDJ/KYKj6e3t0JoGryw3dNxNkNepW4E80RVWldvpb+UP4NXvB7vKDAADV3Iv+ZEEVKHtCV9RsLnqwxYHe2ili7+iIu4ileNxY2rsRgUaNgEdt4ZkGs7OwkuMzZRRb5bChlYEvvoM5ds8/nBlgFL1owOf2FWI+KyMV50Mq6rKuUX1eCdCgkNA9Kns=
