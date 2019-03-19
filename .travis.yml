@@ -25,7 +25,8 @@ cache:
 script: "./gradlew clean assemble test --stacktrace --no-daemon"
 before_install:
 - openssl aes-256-cbc -K $encrypted_faef0200f584_key -iv $encrypted_faef0200f584_iv
-  -in stadroid-dev.jks.enc -out app/stadroid-dev.jks -d
+  -in secrets.tar.enc -out secrets.tar -d
+- tar xvf secrets.tar -C app/
 - "./gradlew assembleRelease --stacktrace --no-daemon"
 deploy:
   provider: script
@@ -33,7 +34,3 @@ deploy:
   script: "./gradlew crashlyticsUploadDistributionRelease"
   on:
     branch: master
-env:
-  global:
-  - secure: RcvvlPFRE6qJ40PvpBVOvv35d8HYd7XRSpc2tC0u0VfuSbEPAj4NWzwUsUoMgNu4Iu3ghT46jBCPq885HZAlpT/FRl38zJiMRfS+iHRF9C88F8UVgLLPngwotq0cCluXF2viKJ5/5UcPs4DREFkAK1l0VEHfWJmT8qIwcqUupJ/8J6NB3RW6S1OZYzaukqYOVJCuU4RKNiQMMlYWJ1vXdP7HHzOFZK1nCctLInnL+61wyZDbCF7FmJBlwkzj8fXMkyedhcIvJORjsls5fyp0EcrLmcQMv2lquvI9cwoLxbGX7bPlPnf4X0wmf2vB42F63crWT2kffV1PYfRcaIOJtS5vih0eRTn9fvPl6XeFZ5kKBw6b4tGsVWr1aE5D0ITOfDdVHdvGen279u4aIBTolnok1lhqtrWVqwfdGJtOjFLddpZUZeUqMtRCQp5LroNeyA7U2gZBAdtakIvZPPRw/GfPlVVMl/yDhHP2VEZXuGWpC5I/2eka2LK266y8Kukm6QLUZECa3HLd7oLeuClc3lYQOXnuReUBytuRnH4WADM0jbW7eNfO+6nFqEtbp+CfNb4gwry83ZPgvwaFov0NCPzgSLeHzvV5bBSG8hDOBSNKL41iR9kVR407Yn+kfHHvRCXrmmqiV9+PmX8aG4YUjR3f1glpsTPvzYQWqXrM7ZI=
-  - secure: cqJItOOn/hbzUjQP9JA2rPyRQZcSFml7kCdL6RV0YSlgx8AqKnu01fnMMUeCCIEzFOehLlrPEF2HqGCz2vEVHwm8g+g62P5q2nbBVzWGSY1d2lWlRKhyoHpZrTdMRxQYuOuie5xgdKR6k4fVsgwTBV/uz01EHZ8DBdtNwHHzUbosiGhxZfVPufGLdAOHi+RXHLRpQL7ZRcQZCXrvr40Mv8d5yUVZBZLiuF8nYDeFmiutqWh6tAJyGYQzCu7PffVi8xaOjTZjoa/2nTDXPQ0czAVav37NlxnY56X8SMJucp7+zegq4P3kvfddHQpy47VXm+Gb9/K7yF66wIlA9ZMdXcBo5aFFL4XSv/TYxXBZrujaLrehN6M/rYhhJzFEnAbdveXs/79vY/sOeMT2m20/i54YZOfjCJ3qJCvWP1/u7TafRgjZf/BzHnCu2I+GE29oK5wOcrDzpeIDAew45IsEATDrR5R1ohcTB3DRLg5fZCkJ08aLouhrd1PBKnngsL2CAgqP7eeFxI8IPXofEnmRhnJqdVhir2k4z1uHZHKzG8QQ7qn1wIqbhheZd+SdKuXuFQs/piohebOVqkTUM4931X38nXWmp1NpTn8yb+Ma3SClhrGOD8FJ8JgsTE8RBijAwZ1z6pTm+ipfCuDqGk7+JKv2Krg3kI7hpmwcjctrSVg=
