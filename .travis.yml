@@ -34,3 +34,7 @@ deploy:
   script: "./gradlew crashlyticsUploadDistributionRelease"
   on:
     branch: master
+notifications:
+  slack:
+    rooms:
+      secure: GcR43VndC1e0pfFiBI4wWPkKydBmAvR6gmzzgaNxKN0aUvhQFduxWvNLRs7EboCOdht47RiV5M/y8VfMnCFOTmD1zrd0tS8NBFsq5enRXL8ndePtxXN2tRuRXOvJzIpvJKVJLIgNDYdntxSSBdwnXuG+3aIb4WA/pDNWVN+A4zYrYqZkZxs7YKPZa2hBBAXN72PKzuj4/ruhvAgzmtPCy1+6wIeW5PZtqa+EfRQidQviqY2Gkei2gMTkDuu/EyaWBl9l0QR48t95R7m8qCmH5/rxMOAvcZYZgnhoPS1czuM+XL2K5YqjTyuk+m0XGktEDZSAubGM/vikv5YdNjxWgtrvHskO3YeWxLqf+q7Dmn/wiFgFRB7ipV55YegQQr/uSM+x5R8CTZipbOFuY8mz0/i6UakRb7BELZYJcKvMQrbyhoZSamEh6qE9JUyGQeRcrcg0kek7xl/bsKTcqSlcVrBiE0NsSFclVow/SpbK86Ulb50elxyapETzr2dYar4nf4WtAv4tOP1ibPJW/fH4NoLGsbeFLjWKZvK/GLfAeA+diIdZEUhwogFF0cbN8dC3lW08/yxl9T3p1E8xYfhTK3iyonon3MfIA9SwY3exSQfjP0rgQKODuCFQQjkjDi+hbUQ4VaJPDrROf8nMG9KkmLaqF6bZ4DJxD/113rpVM/k=

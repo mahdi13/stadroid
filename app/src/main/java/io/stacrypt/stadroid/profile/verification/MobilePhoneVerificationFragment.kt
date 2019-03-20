@@ -35,7 +35,7 @@ class MobilePhoneVerificationFragment : Fragment() {
             try {
                 GlobalScope.launch(Dispatchers.Main) {
                     stemeraldApiClient.schedulMobilePhoneVerification(
-                        phone = ccp.selectedCountryCodeWithPlus + phone_number.text.toString()
+                        phone = ccp.selectedCountryCodeWithPlus + phone_number.text.toString().replace(" ", "")
                     ).await()
                     view.longSnackbar("SMS Sent!")
                 }
