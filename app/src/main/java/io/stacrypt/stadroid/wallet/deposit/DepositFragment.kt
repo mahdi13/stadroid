@@ -1,5 +1,6 @@
 package io.stacrypt.stadroid.wallet.deposit
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,8 @@ import io.stacrypt.stadroid.copyToClipboard
 import io.stacrypt.stadroid.ui.showQrCode
 import io.stacrypt.stadroid.wallet.ui.balancedetail.BalanceDetailViewModel
 import kotlinx.android.synthetic.main.deposit_fragment.view.*
+import net.glxn.qrgen.android.QRCode
+import net.glxn.qrgen.core.image.ImageType
 
 
 class DepositFragment : Fragment() {
@@ -55,7 +58,12 @@ class DepositFragment : Fragment() {
         viewModel.depositInfo.observe(this, Observer {
             view?.address_view?.text = it?.address
 
-            if (it?.address != null) view?.tag_qrcode_image?.showQrCode(it.address)
+            if (it?.address != null) {
+//                view?.tag_qrcode_image?.showQrCode(it.address)
+                view?.address_qrcode_image?.setImageBitmap(
+                    QRCode.from(it.address).bitmap()
+                )
+            }
 
             val renewButton: Button?
             if (it?.extra == null || it.extra!!.isEmpty()) {
@@ -71,7 +79,7 @@ class DepositFragment : Fragment() {
             }
 
             renewButton?.setOnClickListener {
-//                viewModel.
+                //                viewModel.
             }
 
         })

@@ -162,13 +162,13 @@
 
         </androidx.cardview.widget.CardView>
 
-        <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/colorPrimary"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="5dp"
-                app:cardCornerRadius="5dp">
+        <!--<androidx.cardview.widget.CardView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:backgroundTint="@color/colorPrimary"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_marginBottom="5dp"-->
+                <!--app:cardCornerRadius="5dp">-->
 
             <LinearLayout
                     android:layout_width="match_parent"
@@ -207,12 +207,13 @@
                         android:fontFamily="@font/roboto_mono_regular"
                         android:text="1JuUGEWXjN5Q2rFHDSrsKPzNGF462VALVX"/>
 
-                <ImageView
+                <com.github.omadahealth.lollipin.lib.views.SquareImageView
                         android:id="@+id/address_qrcode_image"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
                         android:layout_gravity="center"
                         android:layout_marginTop="20dp"
+                        android:scaleType="fitXY"
                         />
 
                 <LinearLayout
@@ -282,8 +283,8 @@
 
                 </LinearLayout>
             </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
+<!---->
+        <!--</androidx.cardview.widget.CardView>-->
 
         <androidx.cardview.widget.CardView
                 android:id="@+id/tag_container"
@@ -330,7 +331,7 @@
                         android:text="9054893"/>
 
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/tag_qrcode_image"
                         android:layout_width="200dp"
                         android:layout_height="200dp"
