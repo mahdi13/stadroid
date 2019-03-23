@@ -46,16 +46,17 @@ class NotificationService : FirebaseMessagingService() {
 
         }
 
-        val title: String? = remoteMessage.data["title"]
-        val body: String? = remoteMessage.data["body"]
+        val title: String? = remoteMessage.notification?.title
+        val body: String? = remoteMessage.notification?.body
         val objectId: String? = remoteMessage.data["object_id"]
         val objectType: String? = remoteMessage.data["objectType"]
 
 
-        val notification = NotificationCompat.Builder(this, "generalZ")
+        val notification = NotificationCompat.Builder(this, "general")
             .setContentTitle(title)
             .setContentText(body)
             .setSmallIcon(R.drawable.ic_launcher_background)
+            .setStyle(NotificationCompat.BigTextStyle().bigText(body))
             .build()
         val manager = NotificationManagerCompat.from(this)
         manager.notify(/*notification id*/0, notification)

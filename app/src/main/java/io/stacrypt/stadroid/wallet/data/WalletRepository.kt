@@ -5,10 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.paging.toLiveData
 import io.stacrypt.stadroid.data.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import retrofit2.HttpException
 
 // TODO: Add rate limiter
@@ -30,8 +27,8 @@ object WalletRepository {
 //                if (e.code() == 404) { // TODO: More strict if clause (or tell the backend team to handle it there!)
 //                    renewDepositInfo(assetName, liveData)
 //                } else {
-                    // TODO Show error
-                    liveData.postValue(null)
+                // TODO Show error
+                liveData.postValue(null)
 //                }
             } catch (e: Exception) {
                 // TODO Show error
@@ -42,18 +39,30 @@ object WalletRepository {
         return liveData
     }
 
-    fun renewDepositInfo(assetName: String, depositInfo: MutableLiveData<DepositInfo?>): LiveData<DepositInfo?> {
+    fun renewDepositInfo(assetName: String, addressNotUsedHandler: () -> Unit): LiveData<DepositInfo?> {
+        val liveData = MutableLiveData<DepositInfo?>()
         scope.launch {
             try {
-                depositInfo.postValue(stemeraldApiClient.renewDepositInfo(assetName = assetName).await())
+                liveData.postValue(stemeraldApiClient.renewDepositInfo(assetName = assetName).await())
+            } catch (e: HttpException) {
+                if (e.code() == 400) { // TODO: Check x-reason too
+                    liveData.postValue(null)
+                    GlobalScope.launch(Dispatchers.Main) {
+                        addressNotUsedHandler.invoke()
+                    }
+                } else {
+                    // TODO Show error
+                    liveData.postValue(null)
+                }
             } catch (e: Exception) {
                 // TODO Show error
-                depositInfo.postValue(null)
+                liveData.postValue(null)
             } finally {
             }
         }
-        return depositInfo
+        return liveData
     }
+
 
     /**
      * TODO: Think about online and offline
@@ -178,6 +187,7 @@ object WalletRepository {
                 stemeraldApiClient.currencyList().await().forEach { currencyDao.save(it) }
             } catch (e: Exception) {
                 // TODO: Show error
+                e.printStackTrace()
             }
         }
     }

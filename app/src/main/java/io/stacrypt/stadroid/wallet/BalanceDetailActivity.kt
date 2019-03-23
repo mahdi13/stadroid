@@ -9,6 +9,7 @@ import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.wallet.deposit.DepositFragment
 import io.stacrypt.stadroid.wallet.ui.balancedetail.BalanceDetailFragment
 import io.stacrypt.stadroid.wallet.ui.balancedetail.BalanceDetailViewModel
+import org.jetbrains.anko.support.v4.withArguments
 
 class BalanceDetailActivity : AppCompatActivity() {
 
@@ -30,7 +31,7 @@ class BalanceDetailActivity : AppCompatActivity() {
                 else -> null
             }?.let {
                 supportFragmentManager.beginTransaction()
-                    .add(R.id.container, DepositFragment())
+                    .add(R.id.container, it.withArguments(ARG_ASSET to intent.getStringExtra(ARG_ASSET)))
                     .commitNow()
             }
         }

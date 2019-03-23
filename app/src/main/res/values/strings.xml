@@ -56,5 +56,8 @@
     <string name="mobile_verification_description">Please enter your mobile number to receive a verification code</string>
     <string name="do_mobile_verification_description">A verification code has been sent to you by SMS. Please enter it below</string>
     <string name="phone_number">Phone Number</string>
+    <string name="loading">Loading…</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="cancel">Cancel</string>
 
 </resources>

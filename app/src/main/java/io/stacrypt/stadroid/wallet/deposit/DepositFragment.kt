@@ -9,18 +9,21 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.afollestad.materialdialogs.DialogCallback
+import com.afollestad.materialdialogs.MaterialDialog
+import com.google.android.material.dialog.MaterialDialogs
 import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.copyToClipboard
 import io.stacrypt.stadroid.ui.showQrCode
-import io.stacrypt.stadroid.wallet.ui.balancedetail.BalanceDetailViewModel
+import io.stacrypt.stadroid.wallet.BalanceDetailActivity.Companion.ARG_ASSET
 import kotlinx.android.synthetic.main.deposit_fragment.view.*
 import net.glxn.qrgen.android.QRCode
-import net.glxn.qrgen.core.image.ImageType
+import org.jetbrains.anko.design.snackbar
 
 
 class DepositFragment : Fragment() {
 
-    private lateinit var viewModel: BalanceDetailViewModel
+    private lateinit var viewModel: DepositViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,14 +46,10 @@ class DepositFragment : Fragment() {
 
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
-    }
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(activity!!).get(BalanceDetailViewModel::class.java)
-        // TODO: Refresh deposit info
+        viewModel = ViewModelProviders.of(activity!!).get(DepositViewModel::class.java)
+        viewModel.init(arguments?.getString(ARG_ASSET)!!)
         populateUi()
     }
 
@@ -79,8 +78,19 @@ class DepositFragment : Fragment() {
             }
 
             renewButton?.setOnClickListener {
-                //                viewModel.
-                viewModel.renewDepositInfo() // FIXME: (Refer inside of the method)
+                MaterialDialog(activity!!).show {
+                    title(R.string.are_you_sure)
+                    message(text = "If you renew your address, your previous address will be invalidated and could not be used anymore.")
+                    positiveButton(text = "Renew") {
+                        val prevAddress = viewModel.depositInfo.value?.address ?: view?.address_view?.text.toString()
+                        view?.address_view?.text = getString(R.string.loading)
+                        viewModel.renewDepositInfo {
+                            if (prevAddress != null) view?.address_view?.text = prevAddress
+                            view?.snackbar("You should use this address at least once before you can renew it")
+                        }
+                    }
+                    negativeButton(R.string.cancel)
+                }
             }
 
         })

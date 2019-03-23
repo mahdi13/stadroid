@@ -70,7 +70,7 @@ data class Currency(
     var withdrawStaticCommission: Long?,
     var depositPermilleCommission: Long?,
     var withdrawPermilleCommission: Long?,
-    var walletId: Int?
+    var walletId: String?
 
 )
 

@@ -23,26 +23,26 @@ class BalanceDetailViewModel : ViewModel() {
     val networkState = switchMap(balanceHistoryListing) { it.networkState }
     val refreshState = switchMap(balanceHistoryListing) { it.refreshState }
 
-    val depositInfo = object : MutableLiveData<DepositInfo?>() {
-
-        init {
-            switchMap(assetName) {
-                WalletRepository.getDepositInfo(it)
-            }.observeForever {
-                postValue(it)
-            }
-        }
-    }
+//    val depositInfo = object : MutableLiveData<DepositInfo?>() {
+//
+//        init {
+//            switchMap(assetName) {
+//                WalletRepository.getDepositInfo(it)
+//            }.observeForever {
+//                postValue(it)
+//            }
+//        }
+//    }
 //    val depositInfo by lazy {
 //        (switchMap(assetName) {
 //            WalletRepository.getDepositInfo(it)
 //        } as MediatorLiveData<DepositInfo>)
 //    }
 
-    fun renewDepositInfo() {
-        WalletRepository.renewDepositInfo(assetName.value!!, depositInfo)
-        // FIXME: ReObserve the asset_name after renew
-    }
+//    fun renewDepositInfo() {
+//        WalletRepository.renewDepositInfo(assetName.value!!, depositInfo)
+//        // FIXME: ReObserve the asset_name after renew
+//    }
 
     val paymentGateways by lazy { switchMap(assetName) { WalletRepository.getPaymentGateways(it) } }
 

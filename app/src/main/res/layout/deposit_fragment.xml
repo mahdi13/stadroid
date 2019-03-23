@@ -117,7 +117,7 @@
                             android:textColor="@color/real_red"
                             android:textStyle="bold"
                             android:fontFamily="@font/din_medium"
-                            android:text="0.000001 BTC"/>
+                            android:text="@string/loading"/>
 
                     <View
                             android:layout_width="1dp"
@@ -135,7 +135,7 @@
                             android:textColor="@color/real_blue"
                             android:textStyle="bold"
                             android:fontFamily="@font/din_medium"
-                            android:text="100.0 BTC"/>
+                            android:text="@string/loading"/>
 
                     <View
                             android:layout_width="1dp"
@@ -154,7 +154,7 @@
                             android:textColor="@color/colorAccent"
                             android:textStyle="bold"
                             android:fontFamily="@font/din_medium"
-                            android:text="0.4 %"/>
+                            android:text="@string/loading"/>
 
 
                 </LinearLayout>
@@ -162,13 +162,13 @@
 
         </androidx.cardview.widget.CardView>
 
-        <!--<androidx.cardview.widget.CardView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:backgroundTint="@color/colorPrimary"-->
-                <!--android:layout_marginTop="10dp"-->
-                <!--android:layout_marginBottom="5dp"-->
-                <!--app:cardCornerRadius="5dp">-->
+        <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorPrimary"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                app:cardCornerRadius="5dp">
 
             <LinearLayout
                     android:layout_width="match_parent"
@@ -205,7 +205,7 @@
                         android:layout_marginStart="40dp"
                         android:layout_marginEnd="40dp"
                         android:fontFamily="@font/roboto_mono_regular"
-                        android:text="1JuUGEWXjN5Q2rFHDSrsKPzNGF462VALVX"/>
+                        android:text="@string/loading"/>
 
                 <com.github.omadahealth.lollipin.lib.views.SquareImageView
                         android:id="@+id/address_qrcode_image"
@@ -283,8 +283,8 @@
 
                 </LinearLayout>
             </LinearLayout>
-<!---->
-        <!--</androidx.cardview.widget.CardView>-->
+
+        </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
                 android:id="@+id/tag_container"
@@ -328,7 +328,7 @@
                         android:gravity="center"
                         android:layout_marginTop="30dp"
                         android:fontFamily="@font/roboto_mono_regular"
-                        android:text="9054893"/>
+                        android:text="@string/loading"/>
 
 
                 <androidx.appcompat.widget.AppCompatImageView

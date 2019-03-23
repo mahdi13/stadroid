@@ -44,7 +44,7 @@ interface CurrencyDao {
     @Query("SELECT * FROM Currency")
     fun loadAll(): LiveData<List<Currency>>
 
-    @Query("SELECT * FROM Currency WHERE name = :symbol")
+    @Query("SELECT * FROM Currency WHERE symbol = :symbol")
     fun loadBySymbol(symbol: String): LiveData<Currency>
 }
 
