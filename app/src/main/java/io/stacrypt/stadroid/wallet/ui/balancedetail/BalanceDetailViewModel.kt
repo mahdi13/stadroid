@@ -1,9 +1,11 @@
 package io.stacrypt.stadroid.wallet.ui.balancedetail
 
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.Transformations.map
 import androidx.lifecycle.Transformations.switchMap
+import io.stacrypt.stadroid.data.DepositInfo
 import io.stacrypt.stadroid.wallet.data.WalletRepository
 
 
@@ -21,15 +23,26 @@ class BalanceDetailViewModel : ViewModel() {
     val networkState = switchMap(balanceHistoryListing) { it.networkState }
     val refreshState = switchMap(balanceHistoryListing) { it.refreshState }
 
-    val depositInfo by lazy {
-        switchMap(assetName) {
-            WalletRepository.getDepositInfo(it)
+    val depositInfo = object : MutableLiveData<DepositInfo?>() {
+
+        init {
+            switchMap(assetName) {
+                WalletRepository.getDepositInfo(it)
+            }.observeForever {
+                postValue(it)
+            }
         }
     }
-
-//    fun renewDepositInfo(){
-//        WalletRepository.renewDepositInfo(assetName.value!!, depositInfo)
+//    val depositInfo by lazy {
+//        (switchMap(assetName) {
+//            WalletRepository.getDepositInfo(it)
+//        } as MediatorLiveData<DepositInfo>)
 //    }
+
+    fun renewDepositInfo() {
+        WalletRepository.renewDepositInfo(assetName.value!!, depositInfo)
+        // FIXME: ReObserve the asset_name after renew
+    }
 
     val paymentGateways by lazy { switchMap(assetName) { WalletRepository.getPaymentGateways(it) } }
 

@@ -80,6 +80,7 @@ class DepositFragment : Fragment() {
 
             renewButton?.setOnClickListener {
                 //                viewModel.
+                viewModel.renewDepositInfo() // FIXME: (Refer inside of the method)
             }
 
         })
