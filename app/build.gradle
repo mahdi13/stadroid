@@ -93,6 +93,7 @@ dependencies {
     implementation 'androidx.room:room-coroutines:2.1.0-alpha04'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.0.0'
+    implementation 'com.google.firebase:firebase-messaging:17.4.0'
     kapt "androidx.room:room-compiler:2.1.0-alpha05"
     implementation 'androidx.paging:paging-runtime-ktx:2.1.0'
     implementation 'android.arch.work:work-runtime-ktx:1.0.0'
@@ -194,7 +195,7 @@ dependencies {
     implementation 'com.instabug.library:instabug:8.1.2'
 
     // Firebase
-    implementation 'com.google.firebase:firebase-core:16.0.8'
+    implementation('com.google.firebase:firebase-core:16.0.8')
     implementation('com.crashlytics.sdk.android:crashlytics:2.9.9@aar') {
         transitive = true
     }
