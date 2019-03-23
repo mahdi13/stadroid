@@ -39,9 +39,17 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.dev
+
+            ext.betaDistributionReleaseNotes = "This is a Beta release."
+            ext.betaDistributionGroupAliases = "Dev"
+            ext.betaDistributionNotifications = true
         }
         debug {
             signingConfig signingConfigs.dev
+
+            ext.betaDistributionReleaseNotes = "This is a Beta release."
+            ext.betaDistributionGroupAliases = "Dev"
+            ext.betaDistributionNotifications = true
         }
     }
     dataBinding {
@@ -50,10 +58,6 @@ android {
 }
 
 buildscript {
-
-    ext.betaDistributionReleaseNotes = "This is a Beta release."
-    ext.betaDistributionGroupAliases = "Dev"
-    ext.betaDistributionNotifications = true
 
     repositories {
         maven { url 'https://maven.fabric.io/public' }
