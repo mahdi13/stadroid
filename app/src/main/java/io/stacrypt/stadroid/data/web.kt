@@ -380,7 +380,13 @@ val okHttpClient by lazy {
     OkHttpClient.Builder()
         .cookieJar(cookieJar)
         .addInterceptor { chain ->
-            val response = chain.proceed(chain.request())
+
+            val newRequest = chain.request()
+                .newBuilder()
+                .addHeader("X-Firebase-Token", sessionManager.fbToken ?: "")
+                .build()
+
+            val response = chain.proceed(newRequest)
 
             val newToken = response.header("X-New-JWT-Token")
             if (newToken != null) {

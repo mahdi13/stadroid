@@ -35,6 +35,8 @@ class ProfileFragment : Fragment() {
 
         logout.setOnClickListener {
             sessionManager.logout()
+            // TODO: Call logout service
+            // TODO: Terminate current session
             // TODO: Clear entire db
             listener?.onLoggedOut()
         }

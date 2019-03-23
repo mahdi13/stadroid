@@ -9,6 +9,7 @@ import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import androidx.core.app.NotificationManagerCompat
 import io.fabric.sdk.android.services.settings.IconRequest.build
+import io.stacrypt.stadroid.data.sessionManager
 
 
 class NotificationService : FirebaseMessagingService() {
@@ -51,7 +52,7 @@ class NotificationService : FirebaseMessagingService() {
         val objectType: String? = remoteMessage.data["objectType"]
 
 
-        val notification = NotificationCompat.Builder(this, "general")
+        val notification = NotificationCompat.Builder(this, "generalZ")
             .setContentTitle(title)
             .setContentText(body)
             .setSmallIcon(R.drawable.ic_launcher_background)
@@ -72,7 +73,7 @@ class NotificationService : FirebaseMessagingService() {
      */
     override fun onNewToken(token: String?) {
         Log.d(TAG, "Refreshed token: " + token!!)
-
+        sessionManager.fbToken = token
         // If you want to send messages to this application instance or
         // manage this apps subscriptions on the server side, send the
         // Instance ID token to your app server.

@@ -25,6 +25,17 @@ object sessionManager {
                 .getString("jwtToken", null)
         }
 
+    var fbToken: String? = null
+        set(value) {
+            field = value
+            PreferenceManager.getDefaultSharedPreferences(application.applicationContext).edit()
+                .putString("fbToken", value).apply()
+        }
+        get() {
+            return PreferenceManager.getDefaultSharedPreferences(application.applicationContext)
+                .getString("fbToken", null)
+        }
+
     fun login(t: String) {
         jwtToken = t
     }
