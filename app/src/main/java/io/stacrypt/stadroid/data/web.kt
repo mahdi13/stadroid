@@ -124,7 +124,7 @@ interface StemeraldV2ApiClient {
         @Query("limit") limit: Int
     ): Deferred<ArrayList<Order>>
 
-    @HTTP(method = "GET", path = "orders/{order}", hasBody = true)
+    @HTTP(method = "CANCEL", path = "orders/{order}", hasBody = true)
     fun cancelOrder(
         @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
         @Path("order") orderId: Int,
