@@ -47,7 +47,7 @@ class MarketFragment : Fragment() {
             override fun getCount(): Int = 5
         }
 //        tabs.setupWithViewPager(viewpager)
-g
+
     }
 
     override fun onCreateView(
