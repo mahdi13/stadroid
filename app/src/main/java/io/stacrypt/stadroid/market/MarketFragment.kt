@@ -36,16 +36,18 @@ class MarketFragment : Fragment() {
             override fun getItem(position: Int): Fragment {
                 return when (position) {
                     0 -> MarketCandlestickFragment.newInstance("", "")
-                    1 -> MarketBookFragment()
-                    2 -> MarketMineFragment()
+                    1 -> MyActiveOrdersFragment()
+                    2 -> MarketBookFragment()
                     3 -> MarketHistoryFragment()
+                    4 -> MarketMineFragment()
                     else -> throw IndexOutOfBoundsException()
                 }
             }
 
-            override fun getCount(): Int = 4
+            override fun getCount(): Int = 5
         }
-
+//        tabs.setupWithViewPager(viewpager)
+g
     }
 
     override fun onCreateView(

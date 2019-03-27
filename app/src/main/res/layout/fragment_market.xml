@@ -38,6 +38,7 @@
             app:tabTextColor="#ffffff"
             app:tabIndicatorColor="#ffffff"
             app:tabRippleColor="#ffffff"
+            app:tabMode="scrollable"
             android:background="@color/colorPrimaryDark"
             >
 
@@ -46,6 +47,13 @@
                 android:layout_width="wrap_content"
                 android:id="@+id/mine_tab"
                 android:text="@string/chart"
+                />
+
+        <com.google.android.material.tabs.TabItem
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:id="@+id/my_active_orders_tab"
+                android:text="@string/my_active_orders"
                 />
 
         <com.google.android.material.tabs.TabItem

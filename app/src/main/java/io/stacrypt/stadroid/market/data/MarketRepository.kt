@@ -52,9 +52,9 @@ object MarketRepository {
                 liveData.postValue(
                     stemeraldApiClient.kline(
                         market = market,
-                        start = (time.time - DateUtils.WEEK_IN_MILLIS).toInt() / 1000, //FIXME
-                        end = time.time.toInt() / 1000, // FIXME
-                        interval = (DateUtils.MINUTE_IN_MILLIS * 5).toInt()
+                        start = (time.time - DateUtils.MINUTE_IN_MILLIS).div(1000L).toInt(), //FIXME
+                        end = time.time.div(1000L).toInt(), // FIXME
+                        interval = (DateUtils.MINUTE_IN_MILLIS * 5).div(1000L).toInt()
                     ).await()
 //                    mockStemeraldApiClient.kline(
 //                        market = market
@@ -120,6 +120,36 @@ object MarketRepository {
         scope.launch {
             try {
                 liveData.postValue(stemeraldApiClient.mine(market = market, take = 50, skip = 0).await())
+//                liveData.postValue(mockStemeraldApiClient.mine(market = market).await())
+            } catch (e: Exception) {
+                // TODO: Try again
+                e.printStackTrace()
+            }
+        }
+        return liveData
+    }
+
+    fun getMyActiveOrders(market: String): LiveData<List<Order>> = getOrders(market, "pending")
+
+    fun getMyFinishedOrders(market: String): LiveData<List<Order>> = getOrders(market, "finished")
+
+    /**
+     * In memory, because cached data is unusable.
+     *
+     * TODO: Update it automatically
+     */
+    private fun getOrders(market: String, status: String): LiveData<List<Order>> {
+        val liveData = MutableLiveData<List<Order>>()
+        scope.launch {
+            try {
+                liveData.postValue(
+                    stemeraldApiClient.getOrders(
+                        marketName = market,
+                        limit = 50,
+                        offset = 0,
+                        status = status
+                    ).await()
+                )
 //                liveData.postValue(mockStemeraldApiClient.mine(market = market).await())
             } catch (e: Exception) {
                 // TODO: Try again

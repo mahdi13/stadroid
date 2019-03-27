@@ -115,6 +115,22 @@ interface StemeraldV2ApiClient {
     /**
      * Orders
      */
+    @HTTP(method = "GET", path = "orders", hasBody = false)
+    fun getOrders(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
+        @Query("marketName") marketName: String,
+        @Query("status") status: String,
+        @Query("offset") offset: Int,
+        @Query("limit") limit: Int
+    ): Deferred<ArrayList<Order>>
+
+    @HTTP(method = "GET", path = "orders/{order}", hasBody = true)
+    fun cancelOrder(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
+        @Path("order") orderId: Int,
+        @Query("marketName") marketName: String
+    ): Deferred<Unit>
+
     @FormUrlEncoded
     @HTTP(method = "CREATE", path = "orders", hasBody = true)
     fun putMarketOrder(
@@ -427,7 +443,7 @@ val okHttpClient by lazy {
             return@addInterceptor response
 
         }
-        .addInterceptor(HttpLoggingInterceptor())
+        .addInterceptor(HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY })
         .build()
 }
 
