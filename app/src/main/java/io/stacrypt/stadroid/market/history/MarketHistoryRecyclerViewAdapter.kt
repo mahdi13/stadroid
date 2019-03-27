@@ -24,8 +24,8 @@ class MarketHistoryRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
-        holder.amountView.text = item.amount
-        holder.priceView.text = item.price
+        holder.amountView.text = item.amount.toString()
+        holder.priceView.text = item.price.toString()
 
         val newPrice = item.price.toDouble()
         val lastPrice = if (position > 0) items[position - 1].price.toDouble() else newPrice

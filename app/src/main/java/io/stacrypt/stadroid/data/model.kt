@@ -2,6 +2,7 @@ package io.stacrypt.stadroid.data
 
 import androidx.room.*
 import com.google.gson.annotations.SerializedName
+import java.math.BigDecimal
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -12,7 +13,7 @@ data class Market(
     var stockPrec: Int,
     var money: String,
     var feePrec: Int,
-    var minAmount: String,
+    var minAmount: BigDecimal,
     var moneyPrec: Int
 //    @Embedded var status: MarketStatus?,
 //    @Embedded var summary: MarketSummary?,
@@ -21,27 +22,27 @@ data class Market(
 )
 
 data class MarketStatus(
-    val openStatus: Long,
-    val highStatus: Long,
-    val lowStatus: Long,
-    val closeStatus: Long,
-    val lastStatus: Long,
-    val dealStatus: Long,
-    val volumeStatus: Long,
+    val openStatus: BigDecimal,
+    val highStatus: BigDecimal,
+    val lowStatus: BigDecimal,
+    val closeStatus: BigDecimal,
+    val lastStatus: BigDecimal,
+    val dealStatus: BigDecimal,
+    val volumeStatus: BigDecimal,
     val periodStatus: Long
 )
 
 data class MarketSummary(
-    val open24: Long,
-    val last24: Long,
-    val high24: Long,
-    val low24: Long,
-    val deal24: Long,
-    val volume24: Long
+    val open24: BigDecimal,
+    val last24: BigDecimal,
+    val high24: BigDecimal,
+    val low24: BigDecimal,
+    val deal24: BigDecimal,
+    val volume24: BigDecimal
 )
 
 data class MarketLast(
-    val price: Double
+    val price: BigDecimal
 )
 
 @Entity
@@ -60,16 +61,16 @@ data class Currency(
     /**
      * Just for crypto:
      */
-    var depositMin: Long?,
-    var depositMax: Long?,
-    var withdrawMin: Long?,
-    var withdrawMax: Long?,
-    var depositMaxCommission: Long?,
-    var withdrawMaxCommission: Long?,
-    var depositStaticCommission: Long?,
-    var withdrawStaticCommission: Long?,
-    var depositPermilleCommission: Long?,
-    var withdrawPermilleCommission: Long?,
+    var depositMin: BigDecimal?,
+    var depositMax: BigDecimal?,
+    var withdrawMin: BigDecimal?,
+    var withdrawMax: BigDecimal?,
+    var depositMaxCommission: BigDecimal?,
+    var withdrawMaxCommission: BigDecimal?,
+    var depositStaticCommission: BigDecimal?,
+    var withdrawStaticCommission: BigDecimal?,
+    var depositCommissionRate: String?,
+    var withdrawCommissionRate: String?,
     var walletId: String?
 
 )
@@ -77,20 +78,20 @@ data class Currency(
 data class Kline(
     var market: String,
     var time: Long,
-    var o: Double,
-    var h: Double,
-    var l: Double,
-    var c: Double,
-    var volume: Double,
-    var amount: Double
+    var o: BigDecimal,
+    var h: BigDecimal,
+    var l: BigDecimal,
+    var c: BigDecimal,
+    var volume: BigDecimal,
+    var amount: BigDecimal
 )
 
 data class Book(
     var market: String,
     var i: Int,
     var side: String,
-    var price: String,
-    var amount: String
+    var price: BigDecimal,
+    var amount: BigDecimal
 )
 
 data class Deal(
@@ -98,8 +99,8 @@ data class Deal(
     var id: Int,
     var time: Long,
     var type: String,
-    var amount: String,
-    var price: String
+    var amount: BigDecimal,
+    var price: BigDecimal
 )
 
 data class Mine(
@@ -109,9 +110,9 @@ data class Mine(
     var time: Long,
     var side: String,
     var role: String,
-    var amount: String,
-    var price: String,
-    var fee: String,
+    var amount: BigDecimal,
+    var price: BigDecimal,
+    var fee: BigDecimal,
     var fillId: Int,
     var orderId: Int
 )
@@ -119,16 +120,16 @@ data class Mine(
 @Entity
 data class BalanceOverview(
     @PrimaryKey @SerializedName("name") var assetName: String,
-    var available: Double,
-    var freeze: Double
+    var available: BigDecimal,
+    var freeze: BigDecimal
 )
 
 data class BalanceHistory(
     @SerializedName("time") var time: Date,
     @SerializedName("asset") var assetName: String,
     @SerializedName("business") var business: String,
-    @SerializedName("change") var change: String,
-    @SerializedName("balance") var balance: String,
+    @SerializedName("change") var change: BigDecimal,
+    @SerializedName("balance") var balance: BigDecimal,
     @SerializedName("detail") var detail: String
 )
 
@@ -178,6 +179,25 @@ data class Evidence(
     val error: String?,
     val idCard: String?,
     val idCardSecondary: String?
+)
+
+data class Order(
+    val id: Int,
+    val createdAt: Date?,
+    val modifiedAt: Date?,
+    val finishedAt: Date?,
+    val market: String,
+    val user: Int,
+    val type: String,
+    val side: String,
+    val amount: BigDecimal,
+    val price: BigDecimal?,
+    val takerFeeRate: String?,
+    val makerFeeRate: String?,
+    val source: String?,
+    val filledMoney: BigDecimal?,
+    val filledStock: BigDecimal?,
+    val filledFee: BigDecimal?
 )
 
 @Entity
@@ -342,16 +362,16 @@ data class BankCard(
 @Entity
 data class PaymentGateway(
     @PrimaryKey val name: String,
-    val cashinMin: Long,
-    val cashoutStaticCommission: Long,
-    val cashinMax: Long,
-    val cashoutMax: Long,
-    val cashinMaxCommission: Long,
-    val cashinStaticCommission: Long,
-    val cashinPermilleCommission: Long,
-    val cashoutMaxCommission: Long,
-    val cashoutPermilleCommission: Long,
-    val cashoutMin: Long,
+    val cashinMin: BigDecimal,
+    val cashoutStaticCommission: BigDecimal,
+    val cashinMax: BigDecimal,
+    val cashoutMax: BigDecimal,
+    val cashinMaxCommission: BigDecimal,
+    val cashinStaticCommission: BigDecimal,
+    val cashinCommissionRate: String,
+    val cashoutMaxCommission: BigDecimal,
+    val cashoutCommissionRate: String,
+    val cashoutMin: BigDecimal,
     val fiatSymbol: String,
     @Embedded(prefix = "fiat_") val fiat: Fiat
 )

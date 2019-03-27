@@ -27,8 +27,8 @@ class MarketMineRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
-        holder.priceView.text = item.price
-        holder.amountView.text = item.amount
+        holder.priceView.text = item.price.toString()
+        holder.amountView.text = item.amount.toString()
 //        holder.feeView.text = item.fee
 //        holder.dateView.text = sdf.format(item.time)
 //

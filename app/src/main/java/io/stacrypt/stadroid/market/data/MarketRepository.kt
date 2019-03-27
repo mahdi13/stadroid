@@ -1,5 +1,6 @@
 package io.stacrypt.stadroid.market.data
 
+import android.text.format.DateUtils
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.stacrypt.stadroid.data.*
@@ -8,6 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import java.lang.Exception
+import java.util.*
 
 object MarketRepository {
     private val marketDao: MarketDao = stemeraldDatabase.marketDao
@@ -46,20 +48,21 @@ object MarketRepository {
         val liveData = MutableLiveData<List<Kline>>()
         scope.launch {
             try {
-//                val time = Calendar.getInstance().time
-//                liveData.postValue(
-////                    stemeraldApiClient.kline(
-////                        market = market,
-////                        start = (time.time - DateUtils.WEEK_IN_MILLIS).toInt(),
-////                        end = time.time.toInt(),
-////                        interval = (DateUtils.MINUTE_IN_MILLIS * 5).toInt()
-////                    ).await()
+                val time = Calendar.getInstance().time
+                liveData.postValue(
+                    stemeraldApiClient.kline(
+                        market = market,
+                        start = (time.time - DateUtils.WEEK_IN_MILLIS).toInt() / 1000, //FIXME
+                        end = time.time.toInt() / 1000, // FIXME
+                        interval = (DateUtils.MINUTE_IN_MILLIS * 5).toInt()
+                    ).await()
 //                    mockStemeraldApiClient.kline(
 //                        market = market
 //                    ).await()
-//                )
+                )
             } catch (e: Exception) {
                 // TODO: Try again
+                e.printStackTrace()
             }
         }
         return liveData
@@ -74,15 +77,16 @@ object MarketRepository {
         val liveData = MutableLiveData<BookResponse>()
         scope.launch {
             try {
-//                liveData.postValue(
-////                    BookResponse(
-////                        buys = stemeraldApiClient.book(market, "buy").await(),
-////                        sells = stemeraldApiClient.book(market, "sell").await()
-////                    )
+                liveData.postValue(
+                    BookResponse(
+                        buys = stemeraldApiClient.book(market, "buy").await(),
+                        sells = stemeraldApiClient.book(market, "sell").await()
+                    )
 //                    mockStemeraldApiClient.book(market).await()
-//                )
+                )
             } catch (e: Exception) {
                 // TODO: Try again
+                e.printStackTrace()
             }
         }
         return liveData
@@ -100,6 +104,7 @@ object MarketRepository {
                 liveData.postValue(stemeraldApiClient.deal(market).await())
             } catch (e: Exception) {
                 // TODO: Try again
+                e.printStackTrace()
             }
         }
         return liveData
@@ -114,10 +119,11 @@ object MarketRepository {
         val liveData = MutableLiveData<List<Mine>>()
         scope.launch {
             try {
-//                liveData.postValue(stemeraldApiClient.mine(market = market, take = 50, skip = 0).await())
+                liveData.postValue(stemeraldApiClient.mine(market = market, take = 50, skip = 0).await())
 //                liveData.postValue(mockStemeraldApiClient.mine(market = market).await())
             } catch (e: Exception) {
                 // TODO: Try again
+                e.printStackTrace()
             }
         }
         return liveData
@@ -132,14 +138,15 @@ object MarketRepository {
         val liveData = MutableLiveData<MarketSummary>()
         scope.launch {
             try {
-//                liveData.postValue(stemeraldApiClient.marketSummary(market = market).await()[0])
-                liveData.postValue(
-                    MarketSummary(
-                        open24 = 4301, last24 = 4598, high24 = 5034, low24 = 3990, deal24 = 3232312, volume24 = 42345656
-                    )
-                )
+                liveData.postValue(stemeraldApiClient.marketSummary(market = market).await()[0])
+//                liveData.postValue(
+//                    MarketSummary(
+//                        open24 = 4301, last24 = 4598, high24 = 5034, low24 = 3990, deal24 = 3232312, volume24 = 42345656
+//                    )
+//                )
             } catch (e: Exception) {
                 // TODO: Try again
+                e.printStackTrace()
             }
         }
         return liveData
@@ -157,6 +164,7 @@ object MarketRepository {
                 liveData.postValue(stemeraldApiClient.marketStatus(market = market).await())
             } catch (e: Exception) {
                 // TODO: Try again
+                e.printStackTrace()
             }
         }
         return liveData
@@ -174,6 +182,7 @@ object MarketRepository {
                 liveData.postValue(stemeraldApiClient.marketLast(market = market).await())
             } catch (e: Exception) {
                 // TODO: Try again
+                e.printStackTrace()
             }
         }
         return liveData

@@ -62,7 +62,7 @@ class PageKeyedBalanceHistoryDataSource(private val assetName: String) :
         scope.launch {
             try {
 //                val items = stemeraldApiClient.balanceHistory(
-                val items = mockStemeraldApiClient.balanceHistory(
+                val items = stemeraldApiClient.balanceHistory(
                     assetName = assetName,
                     page = params.key
                 ).await()
@@ -83,7 +83,7 @@ class PageKeyedBalanceHistoryDataSource(private val assetName: String) :
         callback: LoadInitialCallback<Int, BalanceHistory>
     ) {
 //        val request = stemeraldApiClient.balanceHistory(assetName = assetName)
-        val request = mockStemeraldApiClient.balanceHistory(assetName = assetName)
+        val request = stemeraldApiClient.balanceHistory(assetName = assetName)
         networkState.postValue(NetworkState.LOADING)
         initialLoad.postValue(NetworkState.LOADING)
 

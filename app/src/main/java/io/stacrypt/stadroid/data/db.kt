@@ -5,6 +5,7 @@ import androidx.room.Database
 import androidx.room.TypeConverter
 import androidx.room.TypeConverters
 import java.util.*
+import java.math.BigDecimal
 
 
 @Database(
@@ -49,4 +50,11 @@ class Converters {
     fun dateToTimestamp(date: Date?): Long? {
         return date?.time?.toLong()
     }
+
+    @TypeConverter
+    fun fromDouble(value: Double?): BigDecimal? = if (value == null) null else BigDecimal(value)
+
+    @TypeConverter
+    fun toDouble(bigDecimal: BigDecimal?): Double? = bigDecimal?.multiply(BigDecimal(100))?.toDouble()
+
 }

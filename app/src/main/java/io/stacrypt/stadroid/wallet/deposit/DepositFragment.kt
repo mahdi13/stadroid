@@ -99,7 +99,7 @@ class DepositFragment : Fragment() {
             if (it == null) return@Observer
             view?.min_limit?.text = it.depositMin?.toString() ?: "No limit"
             view?.max_limit?.text = it.depositMax?.toString() ?: "No limit"
-            view?.fee?.text = "${(it.depositStaticCommission) ?: 0} + ${(it.depositPermilleCommission ?: 0) / 10f}%"
+            view?.fee?.text = "${(it.depositStaticCommission) ?: 0} + ${it.depositCommissionRate}%"
         })
 
         view?.address_copy?.setOnClickListener {

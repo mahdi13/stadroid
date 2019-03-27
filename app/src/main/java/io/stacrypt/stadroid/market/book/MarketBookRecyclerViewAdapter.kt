@@ -25,11 +25,11 @@ class MarketBookRecyclerViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val leftItem = items[position].first
         val rightItem = items[position].second
-        holder.leftPriceView.text = leftItem?.price ?: ""
-        holder.leftAmountView.text = leftItem?.amount ?: ""
-        holder.rightPriceView.text = rightItem?.price ?: ""
-        holder.rightAmountView.text = rightItem?.amount ?: ""
-        holder.rightAmountView.text = rightItem?.amount ?: ""
+        holder.leftPriceView.text = leftItem?.price?.toString() ?: ""
+        holder.leftAmountView.text = leftItem?.amount?.toString() ?: ""
+        holder.rightPriceView.text = rightItem?.price?.toString() ?: ""
+        holder.rightAmountView.text = rightItem?.amount?.toString() ?: ""
+        holder.rightAmountView.text = rightItem?.amount?.toString() ?: ""
 
         holder.leftProgressView.max = items.map { it.first?.amount?.toFloat() ?: 0F }.max()!!
         holder.leftProgressView.progress = leftItem?.amount?.toFloat() ?: 0F

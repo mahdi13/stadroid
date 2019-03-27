@@ -81,7 +81,7 @@ class BalanceDetailPagedAdapter(var balanceOverview: BalanceOverview?) :
 
             titleView.text = item.business
             dateView.text = item.time.format()
-            amountView.text = item.change
+            amountView.text = item.change.toString()
             valueView.text = "1234 $" // FIXME
 
             // TODO: Enhance these color and resource loadings
