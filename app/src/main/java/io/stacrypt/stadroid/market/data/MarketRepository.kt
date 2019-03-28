@@ -24,7 +24,8 @@ object MarketRepository {
      * TODO: Limit webservice call rate
      */
     fun getMarket(marketName: String): LiveData<Market> {
-        refreshMarkets()
+//        refreshMarkets() // FIXME: Uncommenting this line will cause flashing (and loading loop) of vitrine fragment
+        // FIXME: But also we should find a way to update the market data periodically
         return marketDao.load(marketName)
     }
 
@@ -52,9 +53,9 @@ object MarketRepository {
                 liveData.postValue(
                     stemeraldApiClient.kline(
                         market = market,
-                        start = (time.time - DateUtils.MINUTE_IN_MILLIS).div(1000L).toInt(), //FIXME
+                        start = (time.time - DateUtils.MINUTE_IN_MILLIS * 60).div(1000L).toInt(), //FIXME
                         end = time.time.div(1000L).toInt(), // FIXME
-                        interval = (DateUtils.MINUTE_IN_MILLIS * 5).div(1000L).toInt()
+                        interval = (DateUtils.MINUTE_IN_MILLIS).div(1000L).toInt()
                     ).await()
 //                    mockStemeraldApiClient.kline(
 //                        market = market

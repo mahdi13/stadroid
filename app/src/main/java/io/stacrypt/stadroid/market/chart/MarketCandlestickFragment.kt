@@ -52,7 +52,7 @@ class MarketCandlestickFragment : Fragment() {
             values.add(
                 BarEntry(
                     i.toFloat(),
-                    ((it.volume * maxPrice!!) / maxVolume!!).toFloat() / 5f
+                    if (maxVolume?.toInt() == 0) 0F else ((it.volume * maxPrice!!) / maxVolume!!).toFloat() / 5f
                 )
             )
         }

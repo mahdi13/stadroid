@@ -105,6 +105,13 @@ interface StemeraldV2ApiClient {
     @HTTP(method = "BOOK", path = "markets/{market}", hasBody = true)
     fun book(@Path("market") market: String, @Query("side") side: String): Deferred<List<Book>>
 
+    @HTTP(method = "DEPTH", path = "markets/{market}", hasBody = true)
+    fun depth(
+        @Path("market") market: String,
+        @Query("interval") interval: String,
+        @Query("limit") limit: Int
+    ): Deferred<Depth>
+
     @HTTP(method = "PEEK", path = "markets/{market}/marketdeals", hasBody = true)
     fun deal(
         @Path("market") market: String,

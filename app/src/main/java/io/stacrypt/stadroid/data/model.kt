@@ -94,6 +94,16 @@ data class Book(
     var amount: BigDecimal
 )
 
+data class Depth(
+    var asks: ArrayList<DepthRecord>,
+    var bids: ArrayList<DepthRecord>
+)
+
+data class DepthRecord(
+    var price: BigDecimal,
+    var amount: BigDecimal
+)
+
 data class Deal(
     var market: String,
     var id: Int,

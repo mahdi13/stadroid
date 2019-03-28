@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity(),
     }
 
     private fun buildWalletFragment(): Fragment = WalletFragment()
-    private fun buildMarketFragment(): Fragment = MarketFragment()
+    private fun buildMarketFragment(): Fragment = MarketVitrineFragment()
     private fun buildProfileFragment(): Fragment = ProfileFragment()
     private fun buildLoginFragment(): Fragment = LoginFragment()
 
