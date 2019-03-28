@@ -16,6 +16,10 @@ import io.stacrypt.stadroid.market.data.MarketRepository
 import kotlinx.android.synthetic.main.fragment_market_vitrine.*
 import kotlinx.android.synthetic.main.fragment_market_vitrine.view.*
 import org.jetbrains.anko.support.v4.withArguments
+import androidx.core.content.ContextCompat
+import android.graphics.drawable.Drawable
+import kotlinx.android.synthetic.main.fragment_market_vitrine_list.*
+import org.jetbrains.anko.startActivity
 
 
 class MarketVitrineViewModel : ViewModel() {
@@ -38,6 +42,11 @@ class MarketVitrineFragment : Fragment() {
                 // FIXME
                 when (market.name) {
                     "TIRR_TBTC" -> {
+//                        container1.setOnClickListener {
+//                            activity!!.startActivity<MarketActivity> {
+//
+//                            }
+//                        }
                         childFragmentManager.beginTransaction()
                             .replace(R.id.container1, MarketVitrineRowFragment().withArguments("market" to market.name))
                             .commitNow()
@@ -105,15 +114,15 @@ class MarketVitrineRowFragment : Fragment() {
         dataset.setDrawIcons(false)
         dataset.mode = LineDataSet.Mode.CUBIC_BEZIER
         dataset.cubicIntensity = 0.2f
-        dataset.colors = listOf(resources.getColor(R.color.colorPrimaryDark))
+        dataset.colors = listOf(resources.getColor(R.color.colorSecondary))
         dataset.valueTextSize = 0f
-        dataset.fillAlpha = 255
+        dataset.fillAlpha = 200
         dataset.setDrawFilled(true)
         dataset.setDrawCircleHole(false)
         dataset.setDrawCircles(false)
-        dataset.fillColor = resources.getColor(R.color.colorPrimaryDark)
-        dataset.highLightColor = resources.getColor(R.color.colorPrimary)
-        dataset.setDrawCircleHole(false)
+//        dataset.fillColor = resources.getColor(R.color.colorSecondary)
+        dataset.lineWidth = 3f
+        dataset.fillDrawable = ContextCompat.getDrawable(context!!, R.drawable.mini_chart_fill)
         dataset.fillFormatter = IFillFormatter { _, _ ->
             // change the return value here to better understand the effect
             // return 0;
@@ -166,6 +175,7 @@ class MarketVitrineRowFragment : Fragment() {
         mini_chart.setPinchZoom(false)
         mini_chart.isScaleYEnabled = false
         mini_chart.isScaleXEnabled = false
+        mini_chart.setNoDataText("")
 
     }
 

@@ -21,14 +21,6 @@
     <!--style="@style/RemainderVertical.AirGraph"-->
     <!--app:graph_title="Weather Report"/>-->
 
-    <com.github.mikephil.charting.charts.LineChart
-            android:id="@+id/mini_chart"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="-15dp"
-            android:layout_marginBottom="-15dp"
-            android:layout_marginRight="-15dp"/>
-
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -37,18 +29,19 @@
             android:padding="5dp"
             android:id="@+id/row1">
 
-        <androidx.appcompat.widget.AppCompatSpinner
-                style="@style/Widget.AppCompat.Spinner.Underlined"
+        <TextView
+                android:textAppearance="@style/MaterialAlertDialog.MaterialComponents.Title.Text"
                 android:foregroundTint="@color/colorSecondary"
                 android:backgroundTint="@color/colorSecondary"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight="1"
-                android:id="@+id/name_spinner"
+                android:id="@+id/market_name"
                 android:gravity="center"
                 android:textStyle="bold"
                 android:textSize="20sp"
                 android:fontFamily="@font/din_medium"
+                android:text="@string/loading"
                 tools:text="BTC / USD"/>
 
         <TextView
