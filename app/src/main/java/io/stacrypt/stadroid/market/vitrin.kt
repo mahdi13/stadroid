@@ -20,6 +20,7 @@ import androidx.core.content.ContextCompat
 import android.graphics.drawable.Drawable
 import kotlinx.android.synthetic.main.fragment_market_vitrine_list.*
 import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.support.v4.startActivity
 
 
 class MarketVitrineViewModel : ViewModel() {
@@ -42,11 +43,9 @@ class MarketVitrineFragment : Fragment() {
                 // FIXME
                 when (market.name) {
                     "TIRR_TBTC" -> {
-//                        container1.setOnClickListener {
-//                            activity!!.startActivity<MarketActivity> {
-//
-//                            }
-//                        }
+                        container1.setOnClickListener {
+                            startActivity<MarketActivity>(MarketActivity.ARG_MARKET to market.name)
+                        }
                         childFragmentManager.beginTransaction()
                             .replace(R.id.container1, MarketVitrineRowFragment().withArguments("market" to market.name))
                             .commitNow()

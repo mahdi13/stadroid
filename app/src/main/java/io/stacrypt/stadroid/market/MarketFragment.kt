@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentPagerAdapter
+import androidx.lifecycle.ViewModelProviders
 import io.stacrypt.stadroid.R
 import kotlinx.android.synthetic.main.fragment_market.*
 import com.google.android.material.tabs.TabLayout
@@ -20,6 +21,8 @@ import java.lang.IndexOutOfBoundsException
  * A placeholder fragment containing a simple view.
  */
 class MarketFragment : Fragment() {
+
+    private lateinit var viewModel: MarketViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -48,6 +51,12 @@ class MarketFragment : Fragment() {
         }
 //        tabs.setupWithViewPager(viewpager)
 
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModel = ViewModelProviders.of(activity!!).get(MarketViewModel::class.java)
+        arguments?.getString(MarketActivity.ARG_MARKET)?.let { viewModel.marketName.postValue(it) }
     }
 
     override fun onCreateView(
