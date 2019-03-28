@@ -42,16 +42,16 @@ class MarketVitrineFragment : Fragment() {
                             .replace(R.id.container1, MarketVitrineRowFragment().withArguments("market" to market.name))
                             .commitNow()
                     }
-                    "TIRR_TETH" -> {
-                        childFragmentManager.beginTransaction()
-                            .replace(R.id.container2, MarketVitrineRowFragment().withArguments("market" to market.name))
-                            .commitNow()
-                    }
-                    "TBTC_TETH" -> {
-                        childFragmentManager.beginTransaction()
-                            .replace(R.id.container3, MarketVitrineRowFragment().withArguments("market" to market.name))
-                            .commitNow()
-                    }
+//                    "TIRR_TETH" -> {
+//                        childFragmentManager.beginTransaction()
+//                            .replace(R.id.container2, MarketVitrineRowFragment().withArguments("market" to market.name))
+//                            .commitNow()
+//                    }
+//                    "TBTC_TETH" -> {
+//                        childFragmentManager.beginTransaction()
+//                            .replace(R.id.container3, MarketVitrineRowFragment().withArguments("market" to market.name))
+//                            .commitNow()
+//                    }
                 }
             }
         })
@@ -60,18 +60,22 @@ class MarketVitrineFragment : Fragment() {
 
 class VitrineViewModel : ViewModel() {
 
-    val marketName: MutableLiveData<String> = MutableLiveData<String>()
+    val marketName: MutableLiveData<String> = MutableLiveData()
 
-    val market: LiveData<Market> = Transformations.switchMap(marketName) {
-        MarketRepository.getMarket(it)
-    }
-    val last: LiveData<MarketLast> = Transformations.switchMap(marketName) { MarketRepository.getMarketLast(it) }
+    val market: LiveData<Market> =
+        Transformations.switchMap(marketName) { MarketRepository.getMarket(it) }
+
+    val last: LiveData<MarketLast> =
+        Transformations.switchMap(marketName) { MarketRepository.getMarketLast(it) }
+
     val summary: LiveData<MarketSummary> =
         Transformations.switchMap(marketName) { MarketRepository.getMarketSummary(it) }
-    val status: LiveData<MarketStatus> = Transformations.switchMap(marketName) { MarketRepository.getMarketStatus(it) }
-    val kline: LiveData<List<Kline>> = Transformations.switchMap(marketName) {
-        MarketRepository.getKline(it)
-    }
+
+    val status: LiveData<MarketStatus> =
+        Transformations.switchMap(marketName) { MarketRepository.getMarketStatus(it) }
+
+    val kline: LiveData<List<Kline>> =
+        Transformations.switchMap(marketName) { MarketRepository.getKline24(it) }
 
 }
 

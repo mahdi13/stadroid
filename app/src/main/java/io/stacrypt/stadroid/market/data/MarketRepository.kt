@@ -40,22 +40,41 @@ object MarketRepository {
         return marketDao.loadAll()
     }
 
+    fun getKline(market: String): LiveData<List<Kline>> {
+        val time = Calendar.getInstance().time
+        return getKline(
+            market = market,
+            start = (time.time - DateUtils.MINUTE_IN_MILLIS * 60).div(1000L).toInt(), //FIXME
+            end = time.time.div(1000L).toInt(), // FIXME
+            interval = (DateUtils.MINUTE_IN_MILLIS).div(1000L).toInt()
+        )
+    }
+
+    fun getKline24(market: String): LiveData<List<Kline>> {
+        val time = Calendar.getInstance().time
+        return getKline(
+            market = market,
+            start = (time.time - DateUtils.HOUR_IN_MILLIS * 24).div(1000L).toInt(), //FIXME
+            end = time.time.div(1000L).toInt(), // FIXME
+            interval = (DateUtils.HOUR_IN_MILLIS).div(1000L).toInt()
+        )
+    }
+
     /**
      * In memory, because cached data is unusable.
      *
      * TODO: Update it automatically
      */
-    fun getKline(market: String): LiveData<List<Kline>> {
+    private fun getKline(market: String, start: Int, end: Int, interval: Int): LiveData<List<Kline>> {
         val liveData = MutableLiveData<List<Kline>>()
         scope.launch {
             try {
-                val time = Calendar.getInstance().time
                 liveData.postValue(
                     stemeraldApiClient.kline(
                         market = market,
-                        start = (time.time - DateUtils.MINUTE_IN_MILLIS * 60).div(1000L).toInt(), //FIXME
-                        end = time.time.div(1000L).toInt(), // FIXME
-                        interval = (DateUtils.MINUTE_IN_MILLIS).div(1000L).toInt()
+                        start = start,
+                        end = end,
+                        interval = interval
                     ).await()
 //                    mockStemeraldApiClient.kline(
 //                        market = market

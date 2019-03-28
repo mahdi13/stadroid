@@ -24,7 +24,7 @@
             <FrameLayout
                     android:id="@+id/container1"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="250dp"
                     ></FrameLayout>
 
         </androidx.cardview.widget.CardView>
@@ -33,17 +33,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:backgroundTint="@color/colorPrimary"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground"
+                android:backgroundTint="#33333333"
                 >
 
             <FrameLayout
                     android:id="@+id/container2"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    ></FrameLayout>
+                    android:layout_height="250dp"
+                    >
+
+                <TextView
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                        android:textColor="@color/colorGrayText"
+                        android:backgroundTint="#10000000"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/coming_soon"
+                        android:textAllCaps="true"
+                        android:gravity="center"/>
+
+            </FrameLayout>
 
         </androidx.cardview.widget.CardView>
 
@@ -51,17 +60,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:backgroundTint="@color/colorPrimary"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground"
+                android:backgroundTint="#33333333"
                 >
 
             <FrameLayout
                     android:id="@+id/container3"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    ></FrameLayout>
+                    android:layout_height="250dp"
+                    >
+
+                <TextView
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                        android:textColor="@color/colorGrayText"
+                        android:backgroundTint="#10000000"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/coming_soon"
+                        android:textAllCaps="true"
+                        android:gravity="center"/>
+
+            </FrameLayout>
 
         </androidx.cardview.widget.CardView>
 
