@@ -22,14 +22,14 @@ data class Market(
 )
 
 data class MarketStatus(
-    val openStatus: BigDecimal,
-    val highStatus: BigDecimal,
-    val lowStatus: BigDecimal,
-    val closeStatus: BigDecimal,
-    val lastStatus: BigDecimal,
-    val dealStatus: BigDecimal,
-    val volumeStatus: BigDecimal,
-    val periodStatus: Long
+    val open: BigDecimal,
+    val high: BigDecimal,
+    val low: BigDecimal,
+    val close: BigDecimal,
+    val volume: BigDecimal,
+    val deal: BigDecimal,
+    val last: BigDecimal,
+    val period: Long
 )
 
 data class MarketSummary(
