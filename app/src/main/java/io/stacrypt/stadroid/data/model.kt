@@ -386,6 +386,25 @@ data class PaymentGateway(
     @Embedded(prefix = "fiat_") val fiat: Fiat
 )
 
+data class BankingTransaction(
+    @SerializedName("id") var id: Int,
+    @SerializedName("memberId") var userId: Int,
+    @SerializedName("member") var user: User,
+    @SerializedName("fiatSymbol") var fiatSymbol: String,
+    @SerializedName("referenceId") var referenceId: String?,
+    @SerializedName("amount") var amount: BigDecimal?,
+    @SerializedName("commission") var commission: BigDecimal?,
+    @SerializedName("creation") var creation: Date,
+    @SerializedName("createdAt") var createdAt: Date?,
+    @SerializedName("modifiedAt") var modifiedAt: Date?,
+    @SerializedName("bankingId") var bankingId: Any?,
+    @SerializedName("paymentGateway") var paymentGateway: PaymentGateway?,
+    @SerializedName("paymentGatewayName") var paymentGatewayName: String?,
+    @SerializedName("error") var error: String?,
+    @SerializedName("transactionId") var transactionId: String?,
+    @SerializedName("type") var type: String
+)
+
 data class Fiat(
     val name: String,
     val type: String,

@@ -170,6 +170,12 @@ interface StemeraldV2ApiClient {
         @Query("limit") take: Int = 20
     ): Deferred<ArrayList<Mine>>
 
+    @HTTP(method = "GET", path = "transactions/payment-gateways", hasBody = false)
+    fun getPaymentGateways(): Deferred<List<PaymentGateway>>
+
+    /**
+     * Deposits
+     */
     @HTTP(method = "SHOW", path = "deposits", hasBody = true)
     fun showDepositInfo(
         @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
@@ -182,8 +188,26 @@ interface StemeraldV2ApiClient {
         @Query("cryptocurrencySymbol") assetName: String
     ): Deferred<DepositInfo>
 
-    @HTTP(method = "GET", path = "transactions/payment-gateways", hasBody = false)
-    fun getPaymentGateways(): Deferred<List<PaymentGateway>>
+    /**
+     * Shaparak
+     */
+    @FormUrlEncoded
+    @HTTP(method = "CREATE", path = "transactions/shaparak-ins", hasBody = true)
+    fun createShaparakIn(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
+        @Field("amount") amount: String,
+        @Field("shetabAddressId") bankCardId: String,
+        @Field("paymentGatewayName") paymentGatewayName: String
+    ): Deferred<BankingTransaction>
+
+    @FormUrlEncoded
+    @HTTP(method = "SCHEDULE", path = "transactions/shaparak-outs", hasBody = true)
+    fun scheduleShaparakOut(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
+        @Field("amount") amount: String,
+        @Field("shebaAddressId") bankAccountId: String,
+        @Field("paymentGatewayName") paymentGatewayName: String
+    ): Deferred<BankingTransaction>
 
     /**
      * Membership
