@@ -33,12 +33,11 @@ data class MarketStatus(
 )
 
 data class MarketSummary(
-    val open24: BigDecimal,
-    val last24: BigDecimal,
-    val high24: BigDecimal,
-    val low24: BigDecimal,
-    val deal24: BigDecimal,
-    val volume24: BigDecimal
+    val name: String,
+    val askAmount: BigDecimal,
+    val bidAmount: BigDecimal,
+    val askCount: Int,
+    val bidCount: Int
 )
 
 data class MarketLast(

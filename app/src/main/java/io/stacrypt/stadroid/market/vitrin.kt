@@ -192,13 +192,13 @@ class MarketVitrineRowFragment : Fragment() {
             rootView?.market_name?.text = market.name.replace("_", " / ")
         })
 
-        viewModel.summary.observe(this, Observer {
-            rootView?.open?.text = it?.low24.toString()
-            rootView?.high?.text = it?.high24.toString()
-            rootView?.low?.text = it?.low24.toString()
-            rootView?.close?.text = it?.last24.toString()
+        viewModel.status.observe(this, Observer {
+            rootView?.open?.text = it?.low.toString()
+            rootView?.high?.text = it?.high.toString()
+            rootView?.low?.text = it?.low.toString()
+            rootView?.close?.text = it?.last.toString()
             rootView?.volume?.text =
-                it?.volume24.toString() + " " + (viewModel?.marketName?.value?.split("_")?.get(1) ?: "")
+                it?.volume.toString() + " " + (viewModel?.marketName?.value?.split("_")?.get(1) ?: "")
         })
 
         viewModel.last.observe(this, Observer {
