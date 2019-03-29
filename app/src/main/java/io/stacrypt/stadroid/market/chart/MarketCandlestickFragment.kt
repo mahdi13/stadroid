@@ -46,13 +46,14 @@ class MarketCandlestickFragment : Fragment() {
     private fun initBarDataset(items: List<Kline>?): BarDataSet? {
         val values = ArrayList<BarEntry>()
 
-        val maxPrice = items?.maxBy { it.h }?.h
-        val maxVolume = items?.maxBy { it.volume }?.volume
+//        val maxPrice = items?.maxBy { it.h }?.h
+//        val maxVolume = items?.maxBy { it.volume }?.volume
         items?.forEachIndexed { i, it ->
             values.add(
                 BarEntry(
                     i.toFloat(),
-                    if (maxVolume?.toInt() == 0) 0F else ((it.volume * maxPrice!!) / maxVolume!!).toFloat() / 5f
+//                    if (maxVolume?.toInt() == 0) 0F else ((it.volume * maxPrice!!) / maxVolume!!).toFloat() / 5f
+                    it.volume.toFloat()
                 )
             )
         }
@@ -62,8 +63,6 @@ class MarketCandlestickFragment : Fragment() {
         val dataset = BarDataSet(values, "")
 
         dataset.setDrawIcons(false)
-        dataset.axisDependency = YAxis.AxisDependency.LEFT
-//        dataset.shadowColorSameAsCandle = true
 //        dataset.shadowWidth = 1f
         dataset.valueTextColor = Color.WHITE
 //        dataset.decreasingColor = resources.getColor(R.color.real_red)
@@ -71,7 +70,6 @@ class MarketCandlestickFragment : Fragment() {
 //        dataset.increasingColor = resources.getColor(R.color.real_green)
 //        dataset.increasingPaintStyle = Paint.Style.FILL
 //        dataset.neutralColor = Color.BLUE
-        dataset.axisDependency = YAxis.AxisDependency.LEFT
 //        dataset.color = Color.rgb(255, 241, 46)
         dataset.color = Color.argb(20, 220, 220, 78)
 //        dataset.valueTextColor = Color.rgb(60, 220, 78)
@@ -123,12 +121,57 @@ class MarketCandlestickFragment : Fragment() {
         return dataset
     }
 
-    private fun initChart(dataset: CandleDataSet?, barDataSet: BarDataSet?) {
+    private fun initBarChart(barDataSet: BarDataSet?) {
+        if (barDataSet != null) {
+            bar_chart.data = BarData(barDataSet)
+            bar_chart.notifyDataSetChanged()
+            //        bar_chart.setVisibleYRangeMinimum(1_000F, YAxis.AxisDependency.RIGHT)
+//        bar_chart.setVisibleYRangeMaximum(10_000F, YAxis.AxisDependency.RIGHT)
+//        bar_chart.setVisibleYRangeMinimum(1_000F, YAxis.AxisDependency.LEFT)
+//        bar_chart.setVisibleYRangeMaximum(10_000F, YAxis.AxisDependency.LEFT)
+            bar_chart.invalidate()
+//        bar_chart.setMaxVisibleValueCount(100)
+//        bar_chart.zoom(1F, 1F, 100F, 100F)
+            // scaling can now only be done on x- and y-axis separately
+            bar_chart.setPinchZoom(true)
+            bar_chart.isDoubleTapToZoomEnabled = false
+            bar_chart.isNestedScrollingEnabled = true
+            bar_chart.isHorizontalScrollBarEnabled = true
+            bar_chart.isVerticalScrollBarEnabled = true
+            bar_chart.setVisibleXRange(SHOWING_ITEMS.toFloat(), SHOWING_ITEMS.toFloat())
+            bar_chart.moveViewToX((barDataSet.values.size - SHOWING_ITEMS / 2).toFloat())
+            bar_chart.description.isEnabled = false
+            bar_chart.isScaleYEnabled = false
+            bar_chart.isScaleXEnabled = true
+            bar_chart.setNoDataTextTypeface(dinMediumTypeface)
+        }
+
+        // Colors
+        bar_chart.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+
+        // Touch
+        bar_chart.requestDisallowInterceptTouchEvent(true)
+
+        bar_chart.axisRight.isEnabled = false
+        bar_chart.axisLeft.isEnabled = false
+        bar_chart.xAxis.isEnabled = false
+
+        bar_chart.isHighlightPerDragEnabled = true
+        bar_chart.setDrawBorders(false)
+        bar_chart.setBorderWidth(0F)
+
+        bar_chart.legend.isEnabled = false
+
+        bar_chart.isAutoScaleMinMaxEnabled
+
+    }
+
+    private fun initChart(dataset: CandleDataSet?) {
         // Set dataset
         if (dataset != null) {
-            chart.drawOrder =
-                arrayOf(DrawOrder.BAR, DrawOrder.BUBBLE, DrawOrder.CANDLE, DrawOrder.LINE, DrawOrder.SCATTER)
-            chart.data = CombinedData().apply { setData(CandleData(dataset)) }.apply { setData(BarData(barDataSet)) }
+//            chart.drawOrder =
+//                arrayOf(DrawOrder.BAR, DrawOrder.BUBBLE, DrawOrder.CANDLE, DrawOrder.LINE, DrawOrder.SCATTER)
+            chart.data = CandleData(dataset)
             chart.notifyDataSetChanged()
             //        chart.setVisibleYRangeMinimum(1_000F, YAxis.AxisDependency.RIGHT)
 //        chart.setVisibleYRangeMaximum(10_000F, YAxis.AxisDependency.RIGHT)
@@ -213,7 +256,8 @@ class MarketCandlestickFragment : Fragment() {
         viewModel.kline.observe(this,
             Observer<List<Kline>> { klineItems ->
                 // FIXME: This method is called several times and reload the existing data
-                initChart(initDataset(klineItems), initBarDataset(klineItems))
+                initChart(initDataset(klineItems))
+                initBarChart(initBarDataset(klineItems))
                 //                adapter.items = balances!!
 //                adapter.notifyDataSetChanged()
             })
