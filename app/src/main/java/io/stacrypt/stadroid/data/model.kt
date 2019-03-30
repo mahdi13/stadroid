@@ -14,7 +14,15 @@ data class Market(
     var money: String,
     var feePrec: Int,
     var minAmount: BigDecimal,
-    var moneyPrec: Int
+    var moneyPrec: Int,
+    var buyAmountMin: BigDecimal,
+    var buyAmountMax: BigDecimal,
+    var sellAmountMin: BigDecimal,
+    var sellAmountMax: BigDecimal,
+    var takerCommissionRate: String?,
+    var makerCommissionRate: String?,
+    var baseCurrencySymbol: String?,
+    var quoteCurrencySymbol: String?
 //    @Embedded var status: MarketStatus?,
 //    @Embedded var summary: MarketSummary?,
 //    @Embedded var last: MarketLast?
@@ -70,7 +78,9 @@ data class Currency(
     var withdrawStaticCommission: BigDecimal?,
     var depositCommissionRate: String?,
     var withdrawCommissionRate: String?,
-    var walletId: String?
+    var walletId: String?,
+    var normalizationScale: Int,
+    var smallestUnitScale: Int
 
 )
 

@@ -21,6 +21,11 @@ import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.market.MarketViewModel
 import io.stacrypt.stadroid.ui.dinMediumTypeface
 import com.github.mikephil.charting.charts.CombinedChart.DrawOrder
+import kotlin.random.Random
+import com.github.mikephil.charting.charts.Chart
+import io.stacrypt.stadroid.ui.CoupleChartGestureListener
+import io.stacrypt.stadroid.ui.format
+import io.stacrypt.stadroid.ui.formatScaledMinimal
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -53,7 +58,8 @@ class MarketCandlestickFragment : Fragment() {
                 BarEntry(
                     i.toFloat(),
 //                    if (maxVolume?.toInt() == 0) 0F else ((it.volume * maxPrice!!) / maxVolume!!).toFloat() / 5f
-                    it.volume.toFloat()
+//                    it.volume.toFloat()
+                    Random.nextInt(0, 100).toFloat()
                 )
             )
         }
@@ -63,6 +69,8 @@ class MarketCandlestickFragment : Fragment() {
         val dataset = BarDataSet(values, "")
 
         dataset.setDrawIcons(false)
+        dataset.axisDependency = YAxis.AxisDependency.LEFT
+//        dataset.shadowColorSameAsCandle = true
 //        dataset.shadowWidth = 1f
         dataset.valueTextColor = Color.WHITE
 //        dataset.decreasingColor = resources.getColor(R.color.real_red)
@@ -70,8 +78,9 @@ class MarketCandlestickFragment : Fragment() {
 //        dataset.increasingColor = resources.getColor(R.color.real_green)
 //        dataset.increasingPaintStyle = Paint.Style.FILL
 //        dataset.neutralColor = Color.BLUE
+        dataset.axisDependency = YAxis.AxisDependency.LEFT
 //        dataset.color = Color.rgb(255, 241, 46)
-        dataset.color = Color.argb(20, 220, 220, 78)
+        dataset.color = Color.argb(60, 220, 220, 78)
 //        dataset.valueTextColor = Color.rgb(60, 220, 78)
         dataset.valueTextSize = 0f
         dataset.axisDependency = YAxis.AxisDependency.LEFT
@@ -153,25 +162,33 @@ class MarketCandlestickFragment : Fragment() {
         bar_chart.requestDisallowInterceptTouchEvent(true)
 
         bar_chart.axisRight.isEnabled = false
-        bar_chart.axisLeft.isEnabled = false
+        bar_chart.axisLeft.isEnabled = true
         bar_chart.xAxis.isEnabled = false
 
         bar_chart.isHighlightPerDragEnabled = true
         bar_chart.setDrawBorders(false)
         bar_chart.setBorderWidth(0F)
 
-        bar_chart.legend.isEnabled = false
+        // Left axis
+        val leftAxis = bar_chart.axisLeft
+        leftAxis.setLabelCount(5, false)
+        leftAxis.setDrawGridLines(false)
+        leftAxis.setDrawAxisLine(false)
+        leftAxis.axisLineColor = Color.WHITE
+        leftAxis.textColor = Color.WHITE
+        leftAxis.typeface = dinMediumTypeface
 
-        bar_chart.isAutoScaleMinMaxEnabled
+
+        bar_chart.legend.isEnabled = false
 
     }
 
-    private fun initChart(dataset: CandleDataSet?) {
+    private fun initChart(dataset: CandleDataSet?, barDataSet: BarDataSet?) {
         // Set dataset
         if (dataset != null) {
-//            chart.drawOrder =
-//                arrayOf(DrawOrder.BAR, DrawOrder.BUBBLE, DrawOrder.CANDLE, DrawOrder.LINE, DrawOrder.SCATTER)
-            chart.data = CandleData(dataset)
+            chart.drawOrder =
+                arrayOf(DrawOrder.BAR, DrawOrder.BUBBLE, DrawOrder.CANDLE, DrawOrder.LINE, DrawOrder.SCATTER)
+            chart.data = CombinedData().apply { setData(CandleData(dataset)) }.apply { setData(BarData(barDataSet)) }
             chart.notifyDataSetChanged()
             //        chart.setVisibleYRangeMinimum(1_000F, YAxis.AxisDependency.RIGHT)
 //        chart.setVisibleYRangeMaximum(10_000F, YAxis.AxisDependency.RIGHT)
@@ -228,6 +245,11 @@ class MarketCandlestickFragment : Fragment() {
         leftAxis.axisLineColor = Color.WHITE
         leftAxis.textColor = Color.WHITE
         leftAxis.typeface = dinMediumTypeface
+        leftAxis.setValueFormatter { value, axis ->
+            viewModel.baseCurrency.value?.let {
+                value.toBigDecimal().format(it)
+            } ?: ""
+        }
 
         chart.isHighlightPerDragEnabled = true
 
@@ -256,10 +278,20 @@ class MarketCandlestickFragment : Fragment() {
         viewModel.kline.observe(this,
             Observer<List<Kline>> { klineItems ->
                 // FIXME: This method is called several times and reload the existing data
-                initChart(initDataset(klineItems))
+                initChart(initDataset(klineItems), initBarDataset(klineItems))
                 initBarChart(initBarDataset(klineItems))
                 //                adapter.items = balances!!
 //                adapter.notifyDataSetChanged()
+                chart.onChartGestureListener = CoupleChartGestureListener(
+                    chart, arrayOf(bar_chart)
+                )
+                bar_chart.onChartGestureListener = CoupleChartGestureListener(
+                    bar_chart, arrayOf(chart)
+                )
+
+                chart.animateY(500)
+                bar_chart.animateY(500)
+
             })
     }
 
@@ -277,7 +309,10 @@ class MarketCandlestickFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_market_candlestick, container, false)
+        val root = inflater.inflate(R.layout.fragment_market_candlestick, container, false)
+
+
+        return root
     }
 
 

@@ -5,7 +5,7 @@
                 android:layout_height="match_parent"
                 tools:context=".market.chart.MarketCandlestickFragment">
 
-    <com.github.mikephil.charting.charts.CandleStickChart
+    <com.github.mikephil.charting.charts.CombinedChart
             android:id="@+id/chart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
