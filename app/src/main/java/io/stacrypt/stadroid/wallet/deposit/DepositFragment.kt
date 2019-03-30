@@ -14,6 +14,7 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.google.android.material.dialog.MaterialDialogs
 import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.copyToClipboard
+import io.stacrypt.stadroid.ui.format10Digit
 import io.stacrypt.stadroid.ui.showQrCode
 import io.stacrypt.stadroid.wallet.BalanceDetailActivity.Companion.ARG_ASSET
 import kotlinx.android.synthetic.main.deposit_fragment.view.*
@@ -97,8 +98,8 @@ class DepositFragment : Fragment() {
 
         viewModel.currency.observe(this, Observer {
             if (it == null) return@Observer
-            view?.min_limit?.text = it.depositMin?.toString() ?: "No limit"
-            view?.max_limit?.text = it.depositMax?.toString() ?: "No limit"
+            view?.min_limit?.text = it.depositMin?.format10Digit() ?: "No limit"
+            view?.max_limit?.text = it.depositMax?.format10Digit() ?: "No limit"
             view?.fee?.text = "${(it.depositStaticCommission) ?: 0} + ${it.depositCommissionRate}%"
         })
 

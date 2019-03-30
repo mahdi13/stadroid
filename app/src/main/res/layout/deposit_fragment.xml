@@ -114,7 +114,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:textColor="@color/real_red"
+                            android:textColor="@color/real_red_semi_trans"
                             android:textStyle="bold"
                             android:fontFamily="@font/din_medium"
                             android:text="@string/loading"/>
@@ -132,7 +132,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:textColor="@color/real_blue"
+                            android:textColor="@color/real_red_semi_trans"
                             android:textStyle="bold"
                             android:fontFamily="@font/din_medium"
                             android:text="@string/loading"/>
@@ -151,7 +151,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:textColor="@color/colorAccent"
+                            android:textColor="@color/colorSecondaryTrans"
                             android:textStyle="bold"
                             android:fontFamily="@font/din_medium"
                             android:text="@string/loading"/>
