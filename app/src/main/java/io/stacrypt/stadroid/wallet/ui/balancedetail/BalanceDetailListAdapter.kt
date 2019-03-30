@@ -13,6 +13,7 @@ import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.data.BalanceHistory
 import io.stacrypt.stadroid.data.BalanceOverview
 import io.stacrypt.stadroid.data.format
+import io.stacrypt.stadroid.ui.format10Digit
 import kotlinx.android.synthetic.main.row_balance_detail_header.view.*
 import kotlinx.android.synthetic.main.row_balance_detail_history.view.*
 import org.jetbrains.anko.textColorResource
@@ -59,7 +60,7 @@ class BalanceDetailPagedAdapter(var balanceOverview: BalanceOverview?) :
         fun bindTo(item: BalanceOverview?) {
             if (item == null) return
             titleView.text = "Your ${item.assetName} Balance:"
-            amountView.text = item.available.toString()
+            amountView.text = item.available.format10Digit()
             valueView.text = "1234 $" // FIXME
             itemView.tag = item.assetName
         }

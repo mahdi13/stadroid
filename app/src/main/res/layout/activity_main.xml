@@ -75,7 +75,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:text="Toolbar Title"
-                    android:textColor="@color/colorSecondaryTrans"
+                    android:textColor="@color/colorPrimaryLightLight"
                     style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse"
                     android:layout_gravity="center"
                     />
