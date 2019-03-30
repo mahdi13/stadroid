@@ -22,25 +22,26 @@ class MainActivity : AppCompatActivity(),
 //    private lateinit var marketBackdropNavigationHandler: MarketBackdropNavigationHandler
 
     override fun onLoggedOut() {
-        switchFragment(3, "3")
+        switchFragment(3)
         toast("Logged out!")
     }
 
     override fun onLoggedIn() {
-        switchFragment(2, "2")
+        switchFragment(2)
     }
 
     override fun onRegistered() {}
 
-    private val pages = ArrayList<Fragment>(3)
+    private val pages = ArrayList<Pair<Fragment, String>>(3)
 
 
-    private fun switchFragment(pos: Int, tag: String) {
+    private fun switchFragment(pos: Int) {
 //        marketBackdropNavigationHandler.collapse(true)
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.nested_content, pages[pos], tag)
+            .replace(R.id.nested_content, pages[pos].first, pages[pos].second)
             .commit()
+        toolbar_title.text = pages[pos].second
     }
 
     private fun buildWalletFragment(): Fragment = WalletFragment()
@@ -50,10 +51,10 @@ class MainActivity : AppCompatActivity(),
 
 
     private fun buildFragmentsList() {
-        pages.add(buildWalletFragment())
-        pages.add(buildMarketFragment())
-        pages.add(buildProfileFragment())
-        pages.add(buildLoginFragment())
+        pages.add(buildWalletFragment() to "My Wallet")
+        pages.add(buildMarketFragment() to "Trading")
+        pages.add(buildProfileFragment() to "My Profile")
+        pages.add(buildLoginFragment() to "Login or Register")
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -85,14 +86,14 @@ class MainActivity : AppCompatActivity(),
         navigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.navigation_wallet -> {
-                    switchFragment(0, "0")
+                    switchFragment(0)
                 }
                 R.id.navigation_market -> {
-                    switchFragment(1, "1")
+                    switchFragment(1)
                 }
                 R.id.navigation_profile -> {
-                    if (sessionManager.isLoggedIn()) switchFragment(2, "2")
-                    else switchFragment(3, "3")
+                    if (sessionManager.isLoggedIn()) switchFragment(2)
+                    else switchFragment(3)
                 }
             }
             true

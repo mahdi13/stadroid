@@ -3,7 +3,7 @@
     <!--<color name="colorPrimary">#233142</color>-->
     <!--<color name="colorPrimaryDark">#00081c</color>-->
     <color name="colorPrimary">#242537</color>
-    <color name="colorPrimaryDarkDark">#0E0F18</color>
+    <color name="colorPrimaryDarkDark">#11121D</color>
     <color name="colorPrimaryDark">#191b2a</color>
     <color name="colorPrimaryLight">#3f405c</color>
         <color name="colorPrimaryLightLight">#676885</color>
@@ -19,6 +19,7 @@
     <color name="colorControlActivated">#FBB8AC</color>
 
     <color name="colorSecondary">#02a6f2</color>
+    <color name="colorSecondaryTrans">#c002a6f2</color>
     <!--<color name="colorSecondary">#1976d2</color>-->
     <color name="colorSecondaryDark">#004ba0</color>
     <color name="colorSecondaryLight">#63a4ff</color>

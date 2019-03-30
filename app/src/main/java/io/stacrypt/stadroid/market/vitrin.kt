@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.fragment_market_vitrine.view.*
 import org.jetbrains.anko.support.v4.withArguments
 import androidx.core.content.ContextCompat
 import android.graphics.drawable.Drawable
+import io.stacrypt.stadroid.ui.format10Digit
 import kotlinx.android.synthetic.main.fragment_market_vitrine_list.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.startActivity
@@ -193,12 +194,12 @@ class MarketVitrineRowFragment : Fragment() {
         })
 
         viewModel.status.observe(this, Observer {
-            rootView?.open?.text = it?.low.toString()
-            rootView?.high?.text = it?.high.toString()
-            rootView?.low?.text = it?.low.toString()
-            rootView?.close?.text = it?.last.toString()
+//            rootView?.open?.text = it?.low?.format10Digit()
+            rootView?.high?.text = it?.high?.format10Digit()
+            rootView?.low?.text = it?.low?.format10Digit()
+//            rootView?.close?.text = it?.last?.format10Digit()
             rootView?.volume?.text =
-                it?.volume.toString() + " " + (viewModel?.marketName?.value?.split("_")?.get(1) ?: "")
+                "vol " + it?.volume?.format10Digit()// + " " + (viewModel?.marketName?.value?.split("_")?.get(1) ?: "")
         })
 
         viewModel.last.observe(this, Observer {

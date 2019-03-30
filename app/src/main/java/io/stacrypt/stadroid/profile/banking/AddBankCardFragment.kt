@@ -53,11 +53,11 @@ class AddBankCardFragment : Fragment() {
             }
         }
 
-        activity!!.add.isVisible = false
-        activity!!.back.isVisible = true
-        activity!!.back.setOnClickListener {
-            NavHostFragment.findNavController(this@AddBankCardFragment).navigateUp()
-        }
+//        activity!!.add.isVisible = false
+//        activity!!.back.isVisible = true
+//        activity!!.back.setOnClickListener {
+//            NavHostFragment.findNavController(this@AddBankCardFragment).navigateUp()
+//        }
 
     }
 

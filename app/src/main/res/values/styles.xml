@@ -9,6 +9,7 @@
         <item name="android:colorForeground">#FFFFFF</item>
         <item name="android:windowBackground">@color/colorPrimary</item>
         <!--<item name="android:windowLightStatusBar" tools:targetApi="m">true</item>-->
+        <item name="android:statusBarColor">@color/colorPrimaryDarkDark</item>
         <item name="colorControlActivated">@color/colorAccent</item>
         <item name="android:textColorPrimary">#FFFFFF</item>
         <item name="android:dropDownListViewStyle">@style/Widget.Stadroid.Spinner</item>
@@ -40,10 +41,11 @@
     </style>
 
     <style name="Widget.Stadroid.Toolbar" parent="Widget.AppCompat.Toolbar">
-        <item name="android:background">?attr/colorAccent</item>
+        <item name="android:background">@color/colorPrimaryDarkDark</item>
         <item name="android:theme">@style/Theme.Stadroid</item>
         <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
         <item name="titleTextAppearance">@style/TextAppearance.Stadroid.Toolbar</item>
+        <item name="android:elevation">0dp</item>
     </style>
 
     <style name="TextAppearance.Stadroid.Toolbar" parent="TextAppearance.MaterialComponents.Button">

@@ -30,14 +30,14 @@ class BankCardsFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        activity!!.add.isVisible = true
-        activity!!.back.isVisible = true
-        activity!!.add.setOnClickListener {
-            NavHostFragment.findNavController(this@BankCardsFragment).navigate(R.id.addBankCardFragment)
-        }
-        activity!!.back.setOnClickListener {
-            NavHostFragment.findNavController(this@BankCardsFragment).navigateUp()
-        }
+//        activity!!.add.isVisible = true
+//        activity!!.back.isVisible = true
+//        activity!!.add.setOnClickListener {
+//            NavHostFragment.findNavController(this@BankCardsFragment).navigate(R.id.addBankCardFragment)
+//        }
+//        activity!!.back.setOnClickListener {
+//            NavHostFragment.findNavController(this@BankCardsFragment).navigateUp()
+//        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

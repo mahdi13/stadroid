@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="120dp"
             android:layout_marginLeft="-15dp"
             android:layout_marginBottom="-15dp"
             android:layout_marginRight="-15dp"/>
@@ -109,33 +109,33 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-        <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
+        <!--<LinearLayout-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="1"-->
+        <!--android:orientation="vertical">-->
 
-            <TextView
-                    android:id="@+id/open"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
-                    android:fontFamily="@font/din_medium"
-                    android:text="@string/loading"
-                    tools:text="12345.76"/>
+        <!--<TextView-->
+        <!--android:id="@+id/open"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:gravity="center"-->
+        <!--android:textStyle="bold"-->
+        <!--android:textSize="16sp"-->
+        <!--android:fontFamily="@font/din_medium"-->
+        <!--android:text="@string/loading"-->
+        <!--tools:text="12345.76"/>-->
 
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textColor="@color/colorGrayText"
-                    android:textSize="10sp"
-                    android:fontFamily="@font/din_medium"
-                    android:text="Open"/>
+        <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:gravity="center"-->
+        <!--android:textColor="@color/colorGrayText"-->
+        <!--android:textSize="10sp"-->
+        <!--android:fontFamily="@font/din_medium"-->
+        <!--android:text="Open"/>-->
 
-        </LinearLayout>
+        <!--</LinearLayout>-->
 
         <LinearLayout
                 android:layout_width="0dp"
@@ -152,13 +152,14 @@
                     android:textSize="16sp"
                     android:fontFamily="@font/din_medium"
                     android:text="@string/loading"
+                    android:textColor="@color/real_red"
                     tools:text="12345.76"/>
 
             <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:textColor="@color/colorGrayText"
+                    android:textColor="@color/real_red_semi_trans"
                     android:textSize="10sp"
                     android:fontFamily="@font/din_medium"
                     android:text="High"/>
@@ -180,46 +181,47 @@
                     android:textSize="16sp"
                     android:fontFamily="@font/din_medium"
                     android:text="@string/loading"
+                    android:textColor="@color/real_green"
                     tools:text="12345.76"/>
 
             <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:textColor="@color/colorGrayText"
+                    android:textColor="@color/real_green_semi_trans"
                     android:textSize="10sp"
                     android:fontFamily="@font/din_medium"
                     android:text="Low"/>
 
         </LinearLayout>
 
-        <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
+        <!--<LinearLayout-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="1"-->
+        <!--android:orientation="vertical">-->
 
-            <TextView
-                    android:id="@+id/close"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
-                    android:fontFamily="@font/din_medium"
-                    android:text="@string/loading"
-                    tools:text="12345.76"/>
+        <!--<TextView-->
+        <!--android:id="@+id/close"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:gravity="center"-->
+        <!--android:textStyle="bold"-->
+        <!--android:textSize="16sp"-->
+        <!--android:fontFamily="@font/din_medium"-->
+        <!--android:text="@string/loading"-->
+        <!--tools:text="12345.76"/>-->
 
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textColor="@color/colorGrayText"
-                    android:textSize="10sp"
-                    android:fontFamily="@font/din_medium"
-                    android:text="Close"/>
+        <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:gravity="center"-->
+        <!--android:textColor="@color/colorGrayText"-->
+        <!--android:textSize="10sp"-->
+        <!--android:fontFamily="@font/din_medium"-->
+        <!--android:text="Close"/>-->
 
-        </LinearLayout>
+        <!--</LinearLayout>-->
 
     </LinearLayout>
 
