@@ -14,6 +14,7 @@ import io.stacrypt.stadroid.data.BalanceHistory
 import io.stacrypt.stadroid.data.BalanceOverview
 import io.stacrypt.stadroid.data.format
 import io.stacrypt.stadroid.ui.format10Digit
+import io.stacrypt.stadroid.ui.iconResource
 import kotlinx.android.synthetic.main.row_balance_detail_header.view.*
 import kotlinx.android.synthetic.main.row_balance_detail_history.view.*
 import org.jetbrains.anko.textColorResource
@@ -46,6 +47,8 @@ class BalanceDetailPagedAdapter(var balanceOverview: BalanceOverview?) :
         LayoutInflater.from(parent.context)
             .inflate(R.layout.row_balance_detail_header, parent, false)
     ) {
+        val subjectView: TextView = itemView.subject
+        val iconView: ImageView = itemView.header_icon
         val titleView: TextView = itemView.header_title
         val amountView: TextView = itemView.header_amount
         val valueView: TextView = itemView.header_value
@@ -59,9 +62,11 @@ class BalanceDetailPagedAdapter(var balanceOverview: BalanceOverview?) :
 
         fun bindTo(item: BalanceOverview?) {
             if (item == null) return
+            subjectView.text = "${item.currency.name}'s Wallet"
+            iconView.setImageResource(item.currency.iconResource()!!)
             titleView.text = "Your ${item.assetName} Balance:"
             amountView.text = item.available.format10Digit()
-            valueView.text = "1234 $" // FIXME
+            valueView.text = item.assetName // FIXME It should be the value
             itemView.tag = item.assetName
         }
 
@@ -81,12 +86,12 @@ class BalanceDetailPagedAdapter(var balanceOverview: BalanceOverview?) :
             if (item == null) return clear()
 
             titleView.text = item.business
-            dateView.text = item.time.format()
-            amountView.text = item.change.toString()
-            valueView.text = "1234 $" // FIXME
+            dateView.text = item.time?.format().toString()
+            amountView.text = item.change.format10Digit()
+            valueView.text = item.balance.format10Digit() // FIXME It should be the value
 
             // TODO: Enhance these color and resource loadings
-            if (item.change.toDouble() >= 0) {
+            if (item.business?.toLowerCase().equals("deposit")) {
                 titleView.textResource = R.string.deposit
                 titleView.textColorResource = R.color.real_green
                 amountView.textColorResource = R.color.real_green
@@ -95,7 +100,7 @@ class BalanceDetailPagedAdapter(var balanceOverview: BalanceOverview?) :
                     iconView,
                     ColorStateList.valueOf(itemView.resources.getColor(R.color.real_green))
                 )
-            } else {
+            } else if (item.business?.toLowerCase().equals("withdraw")) {
                 titleView.textResource = R.string.withdraw
                 titleView.textColorResource = R.color.real_red
                 amountView.textColorResource = R.color.real_red
@@ -103,6 +108,23 @@ class BalanceDetailPagedAdapter(var balanceOverview: BalanceOverview?) :
                 ImageViewCompat.setImageTintList(
                     iconView,
                     ColorStateList.valueOf(itemView.resources.getColor(R.color.real_red))
+                )
+            } else if (item.business?.toLowerCase().equals("trade")) {
+                titleView.textResource = R.string.trade
+                titleView.textColorResource = R.color.colorSecondary
+                amountView.textColorResource = R.color.colorSecondary
+                iconView.setImageResource(R.drawable.ic_swap_horiz_black_24dp)
+                ImageViewCompat.setImageTintList(
+                    iconView,
+                    ColorStateList.valueOf(itemView.resources.getColor(R.color.colorSecondary))
+                )
+            } else {
+                titleView.textColorResource = R.color.white
+                amountView.textColorResource = R.color.white
+                iconView.setImageResource(R.drawable.ic_done_white_18dp)
+                ImageViewCompat.setImageTintList(
+                    iconView,
+                    ColorStateList.valueOf(itemView.resources.getColor(R.color.white))
                 )
             }
 

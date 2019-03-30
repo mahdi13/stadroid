@@ -140,16 +140,18 @@ data class Mine(
 data class BalanceOverview(
     @PrimaryKey @SerializedName("name") var assetName: String,
     var available: BigDecimal,
-    var freeze: BigDecimal
+    var freeze: BigDecimal,
+    @Embedded(prefix = "currency") var currency: Currency
 )
 
 data class BalanceHistory(
-    @SerializedName("time") var time: Date,
+    @SerializedName("time") var time: Date?,
     @SerializedName("asset") var assetName: String,
-    @SerializedName("business") var business: String,
+    @SerializedName("business") var business: String?,
     @SerializedName("change") var change: BigDecimal,
     @SerializedName("balance") var balance: BigDecimal,
-    @SerializedName("detail") var detail: String
+    @SerializedName("detail") var detail: Any?,
+    @SerializedName("currency") var currency: Currency
 )
 
 data class DepositInfo(

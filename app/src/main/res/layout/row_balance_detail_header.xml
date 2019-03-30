@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="wrap_content">
@@ -25,7 +26,18 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
                     android:layout_margin="10dp"
+                    android:id="@+id/subject"
                     android:text="Stacrypt Wallet"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_margin="10dp"
+                    android:id="@+id/header_icon"
+                    android:src="@drawable/ic_btc"
+                    tools:text="Stacrypt Wallet"/>
 
             <TextView
                     android:id="@+id/header_amount"
@@ -33,13 +45,12 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
-                    android:text="24.5671"
+                    tools:text="24.5671"
                     android:textStyle="bold"
                     android:layout_margin="3dp"
                     android:gravity="center"
                     android:textColor="@color/colorPrimaryText"
                     android:fontFamily="@font/din_medium"
-                    android:maxLength="8"
                     android:lines="1"
                     android:paddingStart="10dp"
                     android:paddingEnd="10dp"
@@ -53,10 +64,10 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_above="@+id/header_amount"
-                    android:text="Your Bitcoin Balance:"
+                    tools:text="Your Bitcoin Balance:"
                     android:textSize="12dp"
                     android:gravity="center"
-                    android:textColor="@color/colorPrimaryLight"
+                    android:textColor="@color/colorPrimaryLightLight"
                     android:textStyle="bold"
                     android:layout_marginBottom="10dp"
                     />
@@ -67,8 +78,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_below="@+id/header_amount"
-                    android:text=" ≃12345 $"
-                    android:textColor="@color/colorPrimaryLight"
+                    tools:text=" ≃12345 $"
+                    android:textColor="@color/colorPrimaryLightLight"
                     android:fontFamily="@font/din_medium"
                     android:lines="1"
                     android:textSize="12dp"
@@ -93,7 +104,7 @@
                 android:layout_weight="1"
                 android:textColor="@color/real_green"
                 app:strokeColor="@color/real_green"
-                android:text="Deposit"
+                android:text="@string/deposit"
                 app:icon="@drawable/ic_add_black_24dp"
                 app:iconTint="@color/real_green"
                 android:layout_margin="5dp"/>
@@ -104,7 +115,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Withdraw"
+                android:text="@string/withdraw"
                 app:icon="@drawable/ic_send_black_24dp"
                 app:iconTint="@color/real_red"
                 android:textColor="@color/real_red"
@@ -119,8 +130,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:fontFamily="@font/din_medium"
-            android:text="History"
-            android:textColor="@color/colorPrimaryLight"
+            android:text="@string/history"
+            android:textColor="@color/colorPrimaryLightLight"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"/>
 

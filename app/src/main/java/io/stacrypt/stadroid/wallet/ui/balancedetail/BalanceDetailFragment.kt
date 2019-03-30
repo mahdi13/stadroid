@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.data.BalanceHistory
 import io.stacrypt.stadroid.data.BalanceOverview
+import io.stacrypt.stadroid.wallet.BalanceDetailActivity
 import kotlinx.android.synthetic.main.balance_detail_fragment.*
 
 class BalanceDetailFragment : Fragment() {
@@ -43,10 +44,12 @@ class BalanceDetailFragment : Fragment() {
 
 
         adapter.onDepositClicked = {
-            // TODO
+            if (activity is BalanceDetailActivity)
+                (activity as BalanceDetailActivity).showDeposit()
         }
         adapter.onWithdrawClicked = {
-            // TODO
+            if (activity is BalanceDetailActivity)
+                (activity as BalanceDetailActivity).showWithdraw()
         }
     }
 

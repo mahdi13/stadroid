@@ -32,6 +32,8 @@
 
     <string name="deposit">Deposit</string>
     <string name="withdraw">Withdraw</string>
+    <string name="trade">Trade</string>
+    <string name="other">Other</string>
 
     <string name="error_invalid_bank_card_number">This is not a valid bank card number</string>
     <string name="error_invalid_bank_card_holder">This is not a valid bank card holder name</string>
@@ -60,6 +62,6 @@
     <string name="loading">Loading…</string>
     <string name="are_you_sure">Are you sure?</string>
     <string name="cancel">Cancel</string>
-    <string name="coming_soon">Coming Soon...</string>
+    <string name="coming_soon">Coming Soon…</string>
 
 </resources>

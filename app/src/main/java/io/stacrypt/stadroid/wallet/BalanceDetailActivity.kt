@@ -27,17 +27,23 @@ class BalanceDetailActivity : AppCompatActivity() {
                 .commitNow()
 
             when (intent.getStringExtra(ARG_ACTION)) {
-                ACTION_DEPOSIT -> DepositFragment()
-                else -> null
-            }?.let {
-                supportFragmentManager.beginTransaction()
-                    .add(R.id.container, it.withArguments(ARG_ASSET to intent.getStringExtra(ARG_ASSET)))
-                    .commitNow()
+                ACTION_DEPOSIT -> showDeposit()
+                ACTION_WITHDRAW -> showWithdraw()
             }
         }
 
         viewModel.assetName.value = intent.getStringExtra(ARG_ASSET)
 
+    }
+
+    fun showWithdraw() {
+        // TODO: Show withdraw
+    }
+
+    fun showDeposit() {
+        supportFragmentManager.beginTransaction()
+            .add(R.id.container, DepositFragment().withArguments(ARG_ASSET to intent.getStringExtra(ARG_ASSET)))
+            .commitNow()
     }
 
     companion object {
