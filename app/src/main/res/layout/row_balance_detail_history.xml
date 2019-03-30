@@ -66,9 +66,9 @@
                     android:layout_margin="3dp"
                     android:textStyle="bold"
                     android:fontFamily="@font/din_medium"
-                    android:maxLength="8"
+                    android:maxLength="12"
                     android:lines="1"
-                    android:text="2.42356 BTC"
+                    tools:text="2.42356 BTC"
                     android:textSize="20dp"/>
 
             <TextView
