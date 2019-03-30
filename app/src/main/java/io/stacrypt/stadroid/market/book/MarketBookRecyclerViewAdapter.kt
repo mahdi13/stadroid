@@ -10,6 +10,9 @@ import io.stacrypt.stadroid.data.Book
 
 import kotlinx.android.synthetic.main.fragment_market_book.view.*
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+import io.stacrypt.stadroid.ui.format
+import io.stacrypt.stadroid.ui.format10Digit
+import io.stacrypt.stadroid.ui.formatShort
 
 
 class MarketBookRecyclerViewAdapter(
@@ -25,11 +28,11 @@ class MarketBookRecyclerViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val leftItem = items[position].first
         val rightItem = items[position].second
-        holder.leftPriceView.text = leftItem?.price?.toString() ?: ""
-        holder.leftAmountView.text = leftItem?.amount?.toString() ?: ""
-        holder.rightPriceView.text = rightItem?.price?.toString() ?: ""
-        holder.rightAmountView.text = rightItem?.amount?.toString() ?: ""
-        holder.rightAmountView.text = rightItem?.amount?.toString() ?: ""
+        holder.leftPriceView.text = leftItem?.price?.format10Digit() ?: ""
+        holder.leftAmountView.text = leftItem?.amount?.format10Digit() ?: ""
+        holder.rightPriceView.text = rightItem?.price?.format10Digit() ?: ""
+        holder.rightAmountView.text = rightItem?.amount?.format10Digit() ?: ""
+        holder.rightAmountView.text = rightItem?.amount?.format10Digit() ?: ""
 
         holder.leftProgressView.max = items.map { it.first?.amount?.toFloat() ?: 0F }.max()!!
         holder.leftProgressView.progress = leftItem?.amount?.toFloat() ?: 0F

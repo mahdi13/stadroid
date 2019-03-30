@@ -24,7 +24,7 @@
                 app:rcRadius="0dp"
                 app:rcBackgroundPadding="1dp"
                 app:rcReverse="true"
-                app:rcProgressColor="#5574a700"
+                app:rcProgressColor="@color/real_green_trans"
                 app:rcBackgroundColor="@color/colorPrimary"/>
 
         <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
@@ -37,7 +37,7 @@
                 app:rcRadius="0dp"
                 app:rcBackgroundPadding="1dp"
                 app:rcReverse="false"
-                app:rcProgressColor="#55e50370"
+                app:rcProgressColor="@color/real_red_trans"
                 app:rcBackgroundColor="@color/colorPrimary"/>
 
     </LinearLayout>
@@ -53,38 +53,45 @@
 
         <TextView
                 android:id="@+id/price_left"
+                android:fontFamily="@font/din_medium"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="345.12"
+                android:text="---"
                 android:textAppearance="?attr/textAppearanceListItem"/>
 
         <TextView
                 android:id="@+id/amount_left"
+                android:fontFamily="@font/din_medium"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="2.43498573"
+                android:textColor="@color/real_green"
+                android:text="---"
+                android:textAppearance="?attr/textAppearanceListItem"/>
+
+
+        <TextView
+                android:id="@+id/amount_right"
+                android:fontFamily="@font/din_medium"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/real_red"
+                android:text="---"
                 android:textAppearance="?attr/textAppearanceListItem"/>
 
         <TextView
                 android:id="@+id/price_right"
+                android:fontFamily="@font/din_medium"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="345.12"
-                android:textAppearance="?attr/textAppearanceListItem"/>
-
-        <TextView
-                android:id="@+id/amount_right"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="2.43498573"
+                android:text="---"
                 android:textAppearance="?attr/textAppearanceListItem"/>
 
     </LinearLayout>

@@ -27,8 +27,10 @@
     <color name="colorSecondaryLightText">#000000</color>
 
     <color name="real_green">#74a700</color>
+    <color name="real_green_dark">#4A6600</color>
     <color name="real_green_trans">#5074a700</color>
     <color name="real_green_semi_trans">#9074a700</color>
+    <color name="real_red_dark">#97044B</color>
     <color name="real_red">#e50370</color>
     <color name="real_red_trans">#55e50370</color>
     <color name="real_red_semi_trans">#95e50370</color>
