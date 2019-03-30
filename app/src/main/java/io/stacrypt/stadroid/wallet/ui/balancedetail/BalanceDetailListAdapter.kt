@@ -38,9 +38,6 @@ class BalanceDetailPagedAdapter :
             .inflate(R.layout.row_balance_detail_history, parent, false)
     ) {
 
-        init {
-            Log.d("salam",  "New viewwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww")
-        }
         val titleView: TextView = itemView.title
         val dateView: TextView = itemView.date
         val amountView: TextView = itemView.amount

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/amount"
+            android:hint="@string/amount"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/address"
+            android:hint="@string/address"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
+            android:id="@+id/verify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Withdraw from my account"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:maxWidth="400dp"
+            android:padding="20dp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textAllCaps="true"
+            android:background="@drawable/button_shape_default_rounded"
+            android:textColor="@color/colorSecondary"
+            app:spinning_bar_width="4dp"
+            app:spinning_bar_color="#FFF"
+            app:spinning_bar_padding="6dp"/>
+
+
+</LinearLayout>

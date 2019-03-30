@@ -63,5 +63,7 @@
     <string name="are_you_sure">Are you sure?</string>
     <string name="cancel">Cancel</string>
     <string name="coming_soon">Coming Soon…</string>
+    <string name="amount">Amount</string>
+    <string name="address">Address</string>
 
 </resources>

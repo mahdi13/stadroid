@@ -1,15 +1,15 @@
 package io.stacrypt.stadroid.ui
 
-import androidx.core.text.trimmedLength
 import io.stacrypt.stadroid.data.Currency
 import java.math.BigDecimal
 import java.math.RoundingMode
+import java.util.*
 import kotlin.math.max
 import kotlin.math.min
 
 fun BigDecimal.format10Digit() = when {
     this < 10.toBigDecimal() -> this.format(8)
-    this < 1_000_000_000.toBigDecimal() -> java.lang.String.format("%.8f", this)
+    this < 1_000_000_000.toBigDecimal() -> java.lang.String.format(Locale.ENGLISH, "%.8f", this)
         .substring(0, 9)
         .toBigDecimal()
         .format()
@@ -19,17 +19,25 @@ fun BigDecimal.format10Digit() = when {
 //        .toBigDecimal()
 //        .format()
 //        .plus(" M")
-    this < 1_000_000_000_000.toBigDecimal() -> java.lang.String.format("%.8f", this.scaleByPowerOfTen(-9))
+    this < 1_000_000_000_000.toBigDecimal() -> java.lang.String.format(
+        Locale.ENGLISH,
+        "%.8f",
+        this.scaleByPowerOfTen(-9)
+    )
         .substring(0, 9)
         .toBigDecimal()
         .format()
         .plus(" B")
-    this < BigDecimal("1000000000000000") -> java.lang.String.format("%.8f", this.scaleByPowerOfTen(-12))
+    this < BigDecimal("1000000000000000") -> java.lang.String.format(
+        Locale.ENGLISH,
+        "%.8f",
+        this.scaleByPowerOfTen(-12)
+    )
         .substring(0, 9)
         .toBigDecimal()
         .format()
         .plus(" T")
-    else -> java.lang.String.format("%,.0f", this)
+    else -> java.lang.String.format(Locale.ENGLISH, "%,.0f", this)
 }
 
 fun BigDecimal.formatShort() =
@@ -37,7 +45,7 @@ fun BigDecimal.formatShort() =
 //        .stripTrailingZeros()
         .toPlainString()
 
-fun BigDecimal.format() = java.lang.String.format("%,f", this)
+fun BigDecimal.format() = java.lang.String.format(Locale.ENGLISH, "%,f", this)
 
 fun BigDecimal.format(digits: Int) = java.lang.String.format("%,.${digits}f", this)
 

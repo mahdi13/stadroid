@@ -41,7 +41,7 @@
     </style>
 
     <style name="Widget.Stadroid.Toolbar" parent="Widget.AppCompat.Toolbar">
-        <item name="android:background">@color/colorPrimaryDarkDark</item>
+        <item name="android:background">@color/colorPrimaryDark</item>
         <item name="android:theme">@style/Theme.Stadroid</item>
         <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
         <item name="titleTextAppearance">@style/TextAppearance.Stadroid.Toolbar</item>
