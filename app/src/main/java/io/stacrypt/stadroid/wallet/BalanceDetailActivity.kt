@@ -37,7 +37,9 @@ class BalanceDetailActivity : AppCompatActivity() {
     }
 
     fun showWithdraw() {
-        // TODO: Show withdraw
+        supportFragmentManager.beginTransaction()
+            .add(R.id.container, WithdrawFragment().withArguments(ARG_ASSET to intent.getStringExtra(ARG_ASSET)))
+            .commitNow()
     }
 
     fun showDeposit() {
