@@ -32,7 +32,7 @@ class BankAccountsFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(activity!!).get(BankAccountsViewModel::class.java)
 
-        view?.findViewById<RecyclerView>(R.id.list)?.adapter = viewModel?.bankAccountListing?.value
+//        view?.findViewById<RecyclerView>(R.id.list)?.adapter = viewModel?.bankAccountListing?.value
     }
 
 }
