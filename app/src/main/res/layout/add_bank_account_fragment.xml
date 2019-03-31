@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".profile.banking.AddBankCardFragment"
+        android:background="@color/colorPrimaryDark"
+        android:orientation="vertical">
+
+
+    <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="5dp"
+            android:backgroundTint="@color/colorPrimary"
+            app:cardUseCompatPadding="true"
+            app:cardCornerRadius="10dp">
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <ImageView
+                    android:id="@+id/shetab"
+                    android:layout_width="100dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/shetab"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="10dp"/>
+
+            <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:orientation="vertical"
+                    android:layout_alignParentEnd="true"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="20dp"
+                    android:paddingStart="20dp">
+
+
+                <TextView
+                        android:id="@+id/title"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/open_sans_bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#999999"
+                        android:text="Your New Account"/>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorGrayText"
+                        android:layout_marginTop="20dp"
+                        android:text="Account Iban"/>
+
+                <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/iban"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="#eeeeee"
+                        android:fontFamily="@font/kameron_bold"
+                        android:layout_marginEnd="20dp"
+                        android:lines="1"
+                        android:hint="11** **** **33 4444"/>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorGrayText"
+                        android:layout_marginTop="20dp"
+                        android:text="Account Owner Name"/>
+
+                <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/owner"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="#eeeeee"
+                        android:fontFamily="@font/kameron_bold"
+                        android:layout_marginEnd="20dp"
+                        android:lines="1"
+                        android:maxLength="50"
+                        android:hint="Jack Daniel"/>
+
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.button.MaterialButton
+            style="@style/Widget.MaterialComponents.Button"
+            android:id="@+id/save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:minWidth="200dp"
+            android:maxWidth="300dp"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/real_green"
+            app:iconGravity="textStart"
+            app:iconPadding="20dp"
+            app:icon="@drawable/ic_check_circle_black_24dp"
+            app:iconTint="@color/white"
+            android:text="Save"/>
+
+
+</LinearLayout>

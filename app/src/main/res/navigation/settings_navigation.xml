@@ -29,6 +29,9 @@
         <action
                 android:id="@+id/action_settings_entrypoint_fragment_to_do_verify_email_fragment"
                 app:destination="@id/do_verify_email_fragment"/>
+        <action
+                android:id="@+id/action_settings_entrypoint_fragment_to_bank_accounts_fragment"
+                app:destination="@id/bank_accounts_fragment"/>
     </fragment>
 
 
@@ -50,6 +53,23 @@
     </fragment>
 
     <fragment
+            android:id="@+id/bank_accounts_fragment"
+            android:name="io.stacrypt.stadroid.profile.banking.BankAccountsFragment"
+            android:label="Blank"
+            tools:layout="@layout/bank_accounts_fragment">
+        <action
+                android:id="@+id/action_bankAccountsFragment_to_addBankAccountFragment"
+                app:destination="@id/addBankAccountFragment"
+                app:enterAnim="@android:anim/slide_in_left"
+                app:exitAnim="@android:anim/slide_out_right"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim"
+                app:popUpTo="@+id/addBankAccountFragment"
+                app:popUpToInclusive="true"
+                />
+    </fragment>
+
+    <fragment
             android:id="@+id/verification_process_fragment"
             android:name="io.stacrypt.stadroid.profile.verification.VerificationProcessFragment"
             android:label="Blank"
@@ -60,6 +80,12 @@
             android:name="io.stacrypt.stadroid.profile.banking.AddBankCardFragment"
             android:label="Blank"
             tools:layout="@layout/add_bank_card_fragment"/>
+
+    <fragment
+            android:id="@+id/addBankAccountFragment"
+            android:name="io.stacrypt.stadroid.profile.banking.AddBankAccountFragment"
+            android:label="Blank"
+            tools:layout="@layout/add_bank_account_fragment"/>
 
     <fragment
             android:id="@+id/app_security_fragment"

@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         tools:context=".profile.banking.BankAccountsFragment">
 
-    <TextView
+    <include layout="@layout/header_appbar_back"/>
+
+    <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Hello"/>
+            tools:listitem="@layout/row_bank_card"
+            android:id="@+id/list"/>
 
-</FrameLayout>
+</LinearLayout>

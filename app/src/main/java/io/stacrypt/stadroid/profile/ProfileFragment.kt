@@ -14,6 +14,7 @@ import io.stacrypt.stadroid.data.User
 import io.stacrypt.stadroid.data.sessionManager
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.ARG_TARGET
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_APPLICATION_PIN
+import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_BANK_ACCOUNTS
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_BANK_CARDS
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_CHANEG_PASSWORD
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_VERIFICATION_PROCESS
@@ -43,6 +44,7 @@ class ProfileFragment : Fragment() {
 
         verification.setTarget(TARGET_VERIFICATION_PROCESS)
         bank_cards.setTarget(TARGET_BANK_CARDS)
+        bank_accounts.setTarget(TARGET_BANK_ACCOUNTS)
         pin.setTarget(TARGET_APPLICATION_PIN)
         change_password.setTarget(TARGET_CHANEG_PASSWORD)
     }
