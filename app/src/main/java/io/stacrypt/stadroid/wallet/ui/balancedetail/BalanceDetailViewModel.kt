@@ -14,7 +14,9 @@ class BalanceDetailViewModel : ViewModel() {
 
     val asset = switchMap(assetName) { WalletRepository.getAsset(it) }
     val balance = switchMap(assetName) { WalletRepository.getBalanceOverview(it) }
-    val currency = switchMap(assetName) { WalletRepository.getCurrency(it) }
+    val currency = switchMap(assetName) {
+        WalletRepository.getCurrency(it)
+    }
 
     private val balanceHistoryListing = map(assetName) {
         WalletRepository.getBalanceHistory(it)

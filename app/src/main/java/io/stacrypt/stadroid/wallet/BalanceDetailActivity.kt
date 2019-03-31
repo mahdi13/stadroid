@@ -37,15 +37,29 @@ class BalanceDetailActivity : AppCompatActivity() {
     }
 
     fun showWithdraw() {
-        supportFragmentManager.beginTransaction()
-            .add(R.id.container, WithdrawFragment().withArguments(ARG_ASSET to intent.getStringExtra(ARG_ASSET)))
-            .commitNow()
+        val fragment = when (viewModel.currency.value?.type?.toLowerCase()) {
+            "cryptocurrency" -> WithdrawFragment()
+            "fiat" -> CashoutFragment()
+            else -> null
+        }
+
+        if (fragment != null)
+            supportFragmentManager.beginTransaction()
+                .add(R.id.container, fragment.withArguments(ARG_ASSET to intent.getStringExtra(ARG_ASSET)))
+                .commitNow()
     }
 
     fun showDeposit() {
-        supportFragmentManager.beginTransaction()
-            .add(R.id.container, DepositFragment().withArguments(ARG_ASSET to intent.getStringExtra(ARG_ASSET)))
-            .commitNow()
+        val fragment = when (viewModel.currency.value?.type?.toLowerCase()) {
+            "cryptocurrency" -> DepositFragment()
+            "fiat" -> CashinFragment()
+            else -> null
+        }
+
+        if (fragment != null)
+            supportFragmentManager.beginTransaction()
+                .add(R.id.container, fragment.withArguments(ARG_ASSET to intent.getStringExtra(ARG_ASSET)))
+                .commitNow()
     }
 
     companion object {
