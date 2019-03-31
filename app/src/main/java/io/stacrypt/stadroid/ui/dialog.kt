@@ -1,3 +1,9 @@
+import android.content.Context
+import android.content.DialogInterface
+import androidx.fragment.app.Fragment
+import org.jetbrains.anko.AlertBuilder
+import org.jetbrains.anko.alert
+
 //package io.stacrypt.stadroid.ui
 //
 //import android.content.Context
@@ -51,3 +57,16 @@
 //fun InteractiveDialog.title(builder: () -> String) {
 //    title = builder.invoke()
 //}
+
+
+interface ConditionAlertBuilder<out D : DialogInterface> : AlertBuilder<D> {
+    val conditions: ArrayList<String>
+}
+
+//fun Context.alert(init: AlertBuilder<DialogInterface>.() -> Unit): AlertBuilder<DialogInterface> =
+//    AndroidAlertBui
+//lder(this).apply { init() }
+
+//fun Fragment.conditionalAlert(init: ConditionAlertBuilder<DialogInterface>.() -> Unit) = requireActivity().alert {
+//
+//}.apply(init)

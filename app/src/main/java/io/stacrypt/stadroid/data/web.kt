@@ -17,6 +17,7 @@ import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersisto
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache
 import com.franmontiel.persistentcookiejar.PersistentCookieJar
 import io.stacrypt.stadroid.application
+import kotlin.collections.ArrayList
 
 
 //const val STEMERALD_API_URL = "http://localhost:8070"
@@ -187,6 +188,32 @@ interface StemeraldV2ApiClient {
         @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
         @Query("cryptocurrencySymbol") assetName: String
     ): Deferred<DepositInfo>
+
+    /**
+     * Withdraw
+     */
+    @HTTP(method = "LIST", path = "withdraws", hasBody = true)
+    fun getWithdraws(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
+        @Query("cryptocurrencySymbol") assetName: String,
+        @Query("page") page: Int = 0
+    ): Deferred<ArrayList<Withdaraw>>
+
+    @HTTP(method = "GET", path = "withdraws/{withdrawId}", hasBody = false)
+    fun getWithdraw(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
+        @Path("withdrawId") withdrawId: String,
+        @Query("cryptocurrencySymbol") assetName: String
+    ): Deferred<Withdaraw>
+
+    @HTTP(method = "SCHEDULE", path = "withdraws", hasBody = true)
+    fun scheduleWithdraw(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
+        @Field("cryptocurrencySymbol") assetName: String,
+        @Field("amount") amount: String,
+        @Field("address") address: String,
+        @Field("businessUid") businessUid: String
+    ): Deferred<Withdaraw>
 
     /**
      * Shaparak

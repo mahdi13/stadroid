@@ -38,6 +38,7 @@ class BalanceDetailPagedAdapter :
             .inflate(R.layout.row_balance_detail_history, parent, false)
     ) {
 
+        val containerView: ViewGroup = itemView.card
         val titleView: TextView = itemView.title
         val dateView: TextView = itemView.date
         val amountView: TextView = itemView.amount
@@ -47,6 +48,7 @@ class BalanceDetailPagedAdapter :
         fun bindTo(item: BalanceHistory?) {
             if (item == null) return clear()
 
+            containerView.tag = item
             titleView.text = item.business ?: ""
             dateView.text = item.time?.format().toString()
             amountView.text = item.change.format10Digit()
@@ -63,6 +65,7 @@ class BalanceDetailPagedAdapter :
                         iconView,
                         ColorStateList.valueOf(itemView.resources.getColor(R.color.real_green))
                     )
+
                 }
                 item.business?.toLowerCase().equals("withdraw") -> {
                     titleView.textResource = R.string.withdraw

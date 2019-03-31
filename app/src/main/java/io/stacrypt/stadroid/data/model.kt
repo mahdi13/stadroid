@@ -163,6 +163,28 @@ data class DepositInfo(
     @SerializedName("address") var address: String
 )
 
+data class Withdaraw(
+    @SerializedName("id") var id: String,
+    @SerializedName("user") var user: String,
+    @SerializedName("toAddress") var toAddress: String?,
+    @SerializedName("netAmount") var netAmount: BigDecimal?,
+    @SerializedName("netAmount") var grossAmount: BigDecimal?,
+    @SerializedName("estimatedNetworkFee") var estimatedNetworkFee: BigDecimal?,
+    @SerializedName("finalNetworkFee") var finalNetworkFee: BigDecimal?,
+    @SerializedName("type") var type: String?,
+    @SerializedName("isManual") var isManual: Boolean?,
+    @SerializedName("status") var status: String?,
+    @SerializedName("txid") var txid: String?,
+    @SerializedName("txHash") var txHash: String?,
+    @SerializedName("blockHeight") var blockHeight: Long?,
+    @SerializedName("blockHash") var blockHash: String?,
+    @SerializedName("link") var link: String?,
+    @SerializedName("confirmationsLeft") var confirmationsLeft: Int?,
+    @SerializedName("error") var error: Int?,
+    @SerializedName("issuedAt") var creation: Date,
+    @SerializedName("paidAt") var expiration: Date?
+)
+
 @Entity
 data class User(
     val id: Int,
