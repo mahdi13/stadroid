@@ -6,15 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.NavHostFragment
+import androidx.recyclerview.widget.RecyclerView
 
 import io.stacrypt.stadroid.R
+import kotlinx.android.synthetic.main.header_appbar_back.view.*
 
 class BankAccountsFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = BankAccountsFragment()
-    }
-
     private lateinit var viewModel: BankAccountsViewModel
 
     override fun onCreateView(
@@ -24,10 +22,17 @@ class BankAccountsFragment : Fragment() {
         return inflater.inflate(R.layout.bank_accounts_fragment, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        view.appbar.setOnClickListener {
+            NavHostFragment.findNavController(this@BankAccountsFragment).navigateUp()
+        }
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(activity!!).get(BankAccountsViewModel::class.java)
-        // TODO: Use the ViewModel
+
+        view?.findViewById<RecyclerView>(R.id.list)?.adapter = viewModel?.bankAccountListing?.value
     }
 
 }
