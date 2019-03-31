@@ -1,6 +1,7 @@
 package io.stacrypt.stadroid.wallet
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,9 +11,6 @@ import androidx.lifecycle.Transformations.switchMap
 import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.wallet.BalanceDetailActivity.Companion.ARG_ASSET
 import io.stacrypt.stadroid.wallet.data.WalletRepository
-import android.R.attr.data
-import android.content.DialogInterface
-import android.widget.CompoundButton
 import androidx.databinding.*
 import androidx.databinding.Observable
 import androidx.lifecycle.Transformations.map
@@ -20,6 +18,7 @@ import io.stacrypt.stadroid.data.*
 import io.stacrypt.stadroid.data.Currency
 import io.stacrypt.stadroid.databinding.WithdrawFragmentBinding
 import io.stacrypt.stadroid.ui.format10Digit
+import kotlinx.android.synthetic.main.row_balance_detail_history.view.*
 import kotlinx.android.synthetic.main.withdraw_fragment.*
 import kotlinx.android.synthetic.main.withdraw_fragment.view.*
 import kotlinx.coroutines.*
@@ -34,8 +33,7 @@ class WithdrawViewModel : ObservableViewModel() {
     val cryptocurrencySymbol = MutableLiveData<String>()
 
     val currency: LiveData<Currency?> = switchMap(cryptocurrencySymbol) {
-        if (it == null) null
-        else WalletRepository.getCurrency(it)
+        WalletRepository.getCurrency(it)
     }
 
 //    val currency: LiveData<Currency> by lazy {
@@ -47,14 +45,18 @@ class WithdrawViewModel : ObservableViewModel() {
 
     @Bindable
     val amount = MutableLiveData<String>()
-    val estimatedCommission = map(amount) {
-        if (
-            currency.value?.withdrawCommissionRate == null ||
-            currency.value?.withdrawCommissionRate?.toBigDecimal() == BigDecimal(0)
-        )
-            BigDecimal(0)
-        else
-            BigDecimal(amount.value).times(BigDecimal(currency.value?.withdrawCommissionRate))
+
+    val estimatedCommission by lazy {
+        map(amount) {
+            Log.d("salam", "salamamdlksfsdjfjdskdalkdjsblnf;s'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+            if (
+                currency.value?.withdrawCommissionRate == null ||
+                currency.value?.withdrawCommissionRate?.toBigDecimal() == BigDecimal(0)
+            )
+                BigDecimal(0)
+            else
+                BigDecimal(amount.value).times(BigDecimal(currency.value?.withdrawCommissionRate))
+        }
     }
 
     @Bindable
@@ -97,19 +99,16 @@ class WithdrawFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        viewModel = ViewModelProviders.of(activity!!).get(WithdrawViewModel::class.java)
-        viewModel.cryptocurrencySymbol.postValue(arguments?.getString(ARG_ASSET)!!)
-
+        viewModel = ViewModelProviders.of(this).get(WithdrawViewModel::class.java)
 
         val binding = DataBindingUtil.inflate<WithdrawFragmentBinding>(
             inflater, R.layout.withdraw_fragment, container, false
         )
         val view = binding.root
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
         //here data must be an instance of the class MarsDataProvider
 //        binding.setA(data)
-
 
         view.submit.onClick {
             if (!validateInputs()) return@onClick
@@ -122,7 +121,7 @@ class WithdrawFragment : Fragment() {
                                     "+ ${viewModel.estimatedCommission.value?.format10Digit()} (fee)"
                         )
                         textView("You will receive this amount within maximum 1 hour")
-                        textView("Your ${viewModel.currency.value?.name} address is ${address}")
+                        textView("Your ${viewModel.currency.value?.name} address is ${viewModel.address.value}")
                         textView("Your are agree with all terms and conditions.")
                         padding = dip(16)
                     }
@@ -133,6 +132,10 @@ class WithdrawFragment : Fragment() {
                 }
             }.show()
         }
+
+        viewModel.cryptocurrencySymbol.value = arguments?.getString(ARG_ASSET)!!
+        viewModel.notifyChange()
+
 
         return view
 
