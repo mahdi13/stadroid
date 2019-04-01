@@ -3,7 +3,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="40dp"
+        >
+
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -25,7 +27,8 @@
                 app:rcBackgroundPadding="1dp"
                 app:rcReverse="true"
                 app:rcProgressColor="@color/real_green_trans"
-                app:rcBackgroundColor="@color/colorPrimary"/>
+                app:rcBackgroundColor="@color/colorPrimaryDark"
+                />
 
         <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
                 android:id="@+id/bg_right"
@@ -38,7 +41,8 @@
                 app:rcBackgroundPadding="1dp"
                 app:rcReverse="false"
                 app:rcProgressColor="@color/real_red_trans"
-                app:rcBackgroundColor="@color/colorPrimary"/>
+                app:rcBackgroundColor="@color/colorPrimaryDark"
+                />
 
     </LinearLayout>
 
@@ -91,4 +95,33 @@
                 android:text="---"/>
 
     </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true">
+
+        <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?android:attr/selectableItemBackground"/>
+
+        <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?android:attr/selectableItemBackground"/>
+
+    </LinearLayout>
+
+
 </RelativeLayout>
