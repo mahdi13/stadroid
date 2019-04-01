@@ -58,8 +58,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="---"
-                android:textAppearance="?attr/textAppearanceListItem"/>
+                android:text="---"/>
 
         <TextView
                 android:id="@+id/amount_left"
@@ -69,8 +68,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:textColor="@color/real_green"
-                android:text="---"
-                android:textAppearance="?attr/textAppearanceListItem"/>
+                android:text="---"/>
 
 
         <TextView
@@ -81,8 +79,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:textColor="@color/real_red"
-                android:text="---"
-                android:textAppearance="?attr/textAppearanceListItem"/>
+                android:text="---"/>
 
         <TextView
                 android:id="@+id/price_right"
@@ -91,8 +88,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="---"
-                android:textAppearance="?attr/textAppearanceListItem"/>
+                android:text="---"/>
 
     </LinearLayout>
 </RelativeLayout>

@@ -19,13 +19,10 @@ import io.stacrypt.stadroid.data.Kline
 import kotlinx.android.synthetic.main.fragment_market_candlestick.*
 import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.market.MarketViewModel
-import io.stacrypt.stadroid.ui.dinMediumTypeface
 import com.github.mikephil.charting.charts.CombinedChart.DrawOrder
 import kotlin.random.Random
 import com.github.mikephil.charting.charts.Chart
-import io.stacrypt.stadroid.ui.CoupleChartGestureListener
-import io.stacrypt.stadroid.ui.format
-import io.stacrypt.stadroid.ui.formatScaledMinimal
+import io.stacrypt.stadroid.ui.*
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -58,8 +55,8 @@ class MarketCandlestickFragment : Fragment() {
                 BarEntry(
                     i.toFloat(),
 //                    if (maxVolume?.toInt() == 0) 0F else ((it.volume * maxPrice!!) / maxVolume!!).toFloat() / 5f
-//                    it.volume.toFloat()
-                    Random.nextInt(0, 100).toFloat()
+                    it.volume.toFloat()
+//                    Random.nextInt(0, 100).toFloat()
                 )
             )
         }
@@ -246,10 +243,16 @@ class MarketCandlestickFragment : Fragment() {
         leftAxis.textColor = Color.WHITE
         leftAxis.typeface = dinMediumTypeface
         leftAxis.setValueFormatter { value, axis ->
-            viewModel.baseCurrency.value?.let {
-                value.toBigDecimal().format(it)
-            } ?: ""
+            //            viewModel.baseCurrency.value?.let {
+//                value.toBigDecimal().format(it)
+//            } ?: ""
+            value.toBigDecimal().format10Digit()
         }
+
+        leftAxis.resetAxisMaximum()
+        leftAxis.resetAxisMinimum()
+        leftAxis.axisMinimum = dataset?.values?.minBy { it.low * 0.8 }?.low?.times(0.99f) ?: 0f
+        leftAxis.axisMaximum = dataset?.values?.maxBy { it.high }?.high?.times(1.01f) ?: 100f
 
         chart.isHighlightPerDragEnabled = true
 
