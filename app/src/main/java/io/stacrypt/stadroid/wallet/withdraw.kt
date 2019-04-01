@@ -13,6 +13,7 @@ import io.stacrypt.stadroid.wallet.BalanceDetailActivity.Companion.ARG_ASSET
 import io.stacrypt.stadroid.wallet.data.WalletRepository
 import androidx.databinding.*
 import androidx.databinding.Observable
+import androidx.lifecycle.Observer
 import androidx.lifecycle.Transformations.map
 import io.stacrypt.stadroid.data.*
 import io.stacrypt.stadroid.data.Currency
@@ -48,7 +49,10 @@ class WithdrawViewModel : ObservableViewModel() {
 
     val estimatedCommission by lazy {
         map(amount) {
-            Log.d("salam", "salamamdlksfsdjfjdskdalkdjsblnf;s'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+            Log.d(
+                "salam",
+                "salamamdlksfsdjfjdskdalkdjsblnf;s'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            )
             if (
                 currency.value?.withdrawCommissionRate == null ||
                 currency.value?.withdrawCommissionRate?.toBigDecimal() == BigDecimal(0)
@@ -132,6 +136,10 @@ class WithdrawFragment : Fragment() {
                 }
             }.show()
         }
+
+        // FIXME: Empty observer to LiveData switchMaps work fine
+        viewModel.currency.observe(viewLifecycleOwner, Observer { })
+        viewModel.estimatedCommission.observe(viewLifecycleOwner, Observer { })
 
         viewModel.cryptocurrencySymbol.value = arguments?.getString(ARG_ASSET)!!
         viewModel.notifyChange()

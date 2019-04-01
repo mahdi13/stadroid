@@ -29,6 +29,9 @@ class CashinFragment : Fragment() {
 
         viewModel = ViewModelProviders.of(this).get(CashinViewModel::class.java)
 
+        // FIXME: Empty observer to LiveData switchMaps work fine
+        viewModel.currency.observe(viewLifecycleOwner, Observer { })
+
         return rootView
     }
 }

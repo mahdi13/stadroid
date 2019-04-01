@@ -16,8 +16,12 @@ class MarketViewModel : ViewModel() {
 
     val allMarkets: LiveData<List<Market>> = MarketRepository.getMarkets()
 
-    val market: LiveData<Market> = switchMap(marketName) { MarketRepository.getMarket(it) }
-    val last: LiveData<MarketLast> = switchMap(marketName) { MarketRepository.getMarketLast(it) }
+    val market: LiveData<Market> = switchMap(marketName) {
+        MarketRepository.getMarket(it)
+    }
+    val last: LiveData<MarketLast> = switchMap(marketName) {
+        MarketRepository.getMarketLast(it)
+    }
     val summary: LiveData<MarketSummary> = switchMap(marketName) { MarketRepository.getMarketSummary(it) }
     val status: LiveData<MarketStatus> = switchMap(marketName) { MarketRepository.getMarketStatus(it) }
     val book: LiveData<BookResponse> = switchMap(marketName) { MarketRepository.getBook(it) }

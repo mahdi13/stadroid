@@ -21,7 +21,9 @@ class CashoutViewModel : ViewModel() {
         this.fiatSymbol.value = fiatSymbol
     }
 
-    val currency = Transformations.switchMap(fiatSymbol) { WalletRepository.getCurrency(it) }
+    val currency = Transformations.switchMap(fiatSymbol) {
+        WalletRepository.getCurrency(it)
+    }
     val paymentGateways = Transformations.switchMap(fiatSymbol) { WalletRepository.getPaymentGateways(it) }
     val bankAccounts = BankingRepository.getBankAccounts()
 
@@ -35,8 +37,12 @@ class CashoutFragment : Fragment() {
 
         viewModel = ViewModelProviders.of(this).get(CashoutViewModel::class.java)
 
+        // FIXME: Empty observer to LiveData switchMaps work fine
+        viewModel.currency.observe(viewLifecycleOwner, Observer { })
+
         viewModel.init(arguments?.getString(ARG_ASSET)!!)
         rootView.bank_accounts.adapter = BankCardPagedAdapter()
+
 
         return rootView
     }

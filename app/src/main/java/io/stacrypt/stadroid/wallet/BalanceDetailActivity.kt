@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.wallet.deposit.DepositFragment
@@ -31,6 +32,13 @@ class BalanceDetailActivity : AppCompatActivity() {
                 ACTION_WITHDRAW -> showWithdraw()
             }
         }
+
+        // FIXME: Empty observer to LiveData switchMaps work fine
+        viewModel.currency.observe(this, Observer { })
+        viewModel.asset.observe(this, Observer { })
+        viewModel.balance.observe(this, Observer { })
+        viewModel.currency.observe(this, Observer { })
+        viewModel.currency.observe(this, Observer { })
 
         viewModel.assetName.value = intent.getStringExtra(ARG_ASSET)
 
