@@ -105,7 +105,10 @@
                 android:textStyle="bold"
                 android:textSize="18sp"
                 android:fontFamily="@font/din_medium"
-                tools:text="Price: 1234.56"/>
+                tools:text="Price: 1234.56"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?android:attr/selectableItemBackground"/>
 
         <TextView
                 android:layout_width="0dp"
@@ -131,7 +134,10 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?android:attr/selectableItemBackground">
 
             <TextView
                     android:id="@+id/open"
@@ -158,7 +164,10 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?android:attr/selectableItemBackground">
 
             <TextView
                     android:id="@+id/high"
@@ -185,7 +194,10 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?android:attr/selectableItemBackground">
 
             <TextView
                     android:id="@+id/low"
@@ -212,7 +224,10 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?android:attr/selectableItemBackground">
 
             <TextView
                     android:id="@+id/close"
