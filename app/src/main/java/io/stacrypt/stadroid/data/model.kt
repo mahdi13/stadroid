@@ -438,6 +438,33 @@ data class BankingTransaction(
     @SerializedName("type") var type: String
 )
 
+data class Notification(
+    @SerializedName("id") var id: Int,
+    @SerializedName("memberId") var memberId: Int,
+    @SerializedName("template") var template: String?,
+    @SerializedName("thumbnail") var thumbnail: String?,
+    @SerializedName("title") var title: String,
+    @SerializedName("isRead") var isRead: Boolean,
+    @SerializedName("target") var target: String?,
+    @SerializedName("createdAt") var createdAt: Date,
+    @SerializedName("readAt") var readAt: Date?,
+    @SerializedName("terminatedAt") var terminatedAt: Date?,
+    @SerializedName("removedAt") var removedAt: Date?,
+    @SerializedName("startedAt") var startedAt: Date?,
+    @SerializedName("priority") var priority: Int?,
+    @SerializedName("severity") var severity: Int?,
+    @SerializedName("description") var description: String,
+    @SerializedName("topic") var topic: String?,
+    @SerializedName("body") var body: String?,
+    @SerializedName("contentType") var contentType: String?,
+    @SerializedName("reason") var reason: String?,
+    @SerializedName("type") var type: String?,
+    @SerializedName("link") var link: String?,
+    @SerializedName("status") var status: String?
+)
+
+data class NotificationCount(val unread: Int)
+
 data class Fiat(
     val name: String,
     val type: String,

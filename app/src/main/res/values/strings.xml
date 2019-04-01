@@ -65,5 +65,7 @@
     <string name="coming_soon">Coming Soon…</string>
     <string name="amount">Amount</string>
     <string name="address">Address</string>
+    <string name="title_notification_list">Notifications</string>
+    <string name="title_notification_detail">Notification Detail</string>
 
 </resources>

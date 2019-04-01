@@ -1,14 +1,11 @@
-package io.stacrypt.stadroid
+package io.stacrypt.stadroid.notification
 
-import android.app.Service
-import android.content.Intent
-import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import androidx.core.app.NotificationManagerCompat
-import io.fabric.sdk.android.services.settings.IconRequest.build
+import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.data.sessionManager
 
 
