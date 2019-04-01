@@ -428,6 +428,28 @@ interface StemeraldV2ApiClient {
     ): Deferred<Unit>
 
 
+    /**
+     * Notifications
+     */
+    @HTTP(method = "GET", path = "notifications", hasBody = false)
+    fun getNotifications(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
+        @Query("offset") offset: Int,
+        @Query("limit") limit: Int
+    ): Deferred<List<Notification>>
+
+    @HTTP(method = "READ", path = "notifications/{notificationId}", hasBody = true)
+    fun readNotification(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
+        @Path("notificationId") notificationId: Int
+    ): Deferred<Notification>
+
+    @HTTP(method = "COUNT", path = "sessions/", hasBody = true)
+    fun countNotifications(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: ""
+    ): Deferred<NotificationCount>
+
+
 }
 
 @Suppress("DeferredIsResult")
