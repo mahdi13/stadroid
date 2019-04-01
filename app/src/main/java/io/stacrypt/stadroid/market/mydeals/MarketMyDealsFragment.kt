@@ -36,7 +36,7 @@ class MarketMyDealsFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(activity!!).get(MarketViewModel::class.java)
-        viewModel.myDeal.observe(this,
+        viewModel.myDeals.observe(this,
             Observer<List<MyDeal>> { mines ->
                 adapter.items = mines
                 adapter.notifyDataSetChanged()

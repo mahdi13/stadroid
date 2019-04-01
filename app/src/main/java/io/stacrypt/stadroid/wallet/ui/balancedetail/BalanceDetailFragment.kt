@@ -51,6 +51,7 @@ class BalanceDetailFragment : Fragment() {
         })
 
         viewModel.balance.observe(viewLifecycleOwner, Observer<BalanceOverview> { item ->
+            if(item == null) return@Observer
             header_title.text = "Your ${item.assetName} Balance:"
             header_amount.text = item.available.format10Digit()
             header_value.text = item.assetName // FIXME It should be the value

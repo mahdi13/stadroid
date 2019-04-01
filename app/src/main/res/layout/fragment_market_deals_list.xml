@@ -89,7 +89,7 @@
             android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:context=".market.mydeals.MarketMyDealsFragment"
-            tools:listitem="@layout/fragment_market_history"
+            tools:listitem="@layout/fragment_market_deals"
             android:background="@color/colorPrimaryDark"/>
 
 

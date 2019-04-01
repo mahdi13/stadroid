@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.fragment_market.*
 import com.google.android.material.tabs.TabLayout
 import io.stacrypt.stadroid.market.book.MarketBookFragment
 import io.stacrypt.stadroid.market.chart.MarketCandlestickFragment
-import io.stacrypt.stadroid.market.history.MarketHistoryFragment
+import io.stacrypt.stadroid.market.marketdeals.MarketDealsFragment
 import io.stacrypt.stadroid.market.mydeals.MarketMyDealsFragment
 import io.stacrypt.stadroid.market.myorders.MyOrdersFragment
 import java.lang.IndexOutOfBoundsException
@@ -43,7 +43,7 @@ class MarketFragment : Fragment() {
                     1 -> MyOrdersFragment()
                     2 -> MarketBookFragment()
                     3 -> MarketMyDealsFragment()
-                    4 -> MarketHistoryFragment()
+                    4 -> MarketDealsFragment()
                     else -> throw IndexOutOfBoundsException()
                 }
             }

@@ -112,11 +112,19 @@ interface StemeraldV2ApiClient {
     ): Deferred<Depth>
 
     @HTTP(method = "PEEK", path = "markets/{market}/marketdeals", hasBody = true)
-    fun deal(
+    fun getMarketDeals(
         @Path("market") market: String,
         @Query("limit") take: Int = 20,
         @Query("lastId") lastId: Int = 0
-    ): Deferred<ArrayList<Deal>>
+    ): Deferred<ArrayList<MarketDeal>>
+
+    @HTTP(method = "PEEK", path = "markets/{market}/mydeals", hasBody = true)
+    fun getMyDeals(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
+        @Path("market") market: String,
+        @Query("limit") take: Int = 20,
+        @Query("offset") skip: Int = 0
+    ): Deferred<ArrayList<MyDeal>>
 
     /**
      * Orders
@@ -450,44 +458,44 @@ interface StemeraldV2ApiClient {
 
 }
 
-@Suppress("DeferredIsResult")
-interface MockStemeraldApiClient {
-    @GET("assets")
-    fun assetList(): Deferred<ArrayList<Asset>>
-
-    @GET("balances?key=98063e30")
-    fun balanceList(): Deferred<ArrayList<BalanceOverview>>
-
-    @GET("balance-history?key=98063e30")
-    fun balanceHistory(
-        @Query("asset") assetName: String,
-        @Query("page") page: Int = 0
-    ): Deferred<ArrayList<BalanceHistory>>
-
-    @GET("market-list?key=98063e30")
-    fun allMarkets(): Deferred<ArrayList<Market>>
-
-    @GET("market-status/{market}?key=98063e30")
-    fun marketStatus(@Path("market") market: String): Deferred<MarketStatus>
-
-    @GET("market-summary/{market}?key=98063e30")
-    fun marketSummary(@Path("market") market: String, @Query("period") period: Long = 86400): Deferred<ArrayList<MarketSummary>>
-
-    @GET("market-last/{market}?key=98063e30")
-    fun marketLast(@Path("market") market: String): Deferred<MarketLast>
-
-    @GET("kline/{market}?key=98063e30")
-    fun kline(@Path("market") market: String): Deferred<ArrayList<Kline>>
-
-    @GET("order-book/{market}?key=98063e30")
-    fun book(@Path("market") market: String): Deferred<BookResponse>
-
-    @GET("deals/{market}?key=98063e30")
-    fun deal(@Path("market") market: String): Deferred<ArrayList<Deal>>
-
-    @GET("myDeal/{market}?key=98063e30")
-    fun mine(@Path("market") market: String): Deferred<ArrayList<MyDeal>>
-}
+//@Suppress("DeferredIsResult")
+//interface MockStemeraldApiClient {
+//    @GET("assets")
+//    fun assetList(): Deferred<ArrayList<Asset>>
+//
+//    @GET("balances?key=98063e30")
+//    fun balanceList(): Deferred<ArrayList<BalanceOverview>>
+//
+//    @GET("balance-history?key=98063e30")
+//    fun balanceHistory(
+//        @Query("asset") assetName: String,
+//        @Query("page") page: Int = 0
+//    ): Deferred<ArrayList<BalanceHistory>>
+//
+//    @GET("market-list?key=98063e30")
+//    fun allMarkets(): Deferred<ArrayList<Market>>
+//
+//    @GET("market-status/{market}?key=98063e30")
+//    fun marketStatus(@Path("market") market: String): Deferred<MarketStatus>
+//
+//    @GET("market-summary/{market}?key=98063e30")
+//    fun marketSummary(@Path("market") market: String, @Query("period") period: Long = 86400): Deferred<ArrayList<MarketSummary>>
+//
+//    @GET("market-last/{market}?key=98063e30")
+//    fun marketLast(@Path("market") market: String): Deferred<MarketLast>
+//
+//    @GET("kline/{market}?key=98063e30")
+//    fun kline(@Path("market") market: String): Deferred<ArrayList<Kline>>
+//
+//    @GET("order-book/{market}?key=98063e30")
+//    fun book(@Path("market") market: String): Deferred<BookResponse>
+//
+//    @GET("deals/{market}?key=98063e30")
+//    fun deal(@Path("market") market: String): Deferred<ArrayList<Deal>>
+//
+//    @GET("myDeals/{market}?key=98063e30")
+//    fun mine(@Path("market") market: String): Deferred<ArrayList<MyDeal>>
+//}
 
 //@Suppress("DeferredIsResult")
 //interface EmeraldApiClient {
@@ -514,6 +522,8 @@ val okHttpClient by lazy {
                 sessionManager.login(newToken)
             }
 
+            // FIXME: More strict check (sometimes 401 is about s.th else, e.g. forgetting passing the authorization header)
+            // FIXME: More strict check (sometimes 400 means unauthorized)
             if (response.code() == 401) {
                 // TODO: Force logout
                 sessionManager.logout()
@@ -549,13 +559,13 @@ var stemeraldApiClient = Retrofit.Builder()
 //    .build()
 //    .create(EmeraldApiClient::class.java)
 
-var mockStemeraldApiClient = Retrofit.Builder()
-    .baseUrl(MOCK_STEMERALD_API_URL)
-    .addCallAdapterFactory(CoroutineCallAdapterFactory())
-    .addConverterFactory(GsonConverterFactory.create())
-    .client(okHttpClient)
-    .build()
-    .create(MockStemeraldApiClient::class.java)
+//var mockStemeraldApiClient = Retrofit.Builder()
+//    .baseUrl(MOCK_STEMERALD_API_URL)
+//    .addCallAdapterFactory(CoroutineCallAdapterFactory())
+//    .addConverterFactory(GsonConverterFactory.create())
+//    .client(okHttpClient)
+//    .build()
+//    .create(MockStemeraldApiClient::class.java)
 
 
 //class TokenAuthenticator : Authenticator {

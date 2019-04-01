@@ -108,7 +108,7 @@ interface PaymentGatewayDao {
 //@Dao
 //interface MineDao {
 //    @Insert(onConflict = REPLACE)
-//    fun save(myDeal: MyDeal)
+//    fun save(myDeals: MyDeal)
 //
 //    @Query("SELECT * FROM MyDeal WHERE market = :market ORDER BY time DESC")
 //    fun loadByMarket(market: String): LiveData<List<MyDeal>>

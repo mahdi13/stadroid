@@ -117,11 +117,12 @@ object MarketRepository {
      *
      * TODO: Update it automatically
      */
-    fun getDeal(market: String): LiveData<List<Deal>> {
-        val liveData = MutableLiveData<List<Deal>>()
+    fun getMyDeals(market: String): LiveData<List<MyDeal>> {
+        val liveData = MutableLiveData<List<MyDeal>>()
         scope.launch {
             try {
-                liveData.postValue(stemeraldApiClient.deal(market).await())
+                liveData.postValue(stemeraldApiClient.getMyDeals(market = market, take = 50, skip = 0).await())
+//                liveData.postValue(mockStemeraldApiClient.myDeals(market = market).await())
             } catch (e: Exception) {
                 // TODO: Try again
                 e.printStackTrace()
@@ -135,12 +136,11 @@ object MarketRepository {
      *
      * TODO: Update it automatically
      */
-    fun getMineOverview(market: String): LiveData<List<MyDeal>> {
-        val liveData = MutableLiveData<List<MyDeal>>()
+    fun getMarketDeals(market: String): LiveData<List<MarketDeal>> {
+        val liveData = MutableLiveData<List<MarketDeal>>()
         scope.launch {
             try {
-                liveData.postValue(stemeraldApiClient.mine(market = market, take = 50, skip = 0).await())
-//                liveData.postValue(mockStemeraldApiClient.myDeal(market = market).await())
+                liveData.postValue(stemeraldApiClient.getMarketDeals(market = market, take = 50, lastId = 0).await())
             } catch (e: Exception) {
                 // TODO: Try again
                 e.printStackTrace()
@@ -170,7 +170,7 @@ object MarketRepository {
                         status = status
                     ).await()
                 )
-//                liveData.postValue(mockStemeraldApiClient.myDeal(market = market).await())
+//                liveData.postValue(mockStemeraldApiClient.myDeals(market = market).await())
             } catch (e: Exception) {
                 // TODO: Try again
                 e.printStackTrace()

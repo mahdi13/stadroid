@@ -113,10 +113,9 @@ data class DepthRecord(
     var amount: BigDecimal
 )
 
-data class Deal(
-    var market: String,
+data class MarketDeal(
     var id: Int,
-    var time: Long,
+    var time: Date,
     var type: String,
     var amount: BigDecimal,
     var price: BigDecimal
@@ -126,14 +125,14 @@ data class MyDeal(
     var id: Int,
     var market: String,
     var user: String,
-    var time: Long,
+    var time: Date,
     var side: String,
     var role: String,
     var amount: BigDecimal,
     var price: BigDecimal,
     var fee: BigDecimal,
-    var fillId: Int,
-    var orderId: Int
+    var deal: BigDecimal,
+    var dealOrderId: Int
 )
 
 @Entity
