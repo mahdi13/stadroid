@@ -1,20 +1,12 @@
 package io.stacrypt.stadroid.notification
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.RecyclerView
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
 import androidx.core.app.NavUtils
 import android.view.MenuItem
 import io.stacrypt.stadroid.R
 
-import io.stacrypt.stadroid.notification.dummy.DummyContent
 import kotlinx.android.synthetic.main.activity_notification_list.*
-import kotlinx.android.synthetic.main.notification_list_content.view.*
 
 /**
  * An activity representing a list of Pings. This activity
@@ -46,7 +38,7 @@ class NotificationListActivity : AppCompatActivity() {
             twoPane = true
         }
 
-        setupRecyclerView(notification_list)
+        notification_list.adapter = NotificationPagedAdapter(this, twoPane)
     }
 
     override fun onOptionsItemSelected(item: MenuItem) =
@@ -64,63 +56,6 @@ class NotificationListActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
 
-    private fun setupRecyclerView(recyclerView: RecyclerView) {
-        recyclerView.adapter = SimpleItemRecyclerViewAdapter(this, DummyContent.ITEMS, twoPane)
-    }
-
-    class SimpleItemRecyclerViewAdapter(
-        private val parentActivity: NotificationListActivity,
-        private val values: List<DummyContent.DummyItem>,
-        private val twoPane: Boolean
-    ) :
-        RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>() {
-
-        private val onClickListener: View.OnClickListener
-
-        init {
-            onClickListener = View.OnClickListener { v ->
-                val item = v.tag as DummyContent.DummyItem
-                if (twoPane) {
-                    val fragment = NotificationDetailFragment().apply {
-                        arguments = Bundle().apply {
-                            putString(NotificationDetailFragment.ARG_ITEM_ID, item.id)
-                        }
-                    }
-                    parentActivity.supportFragmentManager
-                        .beginTransaction()
-                        .replace(R.id.notification_detail_container, fragment)
-                        .commit()
-                } else {
-                    val intent = Intent(v.context, NotificationDetailActivity::class.java).apply {
-                        putExtra(NotificationDetailFragment.ARG_ITEM_ID, item.id)
-                    }
-                    v.context.startActivity(intent)
-                }
-            }
-        }
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.notification_list_content, parent, false)
-            return ViewHolder(view)
-        }
-
-        override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            val item = values[position]
-            holder.idView.text = item.id
-            holder.contentView.text = item.content
-
-            with(holder.itemView) {
-                tag = item
-                setOnClickListener(onClickListener)
-            }
-        }
-
-        override fun getItemCount() = values.size
-
-        inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-            val idView: TextView = view.id_text
-            val contentView: TextView = view.content
-        }
-    }
 }
+
+

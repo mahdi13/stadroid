@@ -471,5 +471,5 @@ data class Fiat(
     val divideByTen: Int
 )
 
-val dateFormatter by lazy { SimpleDateFormat("dd MMM yyyy HH:mm") }
+val dateFormatter by lazy { SimpleDateFormat("dd MMM yyyy HH:mm", Locale.ENGLISH) }
 fun Date.format() = dateFormatter.format(this)

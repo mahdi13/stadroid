@@ -36,8 +36,8 @@ class NotificationDetailActivity : AppCompatActivity() {
             val fragment = NotificationDetailFragment().apply {
                 arguments = Bundle().apply {
                     putString(
-                        NotificationDetailFragment.ARG_ITEM_ID,
-                        intent.getStringExtra(NotificationDetailFragment.ARG_ITEM_ID)
+                        NotificationDetailFragment.ARG_NOTIFICATION,
+                        intent.getStringExtra(NotificationDetailFragment.ARG_NOTIFICATION)
                     )
                 }
             }

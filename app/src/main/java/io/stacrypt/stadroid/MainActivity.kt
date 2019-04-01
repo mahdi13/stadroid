@@ -11,6 +11,7 @@ import io.stacrypt.stadroid.wallet.WalletFragment
 import androidx.room.Room
 import io.stacrypt.stadroid.data.sessionManager
 import io.stacrypt.stadroid.market.*
+import io.stacrypt.stadroid.notification.NotificationListActivity
 import io.stacrypt.stadroid.profile.LoginFragment
 import org.jetbrains.anko.*
 
@@ -101,6 +102,8 @@ class MainActivity : AppCompatActivity(),
 
         // Set the Market Fragment to be displayed by default.
         navigation.selectedItemId = R.id.navigation_market
+
+        notifications.setOnClickListener { startActivity<NotificationListActivity>() }
 
     }
 }
