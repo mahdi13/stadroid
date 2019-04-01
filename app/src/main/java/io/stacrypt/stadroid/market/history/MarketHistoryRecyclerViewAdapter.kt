@@ -7,10 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.data.Deal
+import io.stacrypt.stadroid.ui.format10Digit
+import io.stacrypt.stadroid.ui.formatChangePercentFrom
 
 import kotlinx.android.synthetic.main.fragment_market_history.view.*
 import org.jetbrains.anko.textColorResource
-import kotlin.math.abs
 
 class MarketHistoryRecyclerViewAdapter(
     var items: List<Deal>
@@ -24,22 +25,21 @@ class MarketHistoryRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
-        holder.amountView.text = item.amount.toString()
-        holder.priceView.text = item.price.toString()
+        holder.amountView.text = item.amount.format10Digit()
+        holder.priceView.text = item.price.format10Digit()
 
-        val newPrice = item.price.toDouble()
-        val lastPrice = if (position > 0) items[position - 1].price.toDouble() else newPrice
-        val change = newPrice - lastPrice
-        val changePercent = abs(change) / lastPrice * 100.0
+        val newPrice = item.price
+        val lastPrice = if (position > 0) items[position - 1].price else newPrice
+        val changePercent = newPrice.formatChangePercentFrom(lastPrice)
 
         holder.changeView.text = String.format("%.${2}f", changePercent)
 
-        if (change >= 0) {
-            holder.priceView.textColorResource = R.color.pink_600
-            holder.changeView.textColorResource = R.color.pink_600
+        if (lastPrice > newPrice) {
+            holder.priceView.textColorResource = R.color.real_red
+            holder.changeView.textColorResource = R.color.real_red
         } else {
-            holder.priceView.textColorResource = R.color.green_600
-            holder.changeView.textColorResource = R.color.green_600
+            holder.priceView.textColorResource = R.color.real_green
+            holder.changeView.textColorResource = R.color.real_green
         }
 
     }

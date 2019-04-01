@@ -44,10 +44,13 @@ class BalanceDetailFragment : Fragment() {
         viewModel.balanceHistory.observe(this, Observer<PagedList<BalanceHistory>> {
             adapter.submitList(it)
         })
-        viewModel.balance.observe(this, Observer<BalanceOverview> { item ->
 
-            subject.text = "${item.currency.name}'s Wallet"
-            header_icon.setImageResource(item.currency.iconResource()!!)
+        viewModel.currency.observe(viewLifecycleOwner, Observer { item ->
+            subject.text = "${item.name}'s Wallet"
+            header_icon.setImageResource(item.iconResource()!!)
+        })
+
+        viewModel.balance.observe(viewLifecycleOwner, Observer<BalanceOverview> { item ->
             header_title.text = "Your ${item.assetName} Balance:"
             header_amount.text = item.available.format10Digit()
             header_value.text = item.assetName // FIXME It should be the value

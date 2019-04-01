@@ -79,3 +79,15 @@ fun BigDecimal.formatScaledMinimal(currency: Currency, unitIncluded: Boolean = f
     }
     return output ?: ""
 }
+
+
+fun BigDecimal.formatChangePercentFrom(base: BigDecimal) = if (base == 0.toBigDecimal())
+    "0.00 %"
+else
+    this.abs().divide(base, 8, RoundingMode.HALF_EVEN).scaleByPowerOfTen(2).formatPercent()
+
+fun BigDecimal.formatPercent(digits: Int = 2) = "${this.signSymbol()} ${this.format(digits)} %"
+fun BigDecimal.signSymbol() = if (isPositive()) "+" else "-"
+fun BigDecimal.isPositive(): Boolean = this >= 0.toBigDecimal()
+
+
