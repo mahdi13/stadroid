@@ -57,8 +57,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:context=".market.mine.MarketMineFragment"
-            tools:listitem="@layout/fragment_market_mine"
+            tools:context=".market.mydeals.MarketMyDealsFragment"
+            tools:listitem="@layout/fragment_market_mydeals"
             android:background="@color/colorPrimaryDark"/>
 
 

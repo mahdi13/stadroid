@@ -10,9 +10,7 @@ import retrofit2.http.*
 import java.io.File
 import java.nio.charset.Charset
 import java.util.*
-import io.fabric.sdk.android.services.settings.IconRequest.build
 import okhttp3.*
-import java.io.IOException
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache
 import com.franmontiel.persistentcookiejar.PersistentCookieJar
@@ -169,7 +167,7 @@ interface StemeraldV2ApiClient {
         @Path("market") market: String,
         @Query("offset") skip: Int = 0,
         @Query("limit") take: Int = 20
-    ): Deferred<ArrayList<Mine>>
+    ): Deferred<ArrayList<MyDeal>>
 
     @HTTP(method = "GET", path = "transactions/payment-gateways", hasBody = false)
     fun getPaymentGateways(): Deferred<List<PaymentGateway>>
@@ -487,8 +485,8 @@ interface MockStemeraldApiClient {
     @GET("deals/{market}?key=98063e30")
     fun deal(@Path("market") market: String): Deferred<ArrayList<Deal>>
 
-    @GET("mine/{market}?key=98063e30")
-    fun mine(@Path("market") market: String): Deferred<ArrayList<Mine>>
+    @GET("myDeal/{market}?key=98063e30")
+    fun mine(@Path("market") market: String): Deferred<ArrayList<MyDeal>>
 }
 
 //@Suppress("DeferredIsResult")

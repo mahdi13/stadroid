@@ -1,7 +1,6 @@
 package io.stacrypt.stadroid.market.data
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations.switchMap
 import io.stacrypt.stadroid.data.*
 
 class MarketLiveData(val marketName: String) : LiveData<Market>() {
@@ -20,7 +19,7 @@ class MarketLiveData(val marketName: String) : LiveData<Market>() {
 
     val deal: LiveData<List<Deal>> by lazy { MarketRepository.getDeal(marketName) }
 
-    val mine: LiveData<List<Mine>> by lazy { MarketRepository.getMineOverview(marketName) }
+    val myDeal: LiveData<List<MyDeal>> by lazy { MarketRepository.getMineOverview(marketName) }
 
     val myActiveOrders: LiveData<List<Order>> by lazy { MarketRepository.getMyActiveOrders(marketName) }
 

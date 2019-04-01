@@ -1,4 +1,4 @@
-package io.stacrypt.stadroid.market.mine
+package io.stacrypt.stadroid.market.mydeals
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
@@ -6,22 +6,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import io.stacrypt.stadroid.R
-import io.stacrypt.stadroid.data.Mine
+import io.stacrypt.stadroid.data.MyDeal
 
 
-import kotlinx.android.synthetic.main.fragment_market_mine.view.*
+import kotlinx.android.synthetic.main.fragment_market_mydeals.view.*
 import java.text.SimpleDateFormat
 
 
-class MarketMineRecyclerViewAdapter(
-    var items: List<Mine>
-) : RecyclerView.Adapter<MarketMineRecyclerViewAdapter.ViewHolder>() {
+class MyDealsRecyclerViewAdapter(
+    var items: List<MyDeal>
+) : RecyclerView.Adapter<MyDealsRecyclerViewAdapter.ViewHolder>() {
 
     private val sdf = SimpleDateFormat("dd-MM hh:mm")
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.fragment_market_mine, parent, false)
+            .inflate(R.layout.fragment_market_mydeals, parent, false)
         return ViewHolder(view)
     }
 

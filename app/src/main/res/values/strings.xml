@@ -42,8 +42,8 @@
     <string name="toast_bank_card_added_successfully">Bank card added successfully</string>
     <string name="chart">Chart</string>
     <string name="book">Book</string>
-    <string name="my_active_orders">My Orders</string>
-    <string name="mine">Mine</string>
+    <string name="my_orders">My Orders</string>
+    <string name="my_deals">My Deals</string>
     <string name="history">History</string>
     <string name="market_order">Market Order</string>
     <string name="minus">-</string>

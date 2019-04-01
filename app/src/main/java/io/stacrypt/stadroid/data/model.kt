@@ -122,7 +122,7 @@ data class Deal(
     var price: BigDecimal
 )
 
-data class Mine(
+data class MyDeal(
     var id: Int,
     var market: String,
     var user: String,

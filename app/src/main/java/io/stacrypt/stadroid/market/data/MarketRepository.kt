@@ -135,12 +135,12 @@ object MarketRepository {
      *
      * TODO: Update it automatically
      */
-    fun getMineOverview(market: String): LiveData<List<Mine>> {
-        val liveData = MutableLiveData<List<Mine>>()
+    fun getMineOverview(market: String): LiveData<List<MyDeal>> {
+        val liveData = MutableLiveData<List<MyDeal>>()
         scope.launch {
             try {
                 liveData.postValue(stemeraldApiClient.mine(market = market, take = 50, skip = 0).await())
-//                liveData.postValue(mockStemeraldApiClient.mine(market = market).await())
+//                liveData.postValue(mockStemeraldApiClient.myDeal(market = market).await())
             } catch (e: Exception) {
                 // TODO: Try again
                 e.printStackTrace()
@@ -170,7 +170,7 @@ object MarketRepository {
                         status = status
                     ).await()
                 )
-//                liveData.postValue(mockStemeraldApiClient.mine(market = market).await())
+//                liveData.postValue(mockStemeraldApiClient.myDeal(market = market).await())
             } catch (e: Exception) {
                 // TODO: Try again
                 e.printStackTrace()

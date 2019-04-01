@@ -45,15 +45,15 @@
         <com.google.android.material.tabs.TabItem
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:id="@+id/mine_tab"
-                android:text="@string/chart"
+                android:id="@+id/chart_tab"
+                android:text="@string/my_orders"
                 />
 
         <com.google.android.material.tabs.TabItem
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:id="@+id/my_active_orders_tab"
-                android:text="@string/my_active_orders"
+                android:id="@+id/my_orders_tab"
+                android:text="@string/my_orders"
                 />
 
         <com.google.android.material.tabs.TabItem
@@ -66,8 +66,8 @@
         <com.google.android.material.tabs.TabItem
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:id="@+id/chart_tab"
-                android:text="@string/mine"
+                android:id="@+id/my_deals_tab"
+                android:text="@string/my_deals"
                 />
 
         <com.google.android.material.tabs.TabItem

@@ -1,4 +1,4 @@
-package io.stacrypt.stadroid.market.mine
+package io.stacrypt.stadroid.market.mydeals
 
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -9,24 +9,24 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import io.stacrypt.stadroid.R
-import io.stacrypt.stadroid.data.Mine
+import io.stacrypt.stadroid.data.MyDeal
 import io.stacrypt.stadroid.market.MarketViewModel
-import kotlinx.android.synthetic.main.fragment_market_mine_list.view.*
+import kotlinx.android.synthetic.main.fragment_my_deals_list.view.*
 
 
-class MarketMineFragment : Fragment() {
+class MarketMyDealsFragment : Fragment() {
 
     private lateinit var viewModel: MarketViewModel
-    private lateinit var adapter: MarketMineRecyclerViewAdapter
+    private lateinit var adapter: MyDealsRecyclerViewAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val rootView = inflater.inflate(R.layout.fragment_market_mine_list, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_my_deals_list, container, false)
         val recyclerView = rootView.list
 
-        adapter = MarketMineRecyclerViewAdapter(ArrayList())
+        adapter = MyDealsRecyclerViewAdapter(ArrayList())
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = adapter
 
@@ -36,8 +36,8 @@ class MarketMineFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(activity!!).get(MarketViewModel::class.java)
-        viewModel.mine.observe(this,
-            Observer<List<Mine>> { mines ->
+        viewModel.myDeal.observe(this,
+            Observer<List<MyDeal>> { mines ->
                 adapter.items = mines
                 adapter.notifyDataSetChanged()
             })

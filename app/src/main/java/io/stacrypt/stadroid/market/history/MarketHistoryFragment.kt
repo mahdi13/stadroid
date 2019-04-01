@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProviders
 import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.data.Deal
 import io.stacrypt.stadroid.market.MarketViewModel
+import kotlinx.android.synthetic.main.fragment_market_history_list.view.*
 
 class MarketHistoryFragment : Fragment() {
 
@@ -22,13 +23,13 @@ class MarketHistoryFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val recyclerView = inflater.inflate(R.layout.fragment_market_history_list, container, false) as RecyclerView
+        val rootView = inflater.inflate(R.layout.fragment_market_history_list, container, false)
 
         adapter = MarketHistoryRecyclerViewAdapter(ArrayList())
-        recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = adapter
+        rootView.list.layoutManager = LinearLayoutManager(context)
+        rootView.list.adapter = adapter
 
-        return recyclerView
+        return rootView
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
