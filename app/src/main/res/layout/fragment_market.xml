@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:id="@+id/chart_tab"
-                android:text="@string/my_orders"
+                android:text="@string/chart"
                 />
 
         <com.google.android.material.tabs.TabItem
