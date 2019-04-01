@@ -18,7 +18,22 @@
         <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="3"
+                android:text="Price"
+                android:textColor="@color/colorPrimaryLight"
+                android:gravity="center"
+                android:fontFamily="@font/din_medium"
+                />
+
+        <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimaryLight"/>
+
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
                 android:text="Amount"
                 android:textColor="@color/colorPrimaryLight"
                 android:gravity="center"
@@ -26,19 +41,20 @@
                 />
 
         <View
-                android:layout_width="1px"
+                android:layout_width="1dp"
                 android:layout_height="match_parent"
                 android:background="@color/colorPrimaryLight"/>
 
         <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Price"
+                android:layout_weight="3"
+                android:text="Value"
                 android:textColor="@color/colorPrimaryLight"
                 android:gravity="center"
                 android:fontFamily="@font/din_medium"
                 />
+
 
     </LinearLayout>
 
@@ -58,7 +74,7 @@
             android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:context=".market.mydeals.MarketMyDealsFragment"
-            tools:listitem="@layout/fragment_market_mydeals"
+            tools:listitem="@layout/fragment_my_deals"
             android:background="@color/colorPrimaryDark"/>
 
 

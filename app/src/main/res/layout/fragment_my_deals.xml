@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
               xmlns:tools="http://schemas.android.com/tools"
@@ -31,29 +33,19 @@
             android:layout_margin="4dp"
             tools:text="0.00231000"
             android:gravity="center"
+            android:textColor="@color/real_red"
             android:layout_gravity="center"/>
 
     <TextView
-            android:id="@+id/change"
-            android:layout_width="0dp"
-            android:layout_weight="2"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/din_medium"
-            android:layout_margin="4dp"
-            tools:text="+ 0.04 %"
-            android:textColor="@color/real_green"
-            android:gravity="center"
-            android:layout_gravity="center"/>
-
-    <TextView
-            android:id="@+id/time"
+            android:id="@+id/value"
             android:layout_width="0dp"
             android:fontFamily="@font/din_medium"
-            android:layout_weight="2"
+            android:layout_weight="3"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
-            tools:text="11:54"
+            tools:text="32,547,000"
             android:gravity="center"
+            android:textColor="@color/colorPrimaryLightLight"
             android:layout_gravity="center"/>
 
     <!--<TextView-->

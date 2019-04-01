@@ -9,7 +9,7 @@ import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.data.MyDeal
 
 
-import kotlinx.android.synthetic.main.fragment_market_mydeals.view.*
+import kotlinx.android.synthetic.main.fragment_my_deals.view.*
 import java.text.SimpleDateFormat
 
 
@@ -21,7 +21,7 @@ class MyDealsRecyclerViewAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.fragment_market_mydeals, parent, false)
+            .inflate(R.layout.fragment_my_deals, parent, false)
         return ViewHolder(view)
     }
 

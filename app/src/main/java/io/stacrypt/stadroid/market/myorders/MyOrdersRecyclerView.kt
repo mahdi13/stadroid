@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.data.Order
-import kotlinx.android.synthetic.main.fragment_my_active_orders.view.*
+import kotlinx.android.synthetic.main.fragment_my_orders.view.*
 import java.text.SimpleDateFormat
 
 class MyOrdersRecyclerView(
