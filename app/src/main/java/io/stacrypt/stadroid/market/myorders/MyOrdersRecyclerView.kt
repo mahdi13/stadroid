@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.data.Order
+import io.stacrypt.stadroid.ui.format10Digit
 import kotlinx.android.synthetic.main.fragment_my_orders.view.*
 import java.text.SimpleDateFormat
 
@@ -24,8 +25,8 @@ class MyOrdersRecyclerView(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
-        holder.priceView.text = item.price.toString()
-        holder.amountView.text = item.amount.toString()
+        holder.priceView.text = item.price?.format10Digit() ?: "NA"
+        holder.amountView.text = item.amount.format10Digit()
 //        holder.feeView.text = item.fee
 //        holder.dateView.text = sdf.format(item.time)
 //

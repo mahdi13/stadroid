@@ -28,12 +28,14 @@ class MyDealsRecyclerViewAdapter(
         val item = items[position]
         holder.priceView.text = item.price.format10Digit()
         holder.amountView.text = item.amount.format10Digit()
-        holder.valueView.text = item.amount.times(item.price).format10Digit()
+
+        // TODO: Is it right?
+        holder.valueView.text = item.amount.times(item.price).format10Digit().removeSuffix("0").removeSuffix(".")
 
         if (item.side.toLowerCase() == "buy")
             holder.amountView.textColorResource = R.color.real_green
         else
-            holder.amountView.textColorResource = R.color.real_green
+            holder.amountView.textColorResource = R.color.real_red
 
     }
 

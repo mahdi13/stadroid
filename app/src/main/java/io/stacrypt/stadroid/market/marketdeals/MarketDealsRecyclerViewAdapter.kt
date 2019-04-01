@@ -35,15 +35,12 @@ class MarketDealsRecyclerViewAdapter(
 
         val newPrice = item.price
         val lastPrice = if (position > 0) items[position - 1].price else newPrice
-        val changePercent = newPrice.formatChangePercentFrom(lastPrice)
 
-        holder.changeView.text = String.format("%.${2}f", changePercent)
+        holder.changeView.text = newPrice.formatChangePercentFrom(lastPrice)
 
         if (lastPrice > newPrice) {
-            holder.priceView.textColorResource = R.color.real_red
             holder.changeView.textColorResource = R.color.real_red
         } else {
-            holder.priceView.textColorResource = R.color.real_green
             holder.changeView.textColorResource = R.color.real_green
         }
 
