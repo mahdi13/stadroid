@@ -11,6 +11,11 @@ import androidx.lifecycle.ViewModelProviders
 import io.stacrypt.stadroid.data.Market
 import kotlinx.android.synthetic.main.fragment_market_summary.view.*
 import io.stacrypt.stadroid.R
+import io.stacrypt.stadroid.ui.format
+import io.stacrypt.stadroid.ui.format10Digit
+import org.jetbrains.anko.textColorResource
+import java.math.BigDecimal
+import java.math.RoundingMode
 
 
 const val SHOWING_ITEMS = 20
@@ -24,6 +29,7 @@ class MarketSummaryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         rootView = inflater.inflate(R.layout.fragment_market_summary, container, false)!!
+        rootView?.back?.setOnClickListener { activity?.finish() }
         return rootView
     }
 
@@ -40,16 +46,48 @@ class MarketSummaryFragment : Fragment() {
         })
 
         viewModel.status.observe(this, Observer {
-            rootView?.open?.text = it?.low.toString()
-            rootView?.high?.text = it?.high.toString()
-            rootView?.low?.text = it?.low.toString()
-            rootView?.close?.text = it?.last.toString()
+            rootView?.open?.text = it?.open?.format10Digit()
+            rootView?.high?.text = it?.high?.format10Digit()
+            rootView?.low?.text = it?.low?.format10Digit()
+            rootView?.close?.text = it?.close?.format10Digit()
             rootView?.volume?.text =
-                it?.volume.toString() + " " + (viewModel?.marketName?.value?.split("_")?.get(1) ?: "")
+                it?.volume?.format10Digit() + " " + (viewModel?.marketName?.value?.split("_")?.get(1) ?: "")
+
+            if (viewModel.last.value?.price != null && it?.volume != null) {
+                rootView?.volume_value?.text =
+                    (it?.volume * viewModel.last.value?.price!!).format10Digit() + " " + (viewModel?.marketName?.value?.split(
+                        "_"
+                    )?.get(0) ?: "")
+            }
+
+            if (it.open != BigDecimal(0)) {
+                val precentagePrefix: String
+                val precentageChange: String
+                if (it.open > it.close) {
+                    rootView?.deal?.textColorResource = R.color.real_red_semi_trans
+                    precentagePrefix = "-"
+                    precentageChange =
+                        (it.open - it.close).divide(it.open, 8, RoundingMode.HALF_EVEN).scaleByPowerOfTen(2).format(2)
+                } else {
+                    rootView?.deal?.textColorResource = R.color.real_green_semi_trans
+                    precentagePrefix = "+"
+                    precentageChange =
+                        (it.close - it.open).divide(it.open, 8, RoundingMode.HALF_EVEN).scaleByPowerOfTen(2).format(2)
+                }
+                rootView?.deal?.text = "$precentagePrefix $precentageChange %"
+            }
         })
 
         viewModel.last.observe(this, Observer {
-            rootView?.price?.text = it?.price.toString()
+            rootView?.price?.text = "Last: ${it?.price?.format10Digit()}"
+
+            if (viewModel.status.value?.volume != null && it?.price != null) {
+                rootView?.volume_value?.text =
+                    (it?.price * viewModel.status.value?.volume!!).format10Digit() + " " + (viewModel?.marketName?.value?.split(
+                        "_"
+                    )?.get(0) ?: "")
+            }
+
         })
 
         viewModel.status.observe(this, Observer {

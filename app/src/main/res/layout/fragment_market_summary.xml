@@ -29,6 +29,16 @@
             android:padding="5dp"
             android:id="@+id/row1">
 
+        <ImageButton
+                android:layout_width="?attr/actionBarSize"
+                android:layout_height="?attr/actionBarSize"
+                android:id="@+id/back"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/ic_arrow_back_black_32dp"
+                android:foregroundTint="@color/colorPrimaryLightLight"
+                android:tint="@color/colorPrimaryLightLight"
+                style="@style/Widget.AppCompat.ActionButton"/>
+
         <TextView
                 android:textAppearance="@style/MaterialAlertDialog.MaterialComponents.Title.Text"
                 android:foregroundTint="@color/colorSecondary"
@@ -41,18 +51,40 @@
                 android:textStyle="bold"
                 android:textSize="20sp"
                 android:fontFamily="@font/din_medium"
+                android:textColor="@color/colorSecondary"
                 android:text="@string/loading"
                 tools:text="BTC / USD"/>
 
-        <TextView
+        <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:id="@+id/volume"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
                 android:gravity="center"
-                android:textStyle="bold"
-                android:fontFamily="@font/din_medium"
-                tools:text="23.47653 BTC"/>
+                >
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/volume"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/din_medium"
+                    tools:text="23.47653 BTC"/>
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/volume_value"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/din_medium"
+                    android:textColor="@color/colorPrimaryLightLight"
+                    tools:text="23,47653 B IRR"/>
+
+
+        </LinearLayout>
+
 
     </LinearLayout>
 
@@ -73,7 +105,7 @@
                 android:textStyle="bold"
                 android:textSize="18sp"
                 android:fontFamily="@font/din_medium"
-                android:text="Price: 1234.56 (+ 2.34 %)"/>
+                tools:text="Price: 1234.56"/>
 
         <TextView
                 android:layout_width="0dp"
@@ -83,7 +115,7 @@
                 android:gravity="center"
                 android:textColor="@color/colorGrayText"
                 android:fontFamily="@font/din_medium"
-                android:text="47562532 $"/>
+                android:text="+ 0.00 %"/>
 
     </LinearLayout>
 
@@ -107,7 +139,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:textStyle="bold"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:fontFamily="@font/din_medium"
                     android:text="12345.76"/>
 
@@ -134,7 +166,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:textStyle="bold"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:fontFamily="@font/din_medium"
                     android:text="12345.76"/>
 
@@ -161,7 +193,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:textStyle="bold"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:fontFamily="@font/din_medium"
                     android:text="12345.76"/>
 
@@ -188,7 +220,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:textStyle="bold"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:fontFamily="@font/din_medium"
                     android:text="12345.76"/>
 
