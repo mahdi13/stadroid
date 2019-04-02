@@ -32,6 +32,12 @@
         <action
                 android:id="@+id/action_settings_entrypoint_fragment_to_bank_accounts_fragment"
                 app:destination="@id/bank_accounts_fragment"/>
+        <action
+                android:id="@+id/action_settings_entrypoint_fragment_to_addBankCardFragment"
+                app:destination="@id/addBankCardFragment"/>
+        <action
+                android:id="@+id/action_settings_entrypoint_fragment_to_addBankAccountFragment"
+                app:destination="@id/addBankAccountFragment"/>
     </fragment>
 
 

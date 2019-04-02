@@ -13,6 +13,7 @@ import io.stacrypt.stadroid.wallet.WithdrawFragment
 import io.stacrypt.stadroid.wallet.deposit.DepositFragment
 import org.jetbrains.anko.support.v4.withArguments
 
+
 class BalanceDetailActivity : AppCompatActivity() {
 
     private lateinit var viewModel: BalanceDetailViewModel
@@ -26,7 +27,7 @@ class BalanceDetailActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.container, BalanceDetailFragment())
-                .commitNow()
+                .commit()
 
             when (intent.getStringExtra(ARG_ACTION)) {
                 ACTION_DEPOSIT -> showDeposit(intent.getStringExtra(ARG_ASSET))
@@ -63,14 +64,17 @@ class BalanceDetailActivity : AppCompatActivity() {
 
         if (fragment != null)
             supportFragmentManager.beginTransaction()
-                .add(
+                .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
+                .replace(
                     R.id.container, fragment.withArguments(
                         ARG_ASSET to intent.getStringExtra(
                             ARG_ASSET
                         )
                     )
                 )
-                .commitNow()
+                .addToBackStack("$symbol-withdraw")
+                .commit()
+
     }
 
     fun showDeposit(symbol: String) {
@@ -89,15 +93,22 @@ class BalanceDetailActivity : AppCompatActivity() {
 
         if (fragment != null)
             supportFragmentManager.beginTransaction()
-                .add(
+                .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
+                .replace(
                     R.id.container, fragment.withArguments(
                         ARG_ASSET to intent.getStringExtra(
                             ARG_ASSET
                         )
                     )
                 )
-                .commitNow()
+                .addToBackStack("$symbol-deposit")
+                .commit()
     }
+
+    override fun onBackPressed() =
+        if (supportFragmentManager.backStackEntryCount > 0) supportFragmentManager.popBackStack()
+        else super.onBackPressed()
+
 
     companion object {
         val ARG_ASSET = "asset"

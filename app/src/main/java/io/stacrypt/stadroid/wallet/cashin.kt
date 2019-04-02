@@ -7,9 +7,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
 import io.stacrypt.stadroid.R
-import io.stacrypt.stadroid.data.UserRepository
-import io.stacrypt.stadroid.profile.banking.BankingRepository
+import io.stacrypt.stadroid.profile.ProfileSettingActivity
+import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.ACTION_ADD
+import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_ADD_BANK_CARD
+import io.stacrypt.stadroid.profile.banking.BankCardPagedAdapter
+import io.stacrypt.stadroid.wallet.balance.BalanceDetailActivity.Companion.ARG_ASSET
 import io.stacrypt.stadroid.wallet.data.WalletRepository
+import io.stacrypt.stadroid.wallet.fiat.PaymentGatewayAdapter
+import kotlinx.android.synthetic.main.frgment_cashin.view.*
+import org.jetbrains.anko.support.v4.startActivity
 
 class CashinViewModel : ViewModel() {
 
@@ -31,7 +37,24 @@ class CashinFragment : Fragment() {
 
         // FIXME: Empty observer to LiveData switchMaps work fine
         viewModel.currency.observe(viewLifecycleOwner, Observer { })
+        viewModel.paymentGateways.observe(viewLifecycleOwner, Observer { items ->
+            view?.payment_gateways?.adapter =
+                PaymentGatewayAdapter(items.filter { it.fiatSymbol == viewModel.fiatSymbol.value })
+        })
+        viewModel.fiatSymbol.postValue(arguments?.getString(ARG_ASSET)!!)
 
         return rootView
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        view.cards.adapter = BankCardPagedAdapter()
+
+        view.add.setOnClickListener {
+            startActivity<ProfileSettingActivity>(
+                ProfileSettingActivity.ARG_TARGET to TARGET_ADD_BANK_CARD,
+                ProfileSettingActivity.ARG_ACTION to ACTION_ADD
+            )
+        }
     }
 }

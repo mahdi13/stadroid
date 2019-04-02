@@ -59,6 +59,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/bank_accounts"
                 android:layout_marginTop="10dp"
+                android:id="@+id/add"
                 android:text="Add new bank account"/>
 
         <TextView

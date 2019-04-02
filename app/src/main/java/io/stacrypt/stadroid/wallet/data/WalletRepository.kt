@@ -200,6 +200,7 @@ object WalletRepository {
                     .forEach { paymentGatewayDao.save(it) }
             } catch (e: Exception) {
                 // TODO: Show error
+                e.printStackTrace()
             }
         }
     }

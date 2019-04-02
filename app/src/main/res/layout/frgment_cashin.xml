@@ -4,7 +4,8 @@
                                                    android:orientation="vertical"
                                                    android:layout_width="match_parent"
                                                    android:layout_height="match_parent"
-                                                   android:paddingTop="20dp">
+                                                   android:paddingTop="20dp"
+                                                   android:background="@color/colorPrimary">
 
     <FrameLayout
             android:layout_width="match_parent"
@@ -32,7 +33,7 @@
             android:layout_height="wrap_content"
             android:text="Choose the payment method:"/>
 
-    <androidx.recyclerview.widget.RecyclerView
+    <ListView
             android:id="@+id/payment_gateways"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -42,10 +43,7 @@
             android:layout_marginEnd="20dp"
             android:background="@color/colorPrimaryDark"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-
-    </androidx.recyclerview.widget.RecyclerView>
+            android:layout_height="wrap_content"/>
 
     <TextView
             app:layout_constraintStart_toStartOf="parent"
@@ -53,7 +51,7 @@
             app:layout_constraintBottom_toTopOf="@id/cards"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Choose the payment method:"/>
+            android:text="Choose the bank card:"/>
 
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/cards"
@@ -65,10 +63,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/payment_gateways"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"/>
 
-
-    </androidx.recyclerview.widget.RecyclerView>
+    <com.google.android.material.button.MaterialButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/add"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cards"
+            android:layout_marginTop="10dp"
+            android:text="Add new bank Card"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

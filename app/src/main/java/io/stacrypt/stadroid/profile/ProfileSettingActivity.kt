@@ -22,8 +22,10 @@ class ProfileSettingActivity : AppCompatActivity() {
         const val ARG_TARGET = "target"
         const val ARG_ACTION = "action"
         const val ARG_TOKEN = "token"
+        const val ARG_RESULT = "result"
 
         const val ACTION_VERIFY = "verify"
+        const val ACTION_ADD = "add"
 
         const val TARGET_VERIFICATION_PROCESS = "verification_process"
         const val TARGET_VERIFICATION_EMAIL = "email_verification"
