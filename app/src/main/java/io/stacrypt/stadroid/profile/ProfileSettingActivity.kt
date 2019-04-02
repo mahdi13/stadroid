@@ -1,7 +1,9 @@
 package io.stacrypt.stadroid.profile
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.NavHostFragment
 import io.stacrypt.stadroid.R
 import kotlinx.android.synthetic.main.activity_profile_setting.*
 
@@ -18,16 +20,24 @@ class ProfileSettingActivity : AppCompatActivity() {
 
     }
 
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        val navHost = supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment?
+        if (navHost != null)
+            supportFragmentManager.beginTransaction().detach(navHost).attach(navHost)
+    }
+
     companion object {
         const val ARG_TARGET = "target"
         const val ARG_ACTION = "action"
         const val ARG_TOKEN = "token"
+        const val ARG_LAUNCH_MODE = "launch_mode"
         const val ARG_RESULT = "result"
 
         const val ACTION_VERIFY = "verify"
 
         // TODO Rename it to something meaningful (e.g. isExternalCall)
-        const val ACTION_ADD = "add" // This will make the fragment just like a dialog
+//        const val ACTION_ADD = "add" // This will make the fragment just like a dialog
 
         const val TARGET_VERIFICATION_PROCESS = "verification_process"
         const val TARGET_VERIFICATION_EMAIL = "email_verification"
@@ -57,6 +67,9 @@ class ProfileSettingActivity : AppCompatActivity() {
         const val TARGET_TICKETS = "tickets"
         const val TARGET_TICKET_THREAD = "ticket_thread"
         const val TARGET_NEW_TICKETS = "new_ticker"
+
+        const val LAUNCH_MODE_NORMAL = "normal"
+        const val LAUNCH_MODE_DIALOG = "dialog"
     }
 
 }

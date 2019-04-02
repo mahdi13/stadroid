@@ -9,8 +9,9 @@ import androidx.core.view.isVisible
 import androidx.navigation.fragment.NavHostFragment
 
 import io.stacrypt.stadroid.R
+import io.stacrypt.stadroid.data.sessionManager
 import io.stacrypt.stadroid.data.stemeraldApiClient
-import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.ACTION_ADD
+import io.stacrypt.stadroid.profile.BaseSettingFragment
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.ARG_ACTION
 import kotlinx.android.synthetic.main.activity_profile_setting.*
 import kotlinx.android.synthetic.main.add_bank_card_fragment.view.*
@@ -22,7 +23,9 @@ import org.jetbrains.anko.support.v4.longToast
 import org.jetbrains.anko.support.v4.toast
 import java.lang.Exception
 
-class AddBankCardFragment : Fragment() {
+class AddBankCardFragment : BaseSettingFragment() {
+
+    override fun authorize(): Boolean  = sessionManager.isTrustedClient
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,17 +60,6 @@ class AddBankCardFragment : Fragment() {
             }
         }
 
-        view.back.setOnClickListener { back() }
-
-    }
-
-    private fun back() {
-        if (arguments?.getString(ARG_ACTION) == ACTION_ADD) {
-            // It is an external call
-            activity!!.finish()
-        } else {
-            NavHostFragment.findNavController(this@AddBankCardFragment).navigateUp()
-        }
     }
 
     private fun validateInputs(): Boolean {

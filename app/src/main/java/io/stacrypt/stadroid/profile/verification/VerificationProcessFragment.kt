@@ -9,9 +9,11 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 
 import io.stacrypt.stadroid.R
+import io.stacrypt.stadroid.profile.BaseSettingFragment
+import kotlinx.android.synthetic.main.header_appbar_back.view.*
 import kotlinx.android.synthetic.main.verification_process_fragment.*
 
-class VerificationProcessFragment : Fragment() {
+class VerificationProcessFragment : BaseSettingFragment() {
 
     private lateinit var viewModel: VerificationProcessViewModel
 
@@ -21,6 +23,7 @@ class VerificationProcessFragment : Fragment() {
     ): View? {
         return inflater.inflate(R.layout.verification_process_fragment, container, false)
     }
+
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

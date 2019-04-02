@@ -14,6 +14,11 @@ import io.stacrypt.stadroid.application
 @SuppressLint("StaticFieldLeak")
 object sessionManager {
 
+    const val ADMIN = "admin"
+    const val CLIENT = "client"
+    const val SEMITRUSTED_CLIENT = "semitrusted_client"
+    const val TRUSTED_CLIENT = "trusted_client"
+
     var jwtToken: String? = null
         set(value) {
             field = value
@@ -53,13 +58,14 @@ object sessionManager {
         JwtPayload::class.java
     )
 
-    fun role(): String = getPayload().role
+    val roles: List<String> get () = getPayload().roles
 
-    fun isAdmin() = role() == "admin"
-    fun isRealtor() = role() == "realtor"
-    fun isClient() = role() == "client"
+    val isAdmin: Boolean get() = roles.contains(ADMIN)
+    val isClient: Boolean get() = isSemiTrustedClient or roles.contains(CLIENT)
+    val isSemiTrustedClient: Boolean get() = isTrustedClient or roles.contains(SEMITRUSTED_CLIENT)
+    val isTrustedClient: Boolean get() = roles.contains(TRUSTED_CLIENT)
 
     fun bearerToken(): String? = jwtToken.run { "Bearer ${this}" }
 }
 
-data class JwtPayload(val sessionId: String, val userId: String, val email: String, val role: String)
+data class JwtPayload(val sessionId: String, val memberId: String, val email: String, val roles: List<String>)

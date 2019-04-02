@@ -116,6 +116,10 @@
             android:name="io.stacrypt.stadroid.profile.verification.DoVerifyEmailFragment"
             tools:layout="@layout/fragment_do_verify_email"
             android:label="DoVerifyEmailFragment"/>
+    <action
+            android:id="@+id/action_global_verification_process_fragment"
+            app:destination="@id/verification_process_fragment"
+            app:launchSingleTop="true"/>
 
 
 </navigation>

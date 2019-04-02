@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
 import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.profile.ProfileSettingActivity
-import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.ACTION_ADD
+import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.LAUNCH_MODE_DIALOG
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_ADD_BANK_CARD
 import io.stacrypt.stadroid.profile.banking.BankCardPagedAdapter
 import io.stacrypt.stadroid.wallet.balance.BalanceDetailActivity.Companion.ARG_ASSET
@@ -53,7 +53,7 @@ class CashinFragment : Fragment() {
         view.add.setOnClickListener {
             startActivity<ProfileSettingActivity>(
                 ProfileSettingActivity.ARG_TARGET to TARGET_ADD_BANK_CARD,
-                ProfileSettingActivity.ARG_ACTION to ACTION_ADD
+                ProfileSettingActivity.ARG_LAUNCH_MODE to LAUNCH_MODE_DIALOG
             )
         }
     }

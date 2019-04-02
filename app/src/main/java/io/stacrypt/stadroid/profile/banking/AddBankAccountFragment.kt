@@ -9,17 +9,26 @@ import androidx.core.view.isVisible
 import androidx.navigation.fragment.NavHostFragment
 
 import io.stacrypt.stadroid.R
+import io.stacrypt.stadroid.data.sessionManager
 import io.stacrypt.stadroid.data.stemeraldApiClient
+import io.stacrypt.stadroid.profile.BaseSettingFragment
+import io.stacrypt.stadroid.profile.ProfileSettingActivity
 import kotlinx.android.synthetic.main.activity_profile_setting.*
 import kotlinx.android.synthetic.main.add_bank_card_fragment.view.*
+import kotlinx.android.synthetic.main.header_appbar_back.view.*
+import kotlinx.android.synthetic.main.notification_detail.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import org.jetbrains.anko.support.v4.alert
 import org.jetbrains.anko.support.v4.longToast
+import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.toast
 import java.lang.Exception
 
-class AddBankAccountFragment : Fragment() {
+class AddBankAccountFragment : BaseSettingFragment() {
+
+    override fun authorize(): Boolean  = sessionManager.isTrustedClient
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,20 +53,15 @@ class AddBankAccountFragment : Fragment() {
                     } catch (e: Exception) {
                         e.printStackTrace()
                         toast(R.string.problem_occurred_toast)
+                        view.save.isEnabled = true
                         return@launch
                     }
                     view.save.isEnabled = true
                     longToast(R.string.toast_bank_card_added_successfully)
-                    NavHostFragment.findNavController(this@AddBankAccountFragment).navigateUp()
+                    back()
                 }
             }
         }
-
-//        activity!!.add.isVisible = false
-//        activity!!.back.isVisible = true
-//        activity!!.back.setOnClickListener {
-//            NavHostFragment.findNavController(this@AddBankCardFragment).navigateUp()
-//        }
 
     }
 

@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import io.stacrypt.stadroid.R
+import io.stacrypt.stadroid.data.sessionManager
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.ACTION_VERIFY
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.ARG_ACTION
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.ARG_TARGET
@@ -47,7 +48,6 @@ class SettingEntrypointFragment : Fragment() {
                         else -> throw IllegalArgumentException("Bad target")
                     }
                 }
-
 
             var bundle: Bundle? = null
             if (context.intent.data != null && context.intent.data?.getQueryParameter("t_") != null) {
