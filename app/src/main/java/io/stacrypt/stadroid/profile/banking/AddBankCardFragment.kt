@@ -10,8 +10,11 @@ import androidx.navigation.fragment.NavHostFragment
 
 import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.data.stemeraldApiClient
+import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.ACTION_ADD
+import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.ARG_ACTION
 import kotlinx.android.synthetic.main.activity_profile_setting.*
 import kotlinx.android.synthetic.main.add_bank_card_fragment.view.*
+import kotlinx.android.synthetic.main.header_appbar_back.view.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -44,21 +47,27 @@ class AddBankCardFragment : Fragment() {
                     } catch (e: Exception) {
                         e.printStackTrace()
                         toast(R.string.problem_occurred_toast)
+                        view.save.isEnabled = true
                         return@launch
                     }
                     view.save.isEnabled = true
                     longToast(R.string.toast_bank_card_added_successfully)
-                    NavHostFragment.findNavController(this@AddBankCardFragment).navigateUp()
+                    back()
                 }
             }
         }
 
-//        activity!!.add.isVisible = false
-//        activity!!.back.isVisible = true
-//        activity!!.back.setOnClickListener {
-//            NavHostFragment.findNavController(this@AddBankCardFragment).navigateUp()
-//        }
+        view.back.setOnClickListener { back() }
 
+    }
+
+    private fun back() {
+        if (arguments?.getString(ARG_ACTION) == ACTION_ADD) {
+            // It is an external call
+            activity!!.finish()
+        } else {
+            NavHostFragment.findNavController(this@AddBankCardFragment).navigateUp()
+        }
     }
 
     private fun validateInputs(): Boolean {

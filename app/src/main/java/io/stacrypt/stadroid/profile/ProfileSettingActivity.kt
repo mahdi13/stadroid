@@ -25,7 +25,9 @@ class ProfileSettingActivity : AppCompatActivity() {
         const val ARG_RESULT = "result"
 
         const val ACTION_VERIFY = "verify"
-        const val ACTION_ADD = "add"
+
+        // TODO Rename it to something meaningful (e.g. isExternalCall)
+        const val ACTION_ADD = "add" // This will make the fragment just like a dialog
 
         const val TARGET_VERIFICATION_PROCESS = "verification_process"
         const val TARGET_VERIFICATION_EMAIL = "email_verification"

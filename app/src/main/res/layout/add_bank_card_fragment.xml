@@ -9,6 +9,7 @@
         android:background="@color/colorPrimaryDark"
         android:orientation="vertical">
 
+    <include layout="@layout/header_appbar_back"/>
 
     <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -73,6 +74,8 @@
                         android:fontFamily="@font/kameron_bold"
                         android:layout_marginEnd="20dp"
                         android:lines="1"
+                        android:inputType="number"
+                        android:digits="0123456789-"
                         android:hint="11** **** **33 4444"/>
 
                 <TextView

@@ -25,16 +25,10 @@ class MarketViewModel : ViewModel() {
     val summary: LiveData<MarketSummary> = switchMap(marketName) { MarketRepository.getMarketSummary(it) }
     val status: LiveData<MarketStatus> = switchMap(marketName) { MarketRepository.getMarketStatus(it) }
     val book: LiveData<BookResponse> = switchMap(marketName) { MarketRepository.getBook(it) }
-    val marketDeals: LiveData<List<MarketDeal>> = switchMap(marketName) {
-        MarketRepository.getMarketDeals(it)
-    }
-    val myDeals: LiveData<List<MyDeal>> = switchMap(marketName) {
-        MarketRepository.getMyDeals(it)
-    }
+    val marketDeals: LiveData<List<MarketDeal>> = switchMap(marketName) { MarketRepository.getMarketDeals(it) }
+    val myDeals: LiveData<List<MyDeal>> = switchMap(marketName) { MarketRepository.getMyDeals(it) }
     val myOrders: LiveData<List<Order>> = switchMap(marketName) { MarketRepository.getMyActiveOrders(it) }
-    val kline: LiveData<List<Kline>> = switchMap(marketName) {
-        MarketRepository.getKline(it)
-    }
+    val kline: LiveData<List<Kline>> = switchMap(marketName) { MarketRepository.getKline48(it) }
 
     val baseCurrency: LiveData<Currency> = switchMap(market) { WalletRepository.getCurrency(it.baseCurrencySymbol!!) }
     val quoteCurrency: LiveData<Currency> = switchMap(market) { WalletRepository.getCurrency(it.baseCurrencySymbol!!) }

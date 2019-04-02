@@ -50,6 +50,16 @@ object MarketRepository {
         )
     }
 
+    fun getKline48(market: String): LiveData<List<Kline>> {
+        val time = Calendar.getInstance().time
+        return getKline(
+            market = market,
+            start = (time.time - DateUtils.HOUR_IN_MILLIS * 48).div(1000L).toInt(), //FIXME
+            end = time.time.div(1000L).toInt(), // FIXME
+            interval = (DateUtils.HOUR_IN_MILLIS).div(1000L).toInt()
+        )
+    }
+
     fun getKline24(market: String): LiveData<List<Kline>> {
         val time = Calendar.getInstance().time
         return getKline(
