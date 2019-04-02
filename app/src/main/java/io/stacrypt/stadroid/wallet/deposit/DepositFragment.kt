@@ -1,6 +1,5 @@
 package io.stacrypt.stadroid.wallet.deposit
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,14 +8,12 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.afollestad.materialdialogs.DialogCallback
 import com.afollestad.materialdialogs.MaterialDialog
-import com.google.android.material.dialog.MaterialDialogs
 import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.copyToClipboard
 import io.stacrypt.stadroid.ui.format10Digit
 import io.stacrypt.stadroid.ui.showQrCode
-import io.stacrypt.stadroid.wallet.BalanceDetailActivity.Companion.ARG_ASSET
+import io.stacrypt.stadroid.wallet.balance.BalanceDetailActivity.Companion.ARG_ASSET
 import kotlinx.android.synthetic.main.deposit_fragment.view.*
 import net.glxn.qrgen.android.QRCode
 import org.jetbrains.anko.design.snackbar

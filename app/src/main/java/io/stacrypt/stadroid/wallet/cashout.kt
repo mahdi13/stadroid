@@ -9,7 +9,7 @@ import androidx.lifecycle.*
 import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.profile.banking.BankCardPagedAdapter
 import io.stacrypt.stadroid.profile.banking.BankingRepository
-import io.stacrypt.stadroid.wallet.BalanceDetailActivity.Companion.ARG_ASSET
+import io.stacrypt.stadroid.wallet.balance.BalanceDetailActivity.Companion.ARG_ASSET
 import io.stacrypt.stadroid.wallet.data.WalletRepository
 import kotlinx.android.synthetic.main.frgment_cashout.view.*
 

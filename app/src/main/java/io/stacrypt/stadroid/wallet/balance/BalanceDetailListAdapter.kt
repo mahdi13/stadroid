@@ -1,23 +1,18 @@
-package io.stacrypt.stadroid.wallet.ui.balancedetail
+package io.stacrypt.stadroid.wallet.balance
 
 import android.content.res.ColorStateList
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.widget.ImageViewCompat
-import androidx.paging.PagedList
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.data.BalanceHistory
-import io.stacrypt.stadroid.data.BalanceOverview
 import io.stacrypt.stadroid.data.format
 import io.stacrypt.stadroid.ui.format10Digit
-import io.stacrypt.stadroid.ui.iconResource
-import kotlinx.android.synthetic.main.row_balance_detail_header.view.*
 import kotlinx.android.synthetic.main.row_balance_detail_history.view.*
 import org.jetbrains.anko.textColorResource
 import org.jetbrains.anko.textResource

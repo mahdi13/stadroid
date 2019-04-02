@@ -11,14 +11,15 @@ import io.stacrypt.stadroid.data.BalanceOverview
 import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.ui.format10Digit
 import io.stacrypt.stadroid.ui.iconResource
-import io.stacrypt.stadroid.wallet.BalanceDetailActivity.Companion.ACTION_DEPOSIT
-import io.stacrypt.stadroid.wallet.BalanceDetailActivity.Companion.ACTION_HISTORY
-import io.stacrypt.stadroid.wallet.BalanceDetailActivity.Companion.ACTION_WITHDRAW
+import io.stacrypt.stadroid.wallet.balance.BalanceDetailActivity
+import io.stacrypt.stadroid.wallet.balance.BalanceDetailActivity.Companion.ACTION_DEPOSIT
+import io.stacrypt.stadroid.wallet.balance.BalanceDetailActivity.Companion.ACTION_HISTORY
+import io.stacrypt.stadroid.wallet.balance.BalanceDetailActivity.Companion.ACTION_WITHDRAW
 import kotlinx.android.synthetic.main.fragment_asset_balance.view.*
 
-class AssetBalanceRecyclerViewAdapter(
+class WalletAdapter(
     var items: List<BalanceOverview>
-) : RecyclerView.Adapter<AssetBalanceRecyclerViewAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<WalletAdapter.ViewHolder>() {
 
 //    private val mOnClickListener: View.OnClickListener
 

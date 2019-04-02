@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
 import androidx.lifecycle.Transformations.switchMap
 import io.stacrypt.stadroid.R
-import io.stacrypt.stadroid.wallet.BalanceDetailActivity.Companion.ARG_ASSET
+import io.stacrypt.stadroid.wallet.balance.BalanceDetailActivity.Companion.ARG_ASSET
 import io.stacrypt.stadroid.wallet.data.WalletRepository
 import androidx.databinding.*
 import androidx.databinding.Observable
@@ -19,7 +19,6 @@ import io.stacrypt.stadroid.data.*
 import io.stacrypt.stadroid.data.Currency
 import io.stacrypt.stadroid.databinding.WithdrawFragmentBinding
 import io.stacrypt.stadroid.ui.format10Digit
-import kotlinx.android.synthetic.main.row_balance_detail_history.view.*
 import kotlinx.android.synthetic.main.withdraw_fragment.*
 import kotlinx.android.synthetic.main.withdraw_fragment.view.*
 import kotlinx.coroutines.*

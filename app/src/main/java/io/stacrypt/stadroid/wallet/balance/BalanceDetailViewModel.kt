@@ -1,4 +1,4 @@
-package io.stacrypt.stadroid.wallet.ui.balancedetail
+package io.stacrypt.stadroid.wallet.balance
 
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData

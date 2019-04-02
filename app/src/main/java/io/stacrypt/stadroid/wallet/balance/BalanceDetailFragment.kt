@@ -1,4 +1,4 @@
-package io.stacrypt.stadroid.wallet.ui.balancedetail
+package io.stacrypt.stadroid.wallet.balance
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -6,8 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,12 +14,8 @@ import io.stacrypt.stadroid.data.BalanceHistory
 import io.stacrypt.stadroid.data.BalanceOverview
 import io.stacrypt.stadroid.ui.format10Digit
 import io.stacrypt.stadroid.ui.iconResource
-import io.stacrypt.stadroid.wallet.BalanceDetailActivity
 import kotlinx.android.synthetic.main.balance_detail_fragment.*
 import kotlinx.android.synthetic.main.row_balance_detail_header.*
-import kotlinx.android.synthetic.main.row_balance_detail_header.view.*
-import kotlinx.android.synthetic.main.row_balance_detail_history.*
-import kotlinx.android.synthetic.main.row_balance_detail_history.view.*
 
 class BalanceDetailFragment : Fragment() {
 
@@ -58,11 +52,11 @@ class BalanceDetailFragment : Fragment() {
 
             deposit.setOnClickListener {
                 if (activity is BalanceDetailActivity)
-                    (activity as BalanceDetailActivity).showDeposit()
+                    (activity as BalanceDetailActivity).showDeposit(item.assetName)
             }
             withdraw.setOnClickListener {
                 if (activity is BalanceDetailActivity)
-                    (activity as BalanceDetailActivity).showWithdraw()
+                    (activity as BalanceDetailActivity).showWithdraw(item.assetName)
             }
 
         })

@@ -47,7 +47,7 @@
             app:layout_constraintTop_toBottomOf="@id/header_container"
             app:layout_constraintBottom_toBottomOf="parent"
 
-            tools:context="wallet.ui.balancedetail.BalanceDetailFragment"
+            tools:context=".wallet.balance.BalanceDetailFragment"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:paddingTop="10dp"

@@ -74,7 +74,7 @@
                         android:scheme="https"/>
             </intent-filter>
         </activity>
-        <activity android:name=".wallet.BalanceDetailActivity">
+        <activity android:name=".wallet.balance.BalanceDetailActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
             </intent-filter>
