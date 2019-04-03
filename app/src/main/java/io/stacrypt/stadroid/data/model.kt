@@ -162,6 +162,35 @@ data class DepositInfo(
     @SerializedName("address") var address: String
 )
 
+data class DepositDetail(
+    @SerializedName("id") var id: String,
+    @SerializedName("user") var user: String,
+    @SerializedName("isConfirmed") var isConfirmed: Boolean?,
+    @SerializedName("netAmount") var netAmount: BigDecimal,
+    @SerializedName("grossAmount") var grossAmount: BigDecimal,
+    @SerializedName("toAddress") var toAddress: DepositAddress,
+    @SerializedName("status") var status: String,
+    @SerializedName("txHash") var txHash: String,
+    @SerializedName("blockHeight") var blockHeight: Long,
+    @SerializedName("blockHash") var blockHash: String,
+    @SerializedName("link") var link: String?,
+    @SerializedName("confirmationsLeft") var confirmationsLeft: Int?,
+    @SerializedName("error") var error: String?,
+    @SerializedName("invoice") var invoice: DepositInvoice,
+    @SerializedName("extra") var extra: String?
+)
+
+data class DepositInvoice(
+    @SerializedName("extra") var extra: String?,
+    @SerializedName("creation") var creation: Date,
+    @SerializedName("expiration") var expiration: Date?,
+    @SerializedName("address") var address: String
+)
+
+data class DepositAddress(
+    @SerializedName("address") var address: String
+)
+
 data class Withdaraw(
     @SerializedName("id") var id: String,
     @SerializedName("user") var user: String,
