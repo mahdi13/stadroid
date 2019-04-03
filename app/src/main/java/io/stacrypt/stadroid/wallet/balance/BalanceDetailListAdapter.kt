@@ -16,8 +16,11 @@ import io.stacrypt.stadroid.data.format
 import io.stacrypt.stadroid.data.stemeraldApiClient
 import io.stacrypt.stadroid.ui.format10Digit
 import kotlinx.android.synthetic.main.row_balance_detail_history.view.*
-import org.jetbrains.anko.textColorResource
-import org.jetbrains.anko.textResource
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import org.jetbrains.anko.*
+import java.lang.Exception
 
 class BalanceDetailPagedAdapter :
     PagedListAdapter<BalanceHistory, RecyclerView.ViewHolder>(ITEM_COMPARATOR) {
@@ -46,45 +49,88 @@ class BalanceDetailPagedAdapter :
                 val item = it.tag as BalanceHistory
                 when {
                     item.business?.toLowerCase().equals("deposit") -> {
-                        val deposit = stemeraldApiClient.getDeposi
-                        titleView.textResource = R.string.deposit
-                        titleView.textColorResource = R.color.real_green
-                        amountView.textColorResource = R.color.real_green
-                        iconView.setImageResource(R.drawable.ic_add_black_24dp)
-                        ImageViewCompat.setImageTintList(
-                            iconView,
-                            ColorStateList.valueOf(itemView.resources.getColor(R.color.real_green))
-                        )
-
+                        GlobalScope.launch(Dispatchers.Main) {
+                            val loadingDialog =
+                                it.context.indeterminateProgressDialog(title = "Loading...", message = "") {
+                                    context.setTheme(R.style.AlertDialogCustom)
+                                }.apply { show() }
+                            try {
+                                val deposit = stemeraldApiClient.getDepositInfo(
+                                    assetName = item.assetName,
+                                    depositId = item.detail?.id ?: -1
+                                ).await()
+                                loadingDialog.dismiss()
+                                it.context.alert {
+                                    ctx.setTheme(R.style.AlertDialogCustom)
+                                    title = "Deposit details"
+                                    customView {
+                                        textView("id: ${deposit.id}") {
+                                            textAlignment = View.TEXT_ALIGNMENT_CENTER
+                                        }
+                                    }
+                                    negativeButton("Ok") {}
+                                }.show()
+                            } catch (e: Exception) {
+                                e.printStackTrace()
+                                loadingDialog.dismiss()
+                                it.context.toast(R.string.problem_occurred_toast)
+                            }
+                        }
                     }
                     item.business?.toLowerCase().equals("withdraw") -> {
-                        titleView.textResource = R.string.withdraw
-                        titleView.textColorResource = R.color.real_red
-                        amountView.textColorResource = R.color.real_red
-                        iconView.setImageResource(R.drawable.ic_send_black_24dp)
-                        ImageViewCompat.setImageTintList(
-                            iconView,
-                            ColorStateList.valueOf(itemView.resources.getColor(R.color.real_red))
-                        )
+                        GlobalScope.launch(Dispatchers.Main) {
+                            val loadingDialog =
+                                it.context.indeterminateProgressDialog(title = "Loading...", message = "") {
+                                    context.setTheme(R.style.AlertDialogCustom)
+                                }.apply { show() }
+                            try {
+                                val withdraw = stemeraldApiClient.getWithdrawDetail(
+                                    assetName = item.assetName,
+                                    withdrawId = item.detail?.id ?: -1
+                                ).await()
+                                loadingDialog.dismiss()
+                                it.context.alert {
+                                    ctx.setTheme(R.style.AlertDialogCustom)
+                                    title = "Withdraw details"
+                                    customView {
+                                        textView("id: ${withdraw.id}") {
+                                            textAlignment = View.TEXT_ALIGNMENT_CENTER
+                                        }
+                                    }
+                                    negativeButton("Ok") {}
+                                }.show()
+                            } catch (e: Exception) {
+                                e.printStackTrace()
+                                loadingDialog.dismiss()
+                                it.context.toast(R.string.problem_occurred_toast)
+                            }
+                        }
                     }
                     item.business?.toLowerCase().equals("trade") -> {
-                        titleView.textResource = R.string.trade
-                        titleView.textColorResource = R.color.colorSecondary
-                        amountView.textColorResource = R.color.colorSecondary
-                        iconView.setImageResource(R.drawable.ic_swap_horiz_black_24dp)
-                        ImageViewCompat.setImageTintList(
-                            iconView,
-                            ColorStateList.valueOf(itemView.resources.getColor(R.color.colorSecondary))
-                        )
+                        try {
+                            it.context.alert {
+                                ctx.setTheme(R.style.AlertDialogCustom)
+                                title = "Trade details"
+                                customView {
+                                    textView("Market: ${item.detail?.dealMarket?.replace("_", " / ")}") {
+                                        textAlignment = View.TEXT_ALIGNMENT_CENTER
+                                    }
+                                    textView("Amount: ${item.detail?.dealAmount?.format10Digit()}") {
+                                        textAlignment = View.TEXT_ALIGNMENT_CENTER
+                                    }
+                                    textView("Price: ${item.detail?.dealPrice?.format10Digit()}") {
+                                        textAlignment = View.TEXT_ALIGNMENT_CENTER
+                                    }
+                                }
+                                negativeButton("Ok") {}
+                            }.show()
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                            it.context.toast(R.string.problem_occurred_toast)
+                        }
                     }
                     else -> {
-                        titleView.textColorResource = R.color.white
-                        amountView.textColorResource = R.color.white
-                        iconView.setImageResource(R.drawable.ic_done_white_18dp)
-                        ImageViewCompat.setImageTintList(
-                            iconView,
-                            ColorStateList.valueOf(itemView.resources.getColor(R.color.white))
-                        )
+                        it.context.toast("No details found")
                     }
                 }
             }

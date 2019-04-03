@@ -149,8 +149,19 @@ data class BalanceHistory(
     @SerializedName("business") var business: String?,
     @SerializedName("change") var change: BigDecimal,
     @SerializedName("balance") var balance: BigDecimal,
-    @SerializedName("detail") var detail: Any?,
+    @SerializedName("detail") var detail: BalanceHistoryDetail?,
     @SerializedName("currency") var currency: Currency
+)
+
+data class BalanceHistoryDetail(
+    // Just in deposit and withdraw and cashin and cashout:
+    @SerializedName("id") var id: Int?,
+
+    // Just in trades:
+    @SerializedName("i") var dealId: Int?,
+    @SerializedName("m") var dealMarket: String?,
+    @SerializedName("a") var dealAmount: BigDecimal?,
+    @SerializedName("p") var dealPrice: BigDecimal?
 )
 
 data class DepositInfo(

@@ -186,8 +186,9 @@ interface StemeraldV2ApiClient {
     @HTTP(method = "GET", path = "deposits/{depositId}", hasBody = false)
     fun getDepositInfo(
         @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
+        @Path("depositId") depositId: Int,
         @Query("cryptocurrencySymbol") assetName: String
-    ): Deferred<DepositInfo>
+    ): Deferred<DepositDetail>
 
     @HTTP(method = "SHOW", path = "deposits", hasBody = true)
     fun showDepositInfo(
@@ -212,9 +213,9 @@ interface StemeraldV2ApiClient {
     ): Deferred<ArrayList<Withdaraw>>
 
     @HTTP(method = "GET", path = "withdraws/{withdrawId}", hasBody = false)
-    fun getWithdraw(
+    fun getWithdrawDetail(
         @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
-        @Path("withdrawId") withdrawId: String,
+        @Path("withdrawId") withdrawId: Int,
         @Query("cryptocurrencySymbol") assetName: String
     ): Deferred<Withdaraw>
 
