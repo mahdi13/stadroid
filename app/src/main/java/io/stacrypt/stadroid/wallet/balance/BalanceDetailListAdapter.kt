@@ -1,8 +1,8 @@
 package io.stacrypt.stadroid.wallet.balance
 
 import android.content.res.ColorStateList
+import android.view.Gravity
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
@@ -64,8 +64,10 @@ class BalanceDetailPagedAdapter :
                                     ctx.setTheme(R.style.AlertDialogCustom)
                                     title = "Deposit details"
                                     customView {
-                                        textView("id: ${deposit.id}") {
-                                            textAlignment = View.TEXT_ALIGNMENT_CENTER
+                                        verticalLayout {
+                                            textView("id: ${deposit.id}") {
+                                                gravity = Gravity.CENTER
+                                            }
                                         }
                                     }
                                     negativeButton("Ok") {}
@@ -93,8 +95,10 @@ class BalanceDetailPagedAdapter :
                                     ctx.setTheme(R.style.AlertDialogCustom)
                                     title = "Withdraw details"
                                     customView {
-                                        textView("id: ${withdraw.id}") {
-                                            textAlignment = View.TEXT_ALIGNMENT_CENTER
+                                        verticalLayout {
+                                            textView("id: ${withdraw.id}") {
+                                                gravity = Gravity.CENTER
+                                            }
                                         }
                                     }
                                     negativeButton("Ok") {}
@@ -112,14 +116,16 @@ class BalanceDetailPagedAdapter :
                                 ctx.setTheme(R.style.AlertDialogCustom)
                                 title = "Trade details"
                                 customView {
-                                    textView("Market: ${item.detail?.dealMarket?.replace("_", " / ")}") {
-                                        textAlignment = View.TEXT_ALIGNMENT_CENTER
-                                    }
-                                    textView("Amount: ${item.detail?.dealAmount?.format10Digit()}") {
-                                        textAlignment = View.TEXT_ALIGNMENT_CENTER
-                                    }
-                                    textView("Price: ${item.detail?.dealPrice?.format10Digit()}") {
-                                        textAlignment = View.TEXT_ALIGNMENT_CENTER
+                                    verticalLayout {
+                                        textView("Market: ${item.detail?.dealMarket?.replace("_", " / ")}") {
+                                            gravity = Gravity.CENTER
+                                        }
+                                        textView("Amount: ${item.detail?.dealAmount?.format10Digit()}") {
+                                            gravity = Gravity.CENTER
+                                        }
+                                        textView("Price: ${item.detail?.dealPrice?.format10Digit()}") {
+                                            gravity = Gravity.CENTER
+                                        }
                                     }
                                 }
                                 negativeButton("Ok") {}
