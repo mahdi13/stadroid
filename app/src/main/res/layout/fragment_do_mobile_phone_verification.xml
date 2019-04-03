@@ -54,11 +54,13 @@
             app:bar_enabled="true"
             app:bar_height="2dp"
             app:length="6"
-            app:otp="1234"
+            tools:otp="123456"
+            app:bar_error_color="@color/real_red"
             app:otp_text_size="24dp"/>
 
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/verify"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:strokeColor="@color/colorSecondary"

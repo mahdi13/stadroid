@@ -25,16 +25,16 @@ class DoVerifyEmailFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        try {
-            GlobalScope.launch(Dispatchers.Main) {
+        GlobalScope.launch(Dispatchers.Main) {
+            try {
                 val response = stemeraldApiClient
                     .verifyEmailVerification(token = arguments?.getString(ProfileSettingActivity.ARG_TOKEN)!!)
                     .await()
                 view.longSnackbar("Verification successful!")
+            } catch (e: Exception) {
+                e.printStackTrace()
+                view.longSnackbar("Error occurred!")
             }
-        } catch (e: Exception) {
-            e.printStackTrace()
-            view.longSnackbar("Error occurred!")
         }
 
     }

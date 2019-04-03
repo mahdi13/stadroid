@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Event
+import androidx.lifecycle.ViewModelProviders
 
 import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.data.stemeraldApiClient
@@ -16,10 +18,17 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.jetbrains.anko.design.longSnackbar
+import retrofit2.HttpException
 
 
 class MobilePhoneVerificationFragment : Fragment() {
     private var listener: OnFragmentInteractionListener? = null
+    private lateinit var viewModel: VerificationProcessViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel = ViewModelProviders.of(activity!!).get(VerificationProcessViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,16 +41,25 @@ class MobilePhoneVerificationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         view.ccp.registerCarrierNumberEditText(phone_number)
         verify.setOnClickListener {
-            try {
-                GlobalScope.launch(Dispatchers.Main) {
+            GlobalScope.launch(Dispatchers.Main) {
+                try {
+                    val phone = ccp.selectedCountryCodeWithPlus + phone_number.text.toString().replace(" ", "")
                     stemeraldApiClient.schedulMobilePhoneVerification(
-                        phone = ccp.selectedCountryCodeWithPlus + phone_number.text.toString().replace(" ", "")
+                        phone = phone
                     ).await()
                     view.longSnackbar("SMS Sent!")
+                    viewModel.mobilePhoneSmsSent.postValue(Event(phone))
+                } catch (e: HttpException) {
+                    e.printStackTrace()
+                    if (e.code() == 400) { // TODO: Check x-reason too
+                        view.longSnackbar("Wrong code!")
+                    } else {
+                        view.longSnackbar("Error occurred!")
+                    }
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    view.longSnackbar("Error occurred!")
                 }
-            } catch (e: Exception) {
-                e.printStackTrace()
-                view.longSnackbar("Error occurred!")
             }
         }
     }
