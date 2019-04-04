@@ -105,6 +105,34 @@
                     android:layout_margin="10dp"
                     android:textSize="16sp"/>
 
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="20dp">
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/countries"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_margin="5dp"/>
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/states"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_margin="5dp"/>
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/cities"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_margin="5dp"/>
+            </LinearLayout>
+
             <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
                     android:layout_width="match_parent"
