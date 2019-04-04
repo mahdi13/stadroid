@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
     <TableLayout
             android:layout_width="match_parent"
@@ -29,13 +28,6 @@
                     style="@style/MarketInfoTextViewValue"
                     tools:text="BTC / IRR"/>
 
-            <ImageView
-                    android:layout_gravity="center"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:padding="5dp"
-                    android:layout_marginRight="10dp"/>
-
 
         </TableRow>
 
@@ -43,42 +35,62 @@
 
             <TextView
                     style="@style/MarketInfoTextViewKey"
+                    android:layout_gravity="center_vertical"
                     android:text="Base Currency"/>
 
-            <TextView
-                    android:id="@+id/base_currency"
-                    style="@style/MarketInfoTextViewValue"
-                    tools:text="BTC (Bitcoin)"/>
+            <FrameLayout style="@style/MarketInfoTextViewValue">
 
-            <ImageView
-                    android:id="@+id/market_name_icon"
-                    android:src="@drawable/ic_btc"
-                    android:layout_gravity="center"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:padding="5dp"
-                    android:layout_marginRight="10dp"/>
+
+                <ImageView
+                        android:id="@+id/base_currency_icon"
+                        android:src="@drawable/ic_btc"
+                        android:layout_gravity="center_vertical|end"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:padding="5dp"
+                        android:layout_marginRight="10dp"/>
+
+                <TextView
+                        android:id="@+id/base_currency"
+                        style="@style/MarketInfoTextViewValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        tools:text="BTC (Bitcoin)"/>
+
+            </FrameLayout>
         </TableRow>
 
         <TableRow style="@style/MarketInfoRow">
 
             <TextView
                     style="@style/MarketInfoTextViewKey"
+                    android:layout_gravity="center_vertical"
                     android:text="Quote Currency"/>
 
-            <TextView
-                    android:id="@+id/quote_currency"
-                    style="@style/MarketInfoTextViewValue"
-                    tools:text="IRR (Iran Rial)"/>
+            <FrameLayout style="@style/MarketInfoTextViewValue">
 
-            <ImageView
-                    android:id="@+id/quote_currency_icon"
-                    android:src="@drawable/ic_irr"
-                    android:layout_gravity="center"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:padding="5dp"
-                    android:layout_marginRight="10dp"/>
+
+                <ImageView
+                        android:id="@+id/quote_currency_icon"
+                        android:src="@drawable/ic_irr"
+                        android:layout_gravity="center_vertical|end"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:padding="5dp"
+                        android:layout_marginRight="10dp"/>
+
+                <TextView
+                        android:id="@+id/quote_currency"
+                        style="@style/MarketInfoTextViewValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        tools:text="IRR (Iran Rial)"/>
+
+            </FrameLayout>
 
         </TableRow>
 
@@ -110,7 +122,35 @@
 
             <TextView
                     style="@style/MarketInfoTextViewKey"
-                    android:text="Bids"/>
+                    android:text="Bid Amount"/>
+
+            <TextView
+                    android:id="@+id/bid_amount"
+                    style="@style/MarketInfoTextViewValue"
+                    tools:text="0.45345644"/>
+
+
+        </TableRow>
+
+        <TableRow style="@style/MarketInfoRow">
+
+            <TextView
+                    style="@style/MarketInfoTextViewKey"
+                    android:text="Ask Amount"/>
+
+            <TextView
+                    android:id="@+id/ask_amount"
+                    style="@style/MarketInfoTextViewValue"
+                    tools:text="0.45345644"/>
+
+
+        </TableRow>
+
+        <TableRow style="@style/MarketInfoRow">
+
+            <TextView
+                    style="@style/MarketInfoTextViewKey"
+                    android:text="Bid Count"/>
 
             <TextView
                     android:id="@+id/bids"
@@ -124,7 +164,7 @@
 
             <TextView
                     style="@style/MarketInfoTextViewKey"
-                    android:text="Asks"/>
+                    android:text="Ask Count"/>
 
             <TextView
                     android:id="@+id/asks"
@@ -134,6 +174,98 @@
 
         </TableRow>
 
-    </TableLayout>
+        <TableRow style="@style/MarketInfoRowTitle">
 
-</LinearLayout>
+            <TextView
+                    style="@style/MarketInfoTextViewTitle"
+                    android:text="Past 24H"
+                    android:drawableTint="@color/colorGrayText"
+                    android:drawableStart="@drawable/ic_more_horiz_black_24dp"/>
+        </TableRow>
+
+        <TableRow style="@style/MarketInfoRow">
+
+            <TextView
+                    style="@style/MarketInfoTextViewKey"
+                    android:text="Open"/>
+
+            <TextView
+                    android:id="@+id/open"
+                    style="@style/MarketInfoTextViewValue"
+                    tools:text="43.23434100 BTC"/>
+
+
+        </TableRow>
+
+        <TableRow style="@style/MarketInfoRow">
+
+            <TextView
+                    style="@style/MarketInfoTextViewKey"
+                    android:text="Highest"/>
+
+            <TextView
+                    android:id="@+id/highest"
+                    style="@style/MarketInfoTextViewValue"
+                    tools:text="0.45345644"/>
+
+
+        </TableRow>
+
+        <TableRow style="@style/MarketInfoRow">
+
+            <TextView
+                    style="@style/MarketInfoTextViewKey"
+                    android:text="Lowest"/>
+
+            <TextView
+                    android:id="@+id/lowest"
+                    style="@style/MarketInfoTextViewValue"
+                    tools:text="0.45345644"/>
+
+
+        </TableRow>
+
+        <TableRow style="@style/MarketInfoRow">
+
+            <TextView
+                    style="@style/MarketInfoTextViewKey"
+                    android:text="Close"/>
+
+            <TextView
+                    android:id="@+id/close"
+                    style="@style/MarketInfoTextViewValue"
+                    tools:text="456"/>
+
+
+        </TableRow>
+
+        <TableRow style="@style/MarketInfoRow">
+
+            <TextView
+                    style="@style/MarketInfoTextViewKey"
+                    android:text="Volume"/>
+
+            <TextView
+                    android:id="@+id/volume"
+                    style="@style/MarketInfoTextViewValue"
+                    tools:text="322"/>
+
+
+        </TableRow>
+
+        <TableRow style="@style/MarketInfoRow">
+
+            <TextView
+                    style="@style/MarketInfoTextViewKey"
+                    android:text="Deal"/>
+
+            <TextView
+                    android:id="@+id/deal"
+                    style="@style/MarketInfoTextViewValue"
+                    tools:text="322"/>
+
+
+        </TableRow>
+
+    </TableLayout>
+</ScrollView>

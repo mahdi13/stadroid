@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.fragment_market.*
 import com.google.android.material.tabs.TabLayout
 import io.stacrypt.stadroid.market.book.MarketBookFragment
 import io.stacrypt.stadroid.market.chart.MarketCandlestickFragment
+import io.stacrypt.stadroid.market.info.MarketInfoFragment
 import io.stacrypt.stadroid.market.marketdeals.MarketDealsFragment
 import io.stacrypt.stadroid.market.mydeals.MarketMyDealsFragment
 import io.stacrypt.stadroid.market.myorders.MyOrdersFragment
@@ -35,7 +36,7 @@ class MarketFragment : Fragment() {
                 viewpager.currentItem = tab!!.position
             }
         })
-        viewpager.offscreenPageLimit = 8
+        viewpager.offscreenPageLimit = 12
         viewpager.adapter = object : FragmentPagerAdapter(childFragmentManager) {
             override fun getItem(position: Int): Fragment {
                 return when (position) {
@@ -44,11 +45,12 @@ class MarketFragment : Fragment() {
                     2 -> MarketBookFragment()
                     3 -> MarketMyDealsFragment()
                     4 -> MarketDealsFragment()
+                    5 -> MarketInfoFragment()
                     else -> throw IndexOutOfBoundsException()
                 }
             }
 
-            override fun getCount(): Int = 5
+            override fun getCount(): Int = 6
         }
 //        tabs.setupWithViewPager(viewpager)
 

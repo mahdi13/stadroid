@@ -71,6 +71,7 @@
     <string name="last_name">Last Name</string>
     <string name="identity">Identity</string>
     <string name="national_or_passport_number">National (or passport) number</string>
+    <string name="info">Info</string>
 
     <string-array name="genders">
         <item>Male</item>

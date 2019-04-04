@@ -115,13 +115,18 @@
     </style>
 
     <style name="MarketInfoTextViewKey" parent="TextAppearance.AppCompat.Caption">
-        <item name="android:padding">5dp</item>
+        <item name="android:paddingStart">10dp</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingBottom">5dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/colorPrimaryLightLight</item>
     </style>
 
     <style name="MarketInfoTextViewValue" parent="TextAppearance.AppCompat.Caption">
+        <item name="android:paddingEnd">25dp</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingBottom">5dp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:layout_weight">1</item>
         <item name="android:gravity">center</item>

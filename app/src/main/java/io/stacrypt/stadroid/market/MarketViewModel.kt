@@ -1,5 +1,6 @@
 package io.stacrypt.stadroid.market
 
+import androidx.lifecycle.Event
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations.switchMap
@@ -7,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import io.stacrypt.stadroid.data.*
 import io.stacrypt.stadroid.market.data.MarketRepository
 import io.stacrypt.stadroid.wallet.data.WalletRepository
+import java.math.BigDecimal
 
 class MarketViewModel : ViewModel() {
 
@@ -31,6 +33,10 @@ class MarketViewModel : ViewModel() {
     val kline: LiveData<List<Kline>> = switchMap(marketName) { MarketRepository.getKline48(it) }
 
     val baseCurrency: LiveData<Currency> = switchMap(market) { WalletRepository.getCurrency(it.baseCurrencySymbol!!) }
-    val quoteCurrency: LiveData<Currency> = switchMap(market) { WalletRepository.getCurrency(it.baseCurrencySymbol!!) }
+    val quoteCurrency: LiveData<Currency> = switchMap(market) { WalletRepository.getCurrency(it.quoteCurrencySymbol!!) }
+
+    val newOrderAmount = MutableLiveData<BigDecimal>()
+    val newOrderPrice = MutableLiveData<BigDecimal>()
+    val newOrderType = MutableLiveData<String>()
 
 }
