@@ -267,6 +267,22 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
 
+                    <com.google.android.material.button.MaterialButton
+                            android:id="@+id/id_card1"
+                            android:layout_margin="20dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="National identity card (or passport) image"/>
+
+                    <com.google.android.material.button.MaterialButton
+                            android:id="@+id/id_card2"
+                            android:layout_margin="20dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Take selfie picture"/>
+
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>

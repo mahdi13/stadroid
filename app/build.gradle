@@ -208,6 +208,9 @@ dependencies {
         transitive = true
     }
 
+    // Image Picker
+    implementation 'com.github.nguyenhoanglam:ImagePicker:1.3.1'
+
     testImplementation 'junit:junit:4.12'
     testImplementation 'androidx.arch.core:core-testing:2.0.1'
     testImplementation 'androidx.room:room-testing:2.1.0-alpha06'
