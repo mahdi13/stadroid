@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.data.Book
 import io.stacrypt.stadroid.data.BookResponse
+import io.stacrypt.stadroid.data.Market
 import io.stacrypt.stadroid.market.MarketViewModel
 import kotlin.math.max
 
@@ -37,19 +38,9 @@ class MarketBookFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(activity!!).get(MarketViewModel::class.java)
-        viewModel.book.observe(this,
-            Observer<BookResponse> { books ->
-                val items = ArrayList<Pair<Book?, Book?>>()
-                for (i in 0..(max(books.buys.size, books.sells.size))) {
-                    items.add(
-                        Pair(
-                            if (books.buys.size > i) books.buys[i] else null,
-                            if (books.sells.size > i) books.sells[i] else null
-                        )
-                    )
-                }
-                adapter.items = items
-                adapter.notifyDataSetChanged()
+        viewModel.market.observe(viewLifecycleOwner,
+            Observer<Market> { market ->
+
             })
 
     }
