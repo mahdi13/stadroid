@@ -511,5 +511,9 @@ data class Fiat(
     val divideByTen: Int
 )
 
+data class Country(val id: Int, val name: String, val phonePrefix: String, val code: String)
+data class State(val id: Int, val name: String, val countryId: Int, val country: Country)
+data class City(val id: Int, val name: String, val stateId: Int, val state: State)
+
 val dateFormatter by lazy { SimpleDateFormat("dd MMM yyyy HH:mm", Locale.ENGLISH) }
 fun Date.format() = dateFormatter.format(this)

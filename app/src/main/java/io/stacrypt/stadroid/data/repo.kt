@@ -23,6 +23,7 @@ object UserRepository {
                 liveData.postValue(stemeraldApiClient.getMyEvidences().await())
             } catch (e: Exception) {
                 // TODO: Show error
+                e.printStackTrace()
             }
         }
         return liveData
@@ -34,6 +35,45 @@ object UserRepository {
                 UserRepository.userDao.save(it)
             }
         }
+    }
+
+    fun getCountries(): LiveData<List<Country>> {
+        val liveData = MutableLiveData<List<Country>>()
+        job = scope.launch {
+            try {
+                liveData.postValue(stemeraldApiClient.getCountries().await())
+            } catch (e: Exception) {
+                // TODO: Show error
+                e.printStackTrace()
+            }
+        }
+        return liveData
+    }
+
+    fun getStates(countryId: Int): LiveData<List<State>> {
+        val liveData = MutableLiveData<List<State>>()
+        job = scope.launch {
+            try {
+                liveData.postValue(stemeraldApiClient.getStates(countryId).await())
+            } catch (e: Exception) {
+                // TODO: Show error
+                e.printStackTrace()
+            }
+        }
+        return liveData
+    }
+
+    fun getCities(stateId: Int): LiveData<List<City>> {
+        val liveData = MutableLiveData<List<City>>()
+        job = scope.launch {
+            try {
+                liveData.postValue(stemeraldApiClient.getCities(stateId).await())
+            } catch (e: Exception) {
+                // TODO: Show error
+                e.printStackTrace()
+            }
+        }
+        return liveData
     }
 
 }

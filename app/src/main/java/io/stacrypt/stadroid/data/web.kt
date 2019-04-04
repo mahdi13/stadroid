@@ -463,6 +463,18 @@ interface StemeraldV2ApiClient {
     ): Deferred<NotificationCount>
 
 
+    /**
+     * Territories
+     */
+    @HTTP(method = "GET", path = "territories/countries", hasBody = false)
+    fun getCountries(): Deferred<List<Country>>
+
+    @HTTP(method = "GET", path = "territories/states", hasBody = false)
+    fun getStates(@Query("countryId") countryId: Int): Deferred<List<State>>
+
+    @HTTP(method = "GET", path = "territories/cities", hasBody = false)
+    fun getCities(@Query("stateId") stateId: Int): Deferred<List<City>>
+
 }
 
 //@Suppress("DeferredIsResult")
