@@ -69,5 +69,12 @@
     <string name="title_notification_detail">Notification Detail</string>
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
+    <string name="identity">Identity</string>
+    <string name="national_or_passport_number">National (or passport) number</string>
+
+    <string-array name="genders">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
 
 </resources>

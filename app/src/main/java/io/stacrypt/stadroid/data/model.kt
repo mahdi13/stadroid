@@ -511,9 +511,18 @@ data class Fiat(
     val divideByTen: Int
 )
 
-data class Country(val id: Int, val name: String, val phonePrefix: String, val code: String)
-data class State(val id: Int, val name: String, val countryId: Int, val country: Country)
-data class City(val id: Int, val name: String, val stateId: Int, val state: State)
+data class Country(val id: Int, val name: String, val phonePrefix: String, val code: String) {
+    override fun toString(): String = name
+}
+
+data class State(val id: Int, val name: String, val countryId: Int, val country: Country) {
+    override fun toString(): String = name
+}
+
+data class City(val id: Int, val name: String, val stateId: Int, val state: State) {
+    override fun toString(): String = name
+}
+
 
 val dateFormatter by lazy { SimpleDateFormat("dd MMM yyyy HH:mm", Locale.ENGLISH) }
 fun Date.format() = dateFormatter.format(this)
