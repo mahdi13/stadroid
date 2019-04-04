@@ -67,5 +67,7 @@
     <string name="address">Address</string>
     <string name="title_notification_list">Notifications</string>
     <string name="title_notification_detail">Notification Detail</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
 
 </resources>
