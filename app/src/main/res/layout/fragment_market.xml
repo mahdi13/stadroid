@@ -13,7 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_alignParentTop="true"
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/colorPrimaryDarkDark"
             tools:context=".market.MarketSummaryFragment"
             tools:layout="@layout/fragment_market_summary"
             android:layout_marginTop="0dp">
@@ -40,7 +40,7 @@
             app:tabIndicatorColor="#ffffff"
             app:tabRippleColor="#ffffff"
             app:tabMode="scrollable"
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/colorPrimaryDarkDark"
             >
 
         <com.google.android.material.tabs.TabItem
@@ -100,7 +100,7 @@
     <fragment
             android:id="@+id/new_order"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="170dp"
             android:layout_alignParentBottom="true"
             class="io.stacrypt.stadroid.market.NewOrderFragment"
             android:background="@color/colorPrimaryDark"

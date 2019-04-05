@@ -9,14 +9,14 @@
     android:layout_height="wrap_content"
     tools:context=".market.NewOrderFragment"
     android:orientation="vertical"
-    android:background="@color/colorPrimaryDark"
-    android:paddingEnd="10dp"
+    android:background="@color/colorPrimaryDarkDark"
+    android:padding="10dp"
 >
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/colorPrimaryDarkDark"
     >
 
         <LinearLayout

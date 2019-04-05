@@ -5,7 +5,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:context=".market.MarketSummaryFragment"
-                android:background="@color/colorPrimaryDark">
+                android:background="@color/colorPrimaryDarkDark">
 
     <!--<com.bandiago.libs.simplegraph.LineGraph-->
     <!--xmlns:linegraph="http://schemas.android.com/apk/res-auto"-->

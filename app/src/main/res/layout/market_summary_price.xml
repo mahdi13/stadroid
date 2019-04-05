@@ -7,7 +7,7 @@
         android:orientation="horizontal"
         android:padding="5dp"
         android:id="@+id/row2"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/colorPrimaryDarkDark"
         >
 
     <TextView

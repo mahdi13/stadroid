@@ -151,7 +151,7 @@ class MarketCandlestickFragment : Fragment() {
         }
 
         // Colors
-        bar_chart.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+        bar_chart.setBackgroundColor(resources.getColor(R.color.colorPrimaryDark))
 
         // Touch
         bar_chart.requestDisallowInterceptTouchEvent(true)
@@ -205,7 +205,7 @@ class MarketCandlestickFragment : Fragment() {
         }
 
         // Colors
-        chart.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+        chart.setBackgroundColor(resources.getColor(R.color.colorPrimaryDark))
 
         // Touch
         chart.requestDisallowInterceptTouchEvent(true)
