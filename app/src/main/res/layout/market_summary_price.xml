@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        android:id="@+id/row2"
+        android:background="@color/colorPrimaryDark"
+        >
+
+    <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:id="@+id/price"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:fontFamily="@font/din_medium"
+            tools:text="Price: 1234.56"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?android:attr/selectableItemBackground"/>
+
+    <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/deal"
+            android:gravity="center"
+            android:textColor="@color/colorGrayText"
+            android:fontFamily="@font/din_medium"
+            android:text="+ 0.00 %"/>
+
+</LinearLayout>

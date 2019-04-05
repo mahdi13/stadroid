@@ -10,9 +10,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import io.stacrypt.stadroid.data.Market
 import kotlinx.android.synthetic.main.fragment_market_summary.view.*
+import kotlinx.android.synthetic.main.market_summary_ohlc.view.*
+import kotlinx.android.synthetic.main.market_summary_price.view.*
 import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.ui.format
 import io.stacrypt.stadroid.ui.format10Digit
+import kotlinx.coroutines.*
 import org.jetbrains.anko.textColorResource
 import java.math.BigDecimal
 import java.math.RoundingMode
@@ -93,6 +96,12 @@ class MarketSummaryFragment : Fragment() {
         viewModel.status.observe(this, Observer {
             //TODO
         })
+
+        GlobalScope.launch(Dispatchers.Main) {
+            while (this.isActive) {
+                view?.flip?.flipTheView(); delay(3000)
+            }
+        }
 
     }
 

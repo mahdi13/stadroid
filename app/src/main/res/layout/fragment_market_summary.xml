@@ -88,169 +88,26 @@
 
     </LinearLayout>
 
-    <LinearLayout
+
+    <com.wajahatkarim3.easyflipview.EasyFlipView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="5dp"
             android:layout_below="@+id/row1"
-            android:id="@+id/row2">
+            android:id="@+id/flip"
+            app:flipOnTouch="true"
+            app:flipEnabled="true"
+            app:flipDuration="400"
+            app:flipType="vertical"
+            app:flipFrom="front"
+            app:autoFlipBack="false"
+            app:autoFlipBackTime="1000"
+            >
 
-        <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:id="@+id/price"
-                android:gravity="center"
-                android:textStyle="bold"
-                android:textSize="18sp"
-                android:fontFamily="@font/din_medium"
-                tools:text="Price: 1234.56"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?android:attr/selectableItemBackground"/>
 
-        <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:id="@+id/deal"
-                android:gravity="center"
-                android:textColor="@color/colorGrayText"
-                android:fontFamily="@font/din_medium"
-                android:text="+ 0.00 %"/>
+        <include layout="@layout/market_summary_price"/>
 
-    </LinearLayout>
+        <include layout="@layout/market_summary_ohlc"/>
 
-    <LinearLayout
-            android:layout_below="@+id/row2"
-            android:layout_alignParentBottom="true"
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-        <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?android:attr/selectableItemBackground">
-
-            <TextView
-                    android:id="@+id/open"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:textSize="14sp"
-                    android:fontFamily="@font/din_medium"
-                    android:text="12345.76"/>
-
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textColor="@color/colorGrayText"
-                    android:textSize="10sp"
-                    android:fontFamily="@font/din_medium"
-                    android:text="Open"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?android:attr/selectableItemBackground">
-
-            <TextView
-                    android:id="@+id/high"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:textSize="14sp"
-                    android:fontFamily="@font/din_medium"
-                    android:text="12345.76"/>
-
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textColor="@color/colorGrayText"
-                    android:textSize="10sp"
-                    android:fontFamily="@font/din_medium"
-                    android:text="High"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?android:attr/selectableItemBackground">
-
-            <TextView
-                    android:id="@+id/low"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:textSize="14sp"
-                    android:fontFamily="@font/din_medium"
-                    android:text="12345.76"/>
-
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textColor="@color/colorGrayText"
-                    android:textSize="10sp"
-                    android:fontFamily="@font/din_medium"
-                    android:text="Low"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?android:attr/selectableItemBackground">
-
-            <TextView
-                    android:id="@+id/close"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:textSize="14sp"
-                    android:fontFamily="@font/din_medium"
-                    android:text="12345.76"/>
-
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textColor="@color/colorGrayText"
-                    android:textSize="10sp"
-                    android:fontFamily="@font/din_medium"
-                    android:text="Close"/>
-
-        </LinearLayout>
-
-    </LinearLayout>
-
+    </com.wajahatkarim3.easyflipview.EasyFlipView>
 
 </RelativeLayout>
