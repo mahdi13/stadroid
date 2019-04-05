@@ -32,30 +32,34 @@ class MyOrdersFragment : Fragment() {
         val rootView = inflater.inflate(R.layout.fragment_my_orders_list, container, false)
         val recyclerView = rootView.list
 
-        adapter = MyOrdersRecyclerView(ArrayList(), { o ->
-            alert {
-                title = "You are going to cancel one of your pending orders!"
-                ctx.setTheme(R.style.AlertDialogCustom)
-                message =
-                    "Are you sure you want to cancel you ${o.type} ${o.side} order" +
-                        " with amount ${o.amount}${if (o.price != null) " and price ${o.price}" else ""}"
-                positiveButton("Let's do it") {
-                    GlobalScope.launch(Dispatchers.Main) {
-                        try {
-                            stemeraldApiClient.cancelOrder(marketName = o.market, orderId = o.id).await()
-                            toast("Cancelled successfully!")
-                        } catch (e: Exception) {
-                            toast(R.string.problem_occurred_toast)
-                            e.printStackTrace()
+        adapter = MyOrdersRecyclerView(
+            ArrayList(),
+            onCancelClicked = { o ->
+                alert {
+                    title = "You are going to cancel one of your pending orders!"
+                    ctx.setTheme(R.style.AlertDialogCustom)
+                    message =
+                        "Are you sure you want to cancel you ${o.type} ${o.side} order" +
+                            " with amount ${o.amount}${if (o.price != null) " and price ${o.price}" else ""}"
+                    positiveButton("Let's do it") {
+                        GlobalScope.launch(Dispatchers.Main) {
+                            try {
+                                stemeraldApiClient.cancelOrder(marketName = o.market, orderId = o.id).await()
+                                toast("Cancelled successfully!")
+                            } catch (e: Exception) {
+                                toast(R.string.problem_occurred_toast)
+                                e.printStackTrace()
+                            }
+                            adapter.notifyItemRemoved(adapter.items.indexOf(o))
                         }
-                        adapter.notifyItemRemoved(adapter.items.indexOf(o))
                     }
-                }
-                negativeButton(buttonTextResource = R.string.cancel) {}
-            }.show()
-        }, { order ->
-            order.price?.let { viewModel.newOrderPrice.postValue(order.price) }
-        })
+                    negativeButton(buttonTextResource = R.string.cancel) {}
+                }.show()
+            },
+            onClickListener = { order ->
+                order.price?.let { viewModel.newOrderPrice.postValue(order.price) }
+            }
+        )
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = adapter
 

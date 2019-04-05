@@ -43,8 +43,11 @@ class NewOrderFragment : Fragment() {
 
         viewModel.last.observe(viewLifecycleOwner, Observer {
             if (it?.price == null) return@Observer
-            if (viewModel.newOrderType.value == "market" || viewModel.newOrderPrice.value == BigDecimal("0"))
+            if (viewModel.newOrderPrice.value == null || viewModel.newOrderPrice.value == BigDecimal("0"))
                 viewModel.newOrderPrice.postValue(it.price)
+
+            if (viewModel.newOrderType.value == "market")
+                rootView?.price?.setText(it.price.format10Digit())
         })
 
         viewModel.quoteCurrency.observe(viewLifecycleOwner, Observer {
@@ -58,7 +61,8 @@ class NewOrderFragment : Fragment() {
         })
 
         viewModel.newOrderPrice.observe(viewLifecycleOwner, Observer {
-            rootView.price.setText(it.format10Digit())
+            if (viewModel.newOrderType.value == "limit" && it != null)
+                rootView.price.setText(it.format10Digit())
         })
 
         viewModel.newOrderAmount.observe(viewLifecycleOwner, Observer {
@@ -71,7 +75,7 @@ class NewOrderFragment : Fragment() {
 //                v.visibility = if (it != "market") View.VISIBLE else View.GONE
             }
 
-            if (it == "market") viewModel.newOrderPrice.postValue(viewModel.last.value?.price)
+            viewModel.newOrderPrice.postValue(viewModel.last.value?.price)
 //            if (it == "limit") rootView.price.setText(viewModel.newOrderPrice.value?.format10Digit())
 //            else rootView.price.setText(viewModel.last.value?.price?.format10Digit())
         })
@@ -228,7 +232,8 @@ class NewOrderFragment : Fragment() {
 
         private fun buildFixedString(s: Editable?): CharSequence? = s?.trim()?.run {
             //            if (viewModel.newOrderType.value == "market") "≃ ${removePrefix("≃")}"
-            if (viewModel.newOrderType.value == "market") this
+            if (viewModel.newOrderType.value == "market") (viewModel.last.value?.price?.format10Digit()
+                ?: "NA")
             else this
         }
 

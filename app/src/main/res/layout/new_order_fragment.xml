@@ -2,109 +2,130 @@
 
 
 <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:context=".market.NewOrderFragment"
-        android:orientation="vertical"
-        android:background="@color/colorPrimaryDark"
-        android:paddingEnd="10dp"
-        >
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".market.NewOrderFragment"
+    android:orientation="vertical"
+    android:background="@color/colorPrimaryDark"
+    android:paddingEnd="10dp"
+>
 
     <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimaryDark"
-            >
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+    >
 
         <LinearLayout
-                android:layout_alignParentStart="true"
-                android:layout_toStartOf="@id/buttons_box"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@id/buttons_box"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
 
-            <TextView
-                    android:textColor="@color/colorPrimaryLightLight"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="10sp"
-                    android:layout_gravity="start"
-                    android:layout_marginStart="10dp"
-                    android:text="Price"/>
+            <!--<TextView-->
+            <!--android:textColor="@color/colorPrimaryLightLight"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textSize="10sp"-->
+            <!--android:layout_gravity="start"-->
+            <!--android:layout_marginStart="10dp"-->
+            <!--android:text="Price"/>-->
 
             <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
                 <Button
-                        android:id="@+id/price_down"
-                        android:layout_width="30dp"
-                        android:layout_height="40dp"
-                        android:background="@color/colorPrimary"
-                        android:textColor="@color/white"
-                        android:layout_margin="0dp"
-                        android:padding="0dp"
-                        android:gravity="center"
-                        android:text="@string/minus"/>
+                    android:id="@+id/price_down"
+                    android:layout_width="30dp"
+                    android:layout_height="40dp"
+                    android:background="@color/colorPrimary"
+                    android:textColor="@color/white"
+                    android:layout_margin="0dp"
+                    android:padding="0dp"
+                    android:gravity="center"
+                    android:text="@string/minus"/>
 
-                <com.google.android.material.textfield.TextInputEditText
-                        style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox.Dense"
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/AddOrderTextInputLayoutAppearance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/price"
+                    app:errorEnabled="false"
+                    app:hintAnimationEnabled="false"
+                >
+
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:inputType="number"
                         android:digits="0123456789.≃"
                         android:ems="8"
                         android:id="@+id/price"
-                        android:hint="@string/price"
                         android:fontFamily="@font/din_medium"
                         android:gravity="center"
                         tools:text="[Best Price]"/>
 
+                </com.google.android.material.textfield.TextInputLayout>
+
                 <Button
-                        android:id="@+id/price_up"
-                        android:layout_width="30dp"
-                        android:layout_height="40dp"
-                        android:background="@color/colorPrimary"
-                        android:textColor="@color/white"
-                        android:layout_margin="0dp"
-                        android:padding="0dp"
-                        android:gravity="center"
-                        android:text="@string/plus"/>
+                    android:id="@+id/price_up"
+                    android:layout_width="30dp"
+                    android:layout_height="40dp"
+                    android:background="@color/colorPrimary"
+                    android:textColor="@color/white"
+                    android:layout_margin="0dp"
+                    android:padding="0dp"
+                    android:gravity="center"
+                    android:text="@string/plus"/>
 
             </LinearLayout>
 
-            <TextView
-                    android:textColor="@color/colorPrimaryLightLight"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start"
-                    android:layout_marginStart="10dp"
-                    android:textSize="10sp"
-                    android:text="Amount"/>
+            <!--<TextView-->
+            <!--android:textColor="@color/colorPrimaryLightLight"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="start"-->
+            <!--android:layout_marginStart="10dp"-->
+            <!--android:textSize="10sp"-->
+            <!--android:text="Amount"/>-->
 
             <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
 
                 <Button
-                        android:id="@+id/amount_down"
-                        android:layout_width="30dp"
-                        android:layout_height="40dp"
-                        android:background="@color/colorPrimary"
-                        android:textColor="@color/white"
-                        android:layout_margin="0dp"
-                        android:padding="0dp"
-                        android:gravity="center"
-                        android:text="@string/minus"/>
+                    android:id="@+id/amount_down"
+                    android:layout_width="30dp"
+                    android:layout_height="40dp"
+                    android:background="@color/colorPrimary"
+                    android:textColor="@color/white"
+                    android:layout_margin="0dp"
+                    android:padding="0dp"
+                    android:gravity="center"
+                    android:text="@string/minus"/>
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/AddOrderTextInputLayoutAppearance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/amount"
+                    app:errorEnabled="false"
+                    app:hintAnimationEnabled="false"
+                >
+
+
+                    <com.google.android.material.textfield.TextInputEditText
                         style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox.Dense"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -112,21 +133,22 @@
                         android:digits="0123456789."
                         android:ems="8"
                         android:id="@+id/amount"
-                        android:hint="@string/amount"
                         android:fontFamily="@font/din_medium"
                         android:gravity="center"
                         tools:text="[ Amount ]"/>
 
+                </com.google.android.material.textfield.TextInputLayout>
+
                 <Button
-                        android:id="@+id/amount_up"
-                        android:layout_width="30dp"
-                        android:layout_height="40dp"
-                        android:background="@color/colorPrimary"
-                        android:textColor="@color/white"
-                        android:layout_margin="0dp"
-                        android:padding="0dp"
-                        android:gravity="center"
-                        android:text="@string/plus"/>
+                    android:id="@+id/amount_up"
+                    android:layout_width="30dp"
+                    android:layout_height="40dp"
+                    android:background="@color/colorPrimary"
+                    android:textColor="@color/white"
+                    android:layout_margin="0dp"
+                    android:padding="0dp"
+                    android:gravity="center"
+                    android:text="@string/plus"/>
 
             </LinearLayout>
 
@@ -134,62 +156,72 @@
         </LinearLayout>
 
         <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/buttons_box"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:text="@string/buy"
+                android:textColor="@color/white"
+                app:strokeColor="@color/real_green"
+                app:strokeWidth="1dp"
+                app:backgroundTint="@color/real_green_semi_trans"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:id="@+id/buttons_box"
-                android:gravity="center"
-                android:orientation="vertical">
-
+                android:fontFamily="@font/din_medium"
+                android:id="@+id/buy"/>
 
             <com.google.android.material.button.MaterialButton
-                    style="@style/Widget.MaterialComponents.Button.TextButton"
-                    android:text="@string/buy"
-                    android:textColor="@color/white"
-                    app:strokeColor="@color/real_green"
-                    app:strokeWidth="1dp"
-                    app:backgroundTint="@color/real_green_semi_trans"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/din_medium"
-                    android:id="@+id/buy"/>
-
-            <com.google.android.material.button.MaterialButton
-                    style="@style/Widget.MaterialComponents.Button.TextButton"
-                    android:text="@string/sell"
-                    android:textColor="@color/white"
-                    app:strokeColor="@color/real_red"
-                    app:strokeWidth="1dp"
-                    app:backgroundTint="@color/real_red_semi_trans"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/din_medium"
-                    android:id="@+id/sell"/>
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:text="@string/sell"
+                android:textColor="@color/white"
+                app:strokeColor="@color/real_red"
+                app:strokeWidth="1dp"
+                app:backgroundTint="@color/real_red_semi_trans"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/din_medium"
+                android:id="@+id/sell"/>
         </LinearLayout>
 
 
     </RelativeLayout>
 
     <RadioGroup
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentBottom="true"
-            android:orientation="horizontal"
-            android:gravity="center">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+    >
 
         <RadioButton
-                android:id="@+id/limit_order"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="@string/limit_order"/>
+            style="@style/Widget.MaterialComponents.CompoundButton.RadioButton"
+            android:id="@+id/limit_order"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:text="@string/limit_order"/>
 
         <RadioButton
-                android:id="@+id/market_order"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:text="@string/market_order"/>
+            style="@style/Widget.MaterialComponents.CompoundButton.RadioButton"
+            android:id="@+id/market_order"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:text="@string/market_order"/>
 
 
     </RadioGroup>

@@ -10,101 +10,101 @@
 
 
     <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/colorPrimaryDark">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimaryDark">
 
         <TableLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:stretchColumns="*"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
-                >
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="*"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+        >
 
             <TableRow>
 
                 <androidx.cardview.widget.CardView
-                        android:backgroundTint="@color/colorPrimary"
-                        app:cardCornerRadius="5dp"
-                        android:layout_marginTop="10dp">
+                    android:backgroundTint="@color/colorPrimary"
+                    app:cardCornerRadius="5dp"
+                    android:layout_marginTop="10dp">
 
                     <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
 
                         <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
 
                             <ImageView
-                                    android:layout_width="80dp"
-                                    android:layout_height="80dp"
-                                    android:src="@drawable/icons8_businessman_filled_90"
-                                    android:layout_marginTop="15dp"
-                                    android:layout_marginBottom="5dp"
-                                    android:layout_marginStart="20dp"
-                                    android:layout_marginEnd="0dp"
-                                    android:tint="@color/colorPrimaryLight"
-                                    />
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:src="@drawable/icons8_businessman_filled_90"
+                                android:layout_marginTop="15dp"
+                                android:layout_marginBottom="5dp"
+                                android:layout_marginStart="20dp"
+                                android:layout_marginEnd="0dp"
+                                android:tint="@color/colorPrimaryLight"
+                            />
 
                             <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/email"
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:orientation="vertical">
+                                    android:layout_height="0dp"
+                                    android:layout_weight="2"
+                                    tools:text="test@test.com"
+                                    android:textStyle="bold"
+                                    android:textSize="16sp"
+                                    android:paddingTop="10dp"
+                                    android:gravity="center"
+                                    android:textAllCaps="true"
+                                />
 
                                 <TextView
-                                        android:id="@+id/email"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="0dp"
-                                        android:layout_weight="2"
-                                        tools:text="test@test.com"
-                                        android:textStyle="bold"
-                                        android:textSize="16sp"
-                                        android:paddingTop="10dp"
-                                        android:gravity="center"
-                                        android:textAllCaps="true"
-                                        />
-
-                                <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="0dp"
-                                        android:layout_weight="1"
-                                        android:text="Verified Client"
-                                        android:textSize="14dp"
-                                        android:drawableStart="@drawable/ic_check_circle_black_24dp"
-                                        android:textColor="@color/real_green"
-                                        android:drawableTint="@color/real_green"
-                                        android:textAllCaps="false"
-                                        android:layout_gravity="center"
-                                        android:fontFamily="@font/din_medium"
-                                        android:gravity="center_vertical"/>
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1"
+                                    android:text="Verified Client"
+                                    android:textSize="14dp"
+                                    android:drawableStart="@drawable/ic_check_circle_black_24dp"
+                                    android:textColor="@color/real_green"
+                                    android:drawableTint="@color/real_green"
+                                    android:textAllCaps="false"
+                                    android:layout_gravity="center"
+                                    android:fontFamily="@font/din_medium"
+                                    android:gravity="center_vertical"/>
 
                             </LinearLayout>
 
                         </LinearLayout>
 
                         <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:layout_marginStart="10dp"
-                                android:layout_marginEnd="10dp"
-                                android:layout_marginTop="5dp"
-                                android:background="@color/colorPrimaryLight"/>
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginTop="5dp"
+                            android:background="@color/colorPrimaryLight"/>
 
                         <TextView
-                                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="30dp"
-                                android:layout_marginBottom="10dp"
-                                android:layout_marginTop="10dp"
-                                android:textColor="@color/colorPrimaryTextLight"
-                                android:fontFamily="@font/din_medium"
-                                android:text="Last Login On: 2019-02-12   By: 192.169.1.1"/>
+                            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="30dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginTop="10dp"
+                            android:textColor="@color/colorPrimaryTextLight"
+                            android:fontFamily="@font/din_medium"
+                            android:text="Last Login On: 2019-02-12   By: 192.169.1.1"/>
 
 
                     </LinearLayout>
@@ -113,20 +113,20 @@
 
 
             <TableRow
-                    android:layout_marginTop="5dp">
+                android:layout_marginTop="5dp">
 
                 <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:backgroundTint="@color/pink_700">
+
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
-                        android:backgroundTint="@color/pink_700">
-
-                    <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:paddingStart="10dp"
-                            android:text="Security Alert: 2FA is disable"/>
+                        android:paddingStart="10dp"
+                        android:text="Security Alert: 2FA is disable"/>
 
                 </androidx.cardview.widget.CardView>
             </TableRow>
@@ -135,237 +135,238 @@
             <TableRow android:layout_marginTop="5dp">
 
                 <TextView
-                        android:text="Verification"
-                        android:drawableStart="@drawable/ic_verified_user_black_24dp"
-                        android:drawableTint="@color/colorGrayText"
-                        android:drawablePadding="10dp"
-                        android:textColor="@color/colorGrayText"
-                        android:textAllCaps="true"
-                        android:textSize="16sp"/>
+                    android:text="Verification"
+                    android:drawableStart="@drawable/ic_verified_user_black_24dp"
+                    android:drawableTint="@color/colorGrayText"
+                    android:drawablePadding="10dp"
+                    android:textColor="@color/colorGrayText"
+                    android:textAllCaps="true"
+                    android:textSize="16sp"/>
             </TableRow>
 
             <TableRow>
 
                 <com.google.android.material.button.MaterialButton
-                        style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
-                        android:id="@+id/verification"
-                        android:text="Verification Process"/>
+                    style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
+                    android:id="@+id/verification"
+                    android:text="Verification Process"/>
 
             </TableRow>
 
             <TableRow>
 
                 <com.google.android.material.button.MaterialButton
-                        style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
-                        android:id="@+id/evidence"
-                        android:enabled="false"
-                        android:text="Evidences"/>
+                    style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
+                    android:id="@+id/evidence"
+                    android:enabled="false"
+                    android:text="Evidences"/>
             </TableRow>
 
             <TableRow>
 
                 <TextView
-                        android:text="Bank Accounts"
-                        android:drawableStart="@drawable/ic_credit_card_black_24dp"
-                        android:drawableTint="@color/colorGrayText"
-                        android:drawablePadding="10dp"
-                        android:textColor="@color/colorGrayText"
-                        android:textAllCaps="true"
-                        android:textSize="16sp"/>
+                    android:text="Bank Accounts"
+                    android:drawableStart="@drawable/ic_credit_card_black_24dp"
+                    android:drawableTint="@color/colorGrayText"
+                    android:drawablePadding="10dp"
+                    android:textColor="@color/colorGrayText"
+                    android:textAllCaps="true"
+                    android:textSize="16sp"/>
             </TableRow>
 
             <TableRow>
 
                 <com.google.android.material.button.MaterialButton
-                        style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
-                        android:id="@+id/bank_cards"
-                        android:text="Bank Cards"/>
+                    style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
+                    android:id="@+id/bank_cards"
+                    android:text="Bank Cards"/>
             </TableRow>
 
             <TableRow>
 
                 <com.google.android.material.button.MaterialButton
-                        style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
-                        android:id="@+id/bank_accounts"
-                        android:text="Bank Accounts"/>
+                    style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
+                    android:id="@+id/bank_accounts"
+                    android:text="Bank Accounts"/>
             </TableRow>
 
             <TableRow>
 
                 <TextView
-                        android:text="Support"
-                        android:drawableStart="@drawable/ic_perm_phone_msg_black_24dp"
-                        android:drawableTint="@color/colorGrayText"
-                        android:drawablePadding="10dp"
-                        android:textColor="@color/colorGrayText"
-                        android:textAllCaps="true"
-                        android:textSize="16sp"/>
+                    android:text="Support"
+                    android:drawableStart="@drawable/ic_perm_phone_msg_black_24dp"
+                    android:drawableTint="@color/colorGrayText"
+                    android:drawablePadding="10dp"
+                    android:textColor="@color/colorGrayText"
+                    android:textAllCaps="true"
+                    android:textSize="16sp"/>
             </TableRow>
 
             <TableRow>
 
                 <com.google.android.material.button.MaterialButton
-                        style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
-                        android:enabled="false"
-                        android:id="@+id/tickets"
-                        android:text="Tickets"/>
+                    style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
+                    android:enabled="false"
+                    android:id="@+id/tickets"
+                    android:text="Tickets"/>
             </TableRow>
 
             <TableRow>
 
                 <com.google.android.material.button.MaterialButton
-                        style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
-                        android:enabled="false"
-                        android:id="@+id/new_ticket"
-                        android:text="New Ticket"/>
-
-            </TableRow>
-
-            <TableRow>
-
-                <TextView
-                        android:text="Application Security"
-                        android:drawableStart="@drawable/ic_screen_lock_portrait_black_24dp"
-                        android:drawableTint="@color/colorGrayText"
-                        android:drawablePadding="10dp"
-                        android:textColor="@color/colorGrayText"
-                        android:textAllCaps="true"
-                        android:textSize="16sp"/>
-            </TableRow>
-
-            <TableRow>
-
-                <com.google.android.material.button.MaterialButton
-                        style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
-                        android:enabled="false"
-                        android:id="@+id/pin"
-                        android:text="Application PIN"/>
-
-            </TableRow>
-
-            <TableRow>
-
-                <com.google.android.material.button.MaterialButton
-                        style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
-                        android:enabled="false"
-                        android:id="@+id/whipe"
-                        android:text="Whip Cache"/>
+                    style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
+                    android:enabled="false"
+                    android:id="@+id/new_ticket"
+                    android:text="New Ticket"/>
 
             </TableRow>
 
             <TableRow>
 
                 <TextView
-                        android:text="Withdrawal"
-                        android:drawableStart="@drawable/ic_account_balance_wallet_black_24dp"
-                        android:drawableTint="@color/colorGrayText"
-                        android:drawablePadding="10dp"
-                        android:textColor="@color/colorGrayText"
-                        android:textAllCaps="true"
-                        android:textSize="16sp"/>
+                    android:text="Application Security"
+                    android:drawableStart="@drawable/ic_screen_lock_portrait_black_24dp"
+                    android:drawableTint="@color/colorGrayText"
+                    android:drawablePadding="10dp"
+                    android:textColor="@color/colorGrayText"
+                    android:textAllCaps="true"
+                    android:textSize="16sp"/>
             </TableRow>
 
             <TableRow>
 
                 <com.google.android.material.button.MaterialButton
-                        style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
-                        android:enabled="false"
-                        android:id="@+id/withdrawal_pin"
-                        android:text="Withdrawal PIN"/>
+                    style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
+                    android:enabled="false"
+                    android:id="@+id/pin"
+                    android:text="Application PIN"/>
+
             </TableRow>
 
             <TableRow>
 
                 <com.google.android.material.button.MaterialButton
-                        style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
-                        android:id="@+id/withdrawal_limit"
-                        android:enabled="false"
-                        android:text="Withdrawal Limitations"/>
+                    style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
+                    android:enabled="false"
+                    android:id="@+id/whipe"
+                    android:text="Whip Cache"/>
+
             </TableRow>
 
             <TableRow>
 
                 <TextView
-                        android:text="Account Security"
-                        android:drawableStart="@drawable/ic_security_black_24dp"
-                        android:drawableTint="@color/colorGrayText"
-                        android:drawablePadding="10dp"
-                        android:textColor="@color/colorGrayText"
-                        android:textAllCaps="true"
-                        android:textSize="16sp"/>
+                    android:text="Withdrawal"
+                    android:drawableStart="@drawable/ic_account_balance_wallet_black_24dp"
+                    android:drawableTint="@color/colorGrayText"
+                    android:drawablePadding="10dp"
+                    android:textColor="@color/colorGrayText"
+                    android:textAllCaps="true"
+                    android:textSize="16sp"/>
             </TableRow>
 
             <TableRow>
 
                 <com.google.android.material.button.MaterialButton
-                        style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
-                        android:id="@+id/second_factor"
-                        android:enabled="false"
-                        android:text="2 Factor Authentication ( 2FA )"/>
+                    style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
+                    android:enabled="false"
+                    android:id="@+id/withdrawal_pin"
+                    android:text="Withdrawal PIN"/>
             </TableRow>
 
             <TableRow>
 
                 <com.google.android.material.button.MaterialButton
-                        style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
-                        android:enabled="false"
-                        android:id="@+id/api_key"
-                        android:text="API Keys"/>
-            </TableRow>
-
-            <TableRow>
-
-                <com.google.android.material.button.MaterialButton
-                        style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
-                        android:id="@+id/sessions"
-                        android:text="Sessions"/>
-            </TableRow>
-
-            <TableRow>
-
-                <com.google.android.material.button.MaterialButton
-                        style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
-                        android:id="@+id/ip_whitelist"
-                        android:enabled="false"
-                        android:text="IP Whitelist"/>
-            </TableRow>
-
-            <TableRow>
-
-                <com.google.android.material.button.MaterialButton
-                        style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
-                        android:id="@+id/logs"
-                        android:enabled="false"
-                        android:text="Security Logs"/>
-            </TableRow>
-
-            <TableRow>
-
-                <com.google.android.material.button.MaterialButton
-                        style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
-                        android:id="@+id/change_password"
-                        android:enabled="false"
-                        android:text="Change Password"/>
+                    style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
+                    android:id="@+id/withdrawal_limit"
+                    android:enabled="false"
+                    android:text="Withdrawal Limitations"/>
             </TableRow>
 
             <TableRow>
 
                 <TextView
-                        android:text="Other"
-                        android:drawableStart="@drawable/ic_more_horiz_black_24dp"
-                        android:drawableTint="@color/colorGrayText"
-                        android:drawablePadding="10dp"
-                        android:textColor="@color/colorGrayText"
-                        android:textAllCaps="true"
-                        android:textSize="16sp"/>
+                    android:text="Account Security"
+                    android:drawableStart="@drawable/ic_security_black_24dp"
+                    android:drawableTint="@color/colorGrayText"
+                    android:drawablePadding="10dp"
+                    android:textColor="@color/colorGrayText"
+                    android:textAllCaps="true"
+                    android:textSize="16sp"/>
             </TableRow>
 
             <TableRow>
 
                 <com.google.android.material.button.MaterialButton
-                        style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
-                        android:id="@+id/logout"
-                        android:text="Logout"/>
+                    style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
+                    android:id="@+id/second_factor"
+                    android:enabled="false"
+                    android:text="2 Factor Authentication ( 2FA )"/>
+            </TableRow>
+
+            <TableRow>
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
+                    android:enabled="false"
+                    android:id="@+id/api_key"
+                    android:text="API Keys"/>
+            </TableRow>
+
+            <TableRow>
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
+                    android:id="@+id/sessions"
+                    android:enabled="false"
+                    android:text="Sessions"/>
+            </TableRow>
+
+            <TableRow>
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
+                    android:id="@+id/ip_whitelist"
+                    android:enabled="false"
+                    android:text="IP Whitelist"/>
+            </TableRow>
+
+            <TableRow>
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
+                    android:id="@+id/logs"
+                    android:enabled="false"
+                    android:text="Security Logs"/>
+            </TableRow>
+
+            <TableRow>
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
+                    android:id="@+id/change_password"
+                    android:enabled="false"
+                    android:text="Change Password"/>
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:text="Other"
+                    android:drawableStart="@drawable/ic_more_horiz_black_24dp"
+                    android:drawableTint="@color/colorGrayText"
+                    android:drawablePadding="10dp"
+                    android:textColor="@color/colorGrayText"
+                    android:textAllCaps="true"
+                    android:textSize="16sp"/>
+            </TableRow>
+
+            <TableRow>
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
+                    android:id="@+id/logout"
+                    android:text="Logout"/>
             </TableRow>
 
         </TableLayout>

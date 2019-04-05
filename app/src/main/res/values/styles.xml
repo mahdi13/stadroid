@@ -133,5 +133,23 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
+    <style name="AddOrderHintText" parent="TextAppearance.Stadroid.TextInputLayout.HintText">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:layout_gravity">start</item>
+        <item name="android:gravity">start</item>
+        <item name="android:color">@color/colorPrimaryLightLight</item>
+    </style>
+
+    <style name="AddOrderTextInputLayoutAppearance" parent="Widget.Design.TextInputLayout">
+        <!-- reference our hint & error styles -->
+        <item name="hintTextAppearance">@style/AddOrderHintText</item>
+        <item name="android:gravity">start</item>
+        <item name="android:textAlignment">textStart</item>
+        <item name="colorControlNormal">@color/colorPrimaryLightLight</item>
+        <item name="colorControlActivated">@color/colorPrimaryLightLight</item>
+        <item name="colorControlHighlight">@color/colorPrimaryLightLight</item>
+    </style>
+
 
 </resources>
