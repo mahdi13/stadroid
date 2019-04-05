@@ -21,7 +21,8 @@ class LoginFragment : Fragment() {
     private var listener: OnLoginInteractionListener? = null
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
@@ -70,7 +71,6 @@ class LoginFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is OnLoginInteractionListener) listener = context
-
     }
 
     override fun onDetach() {
@@ -114,7 +114,6 @@ class LoginFragment : Fragment() {
         val emailStr = email.text.toString()
         val passwordStr = password.text.toString()
 
-
         // Check for a valid password, if the user entered one.
         if (!TextUtils.isEmpty(passwordStr) && !isPasswordValid(passwordStr)) {
             password.error = getString(R.string.error_invalid_password)
@@ -131,8 +130,5 @@ class LoginFragment : Fragment() {
         }
 
         return true
-
     }
-
-
 }

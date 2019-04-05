@@ -49,12 +49,10 @@ class NotificationPagedAdapter(activity: NotificationListActivity, twoPane: Bool
         }
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(parent)
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bindTo(getItem(position))
-
 
     inner class ViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
         LayoutInflater.from(parent.context)
@@ -81,7 +79,6 @@ class NotificationPagedAdapter(activity: NotificationListActivity, twoPane: Bool
                     else -> R.color.colorPrimary
                 }
             )
-
         }
 
         private fun clear() {
@@ -89,7 +86,6 @@ class NotificationPagedAdapter(activity: NotificationListActivity, twoPane: Bool
             descriptionView.text = ""
             dateView.text = ""
         }
-
     }
 
     companion object {
@@ -99,10 +95,6 @@ class NotificationPagedAdapter(activity: NotificationListActivity, twoPane: Bool
 
             override fun areItemsTheSame(oldItem: Notification, newItem: Notification): Boolean =
                 oldItem.id == newItem.id
-
         }
-
     }
-
-
 }

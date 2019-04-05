@@ -1,6 +1,5 @@
 package io.stacrypt.stadroid.market.chart
 
-
 import android.graphics.Color
 import android.graphics.Paint
 import android.os.Bundle
@@ -20,10 +19,7 @@ import kotlinx.android.synthetic.main.fragment_market_candlestick.*
 import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.market.MarketViewModel
 import com.github.mikephil.charting.charts.CombinedChart.DrawOrder
-import kotlin.random.Random
-import com.github.mikephil.charting.charts.Chart
 import io.stacrypt.stadroid.ui.*
-
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -175,9 +171,7 @@ class MarketCandlestickFragment : Fragment() {
         leftAxis.textColor = Color.WHITE
         leftAxis.typeface = dinMediumTypeface
 
-
         bar_chart.legend.isEnabled = false
-
     }
 
     private fun initChart(dataset: CandleDataSet?, barDataSet: BarDataSet?) {
@@ -217,7 +211,7 @@ class MarketCandlestickFragment : Fragment() {
         // xAxis
         val xAxis = chart.xAxis
         xAxis.position = XAxis.XAxisPosition.BOTTOM
-        xAxis.setDrawGridLines(false)// disable x axis grid lines
+        xAxis.setDrawGridLines(false) // disable x axis grid lines
         xAxis.setDrawLabels(true)
 //        xAxis.axisMinimum = (dataset.values.size - 25).toFloat()
 //        xAxis.axisMaximum = dataset.values.size.toFloat()
@@ -261,12 +255,9 @@ class MarketCandlestickFragment : Fragment() {
 
 //        chart.setBorderColor(resources.getColor(R.color.colorLightGray))
 
-
         chart.axisRight.textColor = Color.WHITE
 
         chart.legend.isEnabled = false
-
-
     }
 
 //    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -294,10 +285,8 @@ class MarketCandlestickFragment : Fragment() {
 
                 chart.animateY(500)
                 bar_chart.animateY(500)
-
             })
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -308,16 +297,15 @@ class MarketCandlestickFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         val root = inflater.inflate(R.layout.fragment_market_candlestick, container, false)
 
-
         return root
     }
-
 
     companion object {
         /**

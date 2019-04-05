@@ -1,6 +1,5 @@
 package io.stacrypt.stadroid.market
 
-import androidx.lifecycle.Event
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations.switchMap
@@ -13,7 +12,7 @@ import java.math.BigDecimal
 class MarketViewModel : ViewModel() {
 
     val marketName: MutableLiveData<String> = MutableLiveData<String>().apply {
-        value = "TIRR_TBTC"//FIXME
+        value = "TIRR_TBTC" // FIXME
     }
 
     val allMarkets: LiveData<List<Market>> = MarketRepository.getMarkets()
@@ -38,5 +37,4 @@ class MarketViewModel : ViewModel() {
     val newOrderAmount = MutableLiveData<BigDecimal>().apply { postValue(BigDecimal("0")) }
     val newOrderPrice = MutableLiveData<BigDecimal>().apply { postValue(BigDecimal("0")) }
     val newOrderType = MutableLiveData<String>().apply { postValue("limit") }
-
 }

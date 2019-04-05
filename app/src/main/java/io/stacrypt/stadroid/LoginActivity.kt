@@ -7,7 +7,6 @@ import io.stacrypt.stadroid.profile.LoginFragment
 
 import org.jetbrains.anko.*
 
-
 /**
  * A login screen that offers login via email/password.
  */
@@ -36,5 +35,4 @@ class LoginActivity : AppCompatActivity(), LoginFragment.OnLoginInteractionListe
         ft.replace(R.id.container, LoginFragment())
         ft.commitNow()
     }
-
 }

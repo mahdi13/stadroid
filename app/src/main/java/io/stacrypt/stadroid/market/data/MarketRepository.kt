@@ -44,7 +44,7 @@ object MarketRepository {
         val time = Calendar.getInstance().time
         return getKline(
             market = market,
-            start = (time.time - DateUtils.MINUTE_IN_MILLIS * 60).div(1000L).toInt(), //FIXME
+            start = (time.time - DateUtils.MINUTE_IN_MILLIS * 60).div(1000L).toInt(), // FIXME
             end = time.time.div(1000L).toInt(), // FIXME
             interval = (DateUtils.MINUTE_IN_MILLIS).div(1000L).toInt()
         )
@@ -54,7 +54,7 @@ object MarketRepository {
         val time = Calendar.getInstance().time
         return getKline(
             market = market,
-            start = (time.time - DateUtils.HOUR_IN_MILLIS * 48).div(1000L).toInt(), //FIXME
+            start = (time.time - DateUtils.HOUR_IN_MILLIS * 48).div(1000L).toInt(), // FIXME
             end = time.time.div(1000L).toInt(), // FIXME
             interval = (DateUtils.HOUR_IN_MILLIS).div(1000L).toInt()
         )
@@ -64,7 +64,7 @@ object MarketRepository {
         val time = Calendar.getInstance().time
         return getKline(
             market = market,
-            start = (time.time - DateUtils.HOUR_IN_MILLIS * 24).div(1000L).toInt(), //FIXME
+            start = (time.time - DateUtils.HOUR_IN_MILLIS * 24).div(1000L).toInt(), // FIXME
             end = time.time.div(1000L).toInt(), // FIXME
             interval = (DateUtils.HOUR_IN_MILLIS).div(1000L).toInt()
         )
@@ -260,6 +260,4 @@ object MarketRepository {
             }
         }
     }
-
 }
-

@@ -23,7 +23,8 @@ class BalanceDetailFragment : Fragment() {
     private lateinit var adapter: BalanceDetailPagedAdapter
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         return inflater.inflate(R.layout.balance_detail_fragment, container, false)
@@ -45,7 +46,7 @@ class BalanceDetailFragment : Fragment() {
         })
 
         viewModel.balance.observe(viewLifecycleOwner, Observer<BalanceOverview> { item ->
-            if(item == null) return@Observer
+            if (item == null) return@Observer
             header_title.text = "Your ${item.assetName} Balance:"
             header_amount.text = item.available.format10Digit()
             header_value.text = item.assetName // FIXME It should be the value
@@ -58,11 +59,8 @@ class BalanceDetailFragment : Fragment() {
                 if (activity is BalanceDetailActivity)
                     (activity as BalanceDetailActivity).showWithdraw(item.assetName)
             }
-
         })
 
         list.layoutManager = LinearLayoutManager(activity)
-
     }
-
 }

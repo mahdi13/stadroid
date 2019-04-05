@@ -63,7 +63,6 @@ object WalletRepository {
         return liveData
     }
 
-
     /**
      * TODO: Think about online and offline
      * Database first, because of too much query
@@ -136,7 +135,7 @@ object WalletRepository {
      * It will be automatically updated if any change happens.
      */
     fun getAsset(assetName: String): LiveData<Asset> {
-        refreshAssets()// TODO: Execute it rarely
+        refreshAssets() // TODO: Execute it rarely
         return assetDao.loadByName(assetName)
     }
 
@@ -145,7 +144,7 @@ object WalletRepository {
      * It will be automatically updated if any change happens.
      */
     fun getCurrency(symbol: String): LiveData<Currency> {
-        refreshCurrencies()// TODO: Execute it rarely
+        refreshCurrencies() // TODO: Execute it rarely
         return currencyDao.loadBySymbol(symbol)
     }
 
@@ -154,10 +153,9 @@ object WalletRepository {
      * TODO: Webservice call rate limit
      */
     fun getPaymentGateways(symbol: String): LiveData<List<PaymentGateway>> {
-        refreshPaymentGateways()// TODO: Execute it rarely
+        refreshPaymentGateways() // TODO: Execute it rarely
         return paymentGatewayDao.loadByFiatSymbol(symbol)
     }
-
 
     private fun refreshBalanceOverview() {
         job = scope.launch {
@@ -204,6 +202,4 @@ object WalletRepository {
             }
         }
     }
-
 }
-

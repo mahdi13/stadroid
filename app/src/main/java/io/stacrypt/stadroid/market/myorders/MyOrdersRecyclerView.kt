@@ -9,9 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.akexorcist.roundcornerprogressbar.common.BaseRoundCornerProgressBar
 import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.data.Order
-import io.stacrypt.stadroid.ui.changePercentFrom
 import io.stacrypt.stadroid.ui.format10Digit
-import io.stacrypt.stadroid.ui.formatPercent
 import io.stacrypt.stadroid.ui.percentFrom
 import kotlinx.android.synthetic.main.fragment_my_orders.view.*
 import kotlinx.android.synthetic.main.notification_list_content.view.*
@@ -85,7 +83,6 @@ class MyOrdersRecyclerView(
 //        } else {
 //            holder.roleView.text = "Taker"
 //        }
-
     }
 
     override fun getItemCount(): Int = items.size

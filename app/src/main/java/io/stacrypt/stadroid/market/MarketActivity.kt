@@ -27,7 +27,5 @@ class MarketActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment, MarketFragment().withArguments(ARG_MARKET to market), market)
             .commitNow()
-
     }
-
 }

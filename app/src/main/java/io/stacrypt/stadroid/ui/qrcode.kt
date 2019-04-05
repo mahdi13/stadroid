@@ -1,27 +1,18 @@
 package io.stacrypt.stadroid.ui
 
-import android.view.View
 import android.widget.ImageView
-import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import net.glxn.qrgen.android.QRCode
 import android.graphics.Bitmap
 import com.google.zxing.BarcodeFormat
-import android.R.attr.data
 import android.graphics.Color
-import com.google.zxing.common.BitMatrix
 import com.google.zxing.qrcode.QRCodeWriter
-
-
-
 
 fun ImageView.showQrCode(code: String) = apply {
 //    setLayerType(View.LAYER_TYPE_NON, null)
 }.apply {
-    GlobalScope.launch(Dispatchers.Main){
+    GlobalScope.launch(Dispatchers.Main) {
 //        invalidate()
 //        delay(1000)
 //        setImageBitmap(
@@ -44,8 +35,8 @@ fun ImageView.showQrCode(code: String) = apply {
             Bitmap.Config.ARGB_8888
         )
 
-        for (i in 0 until width) {// width
-            for (j in 0 until height) {// height
+        for (i in 0 until width) { // width
+            for (j in 0 until height) { // height
                 ImageBitmap.setPixel(
                     i, j, if (bm.get(i, j))
                         Color.BLACK
@@ -56,6 +47,5 @@ fun ImageView.showQrCode(code: String) = apply {
         }
 
         setImageBitmap(ImageBitmap)
-
     }
 }.apply { invalidate() }

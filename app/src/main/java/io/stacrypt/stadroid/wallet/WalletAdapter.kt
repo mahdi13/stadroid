@@ -63,7 +63,6 @@ class WalletAdapter(
         val freezeView: TextView = itemView.freeze
         val iconView: ImageView = itemView.icon
 
-
         init {
             cardView.setOnClickListener {
                 it.context.startActivity(
@@ -98,7 +97,5 @@ class WalletAdapter(
                 )
             }
         }
-
-
     }
 }

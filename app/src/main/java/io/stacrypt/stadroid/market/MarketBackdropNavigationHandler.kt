@@ -19,7 +19,6 @@ import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.data.Market
 import org.jetbrains.annotations.Nullable
 
-
 class MarketBackdropNavigationHandler @JvmOverloads internal constructor(
     context: Context,
     private val sheet: View,
@@ -69,7 +68,6 @@ class MarketBackdropNavigationHandler @JvmOverloads internal constructor(
         marketViewModel.marketName.observe(context, Observer { marketName ->
             toggleView?.title = marketName
         })
-
     }
 
     override fun onClick(view: View) = animateToggle(duration)

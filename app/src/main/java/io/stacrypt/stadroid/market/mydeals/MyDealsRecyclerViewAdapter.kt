@@ -9,10 +9,8 @@ import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.data.MyDeal
 import io.stacrypt.stadroid.ui.format10Digit
 
-
 import kotlinx.android.synthetic.main.fragment_my_deals.view.*
 import org.jetbrains.anko.textColorResource
-
 
 class MyDealsRecyclerViewAdapter(
     var items: List<MyDeal>
@@ -36,7 +34,6 @@ class MyDealsRecyclerViewAdapter(
             holder.amountView.textColorResource = R.color.real_green
         else
             holder.amountView.textColorResource = R.color.real_red
-
     }
 
     override fun getItemCount(): Int = items.size

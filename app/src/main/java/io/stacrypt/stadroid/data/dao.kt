@@ -7,7 +7,6 @@ import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
 import androidx.room.Update
 
-
 @Dao
 interface MarketDao {
     @Insert(onConflict = REPLACE)
@@ -22,7 +21,6 @@ interface MarketDao {
     @Query("SELECT * FROM Market ORDER BY name ASC")
     fun loadAll(): LiveData<List<Market>>
 }
-
 
 @Dao
 interface AssetDao {
@@ -78,41 +76,41 @@ interface PaymentGatewayDao {
     fun loadByFiatSymbol(fiatSymbol: String): LiveData<List<PaymentGateway>>
 }
 
-//@Dao
-//interface KlineDao {
+// @Dao
+// interface KlineDao {
 //    @Insert(onConflict = REPLACE)
 //    fun save(kline: Kline)
 //
 //    @Query("SELECT * FROM Kline WHERE market = :market ORDER BY time DESC LIMIT 10000")
 //    fun loadByMarket(market: String): LiveData<List<Kline>>
-//}
+// }
 //
-//@Dao
-//interface BookDao {
+// @Dao
+// interface BookDao {
 //    @Insert(onConflict = REPLACE)
 //    fun save(book: Book)
 //
 //    @Query("SELECT * FROM Book WHERE market = :market ORDER BY i ASC")
 //    fun loadByMarket(market: String): LiveData<List<Book>>
-//}
+// }
 //
-//@Dao
-//interface DealDao {
+// @Dao
+// interface DealDao {
 //    @Insert(onConflict = REPLACE)
 //    fun save(deal: Deal)
 //
 //    @Query("SELECT * FROM Deal WHERE market = :market ORDER BY time DESC")
 //    fun loadByMarket(market: String): LiveData<List<Deal>>
-//}
+// }
 //
-//@Dao
-//interface MineDao {
+// @Dao
+// interface MineDao {
 //    @Insert(onConflict = REPLACE)
 //    fun save(myDeals: MyDeal)
 //
 //    @Query("SELECT * FROM MyDeal WHERE market = :market ORDER BY time DESC")
 //    fun loadByMarket(market: String): LiveData<List<MyDeal>>
-//}
+// }
 
 @Dao
 interface UserDao {

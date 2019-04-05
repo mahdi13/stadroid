@@ -24,7 +24,6 @@ class CashinViewModel : ViewModel() {
     val currency = Transformations.switchMap(fiatSymbol) { WalletRepository.getCurrency(it) }
     val paymentGateways = Transformations.switchMap(fiatSymbol) { WalletRepository.getPaymentGateways(it) }
 //    val bankCards = Transformations.switchMap(fiatSymbol) { BankingRepository.getBankCards()}
-
 }
 
 class CashinFragment : Fragment() {

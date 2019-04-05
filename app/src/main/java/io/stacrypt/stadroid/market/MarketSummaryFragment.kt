@@ -21,7 +21,6 @@ import org.jetbrains.anko.textColorResource
 import java.math.BigDecimal
 import java.math.RoundingMode
 
-
 const val SHOWING_ITEMS = 20
 
 class MarketSummaryFragment : Fragment() {
@@ -29,14 +28,14 @@ class MarketSummaryFragment : Fragment() {
     private var rootView: View? = null
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         rootView = inflater.inflate(R.layout.fragment_market_summary, container, false)!!
         rootView?.back?.setOnClickListener { activity?.finish() }
         return rootView
     }
-
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -92,7 +91,6 @@ class MarketSummaryFragment : Fragment() {
 //                        "_"
 //                    )?.get(0) ?: "")
 //            }
-
         })
 
         viewModel.summary.observe(this, Observer {
@@ -104,8 +102,5 @@ class MarketSummaryFragment : Fragment() {
                 view?.flip?.flipTheView(); delay(3000)
             }
         }
-
     }
-
-
 }

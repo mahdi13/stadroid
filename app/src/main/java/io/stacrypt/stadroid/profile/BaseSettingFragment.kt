@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.navOptions
 import io.stacrypt.stadroid.R
 import kotlinx.android.synthetic.main.header_appbar_back.view.*
 import org.jetbrains.anko.support.v4.alert
@@ -34,7 +33,6 @@ abstract class BaseSettingFragment : Fragment() {
                 negativeButton("Cancel") { back() }
             }.show()
         }
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

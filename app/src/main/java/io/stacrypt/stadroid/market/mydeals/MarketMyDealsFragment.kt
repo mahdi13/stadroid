@@ -13,14 +13,14 @@ import io.stacrypt.stadroid.data.MyDeal
 import io.stacrypt.stadroid.market.MarketViewModel
 import kotlinx.android.synthetic.main.fragment_my_deals_list.view.*
 
-
 class MarketMyDealsFragment : Fragment() {
 
     private lateinit var viewModel: MarketViewModel
     private lateinit var adapter: MyDealsRecyclerViewAdapter
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val rootView = inflater.inflate(R.layout.fragment_my_deals_list, container, false)
@@ -41,6 +41,5 @@ class MarketMyDealsFragment : Fragment() {
                 adapter.items = mines
                 adapter.notifyDataSetChanged()
             })
-
     }
 }

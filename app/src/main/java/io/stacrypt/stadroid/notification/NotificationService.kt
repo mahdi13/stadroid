@@ -8,12 +8,10 @@ import androidx.core.app.NotificationManagerCompat
 import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.data.sessionManager
 
-
 class NotificationService : FirebaseMessagingService() {
     companion object {
         const val TAG = "NotificationService"
     }
-
 
     override fun onMessageReceived(remoteMessage: RemoteMessage?) {
         // ...
@@ -33,21 +31,17 @@ class NotificationService : FirebaseMessagingService() {
             // Handle message within 10 seconds
 //                handleNow()
 //            }
-
         }
 
         // Check if message contains a notification payload.
         if (remoteMessage.notification != null) {
             Log.d(TAG, "Message Notification Body: " + remoteMessage.notification!!.body!!)
-
-
         }
 
         val title: String? = remoteMessage.notification?.title
         val body: String? = remoteMessage.notification?.body
         val objectId: String? = remoteMessage.data["object_id"]
         val objectType: String? = remoteMessage.data["objectType"]
-
 
         val notification = NotificationCompat.Builder(this, "general")
             .setContentTitle(title)
@@ -58,11 +52,9 @@ class NotificationService : FirebaseMessagingService() {
         val manager = NotificationManagerCompat.from(this)
         manager.notify(/*notification id*/0, notification)
 
-
         // Also if you intend on generating your own notifications as a result of a received FCM
         // message, here is where that should be initiated. See sendNotification method below.
     }
-
 
     /**
      * Called if InstanceID token is updated. This may occur if the security of

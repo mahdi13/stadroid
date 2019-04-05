@@ -4,7 +4,6 @@ import android.text.TextWatcher
 import android.widget.EditText
 import android.text.Editable
 
-
 fun EditText.addBankCardTextFormatter() = addTextChangedListener(object : TextWatcher {
     private val TOTAL_SYMBOLS = 19 // size of pattern 0000-0000-0000-0000
     private val TOTAL_DIGITS = 16 // max numbers of digits in pattern: 0000 x 4
@@ -67,9 +66,7 @@ fun EditText.addBankCardTextFormatter() = addTextChangedListener(object : TextWa
         }
         return digits
     }
-
 })
-
 
 fun String.isValidBankCardNumber() = isNotEmpty() && this.matches("^([0-9]{4}-){3}[0-9]{4}$".toRegex())
 fun String.isValidBankingIdName() = isNotEmpty() && this.matches("^[0-9a-zA-Z\\s\\.]{2,50}$".toRegex())

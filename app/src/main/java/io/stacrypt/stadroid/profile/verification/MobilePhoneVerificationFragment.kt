@@ -20,7 +20,6 @@ import kotlinx.coroutines.launch
 import org.jetbrains.anko.design.longSnackbar
 import retrofit2.HttpException
 
-
 class MobilePhoneVerificationFragment : Fragment() {
     private var listener: OnFragmentInteractionListener? = null
     private lateinit var viewModel: VerificationProcessViewModel
@@ -31,7 +30,8 @@ class MobilePhoneVerificationFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
@@ -98,5 +98,4 @@ class MobilePhoneVerificationFragment : Fragment() {
         // TODO: Update argument type and name
         fun onFragmentInteraction(uri: Uri)
     }
-
 }

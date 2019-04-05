@@ -18,7 +18,6 @@ import io.stacrypt.stadroid.market.mydeals.MarketMyDealsFragment
 import io.stacrypt.stadroid.market.myorders.MyOrdersFragment
 import java.lang.IndexOutOfBoundsException
 
-
 /**
  * A placeholder fragment containing a simple view.
  */
@@ -53,7 +52,6 @@ class MarketFragment : Fragment() {
             override fun getCount(): Int = 6
         }
 //        tabs.setupWithViewPager(viewpager)
-
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -63,7 +61,8 @@ class MarketFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_market, container, false)

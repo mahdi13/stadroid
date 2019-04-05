@@ -43,7 +43,6 @@ class MarketDealsRecyclerViewAdapter(
         } else {
             holder.changeView.textColorResource = R.color.real_green
         }
-
     }
 
     override fun getItemCount(): Int = items.size

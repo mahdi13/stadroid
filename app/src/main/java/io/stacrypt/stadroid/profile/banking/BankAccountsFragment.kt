@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.NavHostFragment
-import androidx.recyclerview.widget.RecyclerView
 
 import io.stacrypt.stadroid.R
 import kotlinx.android.synthetic.main.header_appbar_back.view.*
@@ -16,7 +15,8 @@ class BankAccountsFragment : Fragment() {
     private lateinit var viewModel: BankAccountsViewModel
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.bank_accounts_fragment, container, false)
@@ -34,5 +34,4 @@ class BankAccountsFragment : Fragment() {
 
 //        view?.findViewById<RecyclerView>(R.id.list)?.adapter = viewModel?.bankAccountListing?.value
     }
-
 }

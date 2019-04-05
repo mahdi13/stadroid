@@ -6,10 +6,8 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.os.Build
-import com.instabug.library.Instabug
-import com.instabug.library.invocation.InstabugInvocationEvent
-import com.crashlytics.android.Crashlytics;
-import io.fabric.sdk.android.Fabric;
+import com.crashlytics.android.Crashlytics
+import io.fabric.sdk.android.Fabric
 lateinit var application: Application
 
 class Application : android.app.Application() {
@@ -24,7 +22,6 @@ class Application : android.app.Application() {
 //            .setInvocationEvents(InstabugInvocationEvent.FLOATING_BUTTON, InstabugInvocationEvent.SCREENSHOT)
 //            .build()
 
-
         // Init notification channels:
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             // Create the NotificationChannel
@@ -38,8 +35,6 @@ class Application : android.app.Application() {
             val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(mChannel)
         }
-
-
     }
 }
 

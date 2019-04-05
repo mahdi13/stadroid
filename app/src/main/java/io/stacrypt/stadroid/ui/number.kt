@@ -3,9 +3,10 @@ package io.stacrypt.stadroid.ui
 import java.math.BigDecimal
 import java.math.RoundingMode
 
-
 enum class Threshold private constructor(
-    aValueString: String, val numberOfZeroes: Int, protected var suffix: Char?,
+    aValueString: String,
+    val numberOfZeroes: Int,
+    protected var suffix: Char?,
     val higherThreshold: Threshold?
 ) {
     TRILLION("1000000000000", 12, 't', null),
@@ -41,14 +42,14 @@ enum class Threshold private constructor(
     }
 }
 
-
 object NumberShortener {
 
     val REQUIRED_PRECISION = 2
 
     fun toPrecisionWithoutLoss(
         aBigDecimal: BigDecimal,
-        aPrecision: Int, aMode: RoundingMode
+        aPrecision: Int,
+        aMode: RoundingMode
     ): BigDecimal {
         val previousScale = aBigDecimal.scale()
         val previousPrecision = aBigDecimal.precision()
@@ -87,7 +88,7 @@ object NumberShortener {
         val sign = if (isNegative) "-" else ""
 // System.out.println("Number: <" + sign + numberAsBigDecimal + ">, rounded: <"
         // + sign + scaledNumber + ">, print: <" + printNumber + ">");
-        return (sign + scaledNumber.stripTrailingZeros().toPlainString()
-                + threshold?.getSuffix())
+        return (sign + scaledNumber.stripTrailingZeros().toPlainString() +
+                threshold?.getSuffix())
     }
 }

@@ -1,6 +1,5 @@
 package io.stacrypt.stadroid.profile.verification
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -22,11 +21,11 @@ import org.jetbrains.anko.design.longSnackbar
 import org.jetbrains.anko.support.v4.toast
 import java.lang.Exception
 
-
 class EmailVerificationFragment : Fragment() {
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.email_verification_fragment, container, false)
@@ -73,9 +72,5 @@ class EmailVerificationFragment : Fragment() {
                 }
             }
         }
-
-
     }
-
 }
-

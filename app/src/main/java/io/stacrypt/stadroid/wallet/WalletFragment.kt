@@ -13,14 +13,14 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.stacrypt.stadroid.data.BalanceOverview
 
-
 class WalletFragment : Fragment() {
 
     private lateinit var viewModel: WalletViewModel
     private lateinit var adapter: WalletAdapter
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val recyclerView = inflater.inflate(R.layout.fragment_wallet, container, false) as RecyclerView
@@ -40,7 +40,5 @@ class WalletFragment : Fragment() {
                 adapter.items = balances!!
                 adapter.notifyDataSetChanged()
             })
-
     }
-
 }

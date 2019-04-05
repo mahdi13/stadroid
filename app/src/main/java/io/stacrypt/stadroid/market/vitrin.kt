@@ -17,12 +17,10 @@ import kotlinx.android.synthetic.main.fragment_market_vitrine.*
 import kotlinx.android.synthetic.main.fragment_market_vitrine.view.*
 import org.jetbrains.anko.support.v4.withArguments
 import androidx.core.content.ContextCompat
-import android.graphics.drawable.Drawable
 import io.stacrypt.stadroid.ui.format10Digit
 import kotlinx.android.synthetic.main.fragment_market_vitrine_list.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.startActivity
-
 
 class MarketVitrineViewModel : ViewModel() {
     val allMarkets: LiveData<List<Market>> = MarketRepository.getMarkets()
@@ -85,7 +83,6 @@ class VitrineViewModel : ViewModel() {
 
     val kline: LiveData<List<Kline>> =
         Transformations.switchMap(marketName) { MarketRepository.getKline24(it) }
-
 }
 
 class MarketVitrineRowFragment : Fragment() {
@@ -93,7 +90,8 @@ class MarketVitrineRowFragment : Fragment() {
     private var rootView: View? = null
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         rootView = inflater.inflate(R.layout.fragment_market_vitrine, container, false)!!
@@ -176,9 +174,7 @@ class MarketVitrineRowFragment : Fragment() {
         mini_chart.isScaleYEnabled = false
         mini_chart.isScaleXEnabled = false
         mini_chart.setNoDataText("")
-
     }
-
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -199,7 +195,7 @@ class MarketVitrineRowFragment : Fragment() {
             rootView?.low?.text = it?.low?.format10Digit()
 //            rootView?.close?.text = it?.last?.format10Digit()
             rootView?.volume?.text =
-                "vol " + it?.volume?.format10Digit()// + " " + (viewModel?.marketName?.value?.split("_")?.get(1) ?: "")
+                "vol " + it?.volume?.format10Digit() // + " " + (viewModel?.marketName?.value?.split("_")?.get(1) ?: "")
         })
 
         viewModel.last.observe(this, Observer {
@@ -207,39 +203,36 @@ class MarketVitrineRowFragment : Fragment() {
         })
 
         viewModel.status.observe(this, Observer {
-            //TODO
+            // TODO
         })
 
         viewModel.kline.observe(this, Observer {
             initChart(initDataset(it))
         })
     }
-
-
 }
 
-
-//class MarketVitrineRowUi : AnkoComponent<ViewGroup> {
+// class MarketVitrineRowUi : AnkoComponent<ViewGroup> {
 //    override fun createView(ui: AnkoContext<ViewGroup>): View = with(ui) {
 //        verticalLayout {
 //
 //        }
 //    }
-//}
+// }
 
-//class MarketVitrineViewHolder(mView: View) : RecyclerView.ViewHolder(mView) {
-////    val name: TextView = mView.
+// class MarketVitrineViewHolder(mView: View) : RecyclerView.ViewHolder(mView) {
+// //    val name: TextView = mView.
 //
 //    fun bind(market: Market) {
 //
 //    }
-//}
+// }
 
-//class MarketVitrineAdapter(
+// class MarketVitrineAdapter(
 //    var items: List<Market>,
 //    val fragmentManager: FragmentManager,
 //    val onMarketSelectedListener: (String) -> Unit
-//) : BaseAdapter() {
+// ) : BaseAdapter() {
 //    @SuppressLint("ViewHolder")
 //    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
 //
@@ -255,4 +248,4 @@ class MarketVitrineRowFragment : Fragment() {
 //
 //    override fun getCount(): Int = items.size
 //
-//}
+// }

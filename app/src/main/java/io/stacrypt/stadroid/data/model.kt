@@ -525,6 +525,5 @@ data class City(val id: Int, val name: String, val stateId: Int, val state: Stat
     override fun toString(): String = name
 }
 
-
 val dateFormatter by lazy { SimpleDateFormat("dd MMM yyyy HH:mm", Locale.ENGLISH) }
 fun Date.format() = dateFormatter.format(this)

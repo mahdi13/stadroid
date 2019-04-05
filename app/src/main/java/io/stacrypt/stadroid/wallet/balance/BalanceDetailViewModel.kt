@@ -1,13 +1,10 @@
 package io.stacrypt.stadroid.wallet.balance
 
-import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.Transformations.map
 import androidx.lifecycle.Transformations.switchMap
-import io.stacrypt.stadroid.data.DepositInfo
 import io.stacrypt.stadroid.wallet.data.WalletRepository
-
 
 class BalanceDetailViewModel : ViewModel() {
     val assetName: MutableLiveData<String> = MutableLiveData()
@@ -43,5 +40,4 @@ class BalanceDetailViewModel : ViewModel() {
 //    }
 
     val paymentGateways by lazy { switchMap(assetName) { WalletRepository.getPaymentGateways(it) } }
-
 }

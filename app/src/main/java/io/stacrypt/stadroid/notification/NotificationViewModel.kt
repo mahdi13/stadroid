@@ -10,6 +10,4 @@ class NotificationViewModel : ViewModel() {
     val notifications = notificationsListing.pagedList
     val networkState = notificationsListing.networkState
     val refreshState = notificationsListing.refreshState
-
-
 }

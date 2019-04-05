@@ -1,18 +1,14 @@
 package io.stacrypt.stadroid.profile.banking
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
-import androidx.navigation.fragment.NavHostFragment
 
 import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.data.sessionManager
 import io.stacrypt.stadroid.data.stemeraldApiClient
 import io.stacrypt.stadroid.profile.BaseSettingFragment
-import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.ARG_ACTION
 import kotlinx.android.synthetic.main.activity_profile_setting.*
 import kotlinx.android.synthetic.main.add_bank_card_fragment.view.*
 import kotlinx.android.synthetic.main.header_appbar_back.view.*
@@ -25,10 +21,11 @@ import java.lang.Exception
 
 class AddBankCardFragment : BaseSettingFragment() {
 
-    override fun authorize(): Boolean  = sessionManager.isTrustedClient
+    override fun authorize(): Boolean = sessionManager.isTrustedClient
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.add_bank_card_fragment, container, false)
@@ -59,7 +56,6 @@ class AddBankCardFragment : BaseSettingFragment() {
                 }
             }
         }
-
     }
 
     private fun validateInputs(): Boolean {
@@ -78,6 +74,4 @@ class AddBankCardFragment : BaseSettingFragment() {
 
         return true
     }
-
-
 }

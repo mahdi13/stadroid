@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.*
 
-
 object UserRepository {
     private val userDao: UserDao = stemeraldDatabase.userDao
 
@@ -75,11 +74,10 @@ object UserRepository {
         }
         return liveData
     }
-
 }
 
-//// A generic class that contains data and status about loading this data.
-//class Resource<T> private constructor(val status: Status, val data: T?, val message: String?) {
+// // A generic class that contains data and status about loading this data.
+// class Resource<T> private constructor(val status: Status, val data: T?, val message: String?) {
 //
 //    enum class Status {
 //        SUCCESS, ERROR, LOADING
@@ -99,11 +97,11 @@ object UserRepository {
 //            return Resource(Status.LOADING, data, null)
 //        }
 //    }
-//}
+// }
 //
-//// ResultType: Type for the Resource data.
-//// RequestType: Type for the API response.
-//abstract class NetworkBoundResource<ResultType, RequestType> {
+// // ResultType: Type for the Resource data.
+// // RequestType: Type for the API response.
+// abstract class NetworkBoundResource<ResultType, RequestType> {
 //
 //    // Returns a LiveData object that represents the resource that's implemented
 //    // in the base class.
@@ -130,4 +128,4 @@ object UserRepository {
 //    // like rate limiter.
 //    @MainThread
 //    abstract fun onFetchFailed()
-//}
+// }

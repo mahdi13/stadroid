@@ -1,11 +1,9 @@
 package io.stacrypt.stadroid.wallet.deposit
 
 import androidx.lifecycle.*
-import androidx.lifecycle.Transformations.switchMap
 import io.stacrypt.stadroid.data.Currency
 import io.stacrypt.stadroid.data.DepositInfo
 import io.stacrypt.stadroid.wallet.data.WalletRepository
-import java.lang.Exception
 
 class DepositViewModel : ViewModel() {
 
@@ -45,11 +43,11 @@ class DepositViewModel : ViewModel() {
 //            }
 //        }
 //    }
-////    val depositInfo by lazy {
-////        (switchMap(assetName) {
-////            WalletRepository.getDepositInfo(it)
-////        } as MediatorLiveData<DepositInfo>)
-////    }
+// //    val depositInfo by lazy {
+// //        (switchMap(assetName) {
+// //            WalletRepository.getDepositInfo(it)
+// //        } as MediatorLiveData<DepositInfo>)
+// //    }
 //
 //    fun renewDepositInfo() {
 //        WalletRepository.renewDepositInfo(assetName.value!!, depositInfo)
@@ -57,5 +55,4 @@ class DepositViewModel : ViewModel() {
 //    }
 
 //    val paymentGateways by lazy { Transformations.switchMap(assetName) { WalletRepository.getPaymentGateways(it) } }
-
 }

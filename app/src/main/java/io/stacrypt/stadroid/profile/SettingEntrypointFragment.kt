@@ -1,6 +1,5 @@
 package io.stacrypt.stadroid.profile
 
-
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +9,6 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import io.stacrypt.stadroid.R
-import io.stacrypt.stadroid.data.sessionManager
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.ACTION_VERIFY
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.ARG_ACTION
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.ARG_TARGET
@@ -22,7 +20,6 @@ import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_BANK
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_BANK_CARDS
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_CHANEG_PASSWORD
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_DO_VERIFY_EMAIL
-import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_VERIFICATION_EMAIL
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_VERIFICATION_PROCESS
 
 class SettingEntrypointFragment : Fragment() {
@@ -67,10 +64,10 @@ class SettingEntrypointFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         return TextView(activity)
     }
-
 }

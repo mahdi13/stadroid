@@ -30,7 +30,8 @@ class ProfileFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? = inflater.inflate(R.layout.fragment_profile, container, false).apply {
 
@@ -72,5 +73,4 @@ class ProfileFragment : Fragment() {
     interface OnProfileInteractionListener {
         fun onLoggedOut()
     }
-
 }

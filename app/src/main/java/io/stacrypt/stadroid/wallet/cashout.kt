@@ -26,7 +26,6 @@ class CashoutViewModel : ViewModel() {
     }
     val paymentGateways = Transformations.switchMap(fiatSymbol) { WalletRepository.getPaymentGateways(it) }
     val bankAccounts = BankingRepository.getBankAccounts()
-
 }
 
 class CashoutFragment : Fragment() {
@@ -42,7 +41,6 @@ class CashoutFragment : Fragment() {
 
         viewModel.init(arguments?.getString(ARG_ASSET)!!)
         rootView.bank_accounts.adapter = BankCardPagedAdapter()
-
 
         return rootView
     }

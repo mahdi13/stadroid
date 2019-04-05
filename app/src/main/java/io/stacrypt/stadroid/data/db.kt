@@ -7,7 +7,6 @@ import androidx.room.TypeConverters
 import java.util.*
 import java.math.BigDecimal
 
-
 @Database(
     entities = [
         Market::class,
@@ -56,5 +55,4 @@ class Converters {
 
     @TypeConverter
     fun toDouble(bigDecimal: BigDecimal?): Double? = bigDecimal?.multiply(BigDecimal(100))?.toDouble()
-
 }

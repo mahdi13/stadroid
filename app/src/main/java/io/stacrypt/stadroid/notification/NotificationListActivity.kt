@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.paging.PagedList
 import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.data.Notification
-import io.stacrypt.stadroid.wallet.balance.BalanceDetailViewModel
 
 import kotlinx.android.synthetic.main.activity_notification_list.*
 
@@ -53,8 +52,6 @@ class NotificationListActivity : AppCompatActivity() {
         viewModel.notifications.observe(this, Observer<PagedList<Notification>> {
             adapter.submitList(it)
         })
-
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem) =
@@ -71,7 +68,5 @@ class NotificationListActivity : AppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
-
 }
-
 

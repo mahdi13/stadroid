@@ -5,7 +5,6 @@ import android.view.MotionEvent
 import android.util.AttributeSet
 import androidx.viewpager.widget.ViewPager
 
-
 class UnscrollableViewPager : ViewPager {
 
     private var isPagingEnabled = false

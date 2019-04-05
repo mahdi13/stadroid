@@ -12,7 +12,6 @@ import android.app.Activity
 import android.os.Parcelable
 import com.nguyenhoanglam.imagepicker.model.Config
 
-
 class ProfileSettingActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,7 +22,6 @@ class ProfileSettingActivity : AppCompatActivity() {
 //        setSupportActionBar(toolbar)
 //        supportActionBar?.setDisplayHomeAsUpEnabled(false)
 //        supportActionBar?.title = ""
-
     }
 
     override fun onNewIntent(intent: Intent?) {
@@ -83,9 +81,7 @@ class ProfileSettingActivity : AppCompatActivity() {
             val images = data.getParcelableArrayListExtra<Parcelable>(Config.EXTRA_IMAGES)
             // do your logic here...
         }
-        super.onActivityResult(requestCode, resultCode, data)  // You MUST have this line to be here
+        super.onActivityResult(requestCode, resultCode, data) // You MUST have this line to be here
         // so ImagePicker can work with fragment mode
     }
-
-
 }

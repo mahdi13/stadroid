@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import io.stacrypt.stadroid.data.StemeraldDatabase
 import io.stacrypt.stadroid.data.stemeraldDatabase
@@ -18,7 +17,6 @@ import io.stacrypt.stadroid.market.*
 import io.stacrypt.stadroid.notification.NotificationListActivity
 import io.stacrypt.stadroid.profile.LoginFragment
 import org.jetbrains.anko.*
-
 
 class MainActivity : AppCompatActivity(),
     LoginFragment.OnLoginInteractionListener,
@@ -40,7 +38,6 @@ class MainActivity : AppCompatActivity(),
 
     private val pages = ArrayList<Pair<Fragment, String>>(3)
 
-
     private fun switchFragment(pos: Int) {
 //        marketBackdropNavigationHandler.collapse(true)
         supportFragmentManager
@@ -54,7 +51,6 @@ class MainActivity : AppCompatActivity(),
     private fun buildMarketFragment(): Fragment = MarketVitrineFragment()
     private fun buildProfileFragment(): Fragment = ProfileFragment()
     private fun buildLoginFragment(): Fragment = LoginFragment()
-
 
     private fun buildFragmentsList() {
         pages.add(buildWalletFragment() to "My Wallet")
@@ -88,7 +84,6 @@ class MainActivity : AppCompatActivity(),
 //            setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp)
 //        }
 
-
 //        marketBackdropNavigationHandler = MarketBackdropNavigationHandler(
 //            this,
 //            nested_content,
@@ -119,7 +114,6 @@ class MainActivity : AppCompatActivity(),
         navigation.selectedItemId = R.id.navigation_market
 
         notifications.setOnClickListener { startActivity<NotificationListActivity>() }
-
     }
 
     override fun onResume() {
@@ -127,5 +121,4 @@ class MainActivity : AppCompatActivity(),
         // TODO: Refresh notificationsCount
     }
 }
-
 

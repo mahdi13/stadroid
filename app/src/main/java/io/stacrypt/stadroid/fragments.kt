@@ -25,7 +25,6 @@ class LoadingFragmentUi<T> : AnkoComponent<T> {
     }
 }
 
-
 class LoadingFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
         LoadingFragmentUi<Fragment>().createView(AnkoContext.create(context!!, this))

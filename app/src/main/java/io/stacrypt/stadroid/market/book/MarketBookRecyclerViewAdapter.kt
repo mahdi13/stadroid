@@ -10,10 +10,7 @@ import io.stacrypt.stadroid.data.Book
 
 import kotlinx.android.synthetic.main.fragment_market_book.view.*
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
-import io.stacrypt.stadroid.ui.format
 import io.stacrypt.stadroid.ui.format10Digit
-import io.stacrypt.stadroid.ui.formatShort
-
 
 class MarketBookRecyclerViewAdapter(
     var items: List<Pair<Book?, Book?>>
@@ -47,7 +44,6 @@ class MarketBookRecyclerViewAdapter(
 //        leftLayer.setPadding(100, 0, 0, 0)
 //        rightLayer.setPadding(0, 0, 100, 0)
 
-
 //        val shape = LayerDrawable(
 //            arrayOf(
 //                holder.containerView.resources.getDrawable(R.drawable.test_shape).apply {setTint(Color.RED)},
@@ -64,7 +60,6 @@ class MarketBookRecyclerViewAdapter(
 //        holder.leftContainerView.right = (holder.leftAmountView.width + holder.leftPriceView.width) - (leftItem?.amount?.toDouble()!! / 400.0 * (holder.leftAmountView.width + holder.leftPriceView.width)).toInt()
 //        holder.rightContainerView.backgroundColor = Color.GREEN
 //        holder.rightContainerView.left = (holder.rightPriceView.width + holder.rightAmountView.width) + (rightItem?.amount?.toDouble()!! / 400.0 * (holder.leftAmountView.width + holder.leftPriceView.width)).toInt()
-
     }
 
     override fun getItemCount(): Int = items.size

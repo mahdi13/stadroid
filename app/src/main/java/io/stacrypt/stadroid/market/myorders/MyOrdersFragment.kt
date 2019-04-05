@@ -16,10 +16,8 @@ import kotlinx.android.synthetic.main.fragment_my_orders_list.view.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import org.jetbrains.anko.cancelButton
 import org.jetbrains.anko.support.v4.alert
 import org.jetbrains.anko.support.v4.toast
-import org.jetbrains.anko.yesButton
 
 class MyOrdersFragment : Fragment() {
 
@@ -27,7 +25,8 @@ class MyOrdersFragment : Fragment() {
     private lateinit var adapter: MyOrdersRecyclerView
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val rootView = inflater.inflate(R.layout.fragment_my_orders_list, container, false)
@@ -69,6 +68,5 @@ class MyOrdersFragment : Fragment() {
                 adapter.items = mines
                 adapter.notifyDataSetChanged()
             })
-
     }
 }

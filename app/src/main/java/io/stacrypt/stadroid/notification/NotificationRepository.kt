@@ -13,7 +13,6 @@ import retrofit2.HttpException
 
 object NotificationRepository {
 
-
     private var job: Job? = null
     private val scope = CoroutineScope(Dispatchers.Default)
 
@@ -66,5 +65,4 @@ object NotificationRepository {
         }
         return liveData
     }
-
 }

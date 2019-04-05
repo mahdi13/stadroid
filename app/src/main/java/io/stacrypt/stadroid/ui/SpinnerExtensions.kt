@@ -17,7 +17,7 @@ object SpinnerExtensions {
      */
     fun Spinner.setSpinnerEntries(entries: List<Any>?) {
         if (entries != null) {
-            val arrayAdapter =  ArrayAdapter<Any>(context, android.R.layout.simple_spinner_item, entries)
+            val arrayAdapter = ArrayAdapter<Any>(context, android.R.layout.simple_spinner_item, entries)
             arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             adapter = arrayAdapter
         }

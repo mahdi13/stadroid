@@ -28,7 +28,6 @@ import org.jetbrains.anko.support.v4.alert
 import java.math.BigDecimal
 import java.util.*
 
-
 class WithdrawViewModel : ObservableViewModel() {
     val cryptocurrencySymbol = MutableLiveData<String>()
 
@@ -85,12 +84,10 @@ class WithdrawViewModel : ObservableViewModel() {
                 )
             } catch (e: Exception) {
                 e.printStackTrace()
-                withdrawError.postValue(Event("Error occurred: ${e.message.toString()}"))
+                withdrawError.postValue(Event("Error occurred: ${e.message}"))
                 // TODO: Describe what is the problem by parsing the error result
             }
         }
-
-
 }
 
 class WithdrawFragment : Fragment() {
@@ -98,7 +95,8 @@ class WithdrawFragment : Fragment() {
     private lateinit var viewModel: WithdrawViewModel
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
@@ -110,7 +108,7 @@ class WithdrawFragment : Fragment() {
         val view = binding.root
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
-        //here data must be an instance of the class MarsDataProvider
+        // here data must be an instance of the class MarsDataProvider
 //        binding.setA(data)
 
         view.submit.onClick {
@@ -143,12 +141,9 @@ class WithdrawFragment : Fragment() {
         viewModel.cryptocurrencySymbol.value = arguments?.getString(ARG_ASSET)!!
         viewModel.notifyChange()
 
-
         return view
 
-
 //        return inflater.inflate(R.layout.withdraw_fragment, container, false)
-
 
 //        viewModel.depositInfo.observe(this, Observer {
 //            if (it == null) return@Observer
@@ -161,7 +156,6 @@ class WithdrawFragment : Fragment() {
 //            }
 //
 //        })
-
     }
 
     private fun validateInputs(): Boolean {
@@ -189,9 +183,7 @@ class WithdrawFragment : Fragment() {
         }
 
         return true
-
     }
-
 }
 
 open class ObservableViewModel : ViewModel(), Observable {

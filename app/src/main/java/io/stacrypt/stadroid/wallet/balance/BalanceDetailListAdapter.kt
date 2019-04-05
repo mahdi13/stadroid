@@ -31,7 +31,6 @@ class BalanceDetailPagedAdapter :
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) =
         (holder as HistoryViewHolder).bindTo(getItem(position))
 
-
     inner class HistoryViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
         LayoutInflater.from(parent.context)
             .inflate(R.layout.row_balance_detail_history, parent, false)
@@ -162,7 +161,6 @@ class BalanceDetailPagedAdapter :
                         iconView,
                         ColorStateList.valueOf(itemView.resources.getColor(R.color.real_green))
                     )
-
                 }
                 item.business?.toLowerCase().equals("withdraw") -> {
                     titleView.textResource = R.string.withdraw
@@ -194,7 +192,6 @@ class BalanceDetailPagedAdapter :
                     )
                 }
             }
-
         }
 
         private fun clear() {
@@ -203,7 +200,6 @@ class BalanceDetailPagedAdapter :
             amountView.text = ""
             valueView.text = ""
         }
-
     }
 
     companion object {
@@ -213,10 +209,6 @@ class BalanceDetailPagedAdapter :
 
             override fun areItemsTheSame(oldItem: BalanceHistory, newItem: BalanceHistory): Boolean =
                 oldItem.time == newItem.time
-
         }
-
     }
-
-
 }

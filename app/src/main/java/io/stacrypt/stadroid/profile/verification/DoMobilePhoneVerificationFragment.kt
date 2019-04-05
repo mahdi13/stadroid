@@ -1,12 +1,10 @@
 package io.stacrypt.stadroid.profile.verification
 
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Event
 
 import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.data.stemeraldApiClient
@@ -29,7 +27,8 @@ private const val ARG_PARAM2 = "param2"
 class DoMobilePhoneVerificationFragment : Fragment() {
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
@@ -59,7 +58,6 @@ class DoMobilePhoneVerificationFragment : Fragment() {
                     view.longSnackbar("Error occurred!")
                 }
             }
-
         }
     }
 }

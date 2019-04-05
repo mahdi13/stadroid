@@ -10,7 +10,6 @@ import android.util.Log
 import android.view.View
 import com.github.mikephil.charting.listener.ChartTouchListener
 
-
 class CoupleChartGestureListener(val srcChart: Chart<*>, private val dstCharts: Array<Chart<*>>) : OnChartGestureListener {
     override fun onChartGestureEnd(me: MotionEvent?, lastPerformedGesture: ChartTouchListener.ChartGesture?) {
 //        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
@@ -36,14 +35,13 @@ class CoupleChartGestureListener(val srcChart: Chart<*>, private val dstCharts: 
 //        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-
     override fun onChartScale(me: MotionEvent, scaleX: Float, scaleY: Float) {
-        //Log.d(TAG, "onChartScale " + scaleX + "/" + scaleY + " X=" + me.getX() + "Y=" + me.getY());
+        // Log.d(TAG, "onChartScale " + scaleX + "/" + scaleY + " X=" + me.getX() + "Y=" + me.getY());
         syncCharts()
     }
 
     override fun onChartTranslate(me: MotionEvent, dX: Float, dY: Float) {
-        Log.d("salam", "onChartTranslate " + dX + "/" + dY + " X=" + me.getX() + "Y=" + me.getY());
+        Log.d("salam", "onChartTranslate " + dX + "/" + dY + " X=" + me.getX() + "Y=" + me.getY())
         syncCharts()
     }
 
@@ -68,5 +66,4 @@ class CoupleChartGestureListener(val srcChart: Chart<*>, private val dstCharts: 
             }
         }
     }
-
 }

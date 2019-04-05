@@ -12,10 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.data.Book
 import io.stacrypt.stadroid.data.BookResponse
-import io.stacrypt.stadroid.data.Market
 import io.stacrypt.stadroid.market.MarketViewModel
 import kotlin.math.max
-
 
 class MarketBookFragment : Fragment() {
 
@@ -23,7 +21,8 @@ class MarketBookFragment : Fragment() {
     private lateinit var adapter: MarketBookRecyclerViewAdapter
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val recyclerView = inflater.inflate(R.layout.fragment_market_book_list, container, false) as RecyclerView
@@ -52,6 +51,5 @@ class MarketBookFragment : Fragment() {
                 adapter.items = items
                 adapter.notifyDataSetChanged()
             })
-
     }
 }

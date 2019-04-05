@@ -1,4 +1,4 @@
-    package io.stacrypt.stadroid.profile.banking
+ package io.stacrypt.stadroid.profile.banking
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -17,7 +17,6 @@ class BankCardPagedAdapter : PagedListAdapter<BankCard, BankCardPagedAdapter.Vie
     override fun onBindViewHolder(holder: ViewHolder, position: Int) =
         (holder as ViewHolder).bindTo(getItem(position))
 
-
     inner class ViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
         LayoutInflater.from(parent.context)
             .inflate(R.layout.row_bank_card, parent, false)
@@ -29,10 +28,9 @@ class BankCardPagedAdapter : PagedListAdapter<BankCard, BankCardPagedAdapter.Vie
         fun bindTo(bankCard: BankCard?) {
             if (bankCard == null) return clear()
 
-            titleView.text = "Card Number ${bankCard.id.toString()}"
+            titleView.text = "Card Number ${bankCard.id}"
             numberView.text = bankCard.pan
             holderView.text = bankCard.holder
-
         }
 
         private fun clear() {
@@ -40,7 +38,6 @@ class BankCardPagedAdapter : PagedListAdapter<BankCard, BankCardPagedAdapter.Vie
             numberView.text = ""
             holderView.text = ""
         }
-
     }
 
     companion object {
@@ -50,10 +47,6 @@ class BankCardPagedAdapter : PagedListAdapter<BankCard, BankCardPagedAdapter.Vie
 
             override fun areItemsTheSame(oldItem: BankCard, newItem: BankCard): Boolean =
                 oldItem.id == newItem.id
-
         }
-
     }
-
-
 }

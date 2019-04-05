@@ -19,7 +19,8 @@ class MarketDealsFragment : Fragment() {
     private lateinit var adapter: MarketDealsRecyclerViewAdapter
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val rootView = inflater.inflate(R.layout.fragment_market_deals_list, container, false)
@@ -40,6 +41,5 @@ class MarketDealsFragment : Fragment() {
                 adapter.items = deals
                 adapter.notifyDataSetChanged()
             })
-
     }
 }

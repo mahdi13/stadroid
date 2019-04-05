@@ -119,6 +119,4 @@ object BankingRepository {
         }
         return liveData
     }
-
 }
-

@@ -10,7 +10,6 @@ import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.data.Market
 import kotlinx.android.synthetic.main.backdrop_market_row.view.*
 
-
 class MarketListRecyclerViewAdapter(
     var items: List<Market>,
     val onMarketSelectedListener: (String) -> Unit

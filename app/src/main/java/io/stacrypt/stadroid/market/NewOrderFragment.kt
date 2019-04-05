@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.*
-import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 
@@ -34,7 +33,8 @@ class NewOrderFragment : Fragment() {
     private var autoIncreaseDecreaseJob: Job? = null
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val rootView = inflater.inflate(R.layout.new_order_fragment, container, false)
@@ -74,7 +74,6 @@ class NewOrderFragment : Fragment() {
             if (it == "market") viewModel.newOrderPrice.postValue(viewModel.last.value?.price)
 //            if (it == "limit") rootView.price.setText(viewModel.newOrderPrice.value?.format10Digit())
 //            else rootView.price.setText(viewModel.last.value?.price?.format10Digit())
-
         })
 
         rootView.price_up.setOnClickListener {
@@ -208,7 +207,6 @@ class NewOrderFragment : Fragment() {
                                 progressDialog.dismiss()
                             }
                         }
-
                     }
                     negativeButton("Cancel") {}
                 }.show()
@@ -234,13 +232,11 @@ class NewOrderFragment : Fragment() {
             else this
         }
 
-
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
         }
 
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
         }
-
     }
 
     private val amountTextWatcher = object : TextWatcher {
@@ -251,14 +247,11 @@ class NewOrderFragment : Fragment() {
 
         private fun buildFixedString(s: Editable?): CharSequence? = s?.trim()
 
-
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
         }
 
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
         }
     }
-
 }
-
 

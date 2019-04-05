@@ -1,18 +1,16 @@
 apply plugin: 'com.android.application'
 
-apply plugin: 'kotlin-kapt'
-
 apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
 
 apply plugin: "androidx.navigation.safeargs"
 
 apply plugin: 'com.google.gms.google-services'
 
 apply plugin: 'io.fabric'
-
-apply from: "../ktlint.gradle"
 
 android {
     signingConfigs {
@@ -224,4 +222,4 @@ dependencies {
     androidTestImplementation 'android.arch.work:work-testing:1.0.0'
 }
 
-preBuild.dependsOn(ktlint)
+//preBuild.dependsOn(ktlint)

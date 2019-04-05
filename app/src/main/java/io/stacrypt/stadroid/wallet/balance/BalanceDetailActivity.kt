@@ -13,7 +13,6 @@ import io.stacrypt.stadroid.wallet.WithdrawFragment
 import io.stacrypt.stadroid.wallet.deposit.DepositFragment
 import org.jetbrains.anko.support.v4.withArguments
 
-
 class BalanceDetailActivity : AppCompatActivity() {
 
     private lateinit var viewModel: BalanceDetailViewModel
@@ -43,7 +42,6 @@ class BalanceDetailActivity : AppCompatActivity() {
         viewModel.currency.observe(this, Observer { })
 
         viewModel.assetName.value = intent.getStringExtra(ARG_ASSET)
-
     }
 
     fun showWithdraw(symbol: String) {
@@ -61,7 +59,6 @@ class BalanceDetailActivity : AppCompatActivity() {
             else -> null
         }
 
-
         if (fragment != null)
             supportFragmentManager.beginTransaction()
                 .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
@@ -74,7 +71,6 @@ class BalanceDetailActivity : AppCompatActivity() {
                 )
                 .addToBackStack("$symbol-withdraw")
                 .commit()
-
     }
 
     fun showDeposit(symbol: String) {
@@ -109,7 +105,6 @@ class BalanceDetailActivity : AppCompatActivity() {
         if (supportFragmentManager.backStackEntryCount > 0) supportFragmentManager.popBackStack()
         else super.onBackPressed()
 
-
     companion object {
         val ARG_ASSET = "asset"
         val ARG_ACTION = "action"
@@ -123,5 +118,4 @@ class BalanceDetailActivity : AppCompatActivity() {
                 ARG_ACTION, action
             )!!
     }
-
 }

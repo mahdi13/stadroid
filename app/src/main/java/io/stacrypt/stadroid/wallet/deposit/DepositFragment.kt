@@ -18,17 +18,16 @@ import kotlinx.android.synthetic.main.deposit_fragment.view.*
 import net.glxn.qrgen.android.QRCode
 import org.jetbrains.anko.design.snackbar
 
-
 class DepositFragment : Fragment() {
 
     private lateinit var viewModel: DepositViewModel
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.deposit_fragment, container, false)
-
 
 //        viewModel.depositInfo.observe(this, Observer {
 //            if (it == null) return@Observer
@@ -41,7 +40,6 @@ class DepositFragment : Fragment() {
 //            }
 //
 //        })
-
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -90,7 +88,6 @@ class DepositFragment : Fragment() {
                     negativeButton(R.string.cancel)
                 }
             }
-
         })
 
         viewModel.currency.observe(this, Observer {
@@ -107,7 +104,5 @@ class DepositFragment : Fragment() {
         view?.tag_copy?.setOnClickListener {
             activity?.copyToClipboard("tag", view?.tag_view?.text.toString())
         }
-
-
     }
 }

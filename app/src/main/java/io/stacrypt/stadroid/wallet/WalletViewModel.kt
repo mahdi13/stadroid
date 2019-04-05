@@ -5,6 +5,4 @@ import io.stacrypt.stadroid.wallet.data.WalletRepository
 
 class WalletViewModel : ViewModel() {
     val balances = WalletRepository.getBalanceOverview()
-
-
 }

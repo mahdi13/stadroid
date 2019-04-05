@@ -58,14 +58,14 @@ object sessionManager {
         JwtPayload::class.java
     )
 
-    val roles: List<String> get () = getPayload().roles
+    val roles: List<String> get() = getPayload().roles
 
     val isAdmin: Boolean get() = roles.contains(ADMIN)
     val isClient: Boolean get() = isSemiTrustedClient or roles.contains(CLIENT)
     val isSemiTrustedClient: Boolean get() = isTrustedClient or roles.contains(SEMITRUSTED_CLIENT)
     val isTrustedClient: Boolean get() = roles.contains(TRUSTED_CLIENT)
 
-    fun bearerToken(): String? = jwtToken.run { "Bearer ${this}" }
+    fun bearerToken(): String? = jwtToken.run { "Bearer $this" }
 }
 
 data class JwtPayload(val sessionId: String, val memberId: String, val email: String, val roles: List<String>)

@@ -17,12 +17,12 @@ class VerificationProcessFragment : BaseSettingFragment() {
     private lateinit var viewModel: VerificationProcessViewModel
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.verification_process_fragment, container, false)
     }
-
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -44,7 +44,7 @@ class VerificationProcessFragment : BaseSettingFragment() {
                         stepper.currentStep = 1
                         childFragmentManager.beginTransaction()
                             .replace(R.id.verification_container, MobilePhoneVerificationFragment()).commitNow()
-                    }/* else if(evidence.fixedPhone == null) {
+                    } /* else if(evidence.fixedPhone == null) {
                         stepper.currentStep = 2
                         childFragmentManager.beginTransaction()
                             .replace(R.id.verification_container, MobilePhoneVerificationFragment()).commitNow()
@@ -85,19 +85,16 @@ class VerificationProcessFragment : BaseSettingFragment() {
                         stepper.currentStep = 2
                         childFragmentManager.beginTransaction()
                             .replace(R.id.verification_container, EvidenceFormFragment()).commitNow()
-
                     } else if (!it.isEvidenceVerified) {
                         // FIXME: Not a great condition
                         stepper.currentStep = 3
                         childFragmentManager.beginTransaction()
                             .replace(R.id.verification_container, VerificationPendingFragment()).commitNow()
-
-                    } else{
+                    } else {
                         stepper.currentStep = 3
                         stepper.setShowDoneIcon(true)
 //                        childFragmentManager.beginTransaction()
 //                            .replace(R.id.verification_container, EvidenceFormFragment()).commitNow()
-
                     }
                 })
             }
@@ -132,7 +129,5 @@ class VerificationProcessFragment : BaseSettingFragment() {
                     ).commit()
             }
         })
-
     }
-
 }

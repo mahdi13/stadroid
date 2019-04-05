@@ -17,12 +17,11 @@ import com.franmontiel.persistentcookiejar.PersistentCookieJar
 import io.stacrypt.stadroid.application
 import kotlin.collections.ArrayList
 
-
-//const val STEMERALD_API_URL = "http://localhost:8070"
+// const val STEMERALD_API_URL = "http://localhost:8070"
 const val MOCK_STEMERALD_API_URL = "https://my.api.mockaroo.com/"
-//const val STAWALLET_API_URL = "http://10.0.2.2:7071/apiv2/"
-//const val STEMERALD_API_URL = "http://10.0.2.2:7071/apiv2/"
-//const val STEMERALD_API_URL = "http://stemerald.stacrypt.io/apiv2/"
+// const val STAWALLET_API_URL = "http://10.0.2.2:7071/apiv2/"
+// const val STEMERALD_API_URL = "http://10.0.2.2:7071/apiv2/"
+// const val STEMERALD_API_URL = "http://stemerald.stacrypt.io/apiv2/"
 const val STEMERALD_API_URL = "http://116.203.119.119/apiv2/"
 val EMERALD_API_URL = Base64
     .decode("aHR0cH" + "M6Ly9iZXRhLn" + "RyYWRlb2ZmLnRy" + "YWRlL2FwaXYxLw", Base64.DEFAULT)!!
@@ -30,8 +29,8 @@ val EMERALD_API_URL = Base64
 
 data class BookResponse(val buys: List<Book>, val sells: List<Book>)
 
-//@Suppress("DeferredIsResult")
-//interface StawalletApiClient {
+// @Suppress("DeferredIsResult")
+// interface StawalletApiClient {
 //    @HTTP(method = "OVERVIEW", path = "balances", hasBody = true)
 //    fun balanceOverview(
 //        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: ""
@@ -44,7 +43,7 @@ data class BookResponse(val buys: List<Book>, val sells: List<Book>)
 //        @Query("page") page: Int = 0
 //    ): Deferred<ArrayList<BalanceHistory>>
 //
-//}
+// }
 
 @Suppress("DeferredIsResult")
 interface StemeraldV2ApiClient {
@@ -271,7 +270,6 @@ interface StemeraldV2ApiClient {
         @Field("password") password: String
     ): Deferred<User>
 
-
     /**
      * Email verification
      */
@@ -329,7 +327,6 @@ interface StemeraldV2ApiClient {
         @Query("skip") skip: Int = 0,
         @Query("take") take: Int = 20
     ): Deferred<List<BankAccount>>
-
 
     @FormUrlEncoded
     @HTTP(method = "ADD", path = "banking/accounts", hasBody = true)
@@ -440,7 +437,6 @@ interface StemeraldV2ApiClient {
         @Path("sessionId") sessionId: String
     ): Deferred<Unit>
 
-
     /**
      * Notifications
      */
@@ -462,7 +458,6 @@ interface StemeraldV2ApiClient {
         @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: ""
     ): Deferred<NotificationCount>
 
-
     /**
      * Territories
      */
@@ -474,11 +469,10 @@ interface StemeraldV2ApiClient {
 
     @HTTP(method = "GET", path = "territories/cities", hasBody = false)
     fun getCities(@Query("stateId") stateId: Int): Deferred<List<City>>
-
 }
 
-//@Suppress("DeferredIsResult")
-//interface MockStemeraldApiClient {
+// @Suppress("DeferredIsResult")
+// interface MockStemeraldApiClient {
 //    @GET("assets")
 //    fun assetList(): Deferred<ArrayList<Asset>>
 //
@@ -514,13 +508,13 @@ interface StemeraldV2ApiClient {
 //
 //    @GET("myDeals/{market}?key=98063e30")
 //    fun mine(@Path("market") market: String): Deferred<ArrayList<MyDeal>>
-//}
+// }
 
-//@Suppress("DeferredIsResult")
-//interface EmeraldApiClient {
+// @Suppress("DeferredIsResult")
+// interface EmeraldApiClient {
 //
 //
-//}
+// }
 
 val cookieJar by lazy { PersistentCookieJar(SetCookieCache(), SharedPrefsCookiePersistor(application)) }
 
@@ -548,13 +542,12 @@ val okHttpClient by lazy {
                 sessionManager.logout()
             }
             return@addInterceptor response
-
         }
         .addInterceptor(HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY })
         .build()
 }
 
-//var stemeraldApiClient = Retrofit.Builder()
+// var stemeraldApiClient = Retrofit.Builder()
 //    .baseUrl(STEMERALD_API_URL)
 //    .addCallAdapterFactory(CoroutineCallAdapterFactory())
 //    .addConverterFactory(GsonConverterFactory.create())
@@ -570,7 +563,7 @@ var stemeraldApiClient = Retrofit.Builder()
     .build()
     .create(StemeraldV2ApiClient::class.java)
 
-//var emeraldApiClient = Retrofit.Builder()
+// var emeraldApiClient = Retrofit.Builder()
 //    .baseUrl(EMERALD_API_URL)
 //    .addCallAdapterFactory(CoroutineCallAdapterFactory())
 //    .addConverterFactory(GsonConverterFactory.create())
@@ -578,7 +571,7 @@ var stemeraldApiClient = Retrofit.Builder()
 //    .build()
 //    .create(EmeraldApiClient::class.java)
 
-//var mockStemeraldApiClient = Retrofit.Builder()
+// var mockStemeraldApiClient = Retrofit.Builder()
 //    .baseUrl(MOCK_STEMERALD_API_URL)
 //    .addCallAdapterFactory(CoroutineCallAdapterFactory())
 //    .addConverterFactory(GsonConverterFactory.create())
@@ -586,8 +579,7 @@ var stemeraldApiClient = Retrofit.Builder()
 //    .build()
 //    .create(MockStemeraldApiClient::class.java)
 
-
-//class TokenAuthenticator : Authenticator {
+// class TokenAuthenticator : Authenticator {
 //    override fun authenticate(route: Route?, response: Response): Request? {
 //        if (response.header("X-New-JWT-Token") == 200) {
 //
@@ -613,4 +605,4 @@ var stemeraldApiClient = Retrofit.Builder()
 //    fun authenticate(route: Route, response: Response<*>): Request? {
 //
 //    }
-//}
+// }

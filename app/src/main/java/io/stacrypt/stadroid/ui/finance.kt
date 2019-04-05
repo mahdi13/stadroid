@@ -74,12 +74,10 @@ fun BigDecimal.formatScaledMinimal(currency: Currency, unitIncluded: Boolean = f
          * IRR
          */
         currency.symbol.endsWith("IRR") -> {
-
         }
     }
     return output ?: ""
 }
-
 
 fun BigDecimal.formatChangePercentFrom(base: BigDecimal) = changePercentFrom(base).formatPercent()
 
@@ -96,5 +94,4 @@ else
 fun BigDecimal.formatPercent(digits: Int = 2) = "${this.signSymbol()} ${this.format(digits)} %"
 fun BigDecimal.signSymbol() = if (isPositive()) "+" else "-"
 fun BigDecimal.isPositive(): Boolean = this >= 0.toBigDecimal()
-
 
