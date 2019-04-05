@@ -121,6 +121,11 @@ class MainActivity : AppCompatActivity(),
         notifications.setOnClickListener { startActivity<NotificationListActivity>() }
 
     }
+
+    override fun onResume() {
+        super.onResume()
+        // TODO: Refresh notificationsCount
+    }
 }
 
 
