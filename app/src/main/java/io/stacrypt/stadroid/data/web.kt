@@ -447,8 +447,8 @@ interface StemeraldV2ApiClient {
     @HTTP(method = "GET", path = "notifications", hasBody = false)
     fun getNotifications(
         @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
-        @Query("offset") offset: Int,
-        @Query("limit") limit: Int
+        @Query("skip") offset: Int,
+        @Query("take") limit: Int
     ): Deferred<List<Notification>>
 
     @HTTP(method = "READ", path = "notifications/{notificationId}", hasBody = true)

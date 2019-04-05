@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.notification_detail.view.*
 class NotificationDetailFragment : Fragment() {
 
     /**
-     * The dummy content this fragment is presenting.
+     * The content this fragment is presenting.
      */
     private var notification: Notification? = null
 

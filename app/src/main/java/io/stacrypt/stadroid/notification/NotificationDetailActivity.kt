@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import io.stacrypt.stadroid.R
+import kotlinx.android.synthetic.main.activity_notification_detail.*
 
 /**
  * An activity representing a single Notification detail screen. This
@@ -19,7 +20,7 @@ class NotificationDetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_notification_detail)
 
         // Show the Up button in the action bar.
-        actionBar?.setDisplayHomeAsUpEnabled(true)
+        back.setOnClickListener { finish() }
 
         // savedInstanceState is non-null when there is fragment state
         // saved from previous configurations of this activity
@@ -44,7 +45,7 @@ class NotificationDetailActivity : AppCompatActivity() {
 
             supportFragmentManager.beginTransaction()
                 .add(R.id.notification_detail_container, fragment)
-                .commit()
+                .commitNow()
         }
     }
 

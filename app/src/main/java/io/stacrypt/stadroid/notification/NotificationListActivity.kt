@@ -4,7 +4,12 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NavUtils
 import android.view.MenuItem
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.paging.PagedList
 import io.stacrypt.stadroid.R
+import io.stacrypt.stadroid.data.Notification
+import io.stacrypt.stadroid.wallet.balance.BalanceDetailViewModel
 
 import kotlinx.android.synthetic.main.activity_notification_list.*
 
@@ -22,13 +27,15 @@ class NotificationListActivity : AppCompatActivity() {
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
      * device.
      */
+    private lateinit var viewModel: NotificationViewModel
+    private lateinit var adapter: NotificationPagedAdapter
     private var twoPane: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_notification_list)
         // Show the Up button in the action bar.
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        back.setOnClickListener { finish() }
 
         if (notification_detail_container != null) {
             // The detail container view will be present only in the
@@ -38,7 +45,16 @@ class NotificationListActivity : AppCompatActivity() {
             twoPane = true
         }
 
-        notification_list.adapter = NotificationPagedAdapter(this, twoPane)
+        viewModel = ViewModelProviders.of(this).get(NotificationViewModel::class.java)
+
+        adapter = NotificationPagedAdapter(this, twoPane)
+        notification_list.adapter = adapter
+
+        viewModel.notifications.observe(this, Observer<PagedList<Notification>> {
+            adapter.submitList(it)
+        })
+
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem) =

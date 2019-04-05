@@ -16,30 +16,16 @@
             android:orientation="vertical"
             >
 
-        <LinearLayout
-                android:layout_width="match_parent"
+
+        <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_margin="@dimen/text_margin"
+                tools:text="Title"
+                android:textStyle="bold"
+                android:textAppearance="?attr/textAppearanceListItem"/>
 
-            <TextView
-                    android:id="@+id/title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/text_margin"
-                    tools:text="Title"
-                    android:textStyle="bold"
-                    android:textAppearance="?attr/textAppearanceListItem"/>
-
-            <TextView
-                    android:id="@+id/date"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/text_margin"
-                    tools:text="11-03 15:45"
-                    android:gravity="end|bottom"
-                    android:layout_gravity="bottom"/>
-
-        </LinearLayout>
 
         <TextView
                 android:id="@+id/description"
@@ -49,6 +35,18 @@
                 tools:text="Description"
                 android:textColor="@color/colorPrimaryLightLight"
                 android:textAppearance="?attr/textAppearanceListItem"/>
+
+        <TextView
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                android:id="@+id/date"
+                android:textColor="@color/colorGrayText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:minWidth="150dp"
+                tools:text="11-03 15:45"
+                android:gravity="end|bottom"
+                android:layout_gravity="bottom"/>
 
 
     </LinearLayout>
