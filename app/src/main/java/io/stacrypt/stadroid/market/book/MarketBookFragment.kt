@@ -27,7 +27,9 @@ class MarketBookFragment : Fragment() {
     ): View? {
         val recyclerView = inflater.inflate(R.layout.fragment_market_book_list, container, false) as RecyclerView
 
-        adapter = MarketBookRecyclerViewAdapter(ArrayList())
+        adapter = MarketBookRecyclerViewAdapter(ArrayList()) { book ->
+            book?.price?.let { viewModel.newOrderPrice.postValue(book.price) }
+        }
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = adapter
 

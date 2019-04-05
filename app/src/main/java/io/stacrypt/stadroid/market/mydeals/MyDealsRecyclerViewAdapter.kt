@@ -13,7 +13,8 @@ import kotlinx.android.synthetic.main.fragment_my_deals.view.*
 import org.jetbrains.anko.textColorResource
 
 class MyDealsRecyclerViewAdapter(
-    var items: List<MyDeal>
+    var items: List<MyDeal>,
+    var onClickListener: (MyDeal) -> Unit
 ) : RecyclerView.Adapter<MyDealsRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -34,11 +35,13 @@ class MyDealsRecyclerViewAdapter(
             holder.amountView.textColorResource = R.color.real_green
         else
             holder.amountView.textColorResource = R.color.real_red
+
+        holder.mView.setOnClickListener { onClickListener(item) }
     }
 
     override fun getItemCount(): Int = items.size
 
-    inner class ViewHolder(mView: View) : RecyclerView.ViewHolder(mView) {
+    inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
         val priceView: TextView = mView.price
         val amountView: TextView = mView.amount
         val valueView: TextView = mView.value

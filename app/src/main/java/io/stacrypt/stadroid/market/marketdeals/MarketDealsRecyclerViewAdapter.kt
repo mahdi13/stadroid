@@ -16,7 +16,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class MarketDealsRecyclerViewAdapter(
-    var items: List<MarketDeal>
+    var items: List<MarketDeal>,
+    var onClickListener: (MarketDeal) -> Unit
 ) : RecyclerView.Adapter<MarketDealsRecyclerViewAdapter.ViewHolder>() {
 
     private val sdf = SimpleDateFormat("hh:mm", Locale.ENGLISH)
@@ -43,6 +44,8 @@ class MarketDealsRecyclerViewAdapter(
         } else {
             holder.changeView.textColorResource = R.color.real_green
         }
+
+        holder.mView.setOnClickListener { onClickListener(item) }
     }
 
     override fun getItemCount(): Int = items.size

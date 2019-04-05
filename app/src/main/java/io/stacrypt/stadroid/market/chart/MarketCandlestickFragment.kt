@@ -20,6 +20,8 @@ import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.market.MarketViewModel
 import com.github.mikephil.charting.charts.CombinedChart.DrawOrder
 import io.stacrypt.stadroid.ui.*
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener
+import com.github.mikephil.charting.highlight.Highlight
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -252,6 +254,15 @@ class MarketCandlestickFragment : Fragment() {
 
         chart.setDrawBorders(false)
         chart.setBorderWidth(0F)
+
+        chart.setOnChartValueSelectedListener(object : OnChartValueSelectedListener {
+            override fun onValueSelected(e: Entry, h: Highlight) {
+                viewModel.newOrderPrice.postValue(e.y.toBigDecimal())
+            }
+
+            override fun onNothingSelected() {
+            }
+        })
 
 //        chart.setBorderColor(resources.getColor(R.color.colorLightGray))
 

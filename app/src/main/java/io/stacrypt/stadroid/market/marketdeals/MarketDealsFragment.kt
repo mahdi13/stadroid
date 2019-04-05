@@ -25,7 +25,9 @@ class MarketDealsFragment : Fragment() {
     ): View? {
         val rootView = inflater.inflate(R.layout.fragment_market_deals_list, container, false)
 
-        adapter = MarketDealsRecyclerViewAdapter(ArrayList())
+        adapter = MarketDealsRecyclerViewAdapter(ArrayList()) {
+            viewModel.newOrderPrice.postValue(it.price)
+        }
         rootView.list.layoutManager = LinearLayoutManager(context)
         rootView.list.adapter = adapter
 

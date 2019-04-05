@@ -53,6 +53,12 @@ class MarketSummaryFragment : Fragment() {
             rootView?.high?.text = it?.high?.format10Digit()
             rootView?.low?.text = it?.low?.format10Digit()
             rootView?.close?.text = it?.close?.format10Digit()
+
+            rootView?.open?.tag = it?.open
+            rootView?.high?.tag = it?.high
+            rootView?.low?.tag = it?.low
+            rootView?.close?.tag = it?.close
+
             rootView?.cap_24?.text =
 //                it?.volume?.format10Digit() + " " + (viewModel?.marketName?.value?.split("_")?.get(1) ?: "")
                 "24h. ${it.volume.format10Digit()}"
@@ -84,6 +90,7 @@ class MarketSummaryFragment : Fragment() {
 
         viewModel.last.observe(this, Observer {
             rootView?.price?.text = "Last: ${it?.price?.format10Digit()}"
+            rootView?.price?.tag = it?.price
 
 //            if (viewModel.status.value?.volume != null && it?.price != null) {
 //                rootView?.volume_value?.text =
@@ -96,6 +103,12 @@ class MarketSummaryFragment : Fragment() {
         viewModel.summary.observe(this, Observer {
             market_cap.text = "cap. ${it?.marketCap?.format10Digit()}"
         })
+
+        listOf(rootView?.open, rootView?.close, rootView?.high, rootView?.low, rootView?.price).forEach {
+            it?.setOnClickListener { v ->
+                (v.tag as BigDecimal?)?.let { price -> viewModel.newOrderPrice.postValue(price) }
+            }
+        }
 
         GlobalScope.launch(Dispatchers.Main) {
             while (this.isActive) {

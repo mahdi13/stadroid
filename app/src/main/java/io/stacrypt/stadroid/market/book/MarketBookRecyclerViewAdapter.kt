@@ -4,6 +4,7 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.TextView
 import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.data.Book
@@ -13,7 +14,8 @@ import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
 import io.stacrypt.stadroid.ui.format10Digit
 
 class MarketBookRecyclerViewAdapter(
-    var items: List<Pair<Book?, Book?>>
+    var items: List<Pair<Book?, Book?>>,
+    var onItemClickListener: (Book?) -> Unit
 ) : RecyclerView.Adapter<MarketBookRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -36,6 +38,9 @@ class MarketBookRecyclerViewAdapter(
 
         holder.rightProgressView.max = items.map { it.second?.amount?.toFloat() ?: 0F }.max()!!
         holder.rightProgressView.progress = rightItem?.amount?.toFloat() ?: 0F
+
+        holder.leftOverlay.setOnClickListener { onItemClickListener(leftItem) }
+        holder.rightOverlay.setOnClickListener { onItemClickListener(rightItem) }
 
 //        val layerDrawable = holder.containerView.resources.getDrawable(R.drawable.test_shape) as LayerDrawable
 //        val leftLayer = layerDrawable.findDrawableByLayerId(R.id.left) as Drawable
@@ -71,5 +76,11 @@ class MarketBookRecyclerViewAdapter(
         val leftAmountView: TextView = mView.amount_left
         val rightPriceView: TextView = mView.price_right
         val rightAmountView: TextView = mView.amount_right
+        val leftOverlay: View = mView.left_overlay
+        val rightOverlay: View = mView.right_overlay
+
+        init {
+            leftOverlay.setOnClickListener { }
+        }
     }
 }

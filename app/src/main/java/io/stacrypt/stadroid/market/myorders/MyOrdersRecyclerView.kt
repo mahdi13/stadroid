@@ -12,14 +12,14 @@ import io.stacrypt.stadroid.data.Order
 import io.stacrypt.stadroid.ui.format10Digit
 import io.stacrypt.stadroid.ui.percentFrom
 import kotlinx.android.synthetic.main.fragment_my_orders.view.*
-import kotlinx.android.synthetic.main.notification_list_content.view.*
 import org.jetbrains.anko.textColorResource
 import java.text.SimpleDateFormat
 import java.util.*
 
 class MyOrdersRecyclerView(
     var items: List<Order>,
-    val onCancelClicked: (Order) -> Unit
+    val onCancelClicked: (Order) -> Unit,
+    var onClickListener: (Order) -> Unit
 ) : RecyclerView.Adapter<MyOrdersRecyclerView.ViewHolder>() {
 
     private val sdfDate = SimpleDateFormat("dd-MM", Locale.ENGLISH)
@@ -37,8 +37,8 @@ class MyOrdersRecyclerView(
         holder.amountView.text = item.amount.format10Digit() + " " + item.market.split("_")[1]
         holder.filledView.text = (item.filledStock ?: 0.toBigDecimal()).format10Digit() + " filled"
         holder.valueView.text = "≃ " +
-                (item.price?.let { (item.price * item.amount).format10Digit() + " " + item.market.split("_")[0] }
-                    ?: "NA")
+            (item.price?.let { (item.price * item.amount).format10Digit() + " " + item.market.split("_")[0] }
+                ?: "NA")
 
         holder.progressView.progress = item.filledStock?.percentFrom(item.amount)?.toFloat() ?: 0f
         when {
@@ -83,11 +83,13 @@ class MyOrdersRecyclerView(
 //        } else {
 //            holder.roleView.text = "Taker"
 //        }
+
+        holder.mView.setOnClickListener { onClickListener(item) }
     }
 
     override fun getItemCount(): Int = items.size
 
-    inner class ViewHolder(mView: View) : RecyclerView.ViewHolder(mView) {
+    inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
         val priceView: TextView = mView.price
         val amountView: TextView = mView.amount
         val filledView: TextView = mView.filled
