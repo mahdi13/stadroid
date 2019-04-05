@@ -15,7 +15,10 @@ import com.google.gson.Gson
 import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.data.Notification
 import io.stacrypt.stadroid.data.format
+import io.stacrypt.stadroid.data.stemeraldApiClient
 import kotlinx.android.synthetic.main.notification_list_content.view.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class NotificationPagedAdapter(activity: NotificationListActivity, twoPane: Boolean) :
     PagedListAdapter<Notification, NotificationPagedAdapter.ViewHolder>(ITEM_COMPARATOR) {
@@ -25,6 +28,8 @@ class NotificationPagedAdapter(activity: NotificationListActivity, twoPane: Bool
     init {
         onClickListener = View.OnClickListener { v ->
             val item = v.tag as Notification
+            GlobalScope.launch { stemeraldApiClient.readNotification(notificationId = item.id).await() }
+
             if (twoPane) {
                 val fragment = NotificationDetailFragment().apply {
                     arguments = Bundle().apply {
@@ -72,7 +77,7 @@ class NotificationPagedAdapter(activity: NotificationListActivity, twoPane: Bool
             cardView.backgroundTintList = ContextCompat.getColorStateList(
                 cardView.context,
                 when {
-                    notification.isRead -> R.color.colorPrimary
+                    notification.isRead -> R.color.colorPrimaryDark
                     else -> R.color.colorPrimary
                 }
             )

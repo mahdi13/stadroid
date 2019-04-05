@@ -151,7 +151,8 @@ class NewOrderFragment : Fragment() {
         }
 
         private fun buildFixedString(s: Editable?): CharSequence? = s?.trim()?.run {
-            if (viewModel.newOrderType.value == "market") "≃ ${removePrefix("≃")}"
+//            if (viewModel.newOrderType.value == "market") "≃ ${removePrefix("≃")}"
+            if (viewModel.newOrderType.value == "market") this
             else this
         }
 
