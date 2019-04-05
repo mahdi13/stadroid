@@ -457,7 +457,7 @@ interface StemeraldV2ApiClient {
         @Path("notificationId") notificationId: Int
     ): Deferred<Notification>
 
-    @HTTP(method = "COUNT", path = "sessions/", hasBody = true)
+    @HTTP(method = "COUNT", path = "notifications", hasBody = true)
     fun countNotifications(
         @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: ""
     ): Deferred<NotificationCount>

@@ -1,9 +1,13 @@
 package io.stacrypt.stadroid
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import io.stacrypt.stadroid.data.StemeraldDatabase
 import io.stacrypt.stadroid.data.stemeraldDatabase
 import io.stacrypt.stadroid.profile.ProfileFragment
@@ -20,6 +24,7 @@ class MainActivity : AppCompatActivity(),
     LoginFragment.OnLoginInteractionListener,
     ProfileFragment.OnProfileInteractionListener {
 
+    private lateinit var viewModel: MainViewModel
 //    private lateinit var marketBackdropNavigationHandler: MarketBackdropNavigationHandler
 
     override fun onLoggedOut() {
@@ -66,6 +71,16 @@ class MainActivity : AppCompatActivity(),
             applicationContext,
             StemeraldDatabase::class.java, "stemerald_db"
         ).build()
+
+        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+
+        viewModel.notificationsCount.observe(this, Observer {
+            val unreadNotifications = it?.unread ?: 0
+
+            notification_badge.visibility = View.VISIBLE
+            if (unreadNotifications == 0) notification_badge.visibility = View.GONE
+            else notification_badge.text = unreadNotifications.toString()
+        })
 
 //        setSupportActionBar(backdrop_toggle)
 //        supportActionBar?.apply {
