@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.market_summary_price.view.*
 import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.ui.format
 import io.stacrypt.stadroid.ui.format10Digit
+import kotlinx.android.synthetic.main.fragment_market_summary.*
 import kotlinx.coroutines.*
 import org.jetbrains.anko.textColorResource
 import java.math.BigDecimal
@@ -53,15 +54,16 @@ class MarketSummaryFragment : Fragment() {
             rootView?.high?.text = it?.high?.format10Digit()
             rootView?.low?.text = it?.low?.format10Digit()
             rootView?.close?.text = it?.close?.format10Digit()
-            rootView?.volume?.text =
-                it?.volume?.format10Digit() + " " + (viewModel?.marketName?.value?.split("_")?.get(1) ?: "")
+            rootView?.cap_24?.text =
+//                it?.volume?.format10Digit() + " " + (viewModel?.marketName?.value?.split("_")?.get(1) ?: "")
+                "24h. ${it.volume.format10Digit()}"
 
-            if (viewModel.last.value?.price != null && it?.volume != null) {
-                rootView?.volume_value?.text =
-                    (it?.volume * viewModel.last.value?.price!!).format10Digit() + " " + (viewModel?.marketName?.value?.split(
-                        "_"
-                    )?.get(0) ?: "")
-            }
+//            if (viewModel.last.value?.price != null && it?.volume != null) {
+//                rootView?.cap_24?.text =
+//                    (it?.volume * viewModel.last.value?.price!!).format10Digit() + " " + (viewModel?.marketName?.value?.split(
+//                        "_"
+//                    )?.get(0) ?: "")
+//            }
 
             if (it.open != BigDecimal(0)) {
                 val precentagePrefix: String
@@ -84,17 +86,17 @@ class MarketSummaryFragment : Fragment() {
         viewModel.last.observe(this, Observer {
             rootView?.price?.text = "Last: ${it?.price?.format10Digit()}"
 
-            if (viewModel.status.value?.volume != null && it?.price != null) {
-                rootView?.volume_value?.text =
-                    (it?.price * viewModel.status.value?.volume!!).format10Digit() + " " + (viewModel?.marketName?.value?.split(
-                        "_"
-                    )?.get(0) ?: "")
-            }
+//            if (viewModel.status.value?.volume != null && it?.price != null) {
+//                rootView?.volume_value?.text =
+//                    (it?.price * viewModel.status.value?.volume!!).format10Digit() + " " + (viewModel?.marketName?.value?.split(
+//                        "_"
+//                    )?.get(0) ?: "")
+//            }
 
         })
 
-        viewModel.status.observe(this, Observer {
-            //TODO
+        viewModel.summary.observe(this, Observer {
+            market_cap.text = "cap. ${it?.marketCap?.format10Digit()}"
         })
 
         GlobalScope.launch(Dispatchers.Main) {

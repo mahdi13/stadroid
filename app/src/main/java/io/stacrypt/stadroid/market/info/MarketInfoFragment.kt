@@ -45,6 +45,7 @@ class MarketInfoFragment : Fragment() {
             bid_amount.text = it?.bidAmount?.format10Digit()
             asks.text = it?.askCount.toString()
             bids.text = it?.bidCount.toString()
+            market_cap.text = it?.marketCap?.format10Digit()
         })
 
         viewModel.status.observe(viewLifecycleOwner, Observer {
@@ -54,7 +55,6 @@ class MarketInfoFragment : Fragment() {
             close.text = it?.close?.format10Digit()
             volume.text = it?.volume?.format10Digit()
             deal.text = it?.deal?.format10Digit()
-            market_cap.text = it?.volume?.format10Digit() // FIXME
         })
 
         return rootView

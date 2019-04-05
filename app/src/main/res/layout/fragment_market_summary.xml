@@ -66,21 +66,21 @@
             <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/volume"
                     android:gravity="center"
                     android:textStyle="bold"
                     android:fontFamily="@font/din_medium"
-                    tools:text="23.47653 BTC"/>
+                    android:id="@+id/market_cap"
+                    tools:text="cap. 23.47653"/>
 
             <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/volume_value"
+                    android:id="@+id/cap_24"
                     android:gravity="center"
                     android:textStyle="bold"
                     android:fontFamily="@font/din_medium"
                     android:textColor="@color/colorPrimaryLightLight"
-                    tools:text="23,47653 B IRR"/>
+                    tools:text="24H. 23,47653"/>
 
 
         </LinearLayout>

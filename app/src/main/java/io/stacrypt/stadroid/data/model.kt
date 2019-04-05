@@ -46,7 +46,9 @@ data class MarketSummary(
     val bidAmount: BigDecimal,
     val askCount: Int,
     val bidCount: Int
-)
+) {
+    val marketCap: BigDecimal get() = askAmount + bidAmount // FIXME
+}
 
 data class MarketLast(
     val price: BigDecimal
