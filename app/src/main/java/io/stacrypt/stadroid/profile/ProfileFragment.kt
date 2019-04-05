@@ -47,6 +47,12 @@ class ProfileFragment : Fragment() {
         bank_accounts.setTarget(TARGET_BANK_ACCOUNTS)
         pin.setTarget(TARGET_APPLICATION_PIN)
         change_password.setTarget(TARGET_CHANEG_PASSWORD)
+
+        viewModel = ViewModelProviders.of(activity!!).get(ProfileViewModel::class.java)
+        viewModel.user?.observe(viewLifecycleOwner,
+            Observer<User> { user ->
+                this.email.text = user.email
+            })
     }
 
     override fun onAttach(context: Context) {
@@ -56,16 +62,6 @@ class ProfileFragment : Fragment() {
         } else {
             throw RuntimeException("$context must implement OnProfileInteractionListener")
         }
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(activity!!).get(ProfileViewModel::class.java)
-        viewModel.user?.observe(this,
-            Observer<User> { user ->
-
-            })
-
     }
 
     override fun onDetach() {
