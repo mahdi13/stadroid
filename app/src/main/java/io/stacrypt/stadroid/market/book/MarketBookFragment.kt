@@ -38,9 +38,19 @@ class MarketBookFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(activity!!).get(MarketViewModel::class.java)
-        viewModel.market.observe(viewLifecycleOwner,
-            Observer<Market> { market ->
-
+        viewModel.book.observe(this,
+            Observer<BookResponse> { books ->
+                val items = ArrayList<Pair<Book?, Book?>>()
+                for (i in 0..(max(books.buys.size, books.sells.size))) {
+                    items.add(
+                        Pair(
+                            if (books.buys.size > i) books.buys[i] else null,
+                            if (books.sells.size > i) books.sells[i] else null
+                        )
+                    )
+                }
+                adapter.items = items
+                adapter.notifyDataSetChanged()
             })
 
     }

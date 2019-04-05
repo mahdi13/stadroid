@@ -35,8 +35,8 @@ class MarketViewModel : ViewModel() {
     val baseCurrency: LiveData<Currency> = switchMap(market) { WalletRepository.getCurrency(it.baseCurrencySymbol!!) }
     val quoteCurrency: LiveData<Currency> = switchMap(market) { WalletRepository.getCurrency(it.quoteCurrencySymbol!!) }
 
-    val newOrderAmount = MutableLiveData<BigDecimal>()
-    val newOrderPrice = MutableLiveData<BigDecimal>()
-    val newOrderType = MutableLiveData<String>()
+    val newOrderAmount = MutableLiveData<BigDecimal>().apply { postValue(BigDecimal("0")) }
+    val newOrderPrice = MutableLiveData<BigDecimal>().apply { postValue(BigDecimal("0")) }
+    val newOrderType = MutableLiveData<String>().apply { postValue("limit") }
 
 }
