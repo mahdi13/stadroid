@@ -10,9 +10,18 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 
 import io.stacrypt.stadroid.R
+import io.stacrypt.stadroid.data.stemeraldApiClient
+import io.stacrypt.stadroid.ui.format
 import io.stacrypt.stadroid.ui.format10Digit
 import kotlinx.android.synthetic.main.new_order_fragment.view.*
 import kotlinx.coroutines.*
+import org.jetbrains.anko.customView
+import org.jetbrains.anko.support.v4.alert
+import org.jetbrains.anko.support.v4.indeterminateProgressDialog
+import org.jetbrains.anko.support.v4.toast
+import org.jetbrains.anko.textView
+import org.jetbrains.anko.verticalLayout
+import java.lang.Exception
 import java.math.BigDecimal
 
 class NewOrderFragment : Fragment() {
@@ -137,6 +146,75 @@ class NewOrderFragment : Fragment() {
         rootView.price.addTextChangedListener(priceTextWatcher)
         rootView.amount.addTextChangedListener(amountTextWatcher)
 
+        listOf(rootView.buy, rootView.sell).forEach {
+            it.setOnClickListener { v ->
+                // TODO: Verify the value with min/max and user's balance
+
+                alert {
+                    ctx.setTheme(R.style.AlertDialogCustom)
+                    title = "Review your order"
+
+                    val newOrderAmount = viewModel.newOrderAmount.value?.format(viewModel.baseCurrency.value!!)!!
+                    val newOrderPrice = viewModel.newOrderPrice.value?.format(viewModel.quoteCurrency.value!!)!!
+                    val newOrderType = viewModel.newOrderType.value!!
+                    val newOrderEstimateFee = "NA" // FIXME Calculate fee
+                    val newOrderSide = if (v.id == R.id.buy) "buy" else "sell"
+                    val newOrderMarketName = viewModel.marketName.value!!
+                    customView {
+                        verticalLayout {
+                            textView("Action: $newOrderSide") {
+                                gravity = Gravity.CENTER
+                            }
+                            textView("Order Type: $newOrderType") {
+                                gravity = Gravity.CENTER
+                            }
+                            textView("Estimated fee: $newOrderEstimateFee ${viewModel.quoteCurrency.value!!.symbol}") {
+                                gravity = Gravity.CENTER
+                            }
+                            textView("Amount: $newOrderAmount ${viewModel.baseCurrency.value!!.symbol}") {
+                                gravity = Gravity.CENTER
+                            }
+                            if (newOrderType == "limit")
+                                textView("Price: $newOrderPrice ${viewModel.quoteCurrency.value!!.symbol}") {
+                                    gravity = Gravity.CENTER
+                                }
+                        }
+                    }
+                    positiveButton("Let's do it!") {
+                        val progressDialog =
+                            indeterminateProgressDialog("Wait", "Putting your order...").apply { show() }
+                        GlobalScope.launch(Dispatchers.Main) {
+                            val request = if (newOrderType == "limit")
+                                stemeraldApiClient.putLimitOrder(
+                                    amount = newOrderAmount,
+                                    price = newOrderPrice,
+                                    marketName = newOrderMarketName,
+                                    side = newOrderSide
+                                )
+                            else
+                                stemeraldApiClient.putMarketOrder(
+                                    amount = newOrderAmount,
+                                    marketName = newOrderMarketName,
+                                    side = newOrderSide
+                                )
+
+                            try {
+                                val newOrder = request.await()
+                                toast("Your order has been submitted!")
+                            } catch (e: Exception) {
+                                e.printStackTrace()
+                                toast(R.string.problem_occurred_toast)
+                            } finally {
+                                progressDialog.dismiss()
+                            }
+                        }
+
+                    }
+                    negativeButton("Cancel") {}
+                }.show()
+            }
+        }
+
         return rootView
     }
 
@@ -151,7 +229,7 @@ class NewOrderFragment : Fragment() {
         }
 
         private fun buildFixedString(s: Editable?): CharSequence? = s?.trim()?.run {
-//            if (viewModel.newOrderType.value == "market") "≃ ${removePrefix("≃")}"
+            //            if (viewModel.newOrderType.value == "market") "≃ ${removePrefix("≃")}"
             if (viewModel.newOrderType.value == "market") this
             else this
         }
