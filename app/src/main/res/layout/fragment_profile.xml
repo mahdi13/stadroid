@@ -158,6 +158,7 @@
                 <com.google.android.material.button.MaterialButton
                         style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
                         android:id="@+id/evidence"
+                        android:enabled="false"
                         android:text="Evidences"/>
             </TableRow>
 
@@ -205,6 +206,7 @@
 
                 <com.google.android.material.button.MaterialButton
                         style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
+                        android:enabled="false"
                         android:id="@+id/tickets"
                         android:text="Tickets"/>
             </TableRow>
@@ -213,6 +215,7 @@
 
                 <com.google.android.material.button.MaterialButton
                         style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
+                        android:enabled="false"
                         android:id="@+id/new_ticket"
                         android:text="New Ticket"/>
 
@@ -234,6 +237,7 @@
 
                 <com.google.android.material.button.MaterialButton
                         style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
+                        android:enabled="false"
                         android:id="@+id/pin"
                         android:text="Application PIN"/>
 
@@ -243,6 +247,7 @@
 
                 <com.google.android.material.button.MaterialButton
                         style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
+                        android:enabled="false"
                         android:id="@+id/whipe"
                         android:text="Whip Cache"/>
 
@@ -264,6 +269,7 @@
 
                 <com.google.android.material.button.MaterialButton
                         style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
+                        android:enabled="false"
                         android:id="@+id/withdrawal_pin"
                         android:text="Withdrawal PIN"/>
             </TableRow>
@@ -273,6 +279,7 @@
                 <com.google.android.material.button.MaterialButton
                         style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
                         android:id="@+id/withdrawal_limit"
+                        android:enabled="false"
                         android:text="Withdrawal Limitations"/>
             </TableRow>
 
@@ -293,6 +300,7 @@
                 <com.google.android.material.button.MaterialButton
                         style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
                         android:id="@+id/second_factor"
+                        android:enabled="false"
                         android:text="2 Factor Authentication ( 2FA )"/>
             </TableRow>
 
@@ -300,6 +308,7 @@
 
                 <com.google.android.material.button.MaterialButton
                         style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
+                        android:enabled="false"
                         android:id="@+id/api_key"
                         android:text="API Keys"/>
             </TableRow>
@@ -317,6 +326,7 @@
                 <com.google.android.material.button.MaterialButton
                         style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
                         android:id="@+id/ip_whitelist"
+                        android:enabled="false"
                         android:text="IP Whitelist"/>
             </TableRow>
 
@@ -325,6 +335,7 @@
                 <com.google.android.material.button.MaterialButton
                         style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
                         android:id="@+id/logs"
+                        android:enabled="false"
                         android:text="Security Logs"/>
             </TableRow>
 
@@ -333,6 +344,7 @@
                 <com.google.android.material.button.MaterialButton
                         style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
                         android:id="@+id/change_password"
+                        android:enabled="false"
                         android:text="Change Password"/>
             </TableRow>
 
