@@ -6,32 +6,48 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.NavHostFragment
+import androidx.paging.PagedList
+import androidx.recyclerview.widget.LinearLayoutManager
 
 import io.stacrypt.stadroid.R
+import io.stacrypt.stadroid.data.BankAccount
+import io.stacrypt.stadroid.data.BankCard
+import io.stacrypt.stadroid.profile.ProfileSettingActivity
+import kotlinx.android.synthetic.main.bank_cards_fragment.view.*
 import kotlinx.android.synthetic.main.header_appbar_back.view.*
 
 class BankAccountsFragment : Fragment() {
     private lateinit var viewModel: BankAccountsViewModel
+    private lateinit var adapter: BankCardPagedAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.bank_accounts_fragment, container, false)
-    }
+        val rootView = inflater.inflate(R.layout.bank_accounts_fragment, container, false)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        view.appbar.setOnClickListener {
-            NavHostFragment.findNavController(this@BankAccountsFragment).navigateUp()
-        }
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(activity!!).get(BankAccountsViewModel::class.java)
 
-//        view?.findViewById<RecyclerView>(R.id.list)?.adapter = viewModel?.bankAccountListing?.value
+        adapter = BankCardPagedAdapter()
+        rootView.list.adapter = adapter
+
+        viewModel.bankAccounts.observe(this, Observer<PagedList<BankAccount>> {
+            if (it.size > 0) rootView.no_result.visibility = View.GONE
+            adapter.submitList(it)
+        })
+        rootView.list.layoutManager = LinearLayoutManager(activity)
+
+        rootView.add.setOnClickListener {
+            NavHostFragment.findNavController(this)
+                .navigate(R.id.action_bankCardsFragment_to_addBankCardFragment, Bundle().apply {
+                    putString(ProfileSettingActivity.ARG_LAUNCH_MODE, ProfileSettingActivity.LAUNCH_MODE_NORMAL)
+                })
+        }
+
+
+        return rootView
     }
 }
