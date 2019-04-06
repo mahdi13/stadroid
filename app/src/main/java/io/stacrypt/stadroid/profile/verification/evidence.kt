@@ -7,7 +7,6 @@ import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.graphics.drawable.toBitmap
 import androidx.databinding.Bindable
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
@@ -22,13 +21,11 @@ import com.nguyenhoanglam.imagepicker.model.Config
 import com.nguyenhoanglam.imagepicker.model.Image
 import com.nguyenhoanglam.imagepicker.ui.imagepicker.ImagePicker
 import io.stacrypt.stadroid.R
-import io.stacrypt.stadroid.data.Gender
-import io.stacrypt.stadroid.data.format
+import io.stacrypt.stadroid.data.mimeType
 import io.stacrypt.stadroid.data.serialize
 import io.stacrypt.stadroid.data.stemeraldApiClient
 import io.stacrypt.stadroid.databinding.EvidenceFormFragmentBinding
 import io.stacrypt.stadroid.profile.banking.isValidName
-import kotlinx.android.synthetic.main.email_verification_fragment.*
 import kotlinx.android.synthetic.main.evidence_form_fragment.*
 import kotlinx.android.synthetic.main.evidence_form_fragment.view.*
 import kotlinx.coroutines.Dispatchers
@@ -37,7 +34,6 @@ import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
 import java.io.File
 import okhttp3.RequestBody
-import okhttp3.MediaType
 import org.jetbrains.anko.support.v4.longToast
 import org.jetbrains.anko.support.v4.toast
 
@@ -219,15 +215,15 @@ class EvidenceFormFragment : Fragment() {
             // view.submit.startAnimation {
 
             val idFile = File(viewModel.idCardPath.value)
-            val idFileReqBody = RequestBody.create(MediaType.parse("image/*"), idFile)
-            val idPart = MultipartBody.Part.createFormData("idCard", idFile.getName(), idFileReqBody)
+            val idFileReqBody = RequestBody.create(idFile.mimeType(), idFile)
+            val idPart = MultipartBody.Part.createFormData("idCard", idFile.name, idFileReqBody)
 
             val idSecondaryFile = File(viewModel.idCardPath.value)
-            val idSecondaryFileReqBody = RequestBody.create(MediaType.parse("image/*"), idSecondaryFile)
+            val idSecondaryFileReqBody = RequestBody.create(idSecondaryFile.mimeType(), idSecondaryFile)
             val idPartSecondary =
                 MultipartBody.Part.createFormData(
                     "idCardSecondary",
-                    idSecondaryFile.getName(),
+                    idSecondaryFile.name,
                     idSecondaryFileReqBody
                 )
 
@@ -235,34 +231,28 @@ class EvidenceFormFragment : Fragment() {
 
                 try {
                     stemeraldApiClient.submitMyEvidences(
-                        partMap = mapOf(
-                            "firstName" to viewModel.firstName.value!!,
-                            "lastName" to viewModel.lastName.value!!,
-                            "address" to viewModel.address.value!!,
-                            "birthday" to Calendar.getInstance(Locale.ENGLISH).apply {
+                        firstName = MultipartBody.Part.createFormData("firstName", viewModel.firstName.value!!),
+                        lastName = MultipartBody.Part.createFormData("lastName", viewModel.lastName.value!!),
+                        address = MultipartBody.Part.createFormData("address", viewModel.address.value!!),
+                        birthday = MultipartBody.Part.createFormData(
+                            "birthday",
+                            Calendar.getInstance(Locale.ENGLISH).apply {
                                 set(
                                     viewModel.birthdayYear.value!!,
                                     viewModel.birthdayMoth.value!!,
                                     viewModel.birthdayDay.value!!
                                 )
-                            }.time.serialize()!!,
-                            "cityId" to viewModel.cities.value!![viewModel.selectedCityPosition.value!!].id.toString(),
-                            "gender" to resources.getStringArray(R.array.genders)[viewModel.selectedGenderPosition.value!!].toLowerCase(),
-                            "nationalCode" to viewModel.idNumber.value!!
+                            }.time.serialize()
                         ),
-                        // firstName = viewModel.firstName.value!!,
-                        // lastName = viewModel.lastName.value!!,
-                        // address = viewModel.address.value!!,
-                        // birthday = Calendar.getInstance(Locale.ENGLISH).apply {
-                        //     set(
-                        //         viewModel.birthdayYear.value!!,
-                        //         viewModel.birthdayMoth.value!!,
-                        //         viewModel.birthdayDay.value!!
-                        //     )
-                        // }.time,
-                        // cityId = viewModel.cities.value!!.get(viewModel.selectedCityPosition.value!!).id,
-                        // gender = Gender.valueOf(resources.getStringArray(R.array.genders).get(viewModel.selectedGenderPosition.value!!).toUpperCase()),
-                        // nationalCode = viewModel.idNumber.value!!,
+                        cityId = MultipartBody.Part.createFormData(
+                            "cityId",
+                            viewModel.cities.value!![viewModel.selectedCityPosition.value!!].id.toString()
+                        ),
+                        gender = MultipartBody.Part.createFormData(
+                            "gender",
+                            resources.getStringArray(R.array.genders)[viewModel.selectedGenderPosition.value!!].toLowerCase()
+                        ),
+                        nationalCode = MultipartBody.Part.createFormData("nationalCode", viewModel.idNumber.value!!),
                         idCard = idPart,
                         idCardSecondary = idPartSecondary
                     ).await()

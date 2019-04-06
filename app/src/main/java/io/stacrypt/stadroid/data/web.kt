@@ -369,14 +369,16 @@ interface StemeraldV2ApiClient {
     @HTTP(method = "SUBMIT", path = "clients/evidences", hasBody = true)
     fun submitMyEvidences(
         @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
-        // @Part("firstName") firstName: String,
-        // @Part("lastName") lastName: String,
+        @Part firstName: MultipartBody.Part,
+        @Part lastName: MultipartBody.Part,
         // @Part("gender") gender: Gender,
+        @Part gender: MultipartBody.Part,
         // @Part("birthday") birthday: Date,
-        // @Part("cityId") cityId: Int,
-        // @Part("nationalCode") nationalCode: String,
-        // @Part("address") address: String,
-        @PartMap(encoding = "utf8") partMap: Map<String, String>,
+        @Part birthday: MultipartBody.Part,
+        @Part cityId: MultipartBody.Part,
+        @Part nationalCode: MultipartBody.Part,
+        @Part address: MultipartBody.Part,
+        // @PartMap(encoding = "utf8") partMap: Map<String, String>,
         @Part idCard: MultipartBody.Part,
         @Part idCardSecondary: MultipartBody.Part
     ): Deferred<Evidence>
@@ -607,3 +609,10 @@ var stemeraldApiClient = Retrofit.Builder()
 //
 //    }
 // }
+
+fun File.mimeType(): MediaType? = when (extension) {
+    "jpeg" -> MediaType.parse("image/jpeg")
+    "jpg" -> MediaType.parse("image/jpeg")
+    "png" -> MediaType.parse("image/png")
+    else -> null
+}
