@@ -26,15 +26,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-            <ImageView
-                    android:id="@+id/shetab"
-                    android:layout_width="100dp"
-                    android:layout_height="60dp"
-                    android:src="@drawable/shetab"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginEnd="10dp"/>
+            <!--<ImageView-->
+                    <!--android:id="@+id/shetab"-->
+                    <!--android:layout_width="100dp"-->
+                    <!--android:layout_height="60dp"-->
+                    <!--android:src="@drawable/shetab"-->
+                    <!--android:layout_alignParentEnd="true"-->
+                    <!--android:layout_alignParentTop="true"-->
+                    <!--android:layout_marginTop="30dp"-->
+                    <!--android:layout_marginEnd="10dp"/>-->
 
             <LinearLayout
                     android:layout_width="wrap_content"
@@ -63,7 +63,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/colorGrayText"
                         android:layout_marginTop="20dp"
-                        android:text="Account Iban"/>
+                        android:text="Account IBAN"/>
 
                 <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/iban"

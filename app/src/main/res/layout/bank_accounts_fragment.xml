@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/back"
         android:layout_alignParentBottom="true"
-        tools:listitem="@layout/row_bank_card"
+        tools:listitem="@layout/row_bank_account"
         android:id="@+id/list"/>
 
     <TextView android:id="@+id/no_result"

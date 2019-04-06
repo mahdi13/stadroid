@@ -214,6 +214,9 @@ dependencies {
     // Flip Layout
     implementation 'com.wajahatkarim3.EasyFlipView:EasyFlipView:2.1.2'
 
+    // Banking
+    implementation 'org.iban4j:iban4j:3.2.1'
+
     testImplementation 'junit:junit:4.12'
     testImplementation 'androidx.arch.core:core-testing:2.0.1'
     testImplementation 'androidx.room:room-testing:2.1.0-alpha06'

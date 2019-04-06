@@ -3,6 +3,41 @@ package io.stacrypt.stadroid.profile.banking
 import android.text.TextWatcher
 import android.widget.EditText
 import android.text.Editable
+import org.iban4j.Iban
+import java.lang.Exception
+
+private val IBAN_REGEX = "^[A-Z]{2}[0-9]{8,30}\$".toRegex()
+
+fun EditText.addBankIbanTextFormatter() = addTextChangedListener(object : TextWatcher {
+
+    private var prev: String = ""
+
+    override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
+    }
+
+    override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+    }
+
+    private fun String.uglify() = replace(" ", "")
+    private fun String.beatifulize() = replace(".{4}".toRegex(), "$0 ")
+        .replaceFirst(".{2}".toRegex(), "$0 ")
+        .trim()
+
+    private fun String.isPartialIban() = IBAN_REGEX.containsMatchIn(this)
+
+    override fun afterTextChanged(s: Editable) {
+        removeTextChangedListener(this)
+
+        val current = s.toString().uglify()
+
+        if (current.uglify().isPartialIban()) s.replace(0, s.length, current.beatifulize())
+        else s.replace(0, s.length, prev)
+
+        prev = s.toString()
+
+        addTextChangedListener(this)
+    }
+})
 
 fun EditText.addBankCardTextFormatter() = addTextChangedListener(object : TextWatcher {
     private val TOTAL_SYMBOLS = 19 // size of pattern 0000-0000-0000-0000
@@ -67,6 +102,12 @@ fun EditText.addBankCardTextFormatter() = addTextChangedListener(object : TextWa
         return digits
     }
 })
+
+fun String.toIbanOrNull() = try {
+    Iban.valueOf(this.replace(" ", ""))
+} catch (e: Exception) {
+    null
+}
 
 fun String.isValidBankCardNumber() = isNotEmpty() && this.matches("^([0-9]{4}-){3}[0-9]{4}$".toRegex())
 fun String.isValidBankingIdName() = isNotEmpty() && this.matches("^[0-9a-zA-Z\\s\\.]{2,50}$".toRegex())

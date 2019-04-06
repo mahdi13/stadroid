@@ -13,14 +13,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 
 import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.data.BankAccount
-import io.stacrypt.stadroid.data.BankCard
+import io.stacrypt.stadroid.profile.BaseSettingFragment
 import io.stacrypt.stadroid.profile.ProfileSettingActivity
-import kotlinx.android.synthetic.main.bank_cards_fragment.view.*
+import kotlinx.android.synthetic.main.bank_accounts_fragment.view.*
 import kotlinx.android.synthetic.main.header_appbar_back.view.*
 
-class BankAccountsFragment : Fragment() {
+class BankAccountsFragment : BaseSettingFragment() {
     private lateinit var viewModel: BankAccountsViewModel
-    private lateinit var adapter: BankCardPagedAdapter
+    private lateinit var adapter: BankAccountPagedAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,7 +31,7 @@ class BankAccountsFragment : Fragment() {
 
         viewModel = ViewModelProviders.of(activity!!).get(BankAccountsViewModel::class.java)
 
-        adapter = BankCardPagedAdapter()
+        adapter = BankAccountPagedAdapter()
         rootView.list.adapter = adapter
 
         viewModel.bankAccounts.observe(this, Observer<PagedList<BankAccount>> {
@@ -42,7 +42,7 @@ class BankAccountsFragment : Fragment() {
 
         rootView.add.setOnClickListener {
             NavHostFragment.findNavController(this)
-                .navigate(R.id.action_bankCardsFragment_to_addBankCardFragment, Bundle().apply {
+                .navigate(R.id.action_bankAccountsFragment_to_addBankAccountFragment, Bundle().apply {
                     putString(ProfileSettingActivity.ARG_LAUNCH_MODE, ProfileSettingActivity.LAUNCH_MODE_NORMAL)
                 })
         }
