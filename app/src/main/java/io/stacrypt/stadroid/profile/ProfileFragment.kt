@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -19,7 +20,9 @@ import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_BANK
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_CHANEG_PASSWORD
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_VERIFICATION_PROCESS
 import kotlinx.android.synthetic.main.fragment_profile.view.*
+import kotlinx.android.synthetic.main.row_payment_gateway.view.*
 import org.jetbrains.anko.support.v4.startActivity
+import org.jetbrains.anko.textColorResource
 
 class ProfileFragment : Fragment() {
     private lateinit var viewModel: ProfileViewModel
@@ -54,6 +57,22 @@ class ProfileFragment : Fragment() {
             Observer<User> { user ->
                 this.email.text = user.email
             })
+
+
+        when {
+            sessionManager.isTrustedClient -> {
+                rootView.verification_status.text = "Verified"
+                rootView.verification_status.textColorResource = R.color.real_green
+            }
+            sessionManager.isSemiTrustedClient -> {
+                rootView.verification_status.text = "Partially Verified"
+                rootView.verification_status.textColorResource = R.color.yellow
+            }
+            sessionManager.isClient -> {
+                rootView.verification_status.text = "Unverified"
+                rootView.verification_status.textColorResource = R.color.real_red
+            }
+        }
     }
 
     override fun onAttach(context: Context) {

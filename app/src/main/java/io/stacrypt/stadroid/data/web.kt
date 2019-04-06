@@ -14,6 +14,7 @@ import okhttp3.*
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache
 import com.franmontiel.persistentcookiejar.PersistentCookieJar
+import com.google.gson.GsonBuilder
 import io.stacrypt.stadroid.application
 import kotlin.collections.ArrayList
 
@@ -368,15 +369,16 @@ interface StemeraldV2ApiClient {
     @HTTP(method = "SUBMIT", path = "clients/evidences", hasBody = true)
     fun submitMyEvidences(
         @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
-        @Part("firstName") firstName: String,
-        @Part("lastName") lastName: String,
-        @Part("gender") gender: Gender,
-        @Part("birthday") birthday: Date,
-        @Part("cityId") cityId: Int,
-        @Part("nationalCode") nationalCode: String,
-        @Part("address") address: String,
-        @Part("idCard") idCard: MultipartBody.Part,
-        @Part("idCardSecondary") idCardSecondary: MultipartBody.Part
+        // @Part("firstName") firstName: String,
+        // @Part("lastName") lastName: String,
+        // @Part("gender") gender: Gender,
+        // @Part("birthday") birthday: Date,
+        // @Part("cityId") cityId: Int,
+        // @Part("nationalCode") nationalCode: String,
+        // @Part("address") address: String,
+        @PartMap(encoding = "utf8") partMap: Map<String, String>,
+        @Part idCard: MultipartBody.Part,
+        @Part idCardSecondary: MultipartBody.Part
     ): Deferred<Evidence>
 
     /**
@@ -557,7 +559,7 @@ val okHttpClient by lazy {
 var stemeraldApiClient = Retrofit.Builder()
     .baseUrl(STEMERALD_API_URL)
     .addCallAdapterFactory(CoroutineCallAdapterFactory())
-    .addConverterFactory(GsonConverterFactory.create())
+    .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS").create()))
     .client(okHttpClient)
     .build()
     .create(StemeraldV2ApiClient::class.java)

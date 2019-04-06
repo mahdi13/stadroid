@@ -526,4 +526,6 @@ data class City(val id: Int, val name: String, val stateId: Int, val state: Stat
 }
 
 val dateFormatter by lazy { SimpleDateFormat("dd MMM yyyy HH:mm", Locale.ENGLISH) }
+val dateSerializer by lazy { SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS", Locale.ENGLISH) }
 fun Date.format() = dateFormatter.format(this)
+fun Date.serialize() = dateSerializer.format(this)

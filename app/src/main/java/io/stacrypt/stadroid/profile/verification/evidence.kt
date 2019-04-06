@@ -7,6 +7,7 @@ import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.graphics.drawable.toBitmap
 import androidx.databinding.Bindable
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
@@ -22,8 +23,12 @@ import com.nguyenhoanglam.imagepicker.model.Image
 import com.nguyenhoanglam.imagepicker.ui.imagepicker.ImagePicker
 import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.data.Gender
+import io.stacrypt.stadroid.data.format
+import io.stacrypt.stadroid.data.serialize
 import io.stacrypt.stadroid.data.stemeraldApiClient
 import io.stacrypt.stadroid.databinding.EvidenceFormFragmentBinding
+import io.stacrypt.stadroid.profile.banking.isValidName
+import kotlinx.android.synthetic.main.email_verification_fragment.*
 import kotlinx.android.synthetic.main.evidence_form_fragment.*
 import kotlinx.android.synthetic.main.evidence_form_fragment.view.*
 import kotlinx.coroutines.Dispatchers
@@ -209,6 +214,10 @@ class EvidenceFormFragment : Fragment() {
 
         view.submit.setOnClickListener {
 
+            if (!validateForm()) return@setOnClickListener
+
+            // view.submit.startAnimation {
+
             val idFile = File(viewModel.idCardPath.value)
             val idFileReqBody = RequestBody.create(MediaType.parse("image/*"), idFile)
             val idPart = MultipartBody.Part.createFormData("idCard", idFile.getName(), idFileReqBody)
@@ -216,39 +225,87 @@ class EvidenceFormFragment : Fragment() {
             val idSecondaryFile = File(viewModel.idCardPath.value)
             val idSecondaryFileReqBody = RequestBody.create(MediaType.parse("image/*"), idSecondaryFile)
             val idPartSecondary =
-                MultipartBody.Part.createFormData("idCardSecondary", idSecondaryFile.getName(), idSecondaryFileReqBody)
+                MultipartBody.Part.createFormData(
+                    "idCardSecondary",
+                    idSecondaryFile.getName(),
+                    idSecondaryFileReqBody
+                )
 
             GlobalScope.launch(Dispatchers.Main) {
 
                 try {
                     stemeraldApiClient.submitMyEvidences(
-                        firstName = viewModel.firstName.value!!,
-                        lastName = viewModel.lastName.value!!,
-                        address = viewModel.address.value!!,
-                        birthday = Calendar.getInstance(Locale.ENGLISH).apply {
-                            set(
-                                viewModel.birthdayYear.value!!,
-                                viewModel.birthdayMoth.value!!,
-                                viewModel.birthdayDay.value!!
-                            )
-                        }.time,
-                        cityId = viewModel.cities.value!!.get(viewModel.selectedCityPosition.value!!).id,
-                        gender = Gender.valueOf(resources.getStringArray(R.array.genders).get(viewModel.selectedGenderPosition.value!!)),
-                        nationalCode = viewModel.idNumber.value!!,
+                        partMap = mapOf(
+                            "firstName" to viewModel.firstName.value!!,
+                            "lastName" to viewModel.lastName.value!!,
+                            "address" to viewModel.address.value!!,
+                            "birthday" to Calendar.getInstance(Locale.ENGLISH).apply {
+                                set(
+                                    viewModel.birthdayYear.value!!,
+                                    viewModel.birthdayMoth.value!!,
+                                    viewModel.birthdayDay.value!!
+                                )
+                            }.time.serialize()!!,
+                            "cityId" to viewModel.cities.value!![viewModel.selectedCityPosition.value!!].id.toString(),
+                            "gender" to resources.getStringArray(R.array.genders)[viewModel.selectedGenderPosition.value!!].toLowerCase(),
+                            "nationalCode" to viewModel.idNumber.value!!
+                        ),
+                        // firstName = viewModel.firstName.value!!,
+                        // lastName = viewModel.lastName.value!!,
+                        // address = viewModel.address.value!!,
+                        // birthday = Calendar.getInstance(Locale.ENGLISH).apply {
+                        //     set(
+                        //         viewModel.birthdayYear.value!!,
+                        //         viewModel.birthdayMoth.value!!,
+                        //         viewModel.birthdayDay.value!!
+                        //     )
+                        // }.time,
+                        // cityId = viewModel.cities.value!!.get(viewModel.selectedCityPosition.value!!).id,
+                        // gender = Gender.valueOf(resources.getStringArray(R.array.genders).get(viewModel.selectedGenderPosition.value!!).toUpperCase()),
+                        // nationalCode = viewModel.idNumber.value!!,
                         idCard = idPart,
                         idCardSecondary = idPartSecondary
                     ).await()
 
                     longToast("Successfully uploaded. You will be fully verified in a few hours...")
+                    // view.submit.doneLoadingAnimation(
+                    //     resources.getColor(R.color.real_green),
+                    //     resources.getDrawable(R.drawable.ic_check_circle_black_24dp).toBitmap(100, 100)
+                    // )
                 } catch (e: Exception) {
                     e.printStackTrace()
                     toast(R.string.problem_occurred_toast)
+                    // view.submit.doneLoadingAnimation(
+                    //     resources.getColor(R.color.real_red),
+                    //     resources.getDrawable(R.drawable.ic_close).toBitmap(100, 100)
+                    // )
+                    // }
                 }
             }
 
         }
 
         return view
+    }
+
+    private fun validateForm(): Boolean {
+        var error: String? = null
+        if (viewModel.firstName.value?.isValidName() != true) error = "FirstName is wrong"
+        else if (viewModel.lastName.value?.isValidName() != true) error = "LastName is wrong"
+        else if (viewModel.birthdayDay.value?.takeIf { it in 1..32 } == null) error = "Birthday Day is wrong"
+        else if (viewModel.birthdayMoth.value?.takeIf { it in 1..13 } == null) error = "Birthday Month is wrong"
+        else if (viewModel.birthdayYear.value?.takeIf { it in 1980..2004 } == null) error =
+            "You should have at least 18 years old"
+        else if (viewModel.selectedGenderPosition.value == null) error = "Please specify your gender"
+        else if (viewModel.selectedCityPosition.value == null) error = "Please choose your city"
+        else if (viewModel.address.value.isNullOrEmpty()) error = "Address is wrong"
+        else if (viewModel.idNumber.value.isNullOrEmpty()) error = "Id number is wrong"
+        else if (viewModel.idCardPath.value.isNullOrEmpty()) error = "Please choose your identity card's picture"
+        else if (viewModel.idCardSecondaryPath.value.isNullOrEmpty()) error = "Please take a selfie from yourself"
+
+        error?.let { longToast(it) }
+
+        return error == null
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

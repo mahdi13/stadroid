@@ -111,3 +111,4 @@ fun String.toIbanOrNull() = try {
 
 fun String.isValidBankCardNumber() = isNotEmpty() && this.matches("^([0-9]{4}-){3}[0-9]{4}$".toRegex())
 fun String.isValidBankingIdName() = isNotEmpty() && this.matches("^[0-9a-zA-Z\\s\\.]{2,50}$".toRegex())
+fun String.isValidName() = isNotEmpty() && this.matches("^[0-9a-zA-Z\\s\\.]{2,50}$".toRegex())
