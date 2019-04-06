@@ -5,12 +5,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import io.stacrypt.stadroid.R
-import kotlinx.android.synthetic.main.activity_profile_setting.*
-import com.nguyenhoanglam.imagepicker.model.Config.EXTRA_IMAGES
-import com.nguyenhoanglam.imagepicker.model.Config.RC_PICK_IMAGES
-import android.app.Activity
-import android.os.Parcelable
-import com.nguyenhoanglam.imagepicker.model.Config
 
 class ProfileSettingActivity : AppCompatActivity() {
 
@@ -74,14 +68,5 @@ class ProfileSettingActivity : AppCompatActivity() {
 
         const val LAUNCH_MODE_NORMAL = "normal"
         const val LAUNCH_MODE_DIALOG = "dialog"
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == Config.RC_PICK_IMAGES && resultCode == Activity.RESULT_OK && data != null) {
-            val images = data.getParcelableArrayListExtra<Parcelable>(Config.EXTRA_IMAGES)
-            // do your logic here...
-        }
-        super.onActivityResult(requestCode, resultCode, data) // You MUST have this line to be here
-        // so ImagePicker can work with fragment mode
     }
 }

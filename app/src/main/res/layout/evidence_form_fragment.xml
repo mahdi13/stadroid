@@ -3,7 +3,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        >
+>
 
     <data>
 
@@ -14,118 +14,118 @@
         <import type="java.util.stream.Collectors"/>
 
         <variable
-                name="viewModel"
-                type="io.stacrypt.stadroid.profile.verification.EvidenceFormViewModel"/>
+            name="viewModel"
+            type="io.stacrypt.stadroid.profile.verification.EvidenceFormViewModel"/>
     </data>
 
 
     <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:context=".profile.verification.EvidenceFormFragment"
-            android:paddingTop="20dp"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".profile.verification.EvidenceFormFragment"
+        android:paddingTop="20dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp">
 
         <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:backgroundTint="@color/colorPrimary">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:backgroundTint="@color/colorPrimary">
 
                 <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
                     <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Personal"
-                            android:drawableStart="@drawable/ic_verified_user_black_24dp"
-                            android:drawableTint="@color/colorGrayText"
-                            android:drawablePadding="10dp"
-                            android:textColor="@color/colorGrayText"
-                            android:textAllCaps="true"
-                            android:layout_margin="10dp"
-                            android:textSize="16sp"/>
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Personal"
+                        android:drawableStart="@drawable/ic_verified_user_black_24dp"
+                        android:drawableTint="@color/colorGrayText"
+                        android:drawablePadding="10dp"
+                        android:textColor="@color/colorGrayText"
+                        android:textAllCaps="true"
+                        android:layout_margin="10dp"
+                        android:textSize="16sp"/>
 
 
                     <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
                         <AutoCompleteTextView
-                                style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
-                                android:id="@+id/first_name"
-                                android:fontFamily="@font/open_sans_regular"
-                                android:layout_marginStart="10dp"
-                                android:layout_marginEnd="10dp"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="@string/first_name"
-                                android:text="@={viewModel.firstName}"
-                                android:inputType="textPersonName"
-                                android:maxLines="1"
-                                android:backgroundTint="@color/colorPrimaryDark"
-                                android:singleLine="true"/>
+                            style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
+                            android:id="@+id/first_name"
+                            android:fontFamily="@font/open_sans_regular"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/first_name"
+                            android:text="@={viewModel.firstName}"
+                            android:inputType="textPersonName"
+                            android:maxLines="1"
+                            android:backgroundTint="@color/colorPrimaryDark"
+                            android:singleLine="true"/>
 
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="20dp"
-                            android:layout_marginBottom="10dp">
+                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp">
 
                         <com.google.android.material.textfield.TextInputEditText
-                                style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
-                                android:fontFamily="@font/open_sans_regular"
-                                android:id="@+id/last_name"
-                                android:layout_marginStart="10dp"
-                                android:layout_marginEnd="10dp"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="@string/last_name"
-                                android:text="@={viewModel.lastName}"
-                                android:imeActionId="6"
-                                android:imeActionLabel="@string/action_login"
-                                android:imeOptions="actionUnspecified"
-                                android:inputType="textPersonName"
-                                android:maxLines="1"
-                                android:backgroundTint="@color/colorPrimaryDark"
-                                android:singleLine="true"/>
+                            style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
+                            android:fontFamily="@font/open_sans_regular"
+                            android:id="@+id/last_name"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/last_name"
+                            android:text="@={viewModel.lastName}"
+                            android:imeActionId="6"
+                            android:imeActionLabel="@string/action_login"
+                            android:imeOptions="actionUnspecified"
+                            android:inputType="textPersonName"
+                            android:maxLines="1"
+                            android:backgroundTint="@color/colorPrimaryDark"
+                            android:singleLine="true"/>
 
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <DatePicker
-                            android:id="@+id/datePicker"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:calendarViewShown="false"
-                            android:datePickerMode="spinner"
-                            android:spinnersShown="true"
-                            android:layout_gravity="center"
-                            android:day="@={viewModel.birthdayDay}"
-                            android:month="@={viewModel.birthdayMoth}"
-                            android:year="@={viewModel.birthdayYear}"
-                            />
+                        android:id="@+id/datePicker"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:calendarViewShown="false"
+                        android:datePickerMode="spinner"
+                        android:spinnersShown="true"
+                        android:layout_gravity="center"
+                        android:day="@={viewModel.birthdayDay}"
+                        android:month="@={viewModel.birthdayMoth}"
+                        android:year="@={viewModel.birthdayYear}"
+                    />
 
                     <androidx.appcompat.widget.AppCompatSpinner
-                            android:entries="@array/genders"
-                            android:selectedItemPosition="@={viewModel.selectedGenderPosition}"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_weight="1"
-                            android:layout_margin="10dp"/>
+                        android:entries="@array/genders"
+                        android:selectedItemPosition="@={viewModel.selectedGenderPosition}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_weight="1"
+                        android:layout_margin="10dp"/>
 
 
                 </LinearLayout>
@@ -135,82 +135,80 @@
 
 
             <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:backgroundTint="@color/colorPrimary">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:backgroundTint="@color/colorPrimary">
 
                 <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
                     <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Address"
-                            android:drawableStart="@drawable/ic_verified_user_black_24dp"
-                            android:drawableTint="@color/colorGrayText"
-                            android:drawablePadding="10dp"
-                            android:textColor="@color/colorGrayText"
-                            android:textAllCaps="true"
-                            android:layout_margin="10dp"
-                            android:textSize="16sp"/>
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Address"
+                        android:drawableStart="@drawable/ic_verified_user_black_24dp"
+                        android:drawableTint="@color/colorGrayText"
+                        android:drawablePadding="10dp"
+                        android:textColor="@color/colorGrayText"
+                        android:textAllCaps="true"
+                        android:layout_margin="10dp"
+                        android:textSize="16sp"/>
 
                     <LinearLayout
-                            android:layout_width="match_parent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center_horizontal"
+                        android:layout_marginBottom="20dp">
+
+                        <androidx.appcompat.widget.AppCompatSpinner
+                            android:id="@+id/countries"
+                            android:entries="@{viewModel.countries}"
+                            android:selectedItemPosition="@={viewModel.selectedCountryPosition}"
+                            android:layout_width="200dp"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_marginBottom="20dp">
+                            android:layout_margin="5dp"/>
 
                         <androidx.appcompat.widget.AppCompatSpinner
-                                android:id="@+id/countries"
-                                android:entries="@{viewModel.countries}"
-                                android:selectedItemPosition="@={viewModel.selectedCountryPosition}"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:layout_margin="5dp"/>
+                            android:id="@+id/states"
+                            android:entries="@{viewModel.states}"
+                            android:selectedItemPosition="@={viewModel.selectedStatePosition}"
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"/>
 
                         <androidx.appcompat.widget.AppCompatSpinner
-                                android:id="@+id/states"
-                                android:entries="@{viewModel.states}"
-                                android:selectedItemPosition="@={viewModel.selectedStatePosition}"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:layout_margin="5dp"/>
-
-                        <androidx.appcompat.widget.AppCompatSpinner
-                                android:id="@+id/cities"
-                                android:entries="@{viewModel.cities}"
-                                android:selectedItemPosition="@={viewModel.selectedCityPosition}"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:layout_margin="5dp"/>
+                            android:id="@+id/cities"
+                            android:entries="@{viewModel.cities}"
+                            android:selectedItemPosition="@={viewModel.selectedCityPosition}"
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"/>
                     </LinearLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
                         <AutoCompleteTextView
-                                style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
-                                android:fontFamily="@font/open_sans_regular"
-                                android:layout_marginStart="10dp"
-                                android:layout_marginEnd="10dp"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="@string/address"
-                                android:inputType="text"
-                                android:minLines="4"
-                                android:maxLines="4"
-                                android:backgroundTint="@color/colorPrimaryDark"
-                                android:singleLine="false"
-                                android:lines="4"
-                                android:layout_marginBottom="10dp"/>
+                            style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
+                            android:fontFamily="@font/open_sans_regular"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/address"
+                            android:inputType="text"
+                            android:minLines="4"
+                            android:maxLines="4"
+                            android:backgroundTint="@color/colorPrimaryDark"
+                            android:singleLine="false"
+                            android:lines="4"
+                            android:layout_marginBottom="10dp"/>
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -221,89 +219,106 @@
 
 
             <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:backgroundTint="@color/colorPrimary">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:backgroundTint="@color/colorPrimary">
 
                 <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
                     <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/identity"
-                            android:drawableStart="@drawable/ic_verified_user_black_24dp"
-                            android:drawableTint="@color/colorGrayText"
-                            android:drawablePadding="10dp"
-                            android:textColor="@color/colorGrayText"
-                            android:textAllCaps="true"
-                            android:layout_margin="10dp"
-                            android:textSize="16sp"/>
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/identity"
+                        android:drawableStart="@drawable/ic_verified_user_black_24dp"
+                        android:drawableTint="@color/colorGrayText"
+                        android:drawablePadding="10dp"
+                        android:textColor="@color/colorGrayText"
+                        android:textAllCaps="true"
+                        android:layout_margin="10dp"
+                        android:textSize="16sp"/>
 
 
                     <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
                         <AutoCompleteTextView
-                                style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
-                                android:fontFamily="@font/open_sans_regular"
-                                android:layout_marginStart="10dp"
-                                android:layout_marginEnd="10dp"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="@string/national_or_passport_number"
-                                android:inputType="text"
-                                android:maxLines="1"
-                                android:text="@={viewModel.idNumber}"
-                                android:backgroundTint="@color/colorPrimaryDark"
-                                android:singleLine="false"
-                                android:layout_marginBottom="10dp"/>
+                            style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
+                            android:fontFamily="@font/open_sans_regular"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/national_or_passport_number"
+                            android:inputType="text"
+                            android:maxLines="1"
+                            android:text="@={viewModel.idNumber}"
+                            android:backgroundTint="@color/colorPrimaryDark"
+                            android:singleLine="false"
+                            android:layout_marginBottom="10dp"/>
 
                     </com.google.android.material.textfield.TextInputLayout>
 
 
                     <com.google.android.material.button.MaterialButton
-                            android:id="@+id/id_card1"
-                            android:layout_margin="20dp"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="National identity card (or passport) image"/>
+                        android:id="@+id/id_card1"
+                        android:layout_margin="20dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="National identity card (or passport) image"/>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/id_card1_image"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:layout_gravity="center"
+                        android:background="@color/colorPrimaryLight"/>
+
 
                     <com.google.android.material.button.MaterialButton
-                            android:id="@+id/id_card2"
-                            android:layout_margin="20dp"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Take selfie picture"/>
+                        android:id="@+id/id_card2"
+                        android:layout_margin="20dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Take selfie picture"/>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/id_card2_image"
+                        android:layout_gravity="center"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:background="@color/colorPrimaryLight"
+                        android:layout_marginBottom="20dp"/>
+
 
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
 
             <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
-                    android:id="@+id/submit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Submit the form"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:maxWidth="400dp"
-                    android:padding="20dp"
-                    android:gravity="center"
-                    android:layout_gravity="center"
-                    android:textAllCaps="true"
-                    android:background="@drawable/button_shape_default_rounded"
-                    android:textColor="@color/colorSecondary"
-                    app:spinning_bar_width="4dp"
-                    app:spinning_bar_color="#FFF"
-                    app:spinning_bar_padding="6dp"/>
+                android:id="@+id/submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Submit the form"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:maxWidth="400dp"
+                android:padding="20dp"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:textAllCaps="true"
+                android:background="@drawable/button_shape_default_rounded"
+                android:textColor="@color/colorSecondary"
+                app:spinning_bar_width="4dp"
+                app:spinning_bar_color="#FFF"
+                app:spinning_bar_padding="6dp"/>
 
 
         </LinearLayout>

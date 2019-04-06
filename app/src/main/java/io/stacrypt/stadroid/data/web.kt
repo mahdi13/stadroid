@@ -375,9 +375,8 @@ interface StemeraldV2ApiClient {
         @Part("cityId") cityId: Int,
         @Part("nationalCode") nationalCode: String,
         @Part("address") address: String,
-        @Part("idCard") idCard: File,
-        @Part("idCardSecondary") idCardSecondary: File,
-        @Part("holder") holder: String
+        @Part("idCard") idCard: MultipartBody.Part,
+        @Part("idCardSecondary") idCardSecondary: MultipartBody.Part
     ): Deferred<Evidence>
 
     /**
