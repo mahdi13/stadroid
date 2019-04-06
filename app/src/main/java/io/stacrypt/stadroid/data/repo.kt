@@ -3,6 +3,7 @@ package io.stacrypt.stadroid.data
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.*
+import retrofit2.HttpException
 
 object UserRepository {
     private val userDao: UserDao = stemeraldDatabase.userDao
@@ -70,6 +71,62 @@ object UserRepository {
             } catch (e: Exception) {
                 // TODO: Show error
                 e.printStackTrace()
+            }
+        }
+        return liveData
+    }
+}
+
+object SecurityRepository {
+
+    private var job: Job? = null
+    private val scope = CoroutineScope(Dispatchers.Default)
+
+    // /**
+    //  * Always online
+    //  */
+    // fun getSecurityLogs(): Listing<SecurityLog> {
+    //     val sourceFactory = NotificationDataSourceFactory()
+    //
+    //     val livePagedList = sourceFactory.toLiveData(pageSize = 20)
+    //
+    //     val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {
+    //         it.initialLoad
+    //     }
+    //
+    //     return Listing(
+    //         pagedList = livePagedList,
+    //         networkState = Transformations.switchMap(sourceFactory.sourceLiveData) {
+    //             it.networkState
+    //         },
+    //         retry = {
+    //             sourceFactory.sourceLiveData.value?.retryAllFailed()
+    //         },
+    //         refresh = {
+    //             sourceFactory.sourceLiveData.value?.invalidate()
+    //         },
+    //         refreshState = refreshState
+    //     )
+    // }
+
+    /**
+     * Always online
+     */
+    fun getLastLogin(): LiveData<SecurityLog?> {
+        val liveData = MutableLiveData<SecurityLog?>()
+        scope.launch {
+            try {
+                liveData.postValue(stemeraldApiClient.getSecurityLogs(take = 1, type = "login").await().firstOrNull())
+            } catch (e: HttpException) {
+                // TODO Show error or retry
+                liveData.postValue(null)
+                e.printStackTrace()
+//                }
+            } catch (e: Exception) {
+                // TODO Show error or retry
+                liveData.postValue(null)
+                e.printStackTrace()
+            } finally {
             }
         }
         return liveData

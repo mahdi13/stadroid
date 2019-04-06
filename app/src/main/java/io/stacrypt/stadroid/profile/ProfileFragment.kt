@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProviders
 
 import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.data.User
+import io.stacrypt.stadroid.data.format
 import io.stacrypt.stadroid.data.sessionManager
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.ARG_TARGET
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_APPLICATION_PIN
@@ -19,8 +20,8 @@ import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_BANK
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_BANK_CARDS
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_CHANEG_PASSWORD
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_VERIFICATION_PROCESS
+import io.stacrypt.stadroid.profile.banking.extractIpAddress
 import kotlinx.android.synthetic.main.fragment_profile.view.*
-import kotlinx.android.synthetic.main.row_payment_gateway.view.*
 import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.textColorResource
 
@@ -56,6 +57,16 @@ class ProfileFragment : Fragment() {
         viewModel.user?.observe(viewLifecycleOwner,
             Observer<User> { user ->
                 this.email.text = user.email
+            })
+
+        viewModel.lastLogin.observe(viewLifecycleOwner,
+            Observer { lastLogin ->
+                this.last_login.text = StringBuilder().append("Last login on ").append(
+                    if (lastLogin?.createdAt != null) lastLogin.createdAt?.format()
+                    else "Unknown"
+                )
+                    .append(" By ")
+                    .append(lastLogin?.details?.extractIpAddress() ?: "Unknown")
             })
 
 

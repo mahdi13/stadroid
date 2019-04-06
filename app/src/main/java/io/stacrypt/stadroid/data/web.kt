@@ -423,7 +423,10 @@ interface StemeraldV2ApiClient {
      */
     @HTTP(method = "GET", path = "logs", hasBody = false)
     fun getSecurityLogs(
-        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: ""
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
+        @Query("skip") skip: Int = 0,
+        @Query("take") take: Int = 20,
+        @Query("type") type: String? = null
     ): Deferred<List<SecurityLog>>
 
     /**

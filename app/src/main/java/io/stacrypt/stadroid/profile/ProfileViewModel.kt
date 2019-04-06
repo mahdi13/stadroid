@@ -6,4 +6,5 @@ import io.stacrypt.stadroid.data.*
 
 class ProfileViewModel : ViewModel() {
     val user: LiveData<User>? = if (sessionManager.isLoggedIn()) UserRepository.getMe() else null
+    val lastLogin = SecurityRepository.getLastLogin()
 }

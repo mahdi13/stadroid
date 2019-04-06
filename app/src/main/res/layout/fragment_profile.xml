@@ -97,15 +97,16 @@
                             android:background="@color/colorPrimaryLight"/>
 
                         <TextView
+                            android:id="@+id/last_login"
                             android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="30dp"
                             android:layout_marginBottom="10dp"
                             android:layout_marginTop="10dp"
+                            android:gravity="center"
                             android:textColor="@color/colorPrimaryTextLight"
                             android:fontFamily="@font/din_medium"
-                            android:text="Last Login On: 2019-02-12   By: 192.169.1.1"/>
+                            tools:text="Last Login On: 2019-02-12   By: 192.169.1.1"/>
 
 
                     </LinearLayout>
