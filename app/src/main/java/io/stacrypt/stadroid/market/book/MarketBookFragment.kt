@@ -1,7 +1,6 @@
 package io.stacrypt.stadroid.market.book
 
 import android.os.Bundle
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +12,8 @@ import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.data.Book
 import io.stacrypt.stadroid.data.BookResponse
 import io.stacrypt.stadroid.market.MarketViewModel
+import io.stacrypt.stadroid.ui.format10Digit
+import kotlinx.android.synthetic.main.fragment_market_book_list.view.*
 import kotlin.math.max
 
 class MarketBookFragment : Fragment() {
@@ -25,21 +26,22 @@ class MarketBookFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val recyclerView = inflater.inflate(R.layout.fragment_market_book_list, container, false) as RecyclerView
+        val rootView = inflater.inflate(R.layout.fragment_market_book_list, container, false)
 
         adapter = MarketBookRecyclerViewAdapter(ArrayList()) { book ->
             book?.price?.let { viewModel.newOrderPrice.postValue(book.price) }
         }
-        recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = adapter
+        rootView.list.layoutManager = LinearLayoutManager(context)
+        rootView.list.adapter = adapter
 
-        return recyclerView
+        return rootView
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(activity!!).get(MarketViewModel::class.java)
-        viewModel.book.observe(this,
+        viewModel.book.observe(
+            this,
             Observer<BookResponse> { books ->
                 val items = ArrayList<Pair<Book?, Book?>>()
                 for (i in 0..(max(books.buys.size, books.sells.size))) {
@@ -52,6 +54,11 @@ class MarketBookFragment : Fragment() {
                 }
                 adapter.items = items
                 adapter.notifyDataSetChanged()
+
+                if (books.buys.isNotEmpty() && books.sells.isNotEmpty()) {
+                    view?.spread?.text =
+                        (books.buys.map { it.price }.min()!! - books.buys.map { it.price }.max()!!).format10Digit()
+                }
             })
     }
 }
