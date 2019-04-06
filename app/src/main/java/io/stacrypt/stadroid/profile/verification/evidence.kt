@@ -7,6 +7,7 @@ import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.graphics.drawable.toBitmap
 import androidx.databinding.Bindable
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
@@ -212,64 +213,67 @@ class EvidenceFormFragment : Fragment() {
 
             if (!validateForm()) return@setOnClickListener
 
-            // view.submit.startAnimation {
+            view.submit.startAnimation {
 
-            val idFile = File(viewModel.idCardPath.value)
-            val idFileReqBody = RequestBody.create(idFile.mimeType(), idFile)
-            val idPart = MultipartBody.Part.createFormData("idCard", idFile.name, idFileReqBody)
+                val idFile = File(viewModel.idCardPath.value)
+                val idFileReqBody = RequestBody.create(idFile.mimeType(), idFile)
+                val idPart = MultipartBody.Part.createFormData("idCard", idFile.name, idFileReqBody)
 
-            val idSecondaryFile = File(viewModel.idCardPath.value)
-            val idSecondaryFileReqBody = RequestBody.create(idSecondaryFile.mimeType(), idSecondaryFile)
-            val idPartSecondary =
-                MultipartBody.Part.createFormData(
-                    "idCardSecondary",
-                    idSecondaryFile.name,
-                    idSecondaryFileReqBody
-                )
+                val idSecondaryFile = File(viewModel.idCardPath.value)
+                val idSecondaryFileReqBody = RequestBody.create(idSecondaryFile.mimeType(), idSecondaryFile)
+                val idPartSecondary =
+                    MultipartBody.Part.createFormData(
+                        "idCardSecondary",
+                        idSecondaryFile.name,
+                        idSecondaryFileReqBody
+                    )
 
-            GlobalScope.launch(Dispatchers.Main) {
+                GlobalScope.launch(Dispatchers.Main) {
 
-                try {
-                    stemeraldApiClient.submitMyEvidences(
-                        firstName = MultipartBody.Part.createFormData("firstName", viewModel.firstName.value!!),
-                        lastName = MultipartBody.Part.createFormData("lastName", viewModel.lastName.value!!),
-                        address = MultipartBody.Part.createFormData("address", viewModel.address.value!!),
-                        birthday = MultipartBody.Part.createFormData(
-                            "birthday",
-                            Calendar.getInstance(Locale.ENGLISH).apply {
-                                set(
-                                    viewModel.birthdayYear.value!!,
-                                    viewModel.birthdayMoth.value!!,
-                                    viewModel.birthdayDay.value!!
-                                )
-                            }.time.serialize()
-                        ),
-                        cityId = MultipartBody.Part.createFormData(
-                            "cityId",
-                            viewModel.cities.value!![viewModel.selectedCityPosition.value!!].id.toString()
-                        ),
-                        gender = MultipartBody.Part.createFormData(
-                            "gender",
-                            resources.getStringArray(R.array.genders)[viewModel.selectedGenderPosition.value!!].toLowerCase()
-                        ),
-                        nationalCode = MultipartBody.Part.createFormData("nationalCode", viewModel.idNumber.value!!),
-                        idCard = idPart,
-                        idCardSecondary = idPartSecondary
-                    ).await()
+                    try {
+                        stemeraldApiClient.submitMyEvidences(
+                            firstName = MultipartBody.Part.createFormData("firstName", viewModel.firstName.value!!),
+                            lastName = MultipartBody.Part.createFormData("lastName", viewModel.lastName.value!!),
+                            address = MultipartBody.Part.createFormData("address", viewModel.address.value!!),
+                            birthday = MultipartBody.Part.createFormData(
+                                "birthday",
+                                Calendar.getInstance(Locale.ENGLISH).apply {
+                                    set(
+                                        viewModel.birthdayYear.value!!,
+                                        viewModel.birthdayMoth.value!!,
+                                        viewModel.birthdayDay.value!!
+                                    )
+                                }.time.serialize()
+                            ),
+                            cityId = MultipartBody.Part.createFormData(
+                                "cityId",
+                                viewModel.cities.value!![viewModel.selectedCityPosition.value!!].id.toString()
+                            ),
+                            gender = MultipartBody.Part.createFormData(
+                                "gender",
+                                resources.getStringArray(R.array.genders)[viewModel.selectedGenderPosition.value!!].toLowerCase()
+                            ),
+                            nationalCode = MultipartBody.Part.createFormData(
+                                "nationalCode",
+                                viewModel.idNumber.value!!
+                            ),
+                            idCard = idPart,
+                            idCardSecondary = idPartSecondary
+                        ).await()
 
-                    longToast("Successfully uploaded. You will be fully verified in a few hours...")
-                    // view.submit.doneLoadingAnimation(
-                    //     resources.getColor(R.color.real_green),
-                    //     resources.getDrawable(R.drawable.ic_check_circle_black_24dp).toBitmap(100, 100)
-                    // )
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                    toast(R.string.problem_occurred_toast)
-                    // view.submit.doneLoadingAnimation(
-                    //     resources.getColor(R.color.real_red),
-                    //     resources.getDrawable(R.drawable.ic_close).toBitmap(100, 100)
-                    // )
-                    // }
+                        longToast("Successfully uploaded. You will be fully verified in a few hours...")
+                        view.submit.doneLoadingAnimation(
+                            resources.getColor(R.color.real_green),
+                            resources.getDrawable(R.drawable.ic_check_circle_black_24dp).toBitmap(100, 100)
+                        )
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                        toast(R.string.problem_occurred_toast)
+                        view.submit.doneLoadingAnimation(
+                            resources.getColor(R.color.real_red),
+                            resources.getDrawable(R.drawable.ic_close).toBitmap(100, 100)
+                        )
+                    }
                 }
             }
 
@@ -280,18 +284,20 @@ class EvidenceFormFragment : Fragment() {
 
     private fun validateForm(): Boolean {
         var error: String? = null
-        if (viewModel.firstName.value?.isValidName() != true) error = "FirstName is wrong"
-        else if (viewModel.lastName.value?.isValidName() != true) error = "LastName is wrong"
-        else if (viewModel.birthdayDay.value?.takeIf { it in 1..32 } == null) error = "Birthday Day is wrong"
-        else if (viewModel.birthdayMoth.value?.takeIf { it in 1..13 } == null) error = "Birthday Month is wrong"
-        else if (viewModel.birthdayYear.value?.takeIf { it in 1980..2004 } == null) error =
-            "You should have at least 18 years old"
-        else if (viewModel.selectedGenderPosition.value == null) error = "Please specify your gender"
-        else if (viewModel.selectedCityPosition.value == null) error = "Please choose your city"
-        else if (viewModel.address.value.isNullOrEmpty()) error = "Address is wrong"
-        else if (viewModel.idNumber.value.isNullOrEmpty()) error = "Id number is wrong"
-        else if (viewModel.idCardPath.value.isNullOrEmpty()) error = "Please choose your identity card's picture"
-        else if (viewModel.idCardSecondaryPath.value.isNullOrEmpty()) error = "Please take a selfie from yourself"
+        when {
+            viewModel.firstName.value?.isValidName() != true -> error = "FirstName is wrong"
+            viewModel.lastName.value?.isValidName() != true -> error = "LastName is wrong"
+            viewModel.birthdayDay.value?.takeIf { it in 1..32 } == null -> error = "Birthday Day is wrong"
+            viewModel.birthdayMoth.value?.takeIf { it in 1..13 } == null -> error = "Birthday Month is wrong"
+            viewModel.birthdayYear.value?.takeIf { it in 1980..2004 } == null -> error =
+                "You should have at least 18 years old"
+            viewModel.selectedGenderPosition.value == null -> error = "Please specify your gender"
+            viewModel.selectedCityPosition.value == null -> error = "Please choose your city"
+            viewModel.address.value.isNullOrEmpty() -> error = "Address is wrong"
+            viewModel.idNumber.value.isNullOrEmpty() -> error = "Id number is wrong"
+            viewModel.idCardPath.value.isNullOrEmpty() -> error = "Please choose your identity card's picture"
+            viewModel.idCardSecondaryPath.value.isNullOrEmpty() -> error = "Please take a selfie from yourself"
+        }
 
         error?.let { longToast(it) }
 
