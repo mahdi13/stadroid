@@ -73,6 +73,7 @@ class VerificationProcessFragment : BaseSettingFragment() {
                             .replace(R.id.verification_container, MobilePhoneVerificationFragment()).commitNow()
 
                     } */ else if (
+                        evidence.error != null ||
                         evidence.firstName == null ||
                         evidence.lastName == null ||
                         evidence.birthday == null ||

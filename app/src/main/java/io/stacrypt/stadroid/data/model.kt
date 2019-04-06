@@ -244,13 +244,11 @@ data class TokenResponse(
     val token: String
 )
 
-enum class Gender { MALE, FEMALE }
-
 data class Evidence(
     val clientId: Int,
     val cityId: Int?,
     val type: String,
-    val gender: Gender?,
+    val gender: String?,
     val birthday: Date?,
     val mobilePhone: String?,
     val fixedPhone: String?,
