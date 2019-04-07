@@ -11,6 +11,7 @@ import io.stacrypt.stadroid.profile.ProfileSettingActivity
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.LAUNCH_MODE_DIALOG
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_ADD_BANK_CARD
 import io.stacrypt.stadroid.profile.banking.BankCardPagedAdapter
+import io.stacrypt.stadroid.profile.banking.BankingRepository
 import io.stacrypt.stadroid.wallet.balance.BalanceDetailActivity.Companion.ARG_ASSET
 import io.stacrypt.stadroid.wallet.data.WalletRepository
 import io.stacrypt.stadroid.wallet.fiat.PaymentGatewayAdapter
@@ -23,7 +24,7 @@ class CashinViewModel : ViewModel() {
 
     val currency = Transformations.switchMap(fiatSymbol) { WalletRepository.getCurrency(it) }
     val paymentGateways = Transformations.switchMap(fiatSymbol) { WalletRepository.getPaymentGateways(it) }
-//    val bankCards = Transformations.switchMap(fiatSymbol) { BankingRepository.getBankCards()}
+   val bankCards = Transformations.switchMap(fiatSymbol) { BankingRepository.getBankCards()}
 }
 
 class CashinFragment : Fragment() {

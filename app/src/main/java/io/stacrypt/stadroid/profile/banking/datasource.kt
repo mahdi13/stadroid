@@ -16,7 +16,7 @@ internal enum class BankIdType { ACCOUNT, CARD }
  * This allows us to channel its network request status etc back to the UI. See the Listing creation
  * in the Repository class.
  */
-class BankAccountDataSourceFactory() : DataSource.Factory<Int, BankAccount>() {
+class BankAccountDataSourceFactory(fiatSymbol: String?) : DataSource.Factory<Int, BankAccount>() {
     val sourceLiveData = MutableLiveData<PageKeyedBankIdDataSource>()
     override fun create(): DataSource<Int, BankAccount> {
         val source = PageKeyedBankIdDataSource(BankIdType.ACCOUNT)
@@ -25,7 +25,7 @@ class BankAccountDataSourceFactory() : DataSource.Factory<Int, BankAccount>() {
     }
 }
 
-class BankCardDataSourceFactory() : DataSource.Factory<Int, BankCard>() {
+class BankCardDataSourceFactory(fiatSymbol: String) : DataSource.Factory<Int, BankCard>() {
     val sourceLiveData = MutableLiveData<PageKeyedBankIdDataSource>()
     override fun create(): DataSource<Int, BankCard> {
         val source = PageKeyedBankIdDataSource(BankIdType.CARD)
@@ -34,7 +34,7 @@ class BankCardDataSourceFactory() : DataSource.Factory<Int, BankCard>() {
     }
 }
 
-class PageKeyedBankIdDataSource internal constructor(val type: BankIdType) :
+class PageKeyedBankIdDataSource internal constructor(val type: BankIdType, val fiatSymbol: String?) :
     PageKeyedDataSource<Int, BankId>() {
 
     private val scope = CoroutineScope(Dispatchers.IO)
@@ -73,11 +73,13 @@ class PageKeyedBankIdDataSource internal constructor(val type: BankIdType) :
                 val items = when (type) {
                     BankIdType.ACCOUNT -> stemeraldApiClient.getBankAccounts(
                         take = params.requestedLoadSize,
-                        skip = params.key * params.requestedLoadSize
+                        skip = params.key * params.requestedLoadSize,
+                        fiatSymbol = fiatSymbol
                     ).await()
                     BankIdType.CARD -> stemeraldApiClient.getBankCards(
                         take = params.requestedLoadSize,
-                        skip = params.key * params.requestedLoadSize
+                        skip = params.key * params.requestedLoadSize,
+                        fiatSymbol = fiatSymbol
                     ).await()
                 }
                 retry = null
@@ -105,11 +107,13 @@ class PageKeyedBankIdDataSource internal constructor(val type: BankIdType) :
                 when (type) {
                     BankIdType.ACCOUNT -> stemeraldApiClient.getBankAccounts(
                         take = params.requestedLoadSize,
-                        skip = 0
+                        skip = 0,
+                        fiatSymbol = fiatSymbol
                     ).await()
                     BankIdType.CARD -> stemeraldApiClient.getBankCards(
                         take = params.requestedLoadSize,
-                        skip = 0
+                        skip = 0,
+                        fiatSymbol = fiatSymbol
                     ).await()
                 }
             }

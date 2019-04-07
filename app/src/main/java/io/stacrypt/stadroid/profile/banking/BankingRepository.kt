@@ -20,7 +20,7 @@ object BankingRepository {
      * Always online
      */
     fun getBankAccounts(): Listing<BankAccount> {
-        val sourceFactory = BankAccountDataSourceFactory()
+        val sourceFactory = BankAccountDataSourceFactory(fiatSymbol)
 
         val livePagedList = sourceFactory.toLiveData(
             pageSize = 20 // Doesn't matter, because server will set it
@@ -48,8 +48,8 @@ object BankingRepository {
     /**
      * Always online
      */
-    fun getBankCards(): Listing<BankCard> {
-        val sourceFactory = BankCardDataSourceFactory()
+    fun getBankCards(fiatSymbol: String? = null): Listing<BankCard> {
+        val sourceFactory = BankCardDataSourceFactory(fiatSymbol)
 
         val livePagedList = sourceFactory.toLiveData(
             pageSize = 20 // Doesn't matter, because server will set it

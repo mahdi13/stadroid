@@ -326,7 +326,8 @@ interface StemeraldV2ApiClient {
     fun getBankAccounts(
         @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
         @Query("skip") skip: Int = 0,
-        @Query("take") take: Int = 20
+        @Query("take") take: Int = 20,
+        @Query("fiatSymbol") fiatSymbol: String? = null
     ): Deferred<List<BankAccount>>
 
     @FormUrlEncoded
@@ -345,7 +346,8 @@ interface StemeraldV2ApiClient {
     fun getBankCards(
         @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
         @Query("skip") skip: Int = 0,
-        @Query("take") take: Int = 20
+        @Query("take") take: Int = 20,
+        @Query("fiatSymbol") fiatSymbol: String? = null
     ): Deferred<List<BankCard>>
 
     @FormUrlEncoded
