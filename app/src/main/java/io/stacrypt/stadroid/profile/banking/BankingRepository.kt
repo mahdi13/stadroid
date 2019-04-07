@@ -19,7 +19,7 @@ object BankingRepository {
     /**
      * Always online
      */
-    fun getBankAccounts(): Listing<BankAccount> {
+    fun getBankAccounts(fiatSymbol: String? = null): Listing<BankAccount> {
         val sourceFactory = BankAccountDataSourceFactory(fiatSymbol)
 
         val livePagedList = sourceFactory.toLiveData(

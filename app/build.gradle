@@ -98,7 +98,7 @@ dependencies {
     implementation 'androidx.room:room-coroutines:2.1.0-alpha04'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.0.0'
-    implementation 'com.google.firebase:firebase-messaging:17.5.0'
+    implementation 'com.google.firebase:firebase-messaging:17.6.0'
     kapt "androidx.room:room-compiler:2.1.0-alpha06"
     implementation 'androidx.paging:paging-runtime-ktx:2.1.0'
     implementation 'android.arch.work:work-runtime-ktx:1.0.0'
@@ -124,7 +124,7 @@ dependencies {
     implementation 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
 
     // Android Support
-    implementation 'com.android.support.constraint:constraint-layout:2.0.0-alpha3'
+    implementation 'com.android.support.constraint:constraint-layout:2.0.0-alpha4'
 
     // Anko
     implementation 'org.jetbrains.anko:anko:0.10.8'

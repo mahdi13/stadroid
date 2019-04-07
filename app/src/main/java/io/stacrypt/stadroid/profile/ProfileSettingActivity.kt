@@ -25,6 +25,33 @@ class ProfileSettingActivity : AppCompatActivity() {
             supportFragmentManager.beginTransaction().detach(navHost).attach(navHost)
     }
 
+    /**
+     * Here is a method which I defined to be able to achieve a lot of functionalities using these extra parameters.
+     * The reseon of all of this structure is all profile related pages have been organized under a singe
+     * activity {@class ProfileSettingActivity} but we would like to be able to interact properly to all related pages.
+     *
+     * For example assume we want to:
+     *  * Navigate normally to different profile pages (with a hirarciale method)
+     *  * Send the user to add a bank account for himself
+     *  * Send the user to choose one of it's bank accounts
+     *  * ...
+     *
+     * The main parameters are:
+     *
+     * {@property ARG_TARGET} -> Where do you want to go? (e.g. bank card lists -> TARGET_BANK_CARDS)
+     *
+     * {@property ARG_ACTION} -> What you want to do? (e.g. choose a card -> ACTION_CHOOSE)
+     *
+     * {@property ARG_LAUNCH_MODE} -> How do you want to go there?
+     * (e.g. do a specific action and come back -> LAUNCH_MODE_DIALOG)
+     *
+     * {@property ARG_TOKEN} -> Mostly being used when we want to handle link click, from outside of the app
+     * (Deep Linking) (e.g. client clicks on verify link on his received email on his inbox)
+
+     * {@property ARG_RESULT} -> Wherever we want to respond a user, we use this key and the sender could get the
+     * related data using this key while overriding {@override onActivityResult}
+     *
+     */
     companion object {
         const val ARG_TARGET = "target"
         const val ARG_ACTION = "action"
@@ -32,6 +59,7 @@ class ProfileSettingActivity : AppCompatActivity() {
         const val ARG_LAUNCH_MODE = "launch_mode"
         const val ARG_RESULT = "result"
 
+        const val ACTION_CHOOSE = "choose"
         const val ACTION_VERIFY = "verify"
 
         // TODO Rename it to something meaningful (e.g. isExternalCall)
@@ -68,5 +96,7 @@ class ProfileSettingActivity : AppCompatActivity() {
 
         const val LAUNCH_MODE_NORMAL = "normal"
         const val LAUNCH_MODE_DIALOG = "dialog"
+
+        const val RESULT_CHOOSE = "choose"
     }
 }

@@ -1,5 +1,7 @@
 package io.stacrypt.stadroid.profile.banking
 
+import android.app.Activity
+import android.content.Intent
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,11 +11,16 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.NavHostFragment
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.Gson
 
 import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.data.BankCard
 import io.stacrypt.stadroid.profile.BaseSettingFragment
 import io.stacrypt.stadroid.profile.ProfileSettingActivity
+import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.ACTION_CHOOSE
+import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.ARG_ACTION
+import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.ARG_LAUNCH_MODE
+import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.LAUNCH_MODE_DIALOG
 import kotlinx.android.synthetic.main.bank_cards_fragment.view.*
 
 class BankCardsFragment : BaseSettingFragment() {
@@ -44,6 +51,16 @@ class BankCardsFragment : BaseSettingFragment() {
                 .navigate(R.id.action_bankCardsFragment_to_addBankCardFragment, Bundle().apply {
                     putString(ProfileSettingActivity.ARG_LAUNCH_MODE, ProfileSettingActivity.LAUNCH_MODE_NORMAL)
                 })
+        }
+
+
+        if (arguments?.getString(ARG_ACTION) == ACTION_CHOOSE) {
+            adapter.onItemClickListener = {
+                activity?.setResult(
+                    Activity.RESULT_OK,
+                    Intent().apply { putExtra(ProfileSettingActivity.RESULT_CHOOSE, Gson().toJson(it)) })
+                if (arguments?.getString(ARG_LAUNCH_MODE) == LAUNCH_MODE_DIALOG) back()
+            }
         }
 
         return rootView

@@ -3,6 +3,7 @@ package io.stacrypt.stadroid.profile.banking
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -13,6 +14,9 @@ import kotlinx.android.synthetic.main.row_bank_account.view.*
 import kotlinx.android.synthetic.main.row_bank_card.view.*
 
 class BankCardPagedAdapter : PagedListAdapter<BankCard, BankCardPagedAdapter.ViewHolder>(ITEM_COMPARATOR) {
+
+    var onItemClickListener: ((BankCard) -> Unit)? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(parent)
 
@@ -23,11 +27,16 @@ class BankCardPagedAdapter : PagedListAdapter<BankCard, BankCardPagedAdapter.Vie
         LayoutInflater.from(parent.context)
             .inflate(R.layout.row_bank_card, parent, false)
     ) {
+        val cardView: CardView = itemView.card_card
         val titleView: TextView = itemView.card_title
         val numberView: TextView = itemView.pan
         val holderView: TextView = itemView.holder
 
         fun bindTo(bankCard: BankCard?) {
+            cardView.setOnClickListener { v ->
+                bankCard?.let { onItemClickListener?.invoke(it) }
+            }
+
             if (bankCard == null) return clear()
 
             titleView.text = "Card Number ${bankCard.id}"
@@ -54,6 +63,9 @@ class BankCardPagedAdapter : PagedListAdapter<BankCard, BankCardPagedAdapter.Vie
 }
 
 class BankAccountPagedAdapter : PagedListAdapter<BankAccount, BankAccountPagedAdapter.ViewHolder>(ITEM_COMPARATOR) {
+
+    var onItemClickListener: ((BankAccount) -> Unit)? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(parent)
 
@@ -64,11 +76,16 @@ class BankAccountPagedAdapter : PagedListAdapter<BankAccount, BankAccountPagedAd
         LayoutInflater.from(parent.context)
             .inflate(R.layout.row_bank_account, parent, false)
     ) {
+        val cardView: CardView = itemView.account_card
         val titleView: TextView = itemView.account_title
         val numberView: TextView = itemView.iban
         val ownerView: TextView = itemView.owner
 
         fun bindTo(bankAccount: BankAccount?) {
+            cardView.setOnClickListener { v ->
+                bankAccount?.let { onItemClickListener?.invoke(it) }
+            }
+
             if (bankAccount == null) return clear()
 
             titleView.text = "Account Number ${bankAccount.id}"

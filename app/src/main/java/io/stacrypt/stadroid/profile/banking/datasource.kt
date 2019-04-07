@@ -25,7 +25,7 @@ class BankAccountDataSourceFactory(val fiatSymbol: String?) : DataSource.Factory
     }
 }
 
-class BankCardDataSourceFactory(val fiatSymbol: String) : DataSource.Factory<Int, BankCard>() {
+class BankCardDataSourceFactory(val fiatSymbol: String?) : DataSource.Factory<Int, BankCard>() {
     val sourceLiveData = MutableLiveData<PageKeyedBankIdDataSource>()
     override fun create(): DataSource<Int, BankCard> {
         val source = PageKeyedBankIdDataSource(BankIdType.CARD, fiatSymbol)

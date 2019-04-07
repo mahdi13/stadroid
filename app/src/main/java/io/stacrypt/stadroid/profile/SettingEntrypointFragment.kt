@@ -11,6 +11,7 @@ import androidx.navigation.fragment.NavHostFragment
 import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.ACTION_VERIFY
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.ARG_ACTION
+import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.ARG_LAUNCH_MODE
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.ARG_TARGET
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.ARG_TOKEN
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_ADD_BANK_ACCOUNT
@@ -46,9 +47,9 @@ class SettingEntrypointFragment : Fragment() {
                     }
                 }
 
-            var bundle: Bundle? = null
-            if (context.intent.data != null && context.intent.data?.getQueryParameter("t_") != null) {
-                bundle = Bundle().apply {
+            val bundle = Bundle(activity?.intent?.extras ?: Bundle.EMPTY)
+            if (activity?.intent?.data?.getQueryParameter("t_") != null) { // FIXME: It's not a good condition
+                bundle.apply {
                     putString(ARG_ACTION, ACTION_VERIFY)
                     putString(ARG_TOKEN, context.intent.data?.getQueryParameter("t_"))
                 }
