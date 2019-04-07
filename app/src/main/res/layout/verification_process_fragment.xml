@@ -15,7 +15,7 @@
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:stpi_stepCount="5"
+            app:stpi_stepCount="4"
             app:stpi_indicatorColor="@color/colorSecondary"
             app:stpi_lineDoneColor="@color/colorSecondary"
             app:stpi_lineColor="@color/colorSecondary"

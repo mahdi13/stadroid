@@ -9,6 +9,6 @@ import io.stacrypt.stadroid.R
 
 class VerificationDoneFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.verification_pending_fragment, container, false)
+        return inflater.inflate(R.layout.verification_done_fragment, container, false)
     }
 }

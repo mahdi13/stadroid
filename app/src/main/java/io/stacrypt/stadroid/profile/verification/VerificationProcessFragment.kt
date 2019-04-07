@@ -73,7 +73,7 @@ class VerificationProcessFragment : BaseSettingFragment() {
                             .replace(R.id.verification_container, MobilePhoneVerificationFragment()).commitNow()
 
                     } */ else if (
-                        evidence.error != null ||
+                        (!it.isEvidenceVerified && evidence.error != null) ||
                         evidence.firstName == null ||
                         evidence.lastName == null ||
                         evidence.birthday == null ||
@@ -92,10 +92,9 @@ class VerificationProcessFragment : BaseSettingFragment() {
                         childFragmentManager.beginTransaction()
                             .replace(R.id.verification_container, VerificationPendingFragment()).commitNow()
                     } else {
-                        stepper.currentStep = 3
-                        stepper.setShowDoneIcon(true)
-//                        childFragmentManager.beginTransaction()
-//                            .replace(R.id.verification_container, EvidenceFormFragment()).commitNow()
+                        stepper.currentStep = 4
+                        childFragmentManager.beginTransaction()
+                            .replace(R.id.verification_container, VerificationDoneFragment()).commitNow()
                     }
                 })
             }
