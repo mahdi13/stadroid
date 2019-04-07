@@ -15,6 +15,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.jetbrains.anko.support.v4.longToast
 import org.jetbrains.anko.support.v4.toast
+import retrofit2.HttpException
 import java.lang.Exception
 
 class AddBankAccountFragment : BaseSettingFragment() {
@@ -42,6 +43,15 @@ class AddBankAccountFragment : BaseSettingFragment() {
                             owner = view.owner.text.toString(),
                             fiatSymbol = "TIRR" // FIXME
                         ).await()
+                    } catch (e: HttpException) {
+                        e.printStackTrace()
+                        if (e.code() == 409) {
+                            toast("You have already submitted an account with theses information")
+                        } else {
+                            toast(R.string.problem_occurred_toast)
+                        }
+                        view.save.isEnabled = true
+                        return@launch
                     } catch (e: Exception) {
                         e.printStackTrace()
                         toast(R.string.problem_occurred_toast)
