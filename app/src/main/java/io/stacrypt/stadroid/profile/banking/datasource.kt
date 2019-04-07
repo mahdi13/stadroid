@@ -16,19 +16,19 @@ internal enum class BankIdType { ACCOUNT, CARD }
  * This allows us to channel its network request status etc back to the UI. See the Listing creation
  * in the Repository class.
  */
-class BankAccountDataSourceFactory(fiatSymbol: String?) : DataSource.Factory<Int, BankAccount>() {
+class BankAccountDataSourceFactory(val fiatSymbol: String?) : DataSource.Factory<Int, BankAccount>() {
     val sourceLiveData = MutableLiveData<PageKeyedBankIdDataSource>()
     override fun create(): DataSource<Int, BankAccount> {
-        val source = PageKeyedBankIdDataSource(BankIdType.ACCOUNT)
+        val source = PageKeyedBankIdDataSource(BankIdType.ACCOUNT, fiatSymbol)
         sourceLiveData.postValue(source)
         return source as PageKeyedDataSource<Int, BankAccount>
     }
 }
 
-class BankCardDataSourceFactory(fiatSymbol: String) : DataSource.Factory<Int, BankCard>() {
+class BankCardDataSourceFactory(val fiatSymbol: String) : DataSource.Factory<Int, BankCard>() {
     val sourceLiveData = MutableLiveData<PageKeyedBankIdDataSource>()
     override fun create(): DataSource<Int, BankCard> {
-        val source = PageKeyedBankIdDataSource(BankIdType.CARD)
+        val source = PageKeyedBankIdDataSource(BankIdType.CARD, fiatSymbol)
         sourceLiveData.postValue(source)
         return source as PageKeyedDataSource<Int, BankCard>
     }
