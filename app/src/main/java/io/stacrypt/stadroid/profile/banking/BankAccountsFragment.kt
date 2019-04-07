@@ -1,5 +1,7 @@
 package io.stacrypt.stadroid.profile.banking
 
+import android.app.Activity
+import android.content.Intent
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.NavHostFragment
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.Gson
 
 import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.data.BankAccount
@@ -19,6 +22,7 @@ import kotlinx.android.synthetic.main.bank_accounts_fragment.view.*
 import kotlinx.android.synthetic.main.header_appbar_back.view.*
 
 class BankAccountsFragment : BaseSettingFragment() {
+
     private lateinit var viewModel: BankAccountsViewModel
     private lateinit var adapter: BankAccountPagedAdapter
 
@@ -45,6 +49,15 @@ class BankAccountsFragment : BaseSettingFragment() {
                 .navigate(R.id.action_bankAccountsFragment_to_addBankAccountFragment, Bundle().apply {
                     putString(ProfileSettingActivity.ARG_LAUNCH_MODE, ProfileSettingActivity.LAUNCH_MODE_NORMAL)
                 })
+        }
+
+        if (arguments?.getString(ProfileSettingActivity.ARG_ACTION) == ProfileSettingActivity.ACTION_CHOOSE) {
+            adapter.onItemClickListener = {
+                activity?.setResult(
+                    Activity.RESULT_OK,
+                    Intent().apply { putExtra(ProfileSettingActivity.RESULT_CHOOSE, Gson().toJson(it)) })
+                if (arguments?.getString(ProfileSettingActivity.ARG_LAUNCH_MODE) == ProfileSettingActivity.LAUNCH_MODE_DIALOG) back()
+            }
         }
 
 

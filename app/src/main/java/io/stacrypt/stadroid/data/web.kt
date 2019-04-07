@@ -236,7 +236,7 @@ interface StemeraldV2ApiClient {
     fun createShaparakIn(
         @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
         @Field("amount") amount: String,
-        @Field("shetabAddressId") bankCardId: String,
+        @Field("shetabAddressId") bankCardId: Int,
         @Field("paymentGatewayName") paymentGatewayName: String
     ): Deferred<BankingTransaction>
 
@@ -245,7 +245,7 @@ interface StemeraldV2ApiClient {
     fun scheduleShaparakOut(
         @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
         @Field("amount") amount: String,
-        @Field("shebaAddressId") bankAccountId: String,
+        @Field("shebaAddressId") bankAccountId: Int,
         @Field("paymentGatewayName") paymentGatewayName: String
     ): Deferred<BankingTransaction>
 

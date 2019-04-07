@@ -7,14 +7,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
+import androidx.navigation.fragment.NavHostFragment
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.data.BankCard
+import io.stacrypt.stadroid.data.PaymentGateway
+import io.stacrypt.stadroid.data.stemeraldApiClient
 import io.stacrypt.stadroid.profile.ProfileSettingActivity
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.ACTION_CHOOSE
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.ARG_ACTION
@@ -22,21 +26,24 @@ import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.ARG_LAUNCH_
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.ARG_TARGET
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.LAUNCH_MODE_DIALOG
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.RESULT_CHOOSE
-import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_ADD_BANK_CARD
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_BANK_CARDS
-import io.stacrypt.stadroid.profile.banking.BankCardPagedAdapter
 import io.stacrypt.stadroid.profile.banking.BankingRepository
+import io.stacrypt.stadroid.ui.format
+import io.stacrypt.stadroid.ui.formatScaledMinimal
 import io.stacrypt.stadroid.wallet.balance.BalanceDetailActivity.Companion.ARG_ASSET
 import io.stacrypt.stadroid.wallet.data.WalletRepository
 import io.stacrypt.stadroid.wallet.fiat.PaymentGatewayAdapter
+import kotlinx.android.synthetic.main.frgment_cashin.*
 import kotlinx.android.synthetic.main.frgment_cashin.view.*
-import org.jetbrains.anko.customView
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import org.jetbrains.anko.sdk27.coroutines.textChangedListener
 import org.jetbrains.anko.support.v4.alert
-import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.longToast
-import org.jetbrains.anko.support.v4.selector
-import org.jetbrains.anko.support.v4.startActivity
-import org.jetbrains.anko.verticalLayout
+import org.jetbrains.anko.support.v4.toast
+import java.lang.Exception
+import java.math.BigDecimal
 
 class CashinViewModel : ViewModel() {
 
@@ -47,6 +54,10 @@ class CashinViewModel : ViewModel() {
     val bankCards = Transformations.switchMap(fiatSymbol) {
         BankingRepository.getBankCards(it).pagedList
     }
+
+    val selectedPaymentGateway = MutableLiveData<PaymentGateway?>()
+    val selectedAmount = MutableLiveData<BigDecimal?>()
+    val selectedCard = MutableLiveData<BankCard?>()
 }
 
 class CashinFragment : Fragment() {
@@ -113,6 +124,53 @@ class CashinFragment : Fragment() {
             // }
         }
 
+        amount.textChangedListener { viewModel.selectedAmount.postValue(amount.text.toString().toBigDecimalOrNull()) }
+
+        rootView.back.setOnClickListener {
+            NavHostFragment.findNavController(this@CashinFragment).navigateUp()
+        }
+
+        rootView.submit.setOnClickListener {
+            // TODO: Check currency  not null
+            // TODO: Validate form
+            // TODO: Check range
+
+            alert {
+                ctx.setTheme(R.style.AlertDialogCustom)
+                // TODO: Show commission
+                // TODO: Show receiving time and other rules
+                // TODO: Check balance
+                // TODO: Show security considerations (checking url and etc.)
+                positiveButton("Let's do it") {
+                    rootView.submit.startAnimation {
+                        GlobalScope.launch(Dispatchers.Main) {
+                            try {
+                                val result = stemeraldApiClient.createShaparakIn(
+                                    paymentGatewayName = viewModel.selectedPaymentGateway.value?.name!!,
+                                    amount = viewModel.selectedAmount.value?.format(viewModel.currency.value!!)!!,
+                                    bankCardId = viewModel.selectedCard.value?.id!!
+                                ).await()
+
+
+                                rootView.submit.doneLoadingAnimation(
+                                    resources.getColor(R.color.real_green),
+                                    resources.getDrawable(R.drawable.ic_check_circle_black_24dp).toBitmap(100, 100)
+                                )
+
+                                // Redirect him to the payment page on browser
+                            } catch (e: Exception) {
+                                // TODO: Handle balance error
+                                e.printStackTrace()
+                                toast(R.string.problem_occurred_toast)
+                                // TODO: Stop submit button's animation and restart it
+                            }
+                        }
+                    }
+                }
+                negativeButton("Cancel") {}
+            }.show()
+
+        }
 
         return rootView
     }
@@ -121,7 +179,8 @@ class CashinFragment : Fragment() {
         if (resultCode == Activity.RESULT_OK && data?.getStringExtra(RESULT_CHOOSE) != null) {
             val card = Gson().fromJson(data.getStringExtra(RESULT_CHOOSE), BankCard::class.java)
             if (card != null) {
-                longToast("You slected ${card.pan}")
+                viewModel.selectedCard.postValue(card)
+                longToast("You selected ${card.pan}")
             }
         }
         super.onActivityResult(requestCode, resultCode, data)

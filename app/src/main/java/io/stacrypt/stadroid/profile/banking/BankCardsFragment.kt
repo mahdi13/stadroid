@@ -53,7 +53,6 @@ class BankCardsFragment : BaseSettingFragment() {
                 })
         }
 
-
         if (arguments?.getString(ARG_ACTION) == ACTION_CHOOSE) {
             adapter.onItemClickListener = {
                 activity?.setResult(
