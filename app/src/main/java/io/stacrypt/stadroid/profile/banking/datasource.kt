@@ -9,6 +9,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import java.lang.Exception
 
+internal enum class BankIdType { ACCOUNT, CARD }
+
 /**
  * A simple data source factory which also provides a way to observe the last created data source.
  * This allows us to channel its network request status etc back to the UI. See the Listing creation
@@ -32,7 +34,7 @@ class BankCardDataSourceFactory() : DataSource.Factory<Int, BankCard>() {
     }
 }
 
-class PageKeyedBankIdDataSource(private val type: BankIdType) :
+class PageKeyedBankIdDataSource internal constructor(val type: BankIdType) :
     PageKeyedDataSource<Int, BankId>() {
 
     private val scope = CoroutineScope(Dispatchers.IO)
@@ -71,11 +73,11 @@ class PageKeyedBankIdDataSource(private val type: BankIdType) :
                 val items = when (type) {
                     BankIdType.ACCOUNT -> stemeraldApiClient.getBankAccounts(
                         take = params.requestedLoadSize,
-                        skip = params.key
+                        skip = params.key * params.requestedLoadSize
                     ).await()
                     BankIdType.CARD -> stemeraldApiClient.getBankCards(
                         take = params.requestedLoadSize,
-                        skip = params.key
+                        skip = params.key * params.requestedLoadSize
                     ).await()
                 }
                 retry = null
