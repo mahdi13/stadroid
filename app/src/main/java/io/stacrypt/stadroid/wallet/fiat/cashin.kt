@@ -28,6 +28,7 @@ import io.stacrypt.stadroid.profile.banking.BankingRepository
 import io.stacrypt.stadroid.profile.banking.CurrencyTextWatcher
 import io.stacrypt.stadroid.ui.calculateDepositCommission
 import io.stacrypt.stadroid.ui.format
+import io.stacrypt.stadroid.ui.formatForJson
 import io.stacrypt.stadroid.wallet.balance.BalanceDetailActivity
 import io.stacrypt.stadroid.wallet.balance.BalanceDetailActivity.Companion.ARG_ASSET
 import io.stacrypt.stadroid.wallet.data.WalletRepository
@@ -139,19 +140,19 @@ class CashinFragment : Fragment() {
                 ctx.setTheme(R.style.AlertDialogCustom)
                 title = "Please review your deposit info:"
                 message =
-                    "Amount: ${viewModel.selectedAmount.value!!.format(viewModel.currency.value!!)}" +
-                        "Commission: ${viewModel.currency?.value!!.calculateDepositCommission(viewModel.selectedAmount.value!!).format(
-                            viewModel.currency.value!!
-                        )}" +
-                        "\n" + "You will pay by: ${viewModel.selectedPaymentGateway.value!!.name}" +
-                        "\n" + "You SHOULD use card: ${viewModel.selectedCard.value!!.pan}"
+                    "Amount: ${viewModel.selectedAmount.value!!.format(viewModel.currency.value!!)}" + "\n"
+                "Commission: ${viewModel.currency?.value!!.calculateDepositCommission(viewModel.selectedAmount.value!!).format(
+                    viewModel.currency.value!!
+                )}" +
+                    "\n" + "You will pay by: ${viewModel.selectedPaymentGateway.value!!.name}" +
+                    "\n" + "You SHOULD use card: ${viewModel.selectedCard.value!!.pan}"
                 positiveButton("Let's do it") {
                     rootView.submit.startAnimation {
                         GlobalScope.launch(Dispatchers.Main) {
                             try {
                                 val result = stemeraldApiClient.createShaparakIn(
                                     paymentGatewayName = viewModel.selectedPaymentGateway.value?.name!!,
-                                    amount = viewModel.selectedAmount.value?.format(viewModel.currency.value!!)!!,
+                                    amount = viewModel.selectedAmount.value?.formatForJson(viewModel.currency.value!!)!!,
                                     bankCardId = viewModel.selectedCard.value?.id!!
                                 ).await()
 
@@ -165,7 +166,7 @@ class CashinFragment : Fragment() {
 
                                 // Redirect him to the payment page on browser
                             } catch (e: Exception) {
-                                // TODO: Handle balance error
+                                // TODO: Handle all errors
                                 e.printStackTrace()
                                 toast(R.string.problem_occurred_toast)
                                 // TODO: Stop submit button's animation and restart it

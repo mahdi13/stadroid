@@ -51,6 +51,8 @@ fun BigDecimal.format(digits: Int) = java.lang.String.format("%,.${digits}f", th
 
 fun BigDecimal.format(currency: Currency) = format(max(min(currency.smallestUnitScale, 8), 0))
 
+fun BigDecimal.formatForJson(currency: Currency) = format(currency.smallestUnitScale).replace(",", "")
+
 /**
  * This method let us show the large amount of money in a few characters
  */
