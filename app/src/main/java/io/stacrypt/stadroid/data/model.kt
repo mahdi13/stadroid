@@ -69,6 +69,10 @@ data class Currency(
     var smallestUnitScale: Int,
 
     /**
+     * Important note!!!
+     * You shouldn't use these parameters for fiats! You should get these limitations from their payment gateway object.
+     *
+     *
      * Just for crypto:
      */
     var depositMin: BigDecimal?,

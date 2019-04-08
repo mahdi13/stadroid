@@ -26,13 +26,12 @@ import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_ADD_
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_BANK_CARDS
 import io.stacrypt.stadroid.profile.banking.BankingRepository
 import io.stacrypt.stadroid.profile.banking.CurrencyTextWatcher
-import io.stacrypt.stadroid.ui.calculateDepositCommission
+import io.stacrypt.stadroid.ui.calculateCashinCommission
 import io.stacrypt.stadroid.ui.format
 import io.stacrypt.stadroid.ui.formatForJson
 import io.stacrypt.stadroid.wallet.balance.BalanceDetailActivity
 import io.stacrypt.stadroid.wallet.balance.BalanceDetailActivity.Companion.ARG_ASSET
 import io.stacrypt.stadroid.wallet.data.WalletRepository
-import kotlinx.android.synthetic.main.fragment_transaction_detail.*
 import kotlinx.android.synthetic.main.frgment_cashin.view.*
 import kotlinx.android.synthetic.main.row_bank_card.view.*
 import kotlinx.coroutines.Dispatchers
@@ -118,19 +117,19 @@ class CashinFragment : Fragment() {
             if (viewModel.selectedCard.value == null)
                 return@setOnClickListener Unit.apply { toast("Please choose a card first") }
 
-            if (viewModel.currency.value?.depositMax?.takeIf { it > BigDecimal(0) }?.takeIf { it < viewModel.selectedAmount.value } != null)
+            if (viewModel.selectedPaymentGateway.value?.cashinMax?.takeIf { it > BigDecimal(0) }?.takeIf { it < viewModel.selectedAmount.value } != null)
                 return@setOnClickListener Unit.apply {
                     longToast(
-                        "Amount is too high. Maximum amount is ${viewModel.currency.value?.depositMax?.format(
+                        "Amount is too high. Maximum amount is ${viewModel.selectedPaymentGateway.value?.cashinMax?.format(
                             viewModel.currency.value!!
                         )}"
                     )
                 }
 
-            if (viewModel.currency.value?.depositMin?.takeIf { it > viewModel.selectedAmount.value } != null)
+            if (viewModel.selectedPaymentGateway.value?.cashinMin?.takeIf { it > viewModel.selectedAmount.value } != null)
                 return@setOnClickListener Unit.apply {
                     longToast(
-                        "Amount is too low. Minimum is ${viewModel.currency.value?.depositMin?.format(
+                        "Amount is too low. Minimum is ${viewModel.selectedPaymentGateway.value?.cashinMin?.format(
                             viewModel.currency.value!!
                         )}"
                     )
@@ -140,12 +139,12 @@ class CashinFragment : Fragment() {
                 ctx.setTheme(R.style.AlertDialogCustom)
                 title = "Please review your deposit info:"
                 message =
-                    "Amount: ${viewModel.selectedAmount.value!!.format(viewModel.currency.value!!)}" + "\n"
-                "Commission: ${viewModel.currency?.value!!.calculateDepositCommission(viewModel.selectedAmount.value!!).format(
-                    viewModel.currency.value!!
-                )}" +
-                    "\n" + "You will pay by: ${viewModel.selectedPaymentGateway.value!!.name}" +
-                    "\n" + "You SHOULD use card: ${viewModel.selectedCard.value!!.pan}"
+                    "Amount: ${viewModel.selectedAmount.value!!.format(viewModel.currency.value!!)}" + "\n" +
+                        "Commission: ${viewModel.selectedPaymentGateway?.value!!.calculateCashinCommission(viewModel.selectedAmount.value!!).format(
+                            viewModel.currency.value!!
+                        )}" +
+                        "\n" + "You will pay by: ${viewModel.selectedPaymentGateway.value!!.name}" +
+                        "\n" + "You SHOULD use card: ${viewModel.selectedCard.value!!.pan}"
                 positiveButton("Let's do it") {
                     rootView.submit.startAnimation {
                         GlobalScope.launch(Dispatchers.Main) {
@@ -169,6 +168,9 @@ class CashinFragment : Fragment() {
                                 // TODO: Handle all errors
                                 e.printStackTrace()
                                 toast(R.string.problem_occurred_toast)
+                                rootView.submit.stopAnimation()
+                                rootView.submit.revertAnimation()
+                                rootView.submit.invalidate()
                                 // TODO: Stop submit button's animation and restart it
                             }
                         }
