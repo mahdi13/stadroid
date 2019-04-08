@@ -8,7 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.wallet.fiat.CashinFragment
-import io.stacrypt.stadroid.wallet.CashoutFragment
+import io.stacrypt.stadroid.wallet.fiat.CashoutFragment
 import io.stacrypt.stadroid.wallet.WithdrawFragment
 import io.stacrypt.stadroid.wallet.deposit.DepositFragment
 import io.stacrypt.stadroid.wallet.fiat.TransactionDetailFragment

@@ -122,3 +122,14 @@ fun PaymentGateway.calculateCashinCommission(amount: BigDecimal): BigDecimal {
 
     return commission
 }
+
+fun PaymentGateway.calculateCashoutCommission(amount: BigDecimal): BigDecimal {
+    val commission =
+        (cashoutStaticCommission ?: BigDecimal.ZERO) + (cashoutCommissionRate?.toBigDecimal()?.times(amount)
+            ?: BigDecimal.ZERO)
+
+    if (cashoutMaxCommission != null && cashoutMaxCommission!! > BigDecimal.ZERO)
+        commission.min(cashoutMaxCommission)
+
+    return commission
+}

@@ -1,90 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-                                       xmlns:app="http://schemas.android.com/apk/res-auto"
-                                       android:orientation="vertical"
-                                       android:layout_width="match_parent"
-                                       android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/colorPrimary"
+              android:orientation="vertical">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <include layout="@layout/header_appbar_back"/>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary">
+
+        <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="20dp">
+            android:layout_height="wrap_content">
 
-        <FrameLayout
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/AddOrderTextInputLayoutAppearance"
+                android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                android:layout_gravity="center_horizontal"
+                android:hint="@string/amount"
                 android:id="@+id/amount_container">
 
-            <EditText
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/amount"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:hint="@string/amount"
+                    android:inputType="number"
+                    android:maxLength="18"
                     android:lines="1"/>
 
-        </FrameLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/bank_accounts"
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Choose the destination bank account:"/>
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="40dp"
+                android:text="Choose the bank account:"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/bank_accounts"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/amount_container"
-                android:layout_marginTop="50dp"
+
+            <include
+                layout="@layout/row_bank_account"
+                android:id="@+id/selected_account"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:background="@color/colorPrimaryDark"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-
-        </androidx.recyclerview.widget.RecyclerView>
-
-        <com.google.android.material.button.MaterialButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/bank_accounts"
                 android:layout_marginTop="10dp"
-                android:id="@+id/add"
-                android:text="Add new bank account"/>
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-        <TextView
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/cards"
+                <!--<com.google.android.material.button.MaterialButton-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:id="@+id/choose_card"-->
+                <!--android:layout_marginEnd="5dp"-->
+                <!--android:text="Choose a card"/>-->
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/add_account"
+                    android:layout_marginStart="5dp"
+                    android:text="Or add new account"/>
+
+            </LinearLayout>
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="40dp"
                 android:text="Choose the payment method:"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/cards"
-                android:layout_marginTop="100dp"
+            <ListView
+                android:id="@+id/payment_gateways"
+                android:layout_marginTop="10dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:background="@color/colorPrimaryDark"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/bank_accounts"
+                android:layout_gravity="center_horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"/>
 
 
-        </androidx.recyclerview.widget.RecyclerView>
+            <!--<androidx.recyclerview.widget.RecyclerView-->
+            <!--android:id="@+id/cards"-->
+            <!--android:layout_marginTop="50dp"-->
+            <!--android:layout_marginStart="20dp"-->
+            <!--android:layout_marginEnd="20dp"-->
+            <!--android:background="@color/colorPrimaryDark"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@id/payment_gateways"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"/>-->
+
+            <!--<com.google.android.material.button.MaterialButton-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/add"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@id/cards"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:text="Add new bank Card"/>-->
+
+            <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
+                android:id="@+id/submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Withdraw from my account"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:maxWidth="400dp"
+                android:padding="20dp"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:textAllCaps="true"
+                android:background="@drawable/button_shape_default_rounded"
+                android:textColor="@color/colorSecondary"
+                app:spinning_bar_width="4dp"
+                app:spinning_bar_color="#FFF"
+                app:spinning_bar_padding="6dp"/>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.core.widget.NestedScrollView>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
