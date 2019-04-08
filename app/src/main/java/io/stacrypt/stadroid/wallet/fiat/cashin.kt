@@ -15,6 +15,7 @@ import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.data.BankCard
 import io.stacrypt.stadroid.data.PaymentGateway
 import io.stacrypt.stadroid.data.stemeraldApiClient
+import io.stacrypt.stadroid.data.verboseLocalizedMessage
 import io.stacrypt.stadroid.profile.ProfileSettingActivity
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.ACTION_CHOOSE
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.ARG_ACTION
@@ -24,7 +25,6 @@ import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.LAUNCH_MODE
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.RESULT_CHOOSE
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_ADD_BANK_CARD
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_BANK_CARDS
-import io.stacrypt.stadroid.profile.banking.BankingRepository
 import io.stacrypt.stadroid.profile.banking.CurrencyTextWatcher
 import io.stacrypt.stadroid.ui.calculateCashinCommission
 import io.stacrypt.stadroid.ui.format
@@ -42,6 +42,7 @@ import org.jetbrains.anko.support.v4.alert
 import org.jetbrains.anko.support.v4.longToast
 import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.toast
+import retrofit2.HttpException
 import java.lang.Exception
 import java.math.BigDecimal
 
@@ -161,6 +162,14 @@ class CashinFragment : Fragment() {
                                 (activity as BalanceDetailActivity).showtransaction(result.id)
 
                                 // Redirect him to the payment page on browser
+                            } catch (e: HttpException) {
+                                // TODO: Handle all errors
+                                e.printStackTrace()
+                                toast(e.verboseLocalizedMessage())
+                                rootView.submit.stopAnimation()
+                                rootView.submit.revertAnimation()
+                                rootView.submit.invalidate()
+                                // TODO: Stop submit button's animation and restart it
                             } catch (e: Exception) {
                                 // TODO: Handle all errors
                                 e.printStackTrace()

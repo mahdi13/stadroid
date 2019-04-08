@@ -13,6 +13,7 @@ import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.data.BankAccount
 import io.stacrypt.stadroid.data.PaymentGateway
 import io.stacrypt.stadroid.data.stemeraldApiClient
+import io.stacrypt.stadroid.data.verboseLocalizedMessage
 import io.stacrypt.stadroid.profile.ProfileSettingActivity
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.ACTION_CHOOSE
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.ARG_ACTION
@@ -21,7 +22,6 @@ import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.ARG_TARGET
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.LAUNCH_MODE_DIALOG
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_ADD_BANK_ACCOUNT
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_BANK_ACCOUNTS
-import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_BANK_CARDS
 import io.stacrypt.stadroid.profile.banking.CurrencyTextWatcher
 import io.stacrypt.stadroid.ui.calculateCashoutCommission
 import io.stacrypt.stadroid.ui.format
@@ -163,16 +163,7 @@ class CashoutFragment : Fragment() {
                             } catch (e: HttpException) {
                                 // TODO: Handle all errors
                                 e.printStackTrace()
-                                if (e.code() == 400) {
-                                    when (e.response().headers().get("X-Reason")) {
-                                        "not-enough-balance" -> toast("Balance not enough")
-                                        "account-not-found" -> toast("Balance not enough")
-                                        "unverified-account" -> toast("Balance not enough")
-                                        "unverified-account" -> toast("amount-not-in-range")
-                                    }
-                                } else {
-                                    toast(R.string.problem_occurred_toast)
-                                }
+                                toast(e.verboseLocalizedMessage())
                                 rootView.submit.stopAnimation()
                                 rootView.submit.revertAnimation()
                                 rootView.submit.invalidate()

@@ -16,6 +16,7 @@ import com.franmontiel.persistentcookiejar.cache.SetCookieCache
 import com.franmontiel.persistentcookiejar.PersistentCookieJar
 import com.google.gson.GsonBuilder
 import io.stacrypt.stadroid.application
+import retrofit2.HttpException
 import kotlin.collections.ArrayList
 
 // const val STEMERALD_API_URL = "http://localhost:8070"
@@ -637,3 +638,15 @@ fun File.mimeType(): MediaType? = when (extension) {
     "png" -> MediaType.parse("image/png")
     else -> null
 }
+
+fun HttpException.verboseLocalizedMessage() = StringBuilder()
+    .append("Error code:").append(this.code()).append(": ")
+    .append("\n").append("Message: ").append(response().message() ?: "Unknown")
+    .append("\n").append("Body: ")
+    .append(response().errorBody()?.string()?.run { if (length > 50) take(20) + takeLast(20) else this } ?: "Unknown")
+    .append("\n").append("Reason: ").append(response().headers().get("X-Reason")?.snakeToHuman() ?: "Unknown")
+    .toString()
+
+fun String.snakeToHuman() = if (isNullOrEmpty()) "" else this
+    .replaceRange(0, 1, this[0].toUpperCase().toString())
+    .replace("([A-Za-z0-9]+)-".toRegex(), "$1")
