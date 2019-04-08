@@ -65,7 +65,8 @@ data class Currency(
     var name: String,
     @PrimaryKey var symbol: String,
     var type: String, // fiat / cryptocurrency
-    var divideByTen: Int,
+    var normalizationScale: Int,
+    var smallestUnitScale: Int,
 
     /**
      * Just for crypto:
@@ -80,9 +81,7 @@ data class Currency(
     var withdrawStaticCommission: BigDecimal?,
     var depositCommissionRate: String?,
     var withdrawCommissionRate: String?,
-    var walletId: String?,
-    var normalizationScale: Int,
-    var smallestUnitScale: Int
+    var walletId: String?
 
 )
 
@@ -407,6 +406,20 @@ data class LoadingState private constructor(
 //        }
 }
 
+data class GenericBankingId(
+    val id: Int,
+    val clientId: Int,
+    val isVerified: Boolean,
+    val error: String?,
+    val fiatSymbol: String,
+    val type: String?,
+    val iban: String?,
+    val owner: String?,
+    val bic: String?,
+    val pan: String?,
+    val holder: String?
+)
+
 interface BankId {
     val id: Int
     val clientId: Int
@@ -453,23 +466,22 @@ data class PaymentGateway(
     val cashoutCommissionRate: String,
     val cashoutMin: BigDecimal,
     val fiatSymbol: String,
-    @Embedded(prefix = "fiat_") val fiat: Fiat
+    @Embedded(prefix = "fiat_") val fiat: Currency
 )
 
 data class BankingTransaction(
     @SerializedName("id") var id: Int,
     @SerializedName("memberId") var userId: Int,
     @SerializedName("member") var user: User,
-    @SerializedName("fiatSymbol") var fiatSymbol: String,
     @SerializedName("referenceId") var referenceId: String?,
     @SerializedName("amount") var amount: BigDecimal?,
     @SerializedName("commission") var commission: BigDecimal?,
     @SerializedName("creation") var creation: Date,
     @SerializedName("createdAt") var createdAt: Date?,
     @SerializedName("modifiedAt") var modifiedAt: Date?,
-    @SerializedName("bankingId") var bankingId: Any?,
-    @SerializedName("paymentGateway") var paymentGateway: PaymentGateway?,
-    @SerializedName("paymentGatewayName") var paymentGatewayName: String?,
+    @SerializedName("bankingId") var bankingId: GenericBankingId?,
+    @SerializedName("paymentGateway") var paymentGateway: PaymentGateway,
+    @SerializedName("paymentGatewayName") var paymentGatewayName: String,
     @SerializedName("error") var error: String?,
     @SerializedName("transactionId") var transactionId: String?,
     @SerializedName("type") var type: String
@@ -501,13 +513,6 @@ data class Notification(
 )
 
 data class NotificationCount(val unread: Int)
-
-data class Fiat(
-    val name: String,
-    val type: String,
-    val symbol: String,
-    val divideByTen: Int
-)
 
 data class Country(val id: Int, val name: String, val phonePrefix: String, val code: String) {
     override fun toString(): String = name

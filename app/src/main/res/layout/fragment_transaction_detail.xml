@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimaryDark">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:layout_width="?attr/actionBarSize"
+            android:layout_height="?attr/actionBarSize"
+            android:id="@+id/back"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_arrow_back_black_32dp"
+            android:foregroundTint="@color/colorPrimaryLightLight"
+            android:tint="@color/colorPrimaryLightLight"
+            style="@style/Widget.AppCompat.ActionButton"/>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:showDividers="middle"
+            android:orientation="vertical">
+
+            <TableRow>
+
+                <TextView
+                    style="@style/TransactionDetailTextViewKey"
+                    android:text="Currency"/>
+
+                <FrameLayout style="@style/TransactionDetailTextViewValue">
+
+                    <ImageView
+                        android:id="@+id/currency_icon"
+                        android:src="@drawable/ic_btc"
+                        android:layout_gravity="center_vertical|end"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:padding="5dp"
+                        android:layout_marginRight="10dp"/>
+
+                    <TextView
+                        android:id="@+id/currency"
+                        style="@style/TransactionDetailTextViewValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        tools:text="BTC (Bitcoin)"/>
+
+                </FrameLayout>
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    style="@style/TransactionDetailTextViewKey"
+                    android:text="Type"/>
+
+                <TextView
+                    style="@style/TransactionDetailTextViewValue"
+                    android:id="@+id/type"
+                    tools:text="Cashin"/>
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    style="@style/TransactionDetailTextViewKey"
+                    android:text="Amount"/>
+
+                <TextView
+                    style="@style/TransactionDetailTextViewValue"
+                    android:id="@+id/amount"
+                    tools:text="23,232,900 IRR"/>
+            </TableRow>
+
+
+            <TableRow>
+
+                <TextView
+                    style="@style/TransactionDetailTextViewKey"
+                    android:text="Commission"/>
+
+                <TextView
+                    style="@style/TransactionDetailTextViewValue"
+                    android:id="@+id/commission"
+                    tools:text="1,234 IRR"/>
+            </TableRow>
+
+
+            <TableRow>
+
+                <TextView
+                    style="@style/TransactionDetailTextViewKey"
+                    android:text="Status"/>
+
+                <TextView
+                    style="@style/TransactionDetailTextViewValue"
+                    android:id="@+id/status"
+                    tools:text="Waiting to be paid"/>
+            </TableRow>
+
+
+            <TableRow>
+
+                <TextView
+                    style="@style/TransactionDetailTextViewKey"
+                    android:text="Transaction Id"/>
+
+                <TextView
+                    style="@style/TransactionDetailTextViewValue"
+                    android:id="@+id/transaction_id"
+                    tools:text="348723543847"/>
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    style="@style/TransactionDetailTextViewKey"
+                    android:text="Reference Id"/>
+
+                <TextView
+                    style="@style/TransactionDetailTextViewValue"
+                    android:id="@+id/reference_id"
+                    tools:text="Waiting to be paid"/>
+
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    style="@style/TransactionDetailTextViewKey"
+                    android:text="Created At"/>
+
+                <TextView
+                    style="@style/TransactionDetailTextViewValue"
+                    android:id="@+id/created_at"
+                    tools:text="@tools:sample/date/hhmmss"/>
+            </TableRow>
+
+            <!--<TableRow>-->
+
+            <!--<TextView-->
+            <!--style="@style/TransactionDetailTextViewKey"-->
+            <!--android:text="Paid At"/>-->
+
+            <!--<TextView-->
+            <!--style="@style/TransactionDetailTextViewValue"-->
+            <!--android:id="@+id/paid_at"-->
+            <!--tools:text="@tools:sample/date/hhmmss"/>-->
+            <!--</TableRow>-->
+
+
+            <TableRow>
+
+                <TextView
+                    style="@style/TransactionDetailTextViewKey"
+                    android:text="Updated At"/>
+
+                <TextView
+                    style="@style/TransactionDetailTextViewValue"
+                    android:id="@+id/updated_at"
+                    tools:text="@tools:sample/date/hhmmss"/>
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    style="@style/TransactionDetailTextViewKey"
+                    android:text="Payment Gateway"/>
+
+                <TextView
+                    style="@style/TransactionDetailTextViewValue"
+                    android:id="@+id/payment_gateway"
+                    tools:text="Shaparak"/>
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    style="@style/TransactionDetailTextViewKey"
+                    android:text="Target Bank Card/Account"/>
+
+                <TextView
+                    style="@style/TransactionDetailTextViewValue"
+                    android:id="@+id/banking_id"
+                    tools:text="1234 1234 1234 1234"/>
+            </TableRow>
+
+
+        </TableLayout>
+
+        <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
+            android:id="@+id/pay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pay"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:maxWidth="400dp"
+            android:padding="20dp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textAllCaps="true"
+            android:background="@drawable/button_shape_default_rounded"
+            android:textColor="@color/colorSecondary"
+            app:spinning_bar_width="4dp"
+            app:spinning_bar_color="#FFF"
+            app:spinning_bar_padding="6dp"/>
+
+
+    </LinearLayout>
+
+</ScrollView>

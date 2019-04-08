@@ -3,8 +3,11 @@ package io.stacrypt.stadroid.profile.banking
 import android.text.TextWatcher
 import android.widget.EditText
 import android.text.Editable
+import io.stacrypt.stadroid.data.Currency
+import io.stacrypt.stadroid.ui.format
 import org.iban4j.Iban
 import java.lang.Exception
+import java.math.BigDecimal
 import java.util.regex.Pattern
 
 private val IBAN_REGEX = "^[A-Z]{2}[0-9]{8,30}\$".toRegex()
@@ -127,4 +130,27 @@ fun String.extractIpAddress(): String? {
     }
 }
 
+class CurrencyTextWatcher(val currency: Currency, val et: EditText) : TextWatcher {
+    override fun afterTextChanged(s: Editable?) {
+        if (s.toString() != current) {
+            et.removeTextChangedListener(this)
 
+            val cleanString = s.toString().replace("[$,.]".toRegex(), "").run { if (length > 0) this else "0" }
+            val formatted = cleanString.toBigDecimalOrNull()?.format(currency) ?: current
+
+            current = formatted
+            et.setText(formatted)
+            et.setSelection(formatted.length)
+
+            et.addTextChangedListener(this)
+        }
+    }
+
+    private var current: String = ""
+
+    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+    }
+
+    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+    }
+}

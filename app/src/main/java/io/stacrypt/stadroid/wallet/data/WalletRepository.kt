@@ -202,4 +202,47 @@ object WalletRepository {
             }
         }
     }
+
+    fun getBankingTransactions(type: String? = null, fiatSymbol: String? = null): LiveData<List<BankingTransaction>?> {
+        val liveData = MutableLiveData<List<BankingTransaction>?>()
+        scope.launch {
+            try {
+                liveData.postValue(
+                    stemeraldApiClient.getBankingTransactions(
+                        fiatSymbol = fiatSymbol,
+                        type = type
+                    ).await()
+                )
+            } catch (e: HttpException) {
+                // TODO Show error
+                liveData.postValue(null)
+//                }
+            } catch (e: Exception) {
+                // TODO Show error
+                liveData.postValue(null)
+            } finally {
+            }
+        }
+        return liveData
+    }
+
+    fun getBankingTransactionById(id: Int): LiveData<BankingTransaction?> {
+        val liveData = MutableLiveData<BankingTransaction?>()
+        scope.launch {
+            try {
+                liveData.postValue(
+                    stemeraldApiClient.getBankingTransactionById(id = id).await()
+                )
+            } catch (e: HttpException) {
+                // TODO Show error
+                liveData.postValue(null)
+//                }
+            } catch (e: Exception) {
+                // TODO Show error
+                liveData.postValue(null)
+            } finally {
+            }
+        }
+        return liveData
+    }
 }

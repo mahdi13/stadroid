@@ -1,19 +1,15 @@
-package io.stacrypt.stadroid.wallet
+package io.stacrypt.stadroid.wallet.fiat
 
 import android.app.Activity
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
-import androidx.navigation.fragment.NavHostFragment
-import androidx.paging.PagedList
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.data.BankCard
@@ -28,17 +24,15 @@ import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.LAUNCH_MODE
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.RESULT_CHOOSE
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_BANK_CARDS
 import io.stacrypt.stadroid.profile.banking.BankingRepository
+import io.stacrypt.stadroid.profile.banking.CurrencyTextWatcher
 import io.stacrypt.stadroid.ui.format
-import io.stacrypt.stadroid.ui.formatScaledMinimal
+import io.stacrypt.stadroid.wallet.balance.BalanceDetailActivity
 import io.stacrypt.stadroid.wallet.balance.BalanceDetailActivity.Companion.ARG_ASSET
 import io.stacrypt.stadroid.wallet.data.WalletRepository
-import io.stacrypt.stadroid.wallet.fiat.PaymentGatewayAdapter
-import kotlinx.android.synthetic.main.frgment_cashin.*
 import kotlinx.android.synthetic.main.frgment_cashin.view.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import org.jetbrains.anko.sdk27.coroutines.textChangedListener
 import org.jetbrains.anko.support.v4.alert
 import org.jetbrains.anko.support.v4.longToast
 import org.jetbrains.anko.support.v4.toast
@@ -62,6 +56,7 @@ class CashinViewModel : ViewModel() {
 
 class CashinFragment : Fragment() {
     lateinit var viewModel: CashinViewModel
+    private var amountTextWatcher: TextWatcher? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.frgment_cashin, container, false)
@@ -69,7 +64,13 @@ class CashinFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(CashinViewModel::class.java)
 
         // FIXME: Empty observer to LiveData switchMaps work fine
-        viewModel.currency.observe(viewLifecycleOwner, Observer { })
+        viewModel.currency.observe(viewLifecycleOwner, Observer {
+            if (it != null && amountTextWatcher == null) {
+                amountTextWatcher = CurrencyTextWatcher(it, rootView.amount)
+                rootView.amount.addTextChangedListener(amountTextWatcher)
+            }
+        })
+
         viewModel.paymentGateways.observe(viewLifecycleOwner, Observer { items ->
             view?.payment_gateways?.adapter =
                 PaymentGatewayAdapter(items.filter { it.fiatSymbol == viewModel.fiatSymbol.value })
@@ -124,10 +125,8 @@ class CashinFragment : Fragment() {
             // }
         }
 
-        amount.textChangedListener { viewModel.selectedAmount.postValue(amount.text.toString().toBigDecimalOrNull()) }
-
         rootView.back.setOnClickListener {
-            NavHostFragment.findNavController(this@CashinFragment).navigateUp()
+            (activity as BalanceDetailActivity).up()
         }
 
         rootView.submit.setOnClickListener {
@@ -156,6 +155,8 @@ class CashinFragment : Fragment() {
                                     resources.getColor(R.color.real_green),
                                     resources.getDrawable(R.drawable.ic_check_circle_black_24dp).toBitmap(100, 100)
                                 )
+
+                                (activity as BalanceDetailActivity).showtransaction(result.id)
 
                                 // Redirect him to the payment page on browser
                             } catch (e: Exception) {

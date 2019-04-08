@@ -21,7 +21,7 @@ import java.math.BigDecimal
         ShebaAddress::class,
         PaymentGateway::class
     ],
-    version = 5
+    version = 6
 )
 @TypeConverters(Converters::class)
 abstract class StemeraldDatabase : RoomDatabase() {

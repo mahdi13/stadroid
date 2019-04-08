@@ -8,6 +8,8 @@ import android.content.Context
 import android.os.Build
 import com.crashlytics.android.Crashlytics
 import io.fabric.sdk.android.Fabric
+import com.crashlytics.android.core.CrashlyticsCore
+
 lateinit var application: Application
 
 class Application : android.app.Application() {
@@ -17,7 +19,10 @@ class Application : android.app.Application() {
 
     override fun onCreate() {
         super.onCreate()
-        Fabric.with(this, Crashlytics())
+        val crashlyticsKit = Crashlytics.Builder()
+            .core(CrashlyticsCore.Builder().disabled(BuildConfig.DEBUG).build())
+            .build()
+        Fabric.with(this, crashlyticsKit)
 //        Instabug.Builder(this, "5b0b628ed1c493b59e0e059e03506dbb")
 //            .setInvocationEvents(InstabugInvocationEvent.FLOATING_BUTTON, InstabugInvocationEvent.SCREENSHOT)
 //            .build()

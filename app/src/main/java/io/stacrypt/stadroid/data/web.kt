@@ -250,6 +250,22 @@ interface StemeraldV2ApiClient {
     ): Deferred<BankingTransaction>
 
     /**
+     * Banking Transactions
+     */
+    @HTTP(method = "GET", path = "transactions", hasBody = false)
+    fun getBankingTransactions(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
+        @Query("fiatSymbol") fiatSymbol: String?,
+        @Query("type") type: String?
+    ): Deferred<List<BankingTransaction>>
+
+    @HTTP(method = "GET", path = "transactions/{id}", hasBody = false)
+    fun getBankingTransactionById(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
+        @Query("id") id: Int
+    ): Deferred<BankingTransaction>
+
+    /**
      * Membership
      */
     @HTTP(method = "GET", path = "clients/me", hasBody = false)

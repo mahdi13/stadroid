@@ -7,10 +7,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import io.stacrypt.stadroid.R
-import io.stacrypt.stadroid.wallet.CashinFragment
+import io.stacrypt.stadroid.wallet.fiat.CashinFragment
 import io.stacrypt.stadroid.wallet.CashoutFragment
 import io.stacrypt.stadroid.wallet.WithdrawFragment
 import io.stacrypt.stadroid.wallet.deposit.DepositFragment
+import io.stacrypt.stadroid.wallet.fiat.TransactionDetailFragment
 import org.jetbrains.anko.support.v4.withArguments
 
 class BalanceDetailActivity : AppCompatActivity() {
@@ -44,6 +45,10 @@ class BalanceDetailActivity : AppCompatActivity() {
         viewModel.assetName.value = intent.getStringExtra(ARG_ASSET)
     }
 
+    fun up() {
+        supportFragmentManager.popBackStack() // FIXME
+    }
+
     fun showWithdraw(symbol: String) {
 //        val fragment = when (viewModel.currency.value?.type?.toLowerCase()) {
 //            "cryptocurrency" -> WithdrawFragment()
@@ -71,6 +76,13 @@ class BalanceDetailActivity : AppCompatActivity() {
                 )
                 .addToBackStack("$symbol-withdraw")
                 .commit()
+    }
+
+    fun showtransaction(id: Int) {
+        supportFragmentManager.beginTransaction()
+            .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
+            .replace(R.id.container, TransactionDetailFragment().withArguments("id" to id))
+            .commit()
     }
 
     fun showDeposit(symbol: String) {

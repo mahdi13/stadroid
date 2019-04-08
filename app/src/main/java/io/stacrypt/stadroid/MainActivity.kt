@@ -66,7 +66,9 @@ class MainActivity : AppCompatActivity(),
         stemeraldDatabase = Room.databaseBuilder(
             applicationContext,
             StemeraldDatabase::class.java, "stemerald_db"
-        ).build()
+        )
+            .fallbackToDestructiveMigration() // FIXME: Not a great approach in production
+            .build()
 
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
 
