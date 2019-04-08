@@ -10,7 +10,8 @@ import kotlinx.android.synthetic.main.row_payment_gateway.view.*
 import org.jetbrains.anko.imageResource
 import org.jetbrains.anko.layoutInflater
 
-class PaymentGatewayAdapter(val items: List<PaymentGateway>) : BaseAdapter() {
+class PaymentGatewayAdapter(val items: List<PaymentGateway>, val onSelected: (PaymentGateway) -> Unit) : BaseAdapter() {
+
     @SuppressLint("ViewHolder")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val item = getItem(position)
@@ -22,6 +23,12 @@ class PaymentGatewayAdapter(val items: List<PaymentGateway>) : BaseAdapter() {
             "TIRR" -> R.drawable.shetab
             else -> R.drawable.ic_launcher_foreground
         }
+
+        view.setOnClickListener {
+            view.check.isChecked = true
+            onSelected.invoke(item)
+        }
+
         return view
     }
 

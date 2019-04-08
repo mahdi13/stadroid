@@ -22,19 +22,24 @@ import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.ARG_LAUNCH_
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.ARG_TARGET
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.LAUNCH_MODE_DIALOG
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.RESULT_CHOOSE
+import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_ADD_BANK_CARD
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_BANK_CARDS
 import io.stacrypt.stadroid.profile.banking.BankingRepository
 import io.stacrypt.stadroid.profile.banking.CurrencyTextWatcher
+import io.stacrypt.stadroid.ui.calculateDepositCommission
 import io.stacrypt.stadroid.ui.format
 import io.stacrypt.stadroid.wallet.balance.BalanceDetailActivity
 import io.stacrypt.stadroid.wallet.balance.BalanceDetailActivity.Companion.ARG_ASSET
 import io.stacrypt.stadroid.wallet.data.WalletRepository
+import kotlinx.android.synthetic.main.fragment_transaction_detail.*
 import kotlinx.android.synthetic.main.frgment_cashin.view.*
+import kotlinx.android.synthetic.main.row_bank_card.view.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.jetbrains.anko.support.v4.alert
 import org.jetbrains.anko.support.v4.longToast
+import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.toast
 import java.lang.Exception
 import java.math.BigDecimal
@@ -66,63 +71,33 @@ class CashinFragment : Fragment() {
         // FIXME: Empty observer to LiveData switchMaps work fine
         viewModel.currency.observe(viewLifecycleOwner, Observer {
             if (it != null && amountTextWatcher == null) {
-                amountTextWatcher = CurrencyTextWatcher(it, rootView.amount)
+                amountTextWatcher = CurrencyTextWatcher(it, rootView.amount, viewModel.selectedAmount)
                 rootView.amount.addTextChangedListener(amountTextWatcher)
             }
         })
 
         viewModel.paymentGateways.observe(viewLifecycleOwner, Observer { items ->
-            view?.payment_gateways?.adapter =
-                PaymentGatewayAdapter(items.filter { it.fiatSymbol == viewModel.fiatSymbol.value })
+            val paymentGatewayAdapter =
+                PaymentGatewayAdapter(items.filter { it.fiatSymbol == viewModel.fiatSymbol.value }) {
+                    viewModel.selectedPaymentGateway.postValue(it)
+                }
+            view?.payment_gateways?.adapter = paymentGatewayAdapter
         })
         viewModel.fiatSymbol.postValue(arguments?.getString(ARG_ASSET)!!)
 
-        // val adapter = BankCardPagedAdapter()
-        // rootView.cards.adapter = adapter
-        //
-        // viewModel.bankCards.observe(this, Observer<PagedList<BankCard>> {
-        //     adapter.submitList(it)
-        // })
-        // rootView.cards.layoutManager = LinearLayoutManager(activity)
+        rootView.add_card.setOnClickListener {
+            startActivity<ProfileSettingActivity>(
+                ProfileSettingActivity.ARG_TARGET to TARGET_ADD_BANK_CARD,
+                ProfileSettingActivity.ARG_LAUNCH_MODE to LAUNCH_MODE_DIALOG
+            )
+        }
 
-        // rootView.add.setOnClickListener {
-        //     startActivity<ProfileSettingActivity>(
-        //         ProfileSettingActivity.ARG_TARGET to TARGET_ADD_BANK_CARD,
-        //         ProfileSettingActivity.ARG_LAUNCH_MODE to LAUNCH_MODE_DIALOG
-        //     )
-        // }
-
-        rootView.choose_card.setOnClickListener {
+        rootView.selected_card?.card_card?.setOnClickListener {
             startActivityForResult(Intent(context, ProfileSettingActivity::class.java).apply {
                 putExtra(ARG_TARGET, TARGET_BANK_CARDS)
                 putExtra(ARG_ACTION, ACTION_CHOOSE)
                 putExtra(ARG_LAUNCH_MODE, LAUNCH_MODE_DIALOG)
             }, 0)
-            // val cards = ArrayList<BankCard>().apply {
-            //     BankingRepository.getBankCards(viewModel.fiatSymbol.value).pagedList.observe(
-            //         viewLifecycleOwner,
-            //         Observer { list ->
-            //             list.iterator().forEach { card -> this.add(card) }
-            //             if (this.size > 0) list.loadAround(this.size - 1)
-            //         })
-            // }
-            // // selector("Choose a card", cards.map { it.pan }) { dialogInterface: DialogInterface, i: Int ->
-            //     longToast("${i} was selected")
-            //     // ctx.setTheme(R.style.AlertDialogCustom)
-            //     // customView {
-            //     //     verticalLayout {}.apply {
-            //     //         this.addView(RecyclerView(context!!).apply {
-            //     //             adapter = BankCardPagedAdapter()
-            //     //             viewModel.bankCards.observe(viewLifecycleOwner, Observer<PagedList<BankCard>> {
-            //     //                 (adapter as BankCardPagedAdapter).submitList(it)
-            //     //             })
-            //     //             this.layoutManager = LinearLayoutManager(activity)
-            //     //         }, 0)
-            //     //     }
-            //     // }
-            // }.apply {
-            //
-            // }
         }
 
         rootView.back.setOnClickListener {
@@ -130,16 +105,46 @@ class CashinFragment : Fragment() {
         }
 
         rootView.submit.setOnClickListener {
-            // TODO: Check currency  not null
-            // TODO: Validate form
-            // TODO: Check range
+            if (viewModel.currency.value == null)
+                return@setOnClickListener Unit.apply { toast("Wait or components to load completely") }
+
+            if (viewModel.selectedAmount.value == null)
+                return@setOnClickListener Unit.apply { toast("Amount is not valid") }
+
+            if (viewModel.selectedPaymentGateway.value == null)
+                return@setOnClickListener Unit.apply { toast("Please choose a payment gateway") }
+
+            if (viewModel.selectedCard.value == null)
+                return@setOnClickListener Unit.apply { toast("Please choose a card first") }
+
+            if (viewModel.currency.value?.depositMax?.takeIf { it > BigDecimal(0) }?.takeIf { it < viewModel.selectedAmount.value } != null)
+                return@setOnClickListener Unit.apply {
+                    longToast(
+                        "Amount is too high. Maximum amount is ${viewModel.currency.value?.depositMax?.format(
+                            viewModel.currency.value!!
+                        )}"
+                    )
+                }
+
+            if (viewModel.currency.value?.depositMin?.takeIf { it > viewModel.selectedAmount.value } != null)
+                return@setOnClickListener Unit.apply {
+                    longToast(
+                        "Amount is too low. Minimum is ${viewModel.currency.value?.depositMin?.format(
+                            viewModel.currency.value!!
+                        )}"
+                    )
+                }
 
             alert {
                 ctx.setTheme(R.style.AlertDialogCustom)
-                // TODO: Show commission
-                // TODO: Show receiving time and other rules
-                // TODO: Check balance
-                // TODO: Show security considerations (checking url and etc.)
+                title = "Please review your deposit info:"
+                message =
+                    "Amount: ${viewModel.selectedAmount.value!!.format(viewModel.currency.value!!)}" +
+                        "Commission: ${viewModel.currency?.value!!.calculateDepositCommission(viewModel.selectedAmount.value!!).format(
+                            viewModel.currency.value!!
+                        )}" +
+                        "\n" + "You will pay by: ${viewModel.selectedPaymentGateway.value!!.name}" +
+                        "\n" + "You SHOULD use card: ${viewModel.selectedCard.value!!.pan}"
                 positiveButton("Let's do it") {
                     rootView.submit.startAnimation {
                         GlobalScope.launch(Dispatchers.Main) {
@@ -176,12 +181,29 @@ class CashinFragment : Fragment() {
         return rootView
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        populateCardLayout(null)
+    }
+
+    private fun populateCardLayout(bankCard: BankCard?) {
+        if (bankCard == null) {
+            view?.selected_card?.card_title?.text = "Choose a card"
+            view?.selected_card?.pan?.text = ""
+            view?.selected_card?.holder?.text = ""
+        } else {
+            view?.selected_card?.card_title?.text = "Card Number ${bankCard.id}"
+            view?.selected_card?.pan?.text = bankCard.pan
+            view?.selected_card?.holder?.text = bankCard.holder
+        }
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == Activity.RESULT_OK && data?.getStringExtra(RESULT_CHOOSE) != null) {
             val card = Gson().fromJson(data.getStringExtra(RESULT_CHOOSE), BankCard::class.java)
             if (card != null) {
                 viewModel.selectedCard.postValue(card)
                 longToast("You selected ${card.pan}")
+                populateCardLayout(card)
             }
         }
         super.onActivityResult(requestCode, resultCode, data)

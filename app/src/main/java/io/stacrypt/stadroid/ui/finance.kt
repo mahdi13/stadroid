@@ -98,3 +98,13 @@ fun BigDecimal.isPositive(): Boolean = this >= 0.toBigDecimal()
 fun String.panSecurityMask(): String = this.replaceRange(IntRange(7, this.length - 3), "*").replace("****", "")
 fun String.ibanSecurityMask(): String = this.replaceRange(IntRange(7, this.length - 3), "*").replace("****", "")
 
+fun Currency.calculateDepositCommission(amount: BigDecimal): BigDecimal {
+    val commission =
+        (depositStaticCommission ?: BigDecimal.ZERO) + (depositCommissionRate?.toBigDecimal()?.times(amount)
+            ?: BigDecimal.ZERO)
+
+    if (depositMaxCommission != null && depositMaxCommission!! > BigDecimal.ZERO)
+        commission.min(depositMaxCommission)
+
+    return commission
+}

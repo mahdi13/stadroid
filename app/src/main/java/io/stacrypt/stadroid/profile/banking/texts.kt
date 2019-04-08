@@ -3,6 +3,7 @@ package io.stacrypt.stadroid.profile.banking
 import android.text.TextWatcher
 import android.widget.EditText
 import android.text.Editable
+import androidx.lifecycle.MutableLiveData
 import io.stacrypt.stadroid.data.Currency
 import io.stacrypt.stadroid.ui.format
 import org.iban4j.Iban
@@ -130,7 +131,8 @@ fun String.extractIpAddress(): String? {
     }
 }
 
-class CurrencyTextWatcher(val currency: Currency, val et: EditText) : TextWatcher {
+class CurrencyTextWatcher(val currency: Currency, val et: EditText, val liveData: MutableLiveData<BigDecimal?>?) :
+    TextWatcher {
     override fun afterTextChanged(s: Editable?) {
         if (s.toString() != current) {
             et.removeTextChangedListener(this)
@@ -141,6 +143,8 @@ class CurrencyTextWatcher(val currency: Currency, val et: EditText) : TextWatche
             current = formatted
             et.setText(formatted)
             et.setSelection(formatted.length)
+
+            liveData?.postValue(formatted.replace("[$,.]".toRegex(), "").toBigDecimalOrNull() ?: BigDecimal.ZERO)
 
             et.addTextChangedListener(this)
         }
