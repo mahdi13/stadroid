@@ -103,6 +103,8 @@ class CashinFragment : Fragment() {
         }
 
         rootView.submit.setOnClickListener {
+            // TODO: Disable the submit button to prevent recreate the transaction
+
             if (viewModel.currency.value == null)
                 return@setOnClickListener Unit.apply { toast("Wait or components to load completely") }
 
@@ -165,7 +167,7 @@ class CashinFragment : Fragment() {
                             } catch (e: HttpException) {
                                 // TODO: Handle all errors
                                 e.printStackTrace()
-                                toast(e.verboseLocalizedMessage())
+                                longToast(e.verboseLocalizedMessage())
                                 rootView.submit.stopAnimation()
                                 rootView.submit.revertAnimation()
                                 rootView.submit.invalidate()

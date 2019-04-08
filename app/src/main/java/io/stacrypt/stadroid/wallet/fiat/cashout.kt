@@ -163,7 +163,7 @@ class CashoutFragment : Fragment() {
                             } catch (e: HttpException) {
                                 // TODO: Handle all errors
                                 e.printStackTrace()
-                                toast(e.verboseLocalizedMessage())
+                                longToast(e.verboseLocalizedMessage())
                                 rootView.submit.stopAnimation()
                                 rootView.submit.revertAnimation()
                                 rootView.submit.invalidate()

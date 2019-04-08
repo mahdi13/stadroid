@@ -42,6 +42,7 @@ class TransactionDetailFragment : Fragment() {
         arguments?.getInt("id")?.let { viewModel.transactionId.postValue(it) }
 
         viewModel.transaction.observe(viewLifecycleOwner, Observer { transaction ->
+            if (transaction == null) return@Observer
             rootView.currency.text = transaction?.paymentGateway?.fiatSymbol
             rootView.currency_icon.setImageResource(transaction?.paymentGateway?.fiat?.iconResource()!!)
             rootView.type.text = when (transaction.type) {
