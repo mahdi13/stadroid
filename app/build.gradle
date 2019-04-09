@@ -217,6 +217,12 @@ dependencies {
     // Banking
     implementation 'org.iban4j:iban4j:3.2.1'
 
+    // Bitcoin
+    compile("com.github.walleth.kethereum:bip32:$kethereumVersion")
+    compile("com.github.walleth.kethereum:functions:$kethereumVersion")
+    compile("com.github.walleth.kethereum:bip44:$kethereumVersion")
+    compile("com.github.walleth.kethereum:crypto:$kethereumVersion")
+
     testImplementation 'junit:junit:4.12'
     testImplementation 'androidx.arch.core:core-testing:2.0.1'
     testImplementation 'androidx.room:room-testing:2.1.0-alpha06'

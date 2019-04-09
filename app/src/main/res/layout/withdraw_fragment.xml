@@ -2,57 +2,71 @@
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        >
+        xmlns:tools="http://schemas.android.com/tools"
+    >
 
     <data>
 
         <variable
-                name="viewModel"
-                type="io.stacrypt.stadroid.wallet.WithdrawViewModel"/>
+            name="viewModel"
+            type="io.stacrypt.stadroid.wallet.cryptocurrency.WithdrawViewModel"/>
     </data>
 
 
     <LinearLayout
-            android:orientation="vertical"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimaryDark">
+
+        <include layout="@layout/header_appbar_back"/>
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/amount"
+            android:hint="@string/amount"
+            android:layout_margin="10dp"
+            android:lines="1"
+            android:inputType="number"
+            android:digits="0123456789.≃"
+            android:ems="10"
+            android:text="@={viewModel.selectedAmount}"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/colorPrimaryDark">
+            android:gravity="center"
+            tools:text="0.12343528"
+            android:maxLength="16"
+            android:layout_height="wrap_content"/>
 
         <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/amount"
-                android:hint="@string/amount"
-                android:layout_margin="10dp"
-                android:lines="1"
-                android:text="@={viewModel.amount}"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-        <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/address"
-                android:hint="@string/address"
-                android:layout_margin="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:lines="1"
-                android:text="@={viewModel.address}"/>
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+            android:id="@+id/address"
+            android:hint="@string/address"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lines="1"
+            android:maxLength="34"
+            android:inputType="text|textAutoComplete"
+            android:gravity="center"
+            tools:text="2MzQwSSnBHWHqSAqtTVQ6v47XtaisrJa1Vc"
+            android:text="@={viewModel.selectedAddress}"/>
 
         <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
-                android:id="@+id/submit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Withdraw from my account"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
-                android:maxWidth="400dp"
-                android:padding="20dp"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:textAllCaps="true"
-                android:background="@drawable/button_shape_default_rounded"
-                android:textColor="@color/colorSecondary"
-                app:spinning_bar_width="4dp"
-                app:spinning_bar_color="#FFF"
-                app:spinning_bar_padding="6dp"/>
+            android:id="@+id/submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Withdraw from my account"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:maxWidth="400dp"
+            android:padding="20dp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textAllCaps="true"
+            android:background="@drawable/button_shape_default_rounded"
+            android:textColor="@color/colorSecondary"
+            app:spinning_bar_width="4dp"
+            app:spinning_bar_color="#FFF"
+            app:spinning_bar_padding="6dp"/>
 
 
     </LinearLayout>

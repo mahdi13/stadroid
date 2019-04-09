@@ -207,8 +207,8 @@ data class DepositAddress(
     @SerializedName("address") var address: String
 )
 
-data class Withdaraw(
-    @SerializedName("id") var id: String,
+data class Withdraw(
+    @SerializedName("id") var id: Int,
     @SerializedName("user") var user: String,
     @SerializedName("toAddress") var toAddress: String?,
     @SerializedName("netAmount") var netAmount: BigDecimal?,

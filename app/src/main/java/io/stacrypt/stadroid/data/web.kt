@@ -9,7 +9,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
 import java.io.File
 import java.nio.charset.Charset
-import java.util.*
 import okhttp3.*
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache
@@ -211,14 +210,14 @@ interface StemeraldV2ApiClient {
         @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
         @Query("cryptocurrencySymbol") assetName: String,
         @Query("page") page: Int = 0
-    ): Deferred<ArrayList<Withdaraw>>
+    ): Deferred<ArrayList<Withdraw>>
 
     @HTTP(method = "GET", path = "withdraws/{withdrawId}", hasBody = false)
     fun getWithdrawDetail(
         @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
         @Path("withdrawId") withdrawId: Int,
         @Query("cryptocurrencySymbol") assetName: String
-    ): Deferred<Withdaraw>
+    ): Deferred<Withdraw>
 
     @HTTP(method = "SCHEDULE", path = "withdraws", hasBody = true)
     fun scheduleWithdraw(
@@ -227,7 +226,7 @@ interface StemeraldV2ApiClient {
         @Field("amount") amount: String,
         @Field("address") address: String,
         @Field("businessUid") businessUid: String
-    ): Deferred<Withdaraw>
+    ): Deferred<Withdraw>
 
     /**
      * Shaparak
