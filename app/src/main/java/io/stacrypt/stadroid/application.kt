@@ -9,6 +9,8 @@ import android.os.Build
 import com.crashlytics.android.Crashlytics
 import io.fabric.sdk.android.Fabric
 import com.crashlytics.android.core.CrashlyticsCore
+import com.instabug.library.Instabug
+import com.instabug.library.invocation.InstabugInvocationEvent
 
 lateinit var application: Application
 
@@ -23,9 +25,9 @@ class Application : android.app.Application() {
             .core(CrashlyticsCore.Builder().disabled(BuildConfig.DEBUG).build())
             .build()
         Fabric.with(this, crashlyticsKit)
-//        Instabug.Builder(this, "5b0b628ed1c493b59e0e059e03506dbb")
-//            .setInvocationEvents(InstabugInvocationEvent.FLOATING_BUTTON, InstabugInvocationEvent.SCREENSHOT)
-//            .build()
+       Instabug.Builder(this, "5b0b628ed1c493b59e0e059e03506dbb")
+           .setInvocationEvents(InstabugInvocationEvent.FLOATING_BUTTON, InstabugInvocationEvent.SCREENSHOT)
+           .build()
 
         // Init notification channels:
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

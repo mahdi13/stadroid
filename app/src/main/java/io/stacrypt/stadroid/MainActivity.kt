@@ -99,7 +99,8 @@ class MainActivity : AppCompatActivity(),
         navigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.navigation_wallet -> {
-                    switchFragment(0)
+                    if (sessionManager.isLoggedIn()) switchFragment(0)
+                    else switchFragment(3)
                 }
                 R.id.navigation_market -> {
                     switchFragment(1)
