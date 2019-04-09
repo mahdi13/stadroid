@@ -141,10 +141,12 @@ class CurrencyTextWatcher(val currency: Currency, val et: EditText, val liveData
             et.removeTextChangedListener(this)
 
             val cleanString = s.toString().replace("[$,]".toRegex(), "").run { if (length > 0) this else "0" }
-            val formatted = cleanString.toBigDecimalOrNull()?.format(currency) ?: current
+            val formatted =
+                cleanString.toBigDecimalOrNull()?.format(currency)?.plus(if (cleanString.last() == '.') "." else "")
+                    ?: current
 
             current = formatted
-            et.setText(formatted + if (cleanString.last() == '.') "." else "")
+            et.setText(formatted)
             et.setSelection(formatted.length)
 
             liveData?.postValue(formatted.replace("[$,]".toRegex(), "").toBigDecimalOrNull() ?: BigDecimal.ZERO)

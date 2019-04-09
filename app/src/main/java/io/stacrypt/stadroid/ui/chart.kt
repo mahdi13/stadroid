@@ -41,7 +41,6 @@ class CoupleChartGestureListener(val srcChart: Chart<*>, private val dstCharts: 
     }
 
     override fun onChartTranslate(me: MotionEvent, dX: Float, dY: Float) {
-        Log.d("salam", "onChartTranslate " + dX + "/" + dY + " X=" + me.getX() + "Y=" + me.getY())
         syncCharts()
     }
 

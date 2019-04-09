@@ -50,7 +50,7 @@ fun BigDecimal.format() = java.lang.String.format(Locale.ENGLISH, "%,f", this)
 
 fun BigDecimal.format(digits: Int) = java.lang.String.format("%,.${digits}f", this)
 
-fun BigDecimal.format(currency: Currency) = format(max(min(currency.smallestUnitScale, 8), 0))
+fun BigDecimal.format(currency: Currency) = format(max(min(currency.smallestUnitScale.unaryMinus(), 8), 0))
 
 fun BigDecimal.formatForJson(currency: Currency) = format(currency.smallestUnitScale).replace(",", "")
 

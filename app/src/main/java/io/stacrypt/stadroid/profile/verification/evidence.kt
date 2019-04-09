@@ -114,7 +114,6 @@ class EvidenceFormViewModel : ObservableViewModel() {
 //        fun DatePicker.setBirthday(
 //            year: Int, month: Int, day: Int, listener: DatePicker.OnDateChangedListener
 //        ) {
-//            Log.d("salam", year.toString())
 //            init(
 //                if (year == 0) year else year,
 //                if (month == 0) month else month,
