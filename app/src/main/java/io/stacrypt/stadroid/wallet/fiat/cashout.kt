@@ -1,5 +1,6 @@
 package io.stacrypt.stadroid.wallet.fiat
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextWatcher
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
+import com.google.gson.Gson
 import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.data.BankAccount
 import io.stacrypt.stadroid.data.PaymentGateway
@@ -20,6 +22,7 @@ import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.ARG_ACTION
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.ARG_LAUNCH_MODE
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.ARG_TARGET
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.LAUNCH_MODE_DIALOG
+import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.RESULT_CHOOSE
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_ADD_BANK_ACCOUNT
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_BANK_ACCOUNTS
 import io.stacrypt.stadroid.profile.banking.CurrencyTextWatcher
@@ -111,7 +114,7 @@ class CashoutFragment : Fragment() {
                 return@setOnClickListener Unit.apply { toast("Please choose a payment gateway") }
 
             if (viewModel.selectedAccount.value == null)
-                return@setOnClickListener Unit.apply { toast("Please choose a card first") }
+                return@setOnClickListener Unit.apply { toast("Please choose an account first") }
 
             if (viewModel.selectedPaymentGateway.value?.cashoutMax?.takeIf { it > BigDecimal(0) }?.takeIf { it < viewModel.selectedAmount.value } != null)
                 return@setOnClickListener Unit.apply {
@@ -187,5 +190,33 @@ class CashoutFragment : Fragment() {
 
 
         return rootView
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        populateAccountLayout(null)
+    }
+
+    private fun populateAccountLayout(bankAccount: BankAccount?) {
+        if (bankAccount == null) {
+            view?.selected_account?.account_title?.text = "Choose an account"
+            view?.selected_account?.iban?.text = ""
+            view?.selected_account?.owner?.text = ""
+        } else {
+            view?.selected_account?.account_title?.text = "Account # ${bankAccount.id}"
+            view?.selected_account?.iban?.text = bankAccount.iban
+            view?.selected_account?.owner?.text = bankAccount.owner
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (resultCode == Activity.RESULT_OK && data?.getStringExtra(RESULT_CHOOSE) != null) {
+            val account = Gson().fromJson(data.getStringExtra(RESULT_CHOOSE), BankAccount::class.java)
+            if (account != null) {
+                viewModel.selectedAccount.postValue(account)
+                longToast("You selected ${account.iban}")
+                populateAccountLayout(account)
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data)
     }
 }

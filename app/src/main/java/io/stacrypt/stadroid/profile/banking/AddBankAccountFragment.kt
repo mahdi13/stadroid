@@ -8,11 +8,14 @@ import android.view.ViewGroup
 import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.data.sessionManager
 import io.stacrypt.stadroid.data.stemeraldApiClient
+import io.stacrypt.stadroid.data.verboseLocalizedMessage
 import io.stacrypt.stadroid.profile.BaseSettingFragment
 import kotlinx.android.synthetic.main.add_bank_account_fragment.view.*
+import kotlinx.android.synthetic.main.evidence_form_fragment.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import org.iban4j.CountryCode
 import org.jetbrains.anko.support.v4.longToast
 import org.jetbrains.anko.support.v4.toast
 import retrofit2.HttpException
@@ -39,7 +42,7 @@ class AddBankAccountFragment : BaseSettingFragment() {
                     view.save.isEnabled = false
                     try {
                         stemeraldApiClient.addBankAccount(
-                            iban = view.iban.text.toString(),
+                            iban = view.iban.text.toString().replace(" ", ""),
                             owner = view.owner.text.toString(),
                             fiatSymbol = "TIRR" // FIXME
                         ).await()
@@ -48,7 +51,7 @@ class AddBankAccountFragment : BaseSettingFragment() {
                         if (e.code() == 409) {
                             toast("You have already submitted an account with theses information")
                         } else {
-                            toast(R.string.problem_occurred_toast)
+                            toast(e.verboseLocalizedMessage())
                         }
                         view.save.isEnabled = true
                         return@launch
@@ -64,14 +67,21 @@ class AddBankAccountFragment : BaseSettingFragment() {
                 }
             }
         }
+
+        
+
     }
 
     private fun validateInputs(): Boolean {
         view?.iban?.error = null
         view?.owner?.error = null
 
-        if (view?.iban?.text?.toString()?.toIbanOrNull() == null) {
+        val iban = view?.iban?.text?.toString()?.toIbanOrNull()
+        if (iban == null) {
             view?.iban?.error = getString(R.string.error_invalid_bank_account_number)
+            return false
+        } else if (!listOf(CountryCode.IR).contains(iban.countryCode)) {
+            view?.iban?.error = "Country not supported"
             return false
         }
 

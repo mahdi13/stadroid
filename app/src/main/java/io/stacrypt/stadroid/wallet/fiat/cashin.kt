@@ -202,7 +202,7 @@ class CashinFragment : Fragment() {
             view?.selected_card?.pan?.text = ""
             view?.selected_card?.holder?.text = ""
         } else {
-            view?.selected_card?.card_title?.text = "Card Number ${bankCard.id}"
+            view?.selected_card?.card_title?.text = "Card # ${bankCard.id}"
             view?.selected_card?.pan?.text = bankCard.pan
             view?.selected_card?.holder?.text = bankCard.holder
         }

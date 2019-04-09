@@ -84,7 +84,7 @@ class TransactionDetailFragment : Fragment() {
                     rootView.visibility = View.GONE
             }
 
-            rootView.setOnClickListener {
+            rootView.pay.setOnClickListener {
                 alert {
                     ctx.setTheme(R.style.AlertDialogCustom)
                     title = "You are going to pay..."
@@ -99,7 +99,7 @@ class TransactionDetailFragment : Fragment() {
                     """.trimIndent()
 
                     positiveButton("Let's go") {
-                        browse("https://pay.ir/payment/gateway/${transaction.id}")
+                        browse("https://pay.ir/pg/${transaction.id}")
                     }
 
                 }.show()

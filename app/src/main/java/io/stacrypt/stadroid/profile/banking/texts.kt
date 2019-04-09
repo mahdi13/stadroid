@@ -7,11 +7,13 @@ import androidx.lifecycle.MutableLiveData
 import io.stacrypt.stadroid.data.Currency
 import io.stacrypt.stadroid.ui.format
 import org.iban4j.Iban
+import org.iban4j.IbanFormat
 import java.lang.Exception
 import java.math.BigDecimal
 import java.util.regex.Pattern
 
-private val IBAN_REGEX = "^[A-Z]{2}[0-9]{8,30}\$".toRegex()
+private val IBAN_POSSIBILITY_REGEX = "^[A-Za-z]{0,2}|[A-Za-z]{2}[0-9\\s]{0,40}$".toRegex()
+private val IBAN_REGEX = "^[A-Za-z]{2}[0-9]{8,30}\$".toRegex()
 
 fun EditText.addBankIbanTextFormatter() = addTextChangedListener(object : TextWatcher {
 
@@ -26,9 +28,10 @@ fun EditText.addBankIbanTextFormatter() = addTextChangedListener(object : TextWa
     private fun String.uglify() = replace(" ", "")
     private fun String.beatifulize() = replace(".{4}".toRegex(), "$0 ")
         .replaceFirst(".{2}".toRegex(), "$0 ")
+        .toUpperCase()
         .trim()
 
-    private fun String.isPartialIban() = IBAN_REGEX.containsMatchIn(this)
+    private fun String.isPartialIban() = IBAN_POSSIBILITY_REGEX.matches(this)
 
     override fun afterTextChanged(s: Editable) {
         removeTextChangedListener(this)
@@ -109,7 +112,7 @@ fun EditText.addBankCardTextFormatter() = addTextChangedListener(object : TextWa
 })
 
 fun String.toIbanOrNull() = try {
-    Iban.valueOf(this.replace(" ", ""))
+    Iban.valueOf(this.replace(" ", ""), IbanFormat.None)
 } catch (e: Exception) {
     null
 }

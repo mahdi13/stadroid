@@ -263,7 +263,7 @@ interface StemeraldV2ApiClient {
     @HTTP(method = "GET", path = "transactions/{id}", hasBody = false)
     fun getBankingTransactionById(
         @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
-        @Query("id") id: Int
+        @Path("id") id: Int
     ): Deferred<BankingTransaction>
 
     /**

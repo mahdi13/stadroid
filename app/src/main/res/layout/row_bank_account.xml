@@ -35,7 +35,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
                 android:scaleType="centerCrop"
-                android:background="@drawable/low_poly_texture_120_roundedhexagon"
+                android:background="@drawable/poly2"
                 android:backgroundTintMode="multiply"
                 android:backgroundTint="#999999"/>
 

@@ -95,6 +95,7 @@
                         android:layout_marginEnd="20dp"
                         android:lines="1"
                         android:maxLength="50"
+                        android:inputType="textPersonName|textAutoComplete|textCapWords"
                         android:hint="Jack Daniel"/>
 
 

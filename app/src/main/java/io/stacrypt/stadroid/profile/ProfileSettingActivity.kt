@@ -75,7 +75,7 @@ class ProfileSettingActivity : AppCompatActivity() {
         const val TARGET_BANK_CARDS = "bank_cards"
         const val TARGET_ADD_BANK_CARD = "add_bank_card"
         const val TARGET_BANK_ACCOUNTS = "bank_accounts"
-        const val TARGET_ADD_BANK_ACCOUNT = "bank_accounts"
+        const val TARGET_ADD_BANK_ACCOUNT = "add_bank_account"
 
         const val TARGET_APPLICATION_PIN = "application_pin"
         const val TARGET_WIPE_CACHE = "whip_cache"
