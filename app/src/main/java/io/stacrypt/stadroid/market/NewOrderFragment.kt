@@ -10,8 +10,10 @@ import androidx.lifecycle.Observer
 
 import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.data.stemeraldApiClient
+import io.stacrypt.stadroid.ext.calculateEstimatedFee
 import io.stacrypt.stadroid.ui.format
 import io.stacrypt.stadroid.ui.format10Digit
+import io.stacrypt.stadroid.ui.formatForJson
 import kotlinx.android.synthetic.main.new_order_fragment.view.*
 import kotlinx.coroutines.*
 import org.jetbrains.anko.customView
@@ -157,12 +159,18 @@ class NewOrderFragment : Fragment() {
                     ctx.setTheme(R.style.AlertDialogCustom)
                     title = "Review your order"
 
-                    val newOrderAmount = viewModel.newOrderAmount.value?.format(viewModel.baseCurrency.value!!)!!
-                    val newOrderPrice = viewModel.newOrderPrice.value?.format(viewModel.quoteCurrency.value!!)!!
+                    val newOrderAmount = viewModel.newOrderAmount.value
+                    val newOrderPrice = viewModel.newOrderPrice.value
                     val newOrderType = viewModel.newOrderType.value!!
-                    val newOrderEstimateFee = "NA" // FIXME Calculate fee
                     val newOrderSide = if (v.id == R.id.buy) "buy" else "sell"
                     val newOrderMarketName = viewModel.marketName.value!!
+                    val newOrderEstimateFee = viewModel.market.value?.calculateEstimatedFee(
+                        type = newOrderType,
+                        side = newOrderSide,
+                        amount = newOrderAmount!!,
+                        price = newOrderPrice!!,
+                        lastPrice = viewModel.last.value!!
+                    )
                     customView {
                         verticalLayout {
                             textView("Action: $newOrderSide") {
@@ -171,14 +179,14 @@ class NewOrderFragment : Fragment() {
                             textView("Order Type: $newOrderType") {
                                 gravity = Gravity.CENTER
                             }
-                            textView("Estimated fee: $newOrderEstimateFee ${viewModel.quoteCurrency.value!!.symbol}") {
+                            textView("Estimated fee: ${newOrderEstimateFee?.format(viewModel.quoteCurrency.value!!)!!} ${viewModel.quoteCurrency.value!!.symbol}") {
                                 gravity = Gravity.CENTER
                             }
-                            textView("Amount: $newOrderAmount ${viewModel.baseCurrency.value!!.symbol}") {
+                            textView("Amount: ${newOrderAmount?.format(viewModel.baseCurrency.value!!)!!} ${viewModel.baseCurrency.value!!.symbol}") {
                                 gravity = Gravity.CENTER
                             }
                             if (newOrderType == "limit")
-                                textView("Price: $newOrderPrice ${viewModel.quoteCurrency.value!!.symbol}") {
+                                textView("Price: ${newOrderPrice?.format(viewModel.quoteCurrency.value!!)!!} ${viewModel.quoteCurrency.value!!.symbol}") {
                                     gravity = Gravity.CENTER
                                 }
                         }
@@ -189,14 +197,14 @@ class NewOrderFragment : Fragment() {
                         GlobalScope.launch(Dispatchers.Main) {
                             val request = if (newOrderType == "limit")
                                 stemeraldApiClient.putLimitOrder(
-                                    amount = newOrderAmount,
-                                    price = newOrderPrice,
+                                    amount = newOrderAmount?.formatForJson(viewModel.baseCurrency.value!!)!!,
+                                    price = newOrderPrice?.formatForJson(viewModel.quoteCurrency.value!!)!!,
                                     marketName = newOrderMarketName,
                                     side = newOrderSide
                                 )
                             else
                                 stemeraldApiClient.putMarketOrder(
-                                    amount = newOrderAmount,
+                                    amount = newOrderAmount?.formatForJson(viewModel.baseCurrency.value!!)!!,
                                     marketName = newOrderMarketName,
                                     side = newOrderSide
                                 )
