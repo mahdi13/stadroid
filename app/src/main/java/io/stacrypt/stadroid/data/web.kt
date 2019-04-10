@@ -69,7 +69,7 @@ interface StemeraldV2ApiClient {
     @HTTP(method = "OVERVIEW", path = "balances", hasBody = true)
     fun balanceOverview(
         @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: ""
-    ): Deferred<ArrayList<BalanceOverview>>
+    ): Deferred<Array<BalanceOverview>>
 
     @HTTP(method = "HISTORY", path = "balances", hasBody = true)
     fun balanceHistory(
@@ -82,13 +82,13 @@ interface StemeraldV2ApiClient {
      * Markets
      */
     @HTTP(method = "LIST", path = "markets", hasBody = true)
-    fun marketList(): Deferred<ArrayList<Market>>
+    fun marketList(): Deferred<List<Market>>
 
     @HTTP(method = "STATUS", path = "markets/{market}", hasBody = true)
     fun marketStatus(@Path("market") market: String, @Query("period") period: Long = 86400): Deferred<MarketStatus>
 
     @HTTP(method = "SUMMARY", path = "markets/{market}", hasBody = true)
-    fun marketSummary(@Path("market") market: String): Deferred<ArrayList<MarketSummary>>
+    fun marketSummary(@Path("market") market: String): Deferred<List<MarketSummary>>
 
     @HTTP(method = "LAST", path = "markets/{market}", hasBody = true)
     fun marketLast(@Path("market") market: String): Deferred<MarketLast>
@@ -116,7 +116,7 @@ interface StemeraldV2ApiClient {
         @Path("market") market: String,
         @Query("limit") take: Int = 20,
         @Query("lastId") lastId: Int = 0
-    ): Deferred<ArrayList<MarketDeal>>
+    ): Deferred<List<MarketDeal>>
 
     @HTTP(method = "PEEK", path = "markets/{market}/mydeals", hasBody = true)
     fun getMyDeals(
@@ -124,7 +124,7 @@ interface StemeraldV2ApiClient {
         @Path("market") market: String,
         @Query("limit") take: Int = 20,
         @Query("offset") skip: Int = 0
-    ): Deferred<ArrayList<MyDeal>>
+    ): Deferred<List<MyDeal>>
 
     /**
      * Orders
@@ -136,7 +136,7 @@ interface StemeraldV2ApiClient {
         @Query("status") status: String,
         @Query("offset") offset: Int,
         @Query("limit") limit: Int
-    ): Deferred<ArrayList<Order>>
+    ): Deferred<List<Order>>
 
     @HTTP(method = "CANCEL", path = "orders/{order}", hasBody = true)
     fun cancelOrder(

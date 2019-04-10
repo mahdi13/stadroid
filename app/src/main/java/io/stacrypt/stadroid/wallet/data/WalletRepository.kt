@@ -157,12 +157,14 @@ object WalletRepository {
         return paymentGatewayDao.loadByFiatSymbol(symbol)
     }
 
-    private fun refreshBalanceOverview() {
+    fun refreshBalanceOverview() {
         job = scope.launch {
             try {
-                stemeraldApiClient.balanceOverview().await().apply {
-                    balanceOverviewDao.deleteAll() // FIXME
-                }.forEach { balanceOverviewDao.save(it) } // FIXME
+                stemeraldApiClient.balanceOverview().await().let {
+                    // balanceOverviewDao.deleteAll() // FIXME
+                    // }.forEach { balanceOverviewDao.save(it) } // FIXME
+                    balanceOverviewDao.saveAll(*it)
+                }
             } catch (e: Exception) {
                 // TODO: Show error
             }

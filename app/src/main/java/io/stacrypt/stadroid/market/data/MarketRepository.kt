@@ -1,12 +1,17 @@
 package io.stacrypt.stadroid.market.data
 
 import android.text.format.DateUtils
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.PullerLiveData
 import io.stacrypt.stadroid.data.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import java.lang.Exception
 import java.util.*
@@ -36,7 +41,7 @@ object MarketRepository {
      * TODO: Limit webservice call rate
      */
     fun getMarkets(): LiveData<List<Market>> {
-        refreshMarkets()
+        // refreshMarkets()
         return marketDao.loadAll()
     }
 
@@ -75,27 +80,56 @@ object MarketRepository {
      *
      * TODO: Update it automatically
      */
-    private fun getKline(market: String, start: Int, end: Int, interval: Int): LiveData<List<Kline>> {
-        val liveData = MutableLiveData<List<Kline>>()
-        scope.launch {
-            try {
-                liveData.postValue(
-                    stemeraldApiClient.kline(
-                        market = market,
-                        start = start,
-                        end = end,
-                        interval = interval
-                    ).await()
-//                    mockStemeraldApiClient.kline(
-//                        market = market
-//                    ).await()
-                )
-            } catch (e: Exception) {
-                // TODO: Try again
-                e.printStackTrace()
-            }
+    private fun getKline(market: String, start: Int, end: Int, interval: Int): LiveData<List<Kline>> =
+        PullerLiveData<List<Kline>>(scope, 1000) {
+            return@PullerLiveData stemeraldApiClient.kline(
+                market = market,
+                start = start,
+                end = end,
+                interval = interval
+            ).await()
         }
-        return liveData
+//         MutableLiveData<List<Kline>>().apply {
+//             val j = scope.launch {
+//                 do {
+//                     if (hasActiveObservers())
+//                         try {
+//                             postValue(
+//                                 stemeraldApiClient.kline(
+//                                     market = market,
+//                                     start = start,
+//                                     end = end,
+//                                     interval = interval
+//                                 ).await()
+// //                    mockStemeraldApiClient.kline(
+// //                        market = market
+// //                    ).await()
+//                             )
+//                         } catch (e: Exception) {
+//                             // TODO: Try again
+//                             e.printStackTrace()
+//                         } finally {
+//                             Log.e("salam updating", this.toString())
+//                         }
+//
+//                     Log.e("salam", this.toString())
+//                     delay(1000)
+//                     // if (!this@apply.hasActiveObservers()) this.cancel()
+//                 } while (true)
+//             }
+//             // observeForever {  }
+//         }
+
+    /**
+     * In memory, because cached data is unusable.
+     *
+     * TODO: Update it automatically
+     */
+    fun getBook(market: String): LiveData<BookResponse> = PullerLiveData<BookResponse>(scope, 1000) {
+        BookResponse(
+            buys = stemeraldApiClient.book(market, "buy").await(),
+            sells = stemeraldApiClient.book(market, "sell").await()
+        )
     }
 
     /**
@@ -103,23 +137,8 @@ object MarketRepository {
      *
      * TODO: Update it automatically
      */
-    fun getBook(market: String): LiveData<BookResponse> {
-        val liveData = MutableLiveData<BookResponse>()
-        scope.launch {
-            try {
-                liveData.postValue(
-                    BookResponse(
-                        buys = stemeraldApiClient.book(market, "buy").await(),
-                        sells = stemeraldApiClient.book(market, "sell").await()
-                    )
-//                    mockStemeraldApiClient.book(market).await()
-                )
-            } catch (e: Exception) {
-                // TODO: Try again
-                e.printStackTrace()
-            }
-        }
-        return liveData
+    fun getMyDeals(market: String): LiveData<List<MyDeal>> = PullerLiveData<List<MyDeal>>(scope, 1000) {
+        stemeraldApiClient.getMyDeals(market = market, take = 50, skip = 0).await()
     }
 
     /**
@@ -127,36 +146,8 @@ object MarketRepository {
      *
      * TODO: Update it automatically
      */
-    fun getMyDeals(market: String): LiveData<List<MyDeal>> {
-        val liveData = MutableLiveData<List<MyDeal>>()
-        scope.launch {
-            try {
-                liveData.postValue(stemeraldApiClient.getMyDeals(market = market, take = 50, skip = 0).await())
-//                liveData.postValue(mockStemeraldApiClient.myDeals(market = market).await())
-            } catch (e: Exception) {
-                // TODO: Try again
-                e.printStackTrace()
-            }
-        }
-        return liveData
-    }
-
-    /**
-     * In memory, because cached data is unusable.
-     *
-     * TODO: Update it automatically
-     */
-    fun getMarketDeals(market: String): LiveData<List<MarketDeal>> {
-        val liveData = MutableLiveData<List<MarketDeal>>()
-        scope.launch {
-            try {
-                liveData.postValue(stemeraldApiClient.getMarketDeals(market = market, take = 50, lastId = 0).await())
-            } catch (e: Exception) {
-                // TODO: Try again
-                e.printStackTrace()
-            }
-        }
-        return liveData
+    fun getMarketDeals(market: String): LiveData<List<MarketDeal>> = PullerLiveData<List<MarketDeal>>(scope, 1000) {
+        stemeraldApiClient.getMarketDeals(market = market, take = 50, lastId = 0).await()
     }
 
     fun getMyActiveOrders(market: String): LiveData<List<Order>> = getOrders(market, "pending")
@@ -168,25 +159,18 @@ object MarketRepository {
      *
      * TODO: Update it automatically
      */
-    private fun getOrders(market: String, status: String): LiveData<List<Order>> {
-        val liveData = MutableLiveData<List<Order>>()
-        scope.launch {
-            try {
-                liveData.postValue(
-                    stemeraldApiClient.getOrders(
-                        marketName = market,
-                        limit = 50,
-                        offset = 0,
-                        status = status
-                    ).await()
-                )
-//                liveData.postValue(mockStemeraldApiClient.myDeals(market = market).await())
-            } catch (e: Exception) {
-                // TODO: Try again
-                e.printStackTrace()
-            }
+    private fun getOrders(market: String, status: String): LiveData<List<Order>> =
+        PullerLiveData<List<Order>>(scope, 1000) {
+            stemeraldApiClient.getOrders(marketName = market, limit = 50, offset = 0, status = status).await()
         }
-        return liveData
+
+    /**
+     * In memory, because cached data is unusable.
+     *
+     * TODO: Update it automatically
+     */
+    fun getMarketSummary(market: String): LiveData<MarketSummary> = PullerLiveData<MarketSummary>(scope, 1000) {
+        stemeraldApiClient.marketSummary(market = market).await()[0]
     }
 
     /**
@@ -194,22 +178,8 @@ object MarketRepository {
      *
      * TODO: Update it automatically
      */
-    fun getMarketSummary(market: String): LiveData<MarketSummary> {
-        val liveData = MutableLiveData<MarketSummary>()
-        scope.launch {
-            try {
-                liveData.postValue(stemeraldApiClient.marketSummary(market = market).await()[0])
-//                liveData.postValue(
-//                    MarketSummary(
-//                        open24 = 4301, last24 = 4598, high24 = 5034, low24 = 3990, deal24 = 3232312, volume24 = 42345656
-//                    )
-//                )
-            } catch (e: Exception) {
-                // TODO: Try again
-                e.printStackTrace()
-            }
-        }
-        return liveData
+    fun getMarketStatus(market: String): LiveData<MarketStatus> = PullerLiveData<MarketStatus>(scope, 1000) {
+        stemeraldApiClient.marketStatus(market = market).await()
     }
 
     /**
@@ -217,35 +187,8 @@ object MarketRepository {
      *
      * TODO: Update it automatically
      */
-    fun getMarketStatus(market: String): LiveData<MarketStatus> {
-        val liveData = MutableLiveData<MarketStatus>()
-        scope.launch {
-            try {
-                liveData.postValue(stemeraldApiClient.marketStatus(market = market).await())
-            } catch (e: Exception) {
-                // TODO: Try again
-                e.printStackTrace()
-            }
-        }
-        return liveData
-    }
-
-    /**
-     * In memory, because cached data is unusable.
-     *
-     * TODO: Update it automatically
-     */
-    fun getMarketLast(market: String): LiveData<MarketLast> {
-        val liveData = MutableLiveData<MarketLast>()
-        scope.launch {
-            try {
-                liveData.postValue(stemeraldApiClient.marketLast(market = market).await())
-            } catch (e: Exception) {
-                // TODO: Try again
-                e.printStackTrace()
-            }
-        }
-        return liveData
+    fun getMarketLast(market: String): LiveData<MarketLast> = PullerLiveData<MarketLast>(scope, 1000) {
+        stemeraldApiClient.marketLast(market = market).await()
     }
 
     private fun refreshMarkets() {

@@ -58,7 +58,7 @@ class MarketBookFragment : Fragment() {
                 if (books.buys.isNotEmpty() && books.sells.isNotEmpty()) {
                     view?.spread?.text =
                         (books.sells.map { it.price }.min()!! - books.buys.map { it.price }.max()!!).format10Digit() +
-                            " " + (viewModel.marketName.value?.split("_")?.get(0) ?: "")
+                            " " + (viewModel.marketName.split("_")?.get(0) ?: "")
                 }
             })
     }

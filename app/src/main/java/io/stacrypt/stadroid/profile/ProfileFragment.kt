@@ -56,6 +56,7 @@ class ProfileFragment : Fragment() {
         viewModel = ViewModelProviders.of(activity!!).get(ProfileViewModel::class.java)
         viewModel.user?.observe(viewLifecycleOwner,
             Observer<User> { user ->
+                if (user == null) return@Observer
                 this.email.text = user.email
             })
 

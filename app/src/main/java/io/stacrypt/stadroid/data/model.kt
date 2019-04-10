@@ -285,7 +285,6 @@ data class Order(
     val filledFee: BigDecimal?
 )
 
-@Entity
 data class Ticket(
     @PrimaryKey var id: Int,
     var title: String,
@@ -298,17 +297,6 @@ data class Ticket(
     var modifiedAt: Date?
 )
 
-@Entity(
-    primaryKeys = ["id"],
-    foreignKeys = [
-        ForeignKey(
-            entity = Ticket::class,
-            parentColumns = arrayOf("id"),
-            childColumns = arrayOf("ticketId"),
-            onDelete = ForeignKey.CASCADE
-        )
-    ]
-)
 data class TicketMessage(
     var id: Int,
     var text: String,

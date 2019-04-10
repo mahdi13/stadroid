@@ -49,6 +49,9 @@ interface CurrencyDao {
 @Dao
 interface BalanceOverviewDao {
     @Insert(onConflict = REPLACE)
+    fun saveAll(vararg balanceOverview: BalanceOverview)
+
+    @Insert(onConflict = REPLACE)
     fun save(balanceOverview: BalanceOverview)
 
     @Query("SELECT * FROM BalanceOverview WHERE assetName = :assetName")

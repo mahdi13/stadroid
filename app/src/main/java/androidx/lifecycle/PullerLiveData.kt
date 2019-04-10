@@ -17,7 +17,8 @@ class PullerLiveData<T>(scope: CoroutineScope, interval: Long, executor: suspend
             if (hasActiveObservers()) {
                 if (pullingStatus.value != PullingStatus.FIRST_LOADING) pullingStatus.postValue(PullingStatus.LOADING)
                 try {
-                    postValue(executor.invoke())
+                    val newValue = executor.invoke()
+                    if (newValue?.hashCode() != value?.hashCode()) postValue(newValue)
                     pullingStatus.postValue(PullingStatus.LIVE)
                 } catch (e: Exception) {
                     pullingStatus.postValue(PullingStatus.ERROR)
@@ -26,14 +27,13 @@ class PullerLiveData<T>(scope: CoroutineScope, interval: Long, executor: suspend
                 Log.e("salam updating", this@PullerLiveData.toString())
             }
             delay(interval)
+            if (!hasObservers()) destroy()
             Log.e("salam alive", this@PullerLiveData.toString())
         } while (true)
     }
     val pullingStatus = MutableLiveData<PullingStatus>().apply { postValue(PullingStatus.FIRST_LOADING) }
 
-    fun destroy() {
-        runBlocking {
-            if (job.isActive) job.cancelAndJoin()
-        }
+    private fun destroy() {
+        if (job.isActive) job.cancel()
     }
 }

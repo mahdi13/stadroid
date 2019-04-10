@@ -15,13 +15,13 @@ import java.math.BigDecimal
         BalanceOverview::class,
 
         User::class,
-        Ticket::class,
-        TicketMessage::class,
+        // Ticket::class,
+        // TicketMessage::class,
         ShetabAddress::class,
         ShebaAddress::class,
         PaymentGateway::class
     ],
-    version = 6
+    version = 7
 )
 @TypeConverters(Converters::class)
 abstract class StemeraldDatabase : RoomDatabase() {

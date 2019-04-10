@@ -163,7 +163,7 @@ class NewOrderFragment : Fragment() {
                     val newOrderPrice = viewModel.newOrderPrice.value
                     val newOrderType = viewModel.newOrderType.value!!
                     val newOrderSide = if (v.id == R.id.buy) "buy" else "sell"
-                    val newOrderMarketName = viewModel.marketName.value!!
+                    val newOrderMarketName = viewModel.marketName
                     val newOrderEstimateFee = viewModel.market.value?.calculateEstimatedFee(
                         type = newOrderType,
                         side = newOrderSide,

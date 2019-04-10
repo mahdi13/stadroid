@@ -1,6 +1,7 @@
 package io.stacrypt.stadroid.market
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +20,6 @@ import org.jetbrains.anko.support.v4.withArguments
 import androidx.core.content.ContextCompat
 import io.stacrypt.stadroid.ui.format10Digit
 import kotlinx.android.synthetic.main.fragment_market_vitrine_list.*
-import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.startActivity
 
 class MarketVitrineViewModel : ViewModel() {
@@ -28,16 +28,11 @@ class MarketVitrineViewModel : ViewModel() {
 
 class MarketVitrineFragment : Fragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-        inflater.inflate(R.layout.fragment_market_vitrine_list, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val rootView = inflater.inflate(R.layout.fragment_market_vitrine_list, container, false)
+        viewModel = ViewModelProviders.of(this).get(MarketVitrineViewModel::class.java)
 
-    private lateinit var viewModel: MarketVitrineViewModel
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(activity!!).get(MarketVitrineViewModel::class.java)
-
-        viewModel.allMarkets.observe(this, Observer<List<Market>> { markets ->
+        viewModel.allMarkets.observe(viewLifecycleOwner, Observer<List<Market>> { markets ->
             markets.forEach { market ->
                 // FIXME
                 when (market.name) {
@@ -49,44 +44,56 @@ class MarketVitrineFragment : Fragment() {
                             .replace(R.id.container1, MarketVitrineRowFragment().withArguments("market" to market.name))
                             .commitNow()
                     }
-//                    "TIRR_TETH" -> {
-//                        childFragmentManager.beginTransaction()
-//                            .replace(R.id.container2, MarketVitrineRowFragment().withArguments("market" to market.name))
-//                            .commitNow()
-//                    }
-//                    "TBTC_TETH" -> {
-//                        childFragmentManager.beginTransaction()
-//                            .replace(R.id.container3, MarketVitrineRowFragment().withArguments("market" to market.name))
-//                            .commitNow()
-//                    }
+                   "TIRR_TETH" -> {
+                       childFragmentManager.beginTransaction()
+                           .replace(R.id.container2, MarketVitrineRowFragment().withArguments("market" to market.name))
+                           .commitNow()
+                   }
+                   "TBTC_TETH" -> {
+                       childFragmentManager.beginTransaction()
+                           .replace(R.id.container3, MarketVitrineRowFragment().withArguments("market" to market.name))
+                           .commitNow()
+                   }
                 }
             }
         })
+        return rootView
+    }
+
+    private lateinit var viewModel: MarketVitrineViewModel
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
     }
 }
 
-class VitrineViewModel : ViewModel() {
+class VitrineRowViewModel : ViewModel() {
 
-    val marketName: MutableLiveData<String> = MutableLiveData()
+    init {
+        Log.e("salammmsalammm", "New Live Data")
+    }
 
-    val market: LiveData<Market> =
-        Transformations.switchMap(marketName) { MarketRepository.getMarket(it) }
+    lateinit var marketName: String
 
-    val last: LiveData<MarketLast> =
-        Transformations.switchMap(marketName) { MarketRepository.getMarketLast(it) }
+    val market: LiveData<Market> by lazy { MarketRepository.getMarket(marketName) }
 
-    val summary: LiveData<MarketSummary> =
-        Transformations.switchMap(marketName) { MarketRepository.getMarketSummary(it) }
+    val last: LiveData<MarketLast> by lazy { MarketRepository.getMarketLast(marketName) }
 
-    val status: LiveData<MarketStatus> =
-        Transformations.switchMap(marketName) { MarketRepository.getMarketStatus(it) }
+    val summary: LiveData<MarketSummary> by lazy { MarketRepository.getMarketSummary(marketName) }
 
-    val kline: LiveData<List<Kline>> =
-        Transformations.switchMap(marketName) { MarketRepository.getKline24(it) }
+    val status: LiveData<MarketStatus> by lazy { MarketRepository.getMarketStatus(marketName) }
+
+    val kline: LiveData<List<Kline>> by lazy { MarketRepository.getKline24(marketName) }
+
+    override fun onCleared() {
+        // (kline as PullerLiveData<*>).destroy()
+        Log.e("salammmsalammm", "Live Data Dead :(((")
+        super.onCleared()
+    }
 }
 
 class MarketVitrineRowFragment : Fragment() {
-    private lateinit var viewModel: VitrineViewModel
+    private lateinit var viewModel: VitrineRowViewModel
     private var rootView: View? = null
 
     override fun onCreateView(
@@ -95,6 +102,40 @@ class MarketVitrineRowFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         rootView = inflater.inflate(R.layout.fragment_market_vitrine, container, false)!!
+
+
+        viewModel = ViewModelProviders.of(this).get(VitrineRowViewModel::class.java)
+        arguments?.getString("market")?.let {
+            viewModel.marketName = it
+        }
+
+        viewModel.market.observe(viewLifecycleOwner, Observer<Market?> { market ->
+            if (market == null) return@Observer
+            rootView?.market_name?.text = market.name.replace("_", " / ")
+        })
+
+        viewModel.status.observe(viewLifecycleOwner, Observer {
+            //            rootView?.open?.text = it?.low?.format10Digit()
+            rootView?.high?.text = it?.high?.format10Digit()
+            rootView?.low?.text = it?.low?.format10Digit()
+//            rootView?.close?.text = it?.last?.format10Digit()
+            rootView?.volume?.text =
+                "vol " + it?.volume?.format10Digit() // + " " + (viewModel?.marketName?.value?.split("_")?.get(1) ?: "")
+        })
+
+        viewModel.last.observe(viewLifecycleOwner, Observer {
+            rootView?.price?.text = it?.price.toString()
+        })
+
+        viewModel.status.observe(viewLifecycleOwner, Observer {
+            // TODO
+        })
+
+        viewModel.kline.observe(viewLifecycleOwner, Observer {
+            initChart(initDataset(it))
+        })
+
+
         return rootView
     }
 
@@ -178,37 +219,6 @@ class MarketVitrineRowFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-        viewModel = ViewModelProviders.of(this).get(VitrineViewModel::class.java)
-        arguments?.getString("market")?.let {
-            viewModel.marketName.postValue(it)
-        }
-
-        viewModel.market.observe(this, Observer<Market?> { market ->
-            if (market == null) return@Observer
-            rootView?.market_name?.text = market.name.replace("_", " / ")
-        })
-
-        viewModel.status.observe(this, Observer {
-//            rootView?.open?.text = it?.low?.format10Digit()
-            rootView?.high?.text = it?.high?.format10Digit()
-            rootView?.low?.text = it?.low?.format10Digit()
-//            rootView?.close?.text = it?.last?.format10Digit()
-            rootView?.volume?.text =
-                "vol " + it?.volume?.format10Digit() // + " " + (viewModel?.marketName?.value?.split("_")?.get(1) ?: "")
-        })
-
-        viewModel.last.observe(this, Observer {
-            rootView?.price?.text = it?.price.toString()
-        })
-
-        viewModel.status.observe(this, Observer {
-            // TODO
-        })
-
-        viewModel.kline.observe(this, Observer {
-            initChart(initDataset(it))
-        })
     }
 }
 

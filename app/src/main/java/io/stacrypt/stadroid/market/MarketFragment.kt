@@ -54,17 +54,13 @@ class MarketFragment : Fragment() {
 //        tabs.setupWithViewPager(viewpager)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(activity!!).get(MarketViewModel::class.java)
-        arguments?.getString(MarketActivity.ARG_MARKET)?.let { viewModel.marketName.postValue(it) }
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        viewModel = ViewModelProviders.of(activity!!).get(MarketViewModel::class.java)
+        arguments?.getString(MarketActivity.ARG_MARKET)?.let { viewModel.marketName = it }
         return inflater.inflate(R.layout.fragment_market, container, false)
     }
 }

@@ -26,3 +26,5 @@ fun Market.calculateEstimatedFee(
     else -> null
 }?.scaleByPowerOfTen(-2)?.times(price)
 
+fun String.parseMarketBaseCurrency() = this.split("_")[1]
+fun String.parseMarketQuoteCurrency() = this.split("_")[0]

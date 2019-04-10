@@ -2,6 +2,7 @@ package io.stacrypt.stadroid.notification
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.PullerLiveData
 import androidx.lifecycle.Transformations
 import androidx.paging.toLiveData
 import io.stacrypt.stadroid.data.*
@@ -46,23 +47,7 @@ object NotificationRepository {
     /**
      * Always online
      */
-    fun getNotificationsCount(): LiveData<NotificationCount?> {
-        val liveData = MutableLiveData<NotificationCount?>()
-        scope.launch {
-            try {
-                liveData.postValue(stemeraldApiClient.countNotifications().await())
-            } catch (e: HttpException) {
-                // TODO Show error or retry
-                liveData.postValue(null)
-                e.printStackTrace()
-//                }
-            } catch (e: Exception) {
-                // TODO Show error or retry
-                liveData.postValue(null)
-                e.printStackTrace()
-            } finally {
-            }
-        }
-        return liveData
+    fun getNotificationsCount(): LiveData<NotificationCount> = PullerLiveData<NotificationCount>(scope, 1000) {
+        stemeraldApiClient.countNotifications().await()
     }
 }
