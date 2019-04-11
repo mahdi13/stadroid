@@ -59,6 +59,10 @@ class BalanceDetailFragment : Fragment() {
                 if (activity is BalanceDetailActivity)
                     (activity as BalanceDetailActivity).showWithdraw(item.assetName)
             }
+            history.setOnClickListener {
+                if (activity is BalanceDetailActivity)
+                    (activity as BalanceDetailActivity).showWithdraw(item.assetName)
+            }
         })
 
         list.layoutManager = LinearLayoutManager(activity)

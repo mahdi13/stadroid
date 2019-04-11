@@ -12,6 +12,7 @@ import io.stacrypt.stadroid.wallet.fiat.CashoutFragment
 import io.stacrypt.stadroid.wallet.cryptocurrency.WithdrawFragment
 import io.stacrypt.stadroid.wallet.deposit.DepositFragment
 import io.stacrypt.stadroid.wallet.fiat.TransactionDetailFragment
+import io.stacrypt.stadroid.wallet.transactions.CryptocurrencyTransactions
 import org.jetbrains.anko.support.v4.withArguments
 
 class BalanceDetailActivity : AppCompatActivity() {
@@ -96,6 +97,34 @@ class BalanceDetailActivity : AppCompatActivity() {
             "TBTC" -> DepositFragment()
             "IRR" -> CashinFragment()
             "TIRR" -> CashinFragment()
+            else -> null
+        }
+
+        if (fragment != null)
+            supportFragmentManager.beginTransaction()
+                .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
+                .replace(
+                    R.id.container, fragment.withArguments(
+                        ARG_ASSET to intent.getStringExtra(
+                            ARG_ASSET
+                        )
+                    )
+                )
+                .addToBackStack("$symbol-deposit")
+                .commit()
+    }
+
+    fun showHistory(symbol: String) {
+//        val fragment = when (viewModel.currency.value?.type?.toLowerCase()) {
+//            "cryptocurrency" -> DepositFragment()
+//            "fiat" -> CashinFragment()
+//            else -> null
+//        }
+        val fragment = when (symbol) {
+            "BTC" -> CryptocurrencyTransactions()
+            "TBTC" -> CryptocurrencyTransactions()
+            // "IRR" -> CashinFragment()
+            // "TIRR" -> CashinFragment()
             else -> null
         }
 

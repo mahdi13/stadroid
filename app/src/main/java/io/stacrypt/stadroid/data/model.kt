@@ -179,7 +179,7 @@ data class DepositInfo(
 )
 
 data class DepositDetail(
-    @SerializedName("id") var id: String,
+    @SerializedName("id") var id: Int,
     @SerializedName("user") var user: String,
     @SerializedName("isConfirmed") var isConfirmed: Boolean?,
     @SerializedName("netAmount") var netAmount: BigDecimal,

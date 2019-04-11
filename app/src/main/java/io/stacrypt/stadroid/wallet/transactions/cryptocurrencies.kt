@@ -15,6 +15,7 @@ import androidx.paging.DataSource
 import com.google.android.material.tabs.TabLayout
 import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.data.Listing
+import io.stacrypt.stadroid.wallet.balance.BalanceDetailActivity
 import io.stacrypt.stadroid.wallet.data.WalletRepository
 import kotlinx.android.synthetic.main.activity_market.*
 import kotlinx.android.synthetic.main.fragment_cryptocurrency_transaction_list.view.*
@@ -52,6 +53,9 @@ class DepositCryptocurrencyTransactionList : Fragment() {
             adapter.submitList(it)
         })
 
+        adapter.onItemClickListener = {
+            (activity!! as BalanceDetailActivity).showtransaction(it.id)
+        }
         return rootView
     }
 }
@@ -87,8 +91,13 @@ class CryptocurrencyTransactions : Fragment() {
                     0 -> DepositCryptocurrencyTransactionList()
                     1 -> WithdrawCryptocurrencyTransactionList()
                     else -> throw IndexOutOfBoundsException()
-                }.apply { this.arguments?.putString(ARG_CRYPTOCURRENCY_SYMBOL, this@CryptocurrencyTransactions.arguments?.getString(
-                    ARG_CRYPTOCURRENCY_SYMBOL))!! }
+                }.apply {
+                    this.arguments?.putString(
+                        ARG_CRYPTOCURRENCY_SYMBOL, this@CryptocurrencyTransactions.arguments?.getString(
+                            BalanceDetailActivity.ARG_ASSET
+                        )
+                    )!!
+                }
             }
 
             override fun getCount(): Int = 6

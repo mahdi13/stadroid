@@ -2,11 +2,14 @@ package io.stacrypt.stadroid.wallet.transactions
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.data.DepositDetail
+import kotlinx.android.synthetic.main.row_deposit_history.view.*
 
 class CryptocurrencyDepositsPagedAdapter :
     PagedListAdapter<DepositDetail, CryptocurrencyDepositsPagedAdapter.ViewHolder>(ITEM_COMPARATOR) {
@@ -21,29 +24,23 @@ class CryptocurrencyDepositsPagedAdapter :
 
     inner class ViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
         LayoutInflater.from(parent.context)
-            .inflate(R.layout.row_bank_card, parent, false)
+            .inflate(R.layout.row_deposit_history, parent, false)
     ) {
-        val cardView: CardView = itemView.card_card
-        val titleView: TextView = itemView.card_title
-        val numberView: TextView = itemView.pan
-        val holderView: TextView = itemView.holder
+        val cardView: CardView = itemView.deposit_card
+        val idView: TextView = itemView.deposit_id
 
-        fun bindTo(bankCard: BankCard?) {
+        fun bindTo(depositDetail: DepositDetail?) {
             cardView.setOnClickListener { v ->
-                bankCard?.let { onItemClickListener?.invoke(it) }
+                depositDetail?.let { onItemClickListener?.invoke(it) }
             }
 
-            if (bankCard == null) return clear()
+            if (depositDetail == null) return clear()
 
-            titleView.text = "Card Number ${bankCard.id}"
-            numberView.text = bankCard.pan
-            holderView.text = bankCard.holder
+            idView.text = depositDetail.id
         }
 
         private fun clear() {
-            titleView.text = ""
-            numberView.text = ""
-            holderView.text = ""
+            idView.text = ""
         }
     }
 
@@ -56,3 +53,4 @@ class CryptocurrencyDepositsPagedAdapter :
                 oldItem.id == newItem.id
         }
     }
+}
