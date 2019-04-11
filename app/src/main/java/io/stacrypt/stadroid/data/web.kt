@@ -183,6 +183,13 @@ interface StemeraldV2ApiClient {
     /**
      * Deposits
      */
+    @HTTP(method = "LIST", path = "deposits", hasBody = true)
+    fun getDeposits(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
+        @Query("cryptocurrencySymbol") assetName: String,
+        @Query("page") page: Int = 0
+    ): Deferred<ArrayList<DepositDetail>>
+
     @HTTP(method = "GET", path = "deposits/{depositId}", hasBody = false)
     fun getDepositInfo(
         @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
