@@ -13,8 +13,10 @@ import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.copyToClipboard
 import io.stacrypt.stadroid.ui.format10Digit
 import io.stacrypt.stadroid.ui.showQrCode
+import io.stacrypt.stadroid.wallet.balance.BalanceDetailActivity
 import io.stacrypt.stadroid.wallet.balance.BalanceDetailActivity.Companion.ARG_ASSET
 import kotlinx.android.synthetic.main.deposit_fragment.view.*
+import kotlinx.android.synthetic.main.header_appbar_back.view.*
 import net.glxn.qrgen.android.QRCode
 import org.jetbrains.anko.design.snackbar
 
@@ -27,7 +29,11 @@ class DepositFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.deposit_fragment, container, false)
+        val rootView = inflater.inflate(R.layout.deposit_fragment, container, false)
+
+        rootView.back.setOnClickListener {
+            (activity as BalanceDetailActivity).up()
+        }
 
 //        viewModel.depositInfo.observe(this, Observer {
 //            if (it == null) return@Observer
@@ -40,6 +46,8 @@ class DepositFragment : Fragment() {
 //            }
 //
 //        })
+
+        return rootView
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

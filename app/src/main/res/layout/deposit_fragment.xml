@@ -1,21 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".wallet.deposit.DepositFragment"
+    android:background="@color/colorPrimaryDark"
+    android:orientation="vertical">
+
+    <include layout="@layout/header_appbar_back"/>
+
+    <ScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".wallet.deposit.DepositFragment"
-        android:background="@color/colorPrimaryDark"
         android:paddingStart="10dp"
         android:paddingEnd="10dp">
 
-    <LinearLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-        <androidx.cardview.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:backgroundTint="@color/colorPrimary"
@@ -23,7 +33,7 @@
                 android:layout_marginBottom="5dp"
                 app:cardCornerRadius="5dp">
 
-            <LinearLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
@@ -32,7 +42,7 @@
                     android:paddingBottom="15dp"
                     android:paddingTop="10dp">
 
-                <TextView
+                    <TextView
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -41,14 +51,14 @@
                         android:textColor="@color/colorPrimaryLightLight"
                         android:layout_marginBottom="15dp"/>
 
-                <LinearLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:orientation="horizontal">
 
 
-                    <TextView
+                        <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
@@ -58,14 +68,14 @@
                             android:fontFamily="@font/din_medium"
                             android:text="Minimum"/>
 
-                    <View
+                        <View
                             android:layout_width="1dp"
                             android:layout_height="match_parent"
                             android:background="@color/colorPrimaryLight"
                             android:layout_marginBottom="10dp"/>
 
 
-                    <TextView
+                        <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
@@ -75,14 +85,14 @@
                             android:fontFamily="@font/din_medium"
                             android:text="Maximum"/>
 
-                    <View
+                        <View
                             android:layout_width="1dp"
                             android:layout_height="match_parent"
                             android:background="@color/colorPrimaryLight"
                             android:layout_marginBottom="10dp"/>
 
 
-                    <TextView
+                        <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
@@ -93,22 +103,22 @@
                             android:text="Commission"/>
 
 
-                </LinearLayout>
+                    </LinearLayout>
 
 
-                <View
+                    <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:background="@color/colorPrimaryLight"/>
 
-                <LinearLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:orientation="horizontal">
 
 
-                    <TextView
+                        <TextView
                             android:id="@+id/min_limit"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
@@ -119,14 +129,14 @@
                             android:fontFamily="@font/din_medium"
                             android:text="@string/loading"/>
 
-                    <View
+                        <View
                             android:layout_width="1dp"
                             android:layout_height="match_parent"
                             android:background="@color/colorPrimaryLight"
                             android:layout_marginTop="10dp"/>
 
 
-                    <TextView
+                        <TextView
                             android:id="@+id/max_limit"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
@@ -137,7 +147,7 @@
                             android:fontFamily="@font/din_medium"
                             android:text="@string/loading"/>
 
-                    <View
+                        <View
                             android:layout_width="1dp"
                             android:layout_height="match_parent"
                             android:background="@color/colorPrimaryLight"
@@ -145,7 +155,7 @@
                             android:layout_marginTop="10dp"/>
 
 
-                    <TextView
+                        <TextView
                             android:id="@+id/fee"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
@@ -157,12 +167,12 @@
                             android:text="@string/loading"/>
 
 
+                    </LinearLayout>
                 </LinearLayout>
-            </LinearLayout>
 
-        </androidx.cardview.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
-        <androidx.cardview.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/colorPrimary"
@@ -170,7 +180,7 @@
                 android:layout_marginBottom="5dp"
                 app:cardCornerRadius="5dp">
 
-            <LinearLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
@@ -179,7 +189,7 @@
                     android:paddingBottom="15dp"
                     android:paddingTop="10dp">
 
-                <TextView
+                    <TextView
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -189,12 +199,12 @@
                         android:fontFamily="@font/din_medium"
                         android:layout_marginBottom="5dp"/>
 
-                <View
+                    <View
                         android:layout_width="match_parent"
                         android:layout_height="1px"
                         android:background="@color/colorAccent"/>
 
-                <TextView
+                    <TextView
                         android:id="@+id/address_view"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                         android:textColor="@color/white"
@@ -207,7 +217,7 @@
                         android:fontFamily="@font/roboto_mono_regular"
                         android:text="@string/loading"/>
 
-                <com.github.omadahealth.lollipin.lib.views.SquareImageView
+                    <com.github.omadahealth.lollipin.lib.views.SquareImageView
                         android:id="@+id/address_qrcode_image"
                         android:layout_width="200dp"
                         android:layout_height="200dp"
@@ -216,14 +226,14 @@
                         android:scaleType="fitXY"
                         />
 
-                <LinearLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:layout_marginTop="30dp">
 
 
-                    <com.google.android.material.button.MaterialButton
+                        <com.google.android.material.button.MaterialButton
                             android:id="@+id/address_renew"
                             style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
                             android:layout_width="0dp"
@@ -232,14 +242,14 @@
                             android:gravity="center"
                             android:text="Renew"/>
 
-                    <View
+                        <View
                             android:layout_width="5dp"
                             android:layout_height="match_parent"
                             android:background="@color/colorPrimary"
                             android:layout_marginTop="10dp"/>
 
 
-                    <com.google.android.material.button.MaterialButton
+                        <com.google.android.material.button.MaterialButton
                             android:id="@+id/address_copy"
                             style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
                             android:layout_width="0dp"
@@ -248,14 +258,14 @@
                             android:gravity="center"
                             android:text="Copy"/>
 
-                    <View
+                        <View
                             android:layout_width="5dp"
                             android:layout_height="match_parent"
                             android:background="@color/colorPrimary"
                             android:layout_marginTop="10dp"/>
 
 
-                    <com.google.android.material.button.MaterialButton
+                        <com.google.android.material.button.MaterialButton
                             android:id="@+id/address_share"
                             style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
                             android:layout_width="0dp"
@@ -264,29 +274,29 @@
                             android:gravity="center"
                             android:text="Share"/>
 
-                    <!--<View-->
-                            <!--android:layout_width="5dp"-->
-                            <!--android:layout_height="match_parent"-->
-                            <!--android:background="@color/colorPrimary"-->
-                            <!--android:layout_marginTop="10dp"/>-->
+                        <!--<View-->
+                        <!--android:layout_width="5dp"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:background="@color/colorPrimary"-->
+                        <!--android:layout_marginTop="10dp"/>-->
 
 
-                    <!--<com.google.android.material.button.MaterialButton-->
-                            <!--android:id="@+id/address_qrcode"-->
-                            <!--style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"-->
-                            <!--android:layout_width="0dp"-->
-                            <!--android:layout_height="match_parent"-->
-                            <!--android:layout_weight="1"-->
-                            <!--android:gravity="center"-->
-                            <!--android:text="QRCode"/>-->
+                        <!--<com.google.android.material.button.MaterialButton-->
+                        <!--android:id="@+id/address_qrcode"-->
+                        <!--style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"-->
+                        <!--android:layout_width="0dp"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:gravity="center"-->
+                        <!--android:text="QRCode"/>-->
 
 
+                    </LinearLayout>
                 </LinearLayout>
-            </LinearLayout>
 
-        </androidx.cardview.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
-        <androidx.cardview.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/tag_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -295,7 +305,7 @@
                 android:layout_marginBottom="5dp"
                 app:cardCornerRadius="5dp">
 
-            <LinearLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
@@ -304,7 +314,7 @@
                     android:paddingBottom="15dp"
                     android:paddingTop="10dp">
 
-                <TextView
+                    <TextView
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -314,12 +324,12 @@
                         android:fontFamily="@font/din_medium"
                         android:layout_marginBottom="5dp"/>
 
-                <View
+                    <View
                         android:layout_width="match_parent"
                         android:layout_height="1px"
                         android:background="@color/colorAccent"/>
 
-                <TextView
+                    <TextView
                         android:id="@+id/tag_view"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
                         android:textColor="@color/white"
@@ -331,7 +341,7 @@
                         android:text="@string/loading"/>
 
 
-                <androidx.appcompat.widget.AppCompatImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/tag_qrcode_image"
                         android:layout_width="200dp"
                         android:layout_height="200dp"
@@ -340,14 +350,14 @@
                         />
 
 
-                <LinearLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:layout_marginTop="30dp">
 
 
-                    <com.google.android.material.button.MaterialButton
+                        <com.google.android.material.button.MaterialButton
                             android:id="@+id/tag_renew"
                             style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
                             android:layout_width="0dp"
@@ -356,14 +366,14 @@
                             android:gravity="center"
                             android:text="Renew"/>
 
-                    <View
+                        <View
                             android:layout_width="5dp"
                             android:layout_height="match_parent"
                             android:background="@color/colorPrimary"
                             android:layout_marginTop="10dp"/>
 
 
-                    <com.google.android.material.button.MaterialButton
+                        <com.google.android.material.button.MaterialButton
                             android:id="@+id/tag_copy"
                             style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
                             android:layout_width="0dp"
@@ -372,14 +382,14 @@
                             android:gravity="center"
                             android:text="Copy"/>
 
-                    <View
+                        <View
                             android:layout_width="5dp"
                             android:layout_height="match_parent"
                             android:background="@color/colorPrimary"
                             android:layout_marginTop="10dp"/>
 
 
-                    <com.google.android.material.button.MaterialButton
+                        <com.google.android.material.button.MaterialButton
                             android:id="@+id/tag_share"
                             style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
                             android:layout_width="0dp"
@@ -388,28 +398,29 @@
                             android:gravity="center"
                             android:text="Share"/>
 
-                    <!--<View-->
-                            <!--android:layout_width="5dp"-->
-                            <!--android:layout_height="match_parent"-->
-                            <!--android:background="@color/colorPrimary"-->
-                            <!--android:layout_marginTop="10dp"/>-->
+                        <!--<View-->
+                        <!--android:layout_width="5dp"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:background="@color/colorPrimary"-->
+                        <!--android:layout_marginTop="10dp"/>-->
 
 
-                    <!--<com.google.android.material.button.MaterialButton-->
-                            <!--android:id="@+id/tag_qrcode"-->
-                            <!--style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"-->
-                            <!--android:layout_width="0dp"-->
-                            <!--android:layout_height="match_parent"-->
-                            <!--android:layout_weight="1"-->
-                            <!--android:gravity="center"-->
-                            <!--android:text="QRCode"/>-->
+                        <!--<com.google.android.material.button.MaterialButton-->
+                        <!--android:id="@+id/tag_qrcode"-->
+                        <!--style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"-->
+                        <!--android:layout_width="0dp"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:gravity="center"-->
+                        <!--android:text="QRCode"/>-->
 
 
+                    </LinearLayout>
                 </LinearLayout>
-            </LinearLayout>
 
-        </androidx.cardview.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
 
-    </LinearLayout>
-</ScrollView>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
