@@ -61,7 +61,7 @@ class BalanceDetailFragment : Fragment() {
             }
             history.setOnClickListener {
                 if (activity is BalanceDetailActivity)
-                    (activity as BalanceDetailActivity).showWithdraw(item.assetName)
+                    (activity as BalanceDetailActivity).showHistory(item.assetName)
             }
         })
 

@@ -36,7 +36,7 @@ class CryptocurrencyDepositsPagedAdapter :
 
             if (depositDetail == null) return clear()
 
-            idView.text = depositDetail.id
+            idView.text = depositDetail.id.toString()
         }
 
         private fun clear() {

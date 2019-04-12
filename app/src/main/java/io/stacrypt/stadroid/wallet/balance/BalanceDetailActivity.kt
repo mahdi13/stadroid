@@ -33,6 +33,7 @@ class BalanceDetailActivity : AppCompatActivity() {
             when (intent.getStringExtra(ARG_ACTION)) {
                 ACTION_DEPOSIT -> showDeposit(intent.getStringExtra(ARG_ASSET))
                 ACTION_WITHDRAW -> showWithdraw(intent.getStringExtra(ARG_ASSET))
+                ACTION_HISTORY -> showHistory(intent.getStringExtra(ARG_ASSET))
             }
         }
 
