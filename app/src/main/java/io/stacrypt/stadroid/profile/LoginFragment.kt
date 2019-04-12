@@ -46,6 +46,10 @@ class LoginFragment : Fragment() {
             }
         }
 
+        reset_password.setOnClickListener {
+
+        }
+
         view.register.setOnClickListener {
             if (!validateInputs()) return@setOnClickListener
             singletonAsync {

@@ -1,6 +1,5 @@
 package io.stacrypt.stadroid.wallet
 
-import androidx.lifecycle.RateLimiter
 import androidx.lifecycle.ViewModel
 import io.stacrypt.stadroid.wallet.data.WalletRepository
 import kotlinx.coroutines.GlobalScope

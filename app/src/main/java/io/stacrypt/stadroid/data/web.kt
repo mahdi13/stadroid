@@ -426,6 +426,12 @@ interface StemeraldV2ApiClient {
         @Field("password") password: String
     ): Deferred<Unit>
 
+    @FormUrlEncoded
+    @HTTP(method = "SCHEDULE", path = "clients/passwords", hasBody = true)
+    fun scheduleResetPassword(
+        @Field("email") email: String
+    ): Deferred<Unit>
+
     /**
      * Second Factor
      */
