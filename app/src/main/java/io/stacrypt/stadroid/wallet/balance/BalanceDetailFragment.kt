@@ -15,7 +15,6 @@ import io.stacrypt.stadroid.data.BalanceOverview
 import io.stacrypt.stadroid.ui.format10Digit
 import io.stacrypt.stadroid.ui.iconResource
 import kotlinx.android.synthetic.main.balance_detail_fragment.*
-import kotlinx.android.synthetic.main.row_balance_detail_header.*
 
 class BalanceDetailFragment : Fragment() {
 
@@ -66,5 +65,9 @@ class BalanceDetailFragment : Fragment() {
         })
 
         list.layoutManager = LinearLayoutManager(activity)
+
+        back.setOnClickListener {
+            (activity as BalanceDetailActivity).finish()
+        }
     }
 }
