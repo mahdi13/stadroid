@@ -5,6 +5,7 @@ import android.widget.EditText
 import android.text.Editable
 import androidx.lifecycle.MutableLiveData
 import io.stacrypt.stadroid.data.Currency
+import io.stacrypt.stadroid.data.dateFormatter
 import io.stacrypt.stadroid.ui.format
 import org.iban4j.Iban
 import org.iban4j.IbanFormat
@@ -136,14 +137,22 @@ fun String.extractIpAddress(): String? {
 
 class CurrencyTextWatcher(val currency: Currency, val et: EditText, val liveData: MutableLiveData<BigDecimal?>?) :
     TextWatcher {
+
+    init {
+        et.setOnFocusChangeListener { v, hasFocus ->
+            et.setText(et.text.replace("[$,]".toRegex(), "").toBigDecimalOrNull()?.format(currency).toString())
+        }
+    }
+
     override fun afterTextChanged(s: Editable?) {
         if (s.toString() != current) {
             et.removeTextChangedListener(this)
 
             val cleanString = s.toString().replace("[$,]".toRegex(), "").run { if (length > 0) this else "0" }
             val formatted =
-                cleanString.toBigDecimalOrNull()?.format(currency)?.plus(if (cleanString.last() == '.') "." else "")
-                    ?: current
+                if (cleanString.toBigDecimalOrNull() != null) s.toString() else current
+            //     cleanString.toBigDecimalOrNull()?.format(currency)?.plus(if (cleanString.last() == '.') "." else "")
+            //         ?: current
 
             current = formatted
             et.setText(formatted)
