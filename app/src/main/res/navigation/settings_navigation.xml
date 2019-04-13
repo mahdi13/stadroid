@@ -7,119 +7,128 @@
 
 
     <fragment
-            android:id="@+id/settings_entrypoint_fragment"
-            android:name="io.stacrypt.stadroid.profile.SettingEntrypointFragment"
-            android:label="Blank">
+        android:id="@+id/settings_entrypoint_fragment"
+        android:name="io.stacrypt.stadroid.profile.SettingEntrypointFragment"
+        android:label="Blank">
         <action
-                android:id="@+id/action_settings_entrypoint_fragment_to_bank_cards_fragment"
-                app:destination="@id/bank_cards_fragment"
-                app:popUpToInclusive="true"/>
+            android:id="@+id/action_settings_entrypoint_fragment_to_bank_cards_fragment"
+            app:destination="@id/bank_cards_fragment"
+            app:popUpToInclusive="true"/>
         <action
-                android:id="@+id/action_settings_entrypoint_fragment_to_emailVerificationFragment"
-                app:destination="@id/emailVerificationFragment"/>
+            android:id="@+id/action_settings_entrypoint_fragment_to_emailVerificationFragment"
+            app:destination="@id/emailVerificationFragment"/>
         <action
-                android:id="@+id/action_settings_entrypoint_fragment_to_app_security_fragment"
-                app:destination="@id/app_security_fragment"/>
+            android:id="@+id/action_settings_entrypoint_fragment_to_app_security_fragment"
+            app:destination="@id/app_security_fragment"/>
         <action
-                android:id="@+id/action_settings_entrypoint_fragment_to_change_password_fragment"
-                app:destination="@id/change_password_fragment"/>
+            android:id="@+id/action_settings_entrypoint_fragment_to_change_password_fragment"
+            app:destination="@id/change_password_fragment"/>
         <action
-                android:id="@+id/action_settings_entrypoint_fragment_to_verification_process_fragment"
-                app:destination="@id/verification_process_fragment"/>
+            android:id="@+id/action_settings_entrypoint_fragment_to_verification_process_fragment"
+            app:destination="@id/verification_process_fragment"/>
         <action
-                android:id="@+id/action_settings_entrypoint_fragment_to_do_verify_email_fragment"
-                app:destination="@id/do_verify_email_fragment"/>
+            android:id="@+id/action_settings_entrypoint_fragment_to_do_verify_email_fragment"
+            app:destination="@id/do_verify_email_fragment"/>
         <action
-                android:id="@+id/action_settings_entrypoint_fragment_to_bank_accounts_fragment"
-                app:destination="@id/bank_accounts_fragment"/>
+            android:id="@+id/action_settings_entrypoint_fragment_to_bank_accounts_fragment"
+            app:destination="@id/bank_accounts_fragment"/>
         <action
-                android:id="@+id/action_settings_entrypoint_fragment_to_addBankCardFragment"
-                app:destination="@id/addBankCardFragment"/>
+            android:id="@+id/action_settings_entrypoint_fragment_to_addBankCardFragment"
+            app:destination="@id/addBankCardFragment"/>
         <action
-                android:id="@+id/action_settings_entrypoint_fragment_to_addBankAccountFragment"
-                app:destination="@id/addBankAccountFragment"/>
+            android:id="@+id/action_settings_entrypoint_fragment_to_addBankAccountFragment"
+            app:destination="@id/addBankAccountFragment"/>
+        <action
+            android:id="@+id/action_settings_entrypoint_fragment_to_reset_password_fragment"
+            app:destination="@id/reset_password_fragment"/>
     </fragment>
 
 
     <fragment
-            android:id="@+id/bank_cards_fragment"
-            android:name="io.stacrypt.stadroid.profile.banking.BankCardsFragment"
-            android:label="Blank"
-            tools:layout="@layout/bank_cards_fragment">
+        android:id="@+id/bank_cards_fragment"
+        android:name="io.stacrypt.stadroid.profile.banking.BankCardsFragment"
+        android:label="Blank"
+        tools:layout="@layout/bank_cards_fragment">
         <action
-                android:id="@+id/action_bankCardsFragment_to_addBankCardFragment"
-                app:destination="@id/addBankCardFragment"
-                app:enterAnim="@android:anim/slide_in_left"
-                app:exitAnim="@android:anim/slide_out_right"
-                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-                app:popExitAnim="@anim/nav_default_pop_exit_anim"
-                app:popUpTo="@+id/addBankCardFragment"
-                app:popUpToInclusive="true"
-                />
+            android:id="@+id/action_bankCardsFragment_to_addBankCardFragment"
+            app:destination="@id/addBankCardFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@+id/addBankCardFragment"
+            app:popUpToInclusive="true"
+            />
     </fragment>
 
     <fragment
-            android:id="@+id/bank_accounts_fragment"
-            android:name="io.stacrypt.stadroid.profile.banking.BankAccountsFragment"
-            android:label="Blank"
-            tools:layout="@layout/bank_accounts_fragment">
+        android:id="@+id/bank_accounts_fragment"
+        android:name="io.stacrypt.stadroid.profile.banking.BankAccountsFragment"
+        android:label="Blank"
+        tools:layout="@layout/bank_accounts_fragment">
         <action
-                android:id="@+id/action_bankAccountsFragment_to_addBankAccountFragment"
-                app:destination="@id/addBankAccountFragment"
-                app:enterAnim="@android:anim/slide_in_left"
-                app:exitAnim="@android:anim/slide_out_right"
-                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-                app:popExitAnim="@anim/nav_default_pop_exit_anim"
-                app:popUpTo="@+id/addBankAccountFragment"
-                app:popUpToInclusive="true"
-                />
+            android:id="@+id/action_bankAccountsFragment_to_addBankAccountFragment"
+            app:destination="@id/addBankAccountFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@+id/addBankAccountFragment"
+            app:popUpToInclusive="true"
+            />
     </fragment>
 
     <fragment
-            android:id="@+id/verification_process_fragment"
-            android:name="io.stacrypt.stadroid.profile.verification.VerificationProcessFragment"
-            android:label="Blank"
-            tools:layout="@layout/verification_process_fragment"/>
+        android:id="@+id/verification_process_fragment"
+        android:name="io.stacrypt.stadroid.profile.verification.VerificationProcessFragment"
+        android:label="Blank"
+        tools:layout="@layout/verification_process_fragment"/>
 
     <fragment
-            android:id="@+id/addBankCardFragment"
-            android:name="io.stacrypt.stadroid.profile.banking.AddBankCardFragment"
-            android:label="Blank"
-            tools:layout="@layout/add_bank_card_fragment"/>
+        android:id="@+id/addBankCardFragment"
+        android:name="io.stacrypt.stadroid.profile.banking.AddBankCardFragment"
+        android:label="Blank"
+        tools:layout="@layout/add_bank_card_fragment"/>
 
     <fragment
-            android:id="@+id/addBankAccountFragment"
-            android:name="io.stacrypt.stadroid.profile.banking.AddBankAccountFragment"
-            android:label="Blank"
-            tools:layout="@layout/add_bank_account_fragment"/>
+        android:id="@+id/addBankAccountFragment"
+        android:name="io.stacrypt.stadroid.profile.banking.AddBankAccountFragment"
+        android:label="Blank"
+        tools:layout="@layout/add_bank_account_fragment"/>
 
     <fragment
-            android:id="@+id/app_security_fragment"
-            android:name="io.stacrypt.stadroid.profile.appsec.AppSecurityFragment"
-            android:label="Blank"
-            tools:layout="@layout/fragment_set_pattern"/>
+        android:id="@+id/app_security_fragment"
+        android:name="io.stacrypt.stadroid.profile.appsec.AppSecurityFragment"
+        android:label="Blank"
+        tools:layout="@layout/fragment_set_pattern"/>
 
     <fragment
-            android:id="@+id/change_password_fragment"
-            android:name="io.stacrypt.stadroid.profile.security.ChangePasswordFragment"
-            android:label="Blank"
-            tools:layout="@layout/fragment_change_password"/>
+        android:id="@+id/change_password_fragment"
+        android:name="io.stacrypt.stadroid.profile.security.ChangePasswordFragment"
+        android:label="Blank"
+        tools:layout="@layout/fragment_change_password"/>
 
     <fragment
-            android:id="@+id/emailVerificationFragment"
-            android:name="io.stacrypt.stadroid.profile.verification.EmailVerificationFragment"
-            tools:layout="@layout/email_verification_fragment"
-            android:label="EmailVerificationFragment"/>
+        android:id="@+id/reset_password_fragment"
+        android:name="io.stacrypt.stadroid.profile.security.ResetPasswordFragment"
+        android:label="Blank"
+        tools:layout="@layout/fragment_reset_password"/>
 
     <fragment
-            android:id="@+id/do_verify_email_fragment"
-            android:name="io.stacrypt.stadroid.profile.verification.DoVerifyEmailFragment"
-            tools:layout="@layout/fragment_do_verify_email"
-            android:label="DoVerifyEmailFragment"/>
+        android:id="@+id/emailVerificationFragment"
+        android:name="io.stacrypt.stadroid.profile.verification.EmailVerificationFragment"
+        tools:layout="@layout/email_verification_fragment"
+        android:label="EmailVerificationFragment"/>
+
+    <fragment
+        android:id="@+id/do_verify_email_fragment"
+        android:name="io.stacrypt.stadroid.profile.verification.DoVerifyEmailFragment"
+        tools:layout="@layout/fragment_do_verify_email"
+        android:label="DoVerifyEmailFragment"/>
     <action
-            android:id="@+id/action_global_verification_process_fragment"
-            app:destination="@id/verification_process_fragment"
-            app:launchSingleTop="true"/>
+        android:id="@+id/action_global_verification_process_fragment"
+        app:destination="@id/verification_process_fragment"
+        app:launchSingleTop="true"/>
 
 
 </navigation>

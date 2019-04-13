@@ -11,7 +11,6 @@ import androidx.navigation.fragment.NavHostFragment
 import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.ACTION_VERIFY
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.ARG_ACTION
-import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.ARG_LAUNCH_MODE
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.ARG_TARGET
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.ARG_TOKEN
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_ADD_BANK_ACCOUNT
@@ -19,8 +18,9 @@ import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_ADD_
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_APPLICATION_PIN
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_BANK_ACCOUNTS
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_BANK_CARDS
-import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_CHANEG_PASSWORD
+import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_CHANGE_PASSWORD
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_DO_VERIFY_EMAIL
+import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_RESET_PASSWORD
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_VERIFICATION_PROCESS
 
 class SettingEntrypointFragment : Fragment() {
@@ -32,6 +32,8 @@ class SettingEntrypointFragment : Fragment() {
             val targetNavigationId: Int =
                 if (context.intent?.data?.path?.contains("email_verification") == true) {
                     R.id.action_settings_entrypoint_fragment_to_do_verify_email_fragment
+                } else if (context.intent?.data?.path?.contains("reset_password") == true) {
+                    R.id.action_settings_entrypoint_fragment_to_reset_password_fragment
                 } else {
                     when (context.intent.extras!![ARG_TARGET] as String) {
 //                        TARGET_VERIFICATION_EMAIL -> R.id.action_settings_entrypoint_fragment_to_bank_cards_fragment
@@ -40,7 +42,7 @@ class SettingEntrypointFragment : Fragment() {
                         TARGET_BANK_ACCOUNTS -> R.id.action_settings_entrypoint_fragment_to_bank_accounts_fragment
                         TARGET_ADD_BANK_ACCOUNT -> R.id.action_settings_entrypoint_fragment_to_addBankAccountFragment
                         TARGET_APPLICATION_PIN -> R.id.action_settings_entrypoint_fragment_to_app_security_fragment
-                        TARGET_CHANEG_PASSWORD -> R.id.action_settings_entrypoint_fragment_to_change_password_fragment
+                        TARGET_CHANGE_PASSWORD -> R.id.action_settings_entrypoint_fragment_to_change_password_fragment
                         TARGET_VERIFICATION_PROCESS -> R.id.action_settings_entrypoint_fragment_to_verification_process_fragment
                         TARGET_DO_VERIFY_EMAIL -> R.id.action_settings_entrypoint_fragment_to_do_verify_email_fragment
                         else -> throw IllegalArgumentException("Bad target")

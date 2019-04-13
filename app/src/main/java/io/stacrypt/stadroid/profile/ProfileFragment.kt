@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -18,7 +17,7 @@ import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.ARG_TARGET
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_APPLICATION_PIN
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_BANK_ACCOUNTS
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_BANK_CARDS
-import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_CHANEG_PASSWORD
+import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_CHANGE_PASSWORD
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_VERIFICATION_PROCESS
 import io.stacrypt.stadroid.profile.banking.extractIpAddress
 import kotlinx.android.synthetic.main.fragment_profile.view.*
@@ -51,7 +50,7 @@ class ProfileFragment : Fragment() {
         bank_cards.setTarget(TARGET_BANK_CARDS)
         bank_accounts.setTarget(TARGET_BANK_ACCOUNTS)
         pin.setTarget(TARGET_APPLICATION_PIN)
-        change_password.setTarget(TARGET_CHANEG_PASSWORD)
+        change_password.setTarget(TARGET_CHANGE_PASSWORD)
 
         viewModel = ViewModelProviders.of(activity!!).get(ProfileViewModel::class.java)
         viewModel.user?.observe(viewLifecycleOwner,

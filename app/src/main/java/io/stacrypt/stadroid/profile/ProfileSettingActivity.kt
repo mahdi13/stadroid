@@ -85,10 +85,12 @@ class ProfileSettingActivity : AppCompatActivity() {
 
         const val TARGET_SESSIONS = "bank_accounts"
         const val TARGET_SECOND_FACTOR = "second_factor"
-        const val TARGET_API_KEYS = "second_factor"
-        const val TARGET_IP_WHITELIST = "second_factor"
-        const val TARGET_SECURITY_LOGS = "second_factor"
-        const val TARGET_CHANEG_PASSWORD = "second_factor"
+        const val TARGET_API_KEYS = "api_keys"
+        const val TARGET_IP_WHITELIST = "ip_whitelist"
+        const val TARGET_SECURITY_LOGS = "security_logs"
+        const val TARGET_CHANGE_PASSWORD = "change_password"
+
+        const val TARGET_RESET_PASSWORD = "reset_password"
 
         const val TARGET_TICKETS = "tickets"
         const val TARGET_TICKET_THREAD = "ticket_thread"

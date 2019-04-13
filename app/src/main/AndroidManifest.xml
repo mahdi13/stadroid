@@ -5,29 +5,29 @@
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
-            android:name=".Application"
-            android:allowBackup="true"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/app_name"
-            android:networkSecurityConfig="@xml/network_security_config"
-            android:roundIcon="@mipmap/ic_launcher_round"
-            android:supportsRtl="true"
-            android:theme="@style/Theme.Stadroid">
+        android:name=".Application"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Stadroid">
         <activity
-                android:name=".notification.NotificationListActivity"
-                android:label="@string/title_notification_list"
-                android:parentActivityName=".MainActivity">
+            android:name=".notification.NotificationListActivity"
+            android:label="@string/title_notification_list"
+            android:parentActivityName=".MainActivity">
             <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value="io.stacrypt.stadroid.MainActivity"/>
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="io.stacrypt.stadroid.MainActivity"/>
         </activity>
         <activity
-                android:name=".notification.NotificationDetailActivity"
-                android:label="@string/title_notification_detail"
-                android:parentActivityName=".notification.NotificationListActivity">
+            android:name=".notification.NotificationDetailActivity"
+            android:label="@string/title_notification_detail"
+            android:parentActivityName=".notification.NotificationListActivity">
             <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value="io.stacrypt.stadroid.notification.NotificationListActivity"/>
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="io.stacrypt.stadroid.notification.NotificationListActivity"/>
         </activity>
 
         <service android:name=".notification.NotificationService">
@@ -37,30 +37,30 @@
         </service>
 
         <meta-data
-                android:name="io.fabric.ApiKey"
-                android:value="0f49544f6db8538699c5fe60faca48d1cd16a47a"/>
+            android:name="io.fabric.ApiKey"
+            android:value="0f49544f6db8538699c5fe60faca48d1cd16a47a"/>
         <!--
  Set custom default icon. This is used when no icon is set for incoming notification messages.
             See README(https://goo.gl/l4GJaQ) for more.
         -->
         <meta-data
-                android:name="com.google.firebase.messaging.default_notification_icon"
-                android:resource="@drawable/ic_launcher_background"/>
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_launcher_background"/>
         <!--
  Set color used with incoming notification messages. This is used when no color is set for the incoming
              notification message. See README(https://goo.gl/6BKBk7) for more.
         -->
         <meta-data
-                android:name="com.google.firebase.messaging.default_notification_color"
-                android:resource="@color/colorAccent"/>
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent"/>
 
         <activity
-                android:name=".profile.ProfileSettingActivity"
-                android:label="@string/title_activity_profile_setting"
-                android:launchMode="singleTask">
+            android:name=".profile.ProfileSettingActivity"
+            android:label="@string/title_activity_profile_setting"
+            android:launchMode="singleTask">
             <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value="io.stacrypt.stadroid.MainActivity"/>
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="io.stacrypt.stadroid.MainActivity"/>
 
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
@@ -69,9 +69,13 @@
                 <category android:name="android.intent.category.BROWSABLE"/>
 
                 <data
-                        android:host="stacrypt.io"
-                        android:path="/email_verification"
-                        android:scheme="https"/>
+                    android:host="stacrypt.io"
+                    android:path="/email_verification"
+                    android:scheme="https"/>
+                <data
+                    android:host="stacrypt.io"
+                    android:path="/reset_password"
+                    android:scheme="https"/>
             </intent-filter>
         </activity>
         <activity android:name=".wallet.balance.BalanceDetailActivity">
@@ -80,17 +84,17 @@
             </intent-filter>
         </activity>
         <activity
-                android:name=".market.MarketActivity"
-                android:label="@string/title_activity_market"
-                android:windowSoftInputMode="stateHidden|adjustResize">
+            android:name=".market.MarketActivity"
+            android:label="@string/title_activity_market"
+            android:windowSoftInputMode="stateHidden|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
             </intent-filter>
         </activity>
         <activity
-                android:name=".MainActivity"
-                android:label="@string/app_name"
-                android:launchMode="singleTop">
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -98,8 +102,8 @@
             </intent-filter>
         </activity>
         <activity
-                android:name=".LoginActivity"
-                android:label="@string/title_activity_login">
+            android:name=".LoginActivity"
+            android:label="@string/title_activity_login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
             </intent-filter>
