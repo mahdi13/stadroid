@@ -35,7 +35,7 @@ class MarketViewModel : ViewModel() {
     val baseCurrency: LiveData<Currency> by lazy { WalletRepository.getCurrency(marketName.parseMarketBaseCurrency()) }
     val quoteCurrency: LiveData<Currency> by lazy { WalletRepository.getCurrency(marketName.parseMarketQuoteCurrency()) }
 
-    val newOrderAmount = MutableLiveData<BigDecimal>().apply { postValue(BigDecimal("0")) }
-    val newOrderPrice = MutableLiveData<BigDecimal>().apply { postValue(BigDecimal("0")) }
-    val newOrderType = MutableLiveData<String>().apply { postValue("limit") }
+    val newOrderAmount = MutableLiveData<BigDecimal>().apply { value = BigDecimal("0") }
+    val newOrderPrice = MutableLiveData<BigDecimal>().apply { value = BigDecimal("0") }
+    val newOrderType = MutableLiveData<String>().apply { value = "limit" }
 }

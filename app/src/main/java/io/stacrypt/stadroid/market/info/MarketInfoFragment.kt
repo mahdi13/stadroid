@@ -28,34 +28,39 @@ class MarketInfoFragment : Fragment() {
         viewModel = ViewModelProviders.of(activity!!).get(MarketViewModel::class.java)
 
         viewModel.market.observe(viewLifecycleOwner, Observer {
-            market_name.text = it?.name?.replace("_", " / ")
+            if (it == null) return@Observer
+            market_name.text = it.name.replace("_", " / ")
         })
 
         viewModel.baseCurrency.observe(viewLifecycleOwner, Observer {
-            base_currency.text = it?.symbol
+            if (it == null) return@Observer
+            base_currency.text = it.symbol
             base_currency_icon.imageResource = it.iconResource()
         })
 
         viewModel.quoteCurrency.observe(viewLifecycleOwner, Observer {
-            quote_currency.text = it?.symbol
+            if (it == null) return@Observer
+            quote_currency.text = it.symbol
             quote_currency_icon.imageResource = it.iconResource()
         })
 
         viewModel.summary.observe(viewLifecycleOwner, Observer {
-            ask_amount.text = it?.askAmount?.format10Digit()
-            bid_amount.text = it?.bidAmount?.format10Digit()
-            asks.text = it?.askCount.toString()
-            bids.text = it?.bidCount.toString()
-            market_cap.text = it?.marketCap?.format10Digit()
+            if (it == null) return@Observer
+            ask_amount.text = it.askAmount.format10Digit()
+            bid_amount.text = it.bidAmount.format10Digit()
+            asks.text = it.askCount.toString()
+            bids.text = it.bidCount.toString()
+            market_cap.text = it.marketCap.format10Digit()
         })
 
         viewModel.status.observe(viewLifecycleOwner, Observer {
-            open.text = it?.open?.format10Digit()
-            highest.text = it?.high?.format10Digit()
-            lowest.text = it?.low?.format10Digit()
-            close.text = it?.close?.format10Digit()
-            volume.text = it?.volume?.format10Digit()
-            deal.text = it?.deal?.format10Digit()
+            if (it == null) return@Observer
+            open.text = it.open.format10Digit()
+            highest.text = it.high.format10Digit()
+            lowest.text = it.low.format10Digit()
+            close.text = it.close.format10Digit()
+            volume.text = it.volume.format10Digit()
+            deal.text = it.deal.format10Digit()
         })
 
         return rootView

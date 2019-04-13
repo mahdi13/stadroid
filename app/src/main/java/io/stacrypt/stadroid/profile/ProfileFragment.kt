@@ -38,7 +38,7 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? = inflater.inflate(R.layout.fragment_profile, container, false).apply {
 
-        logout.setOnClickListener {
+        this?.logout?.setOnClickListener {
             sessionManager.logout()
             // TODO: Call logout service
             // TODO: Terminate current session
@@ -46,42 +46,43 @@ class ProfileFragment : Fragment() {
             listener?.onLoggedOut()
         }
 
-        verification.setTarget(TARGET_VERIFICATION_PROCESS)
-        bank_cards.setTarget(TARGET_BANK_CARDS)
-        bank_accounts.setTarget(TARGET_BANK_ACCOUNTS)
-        pin.setTarget(TARGET_APPLICATION_PIN)
-        change_password.setTarget(TARGET_CHANGE_PASSWORD)
+        this?.verification?.setTarget(TARGET_VERIFICATION_PROCESS)
+        this?.bank_cards?.setTarget(TARGET_BANK_CARDS)
+        this?.bank_accounts?.setTarget(TARGET_BANK_ACCOUNTS)
+        this?.pin?.setTarget(TARGET_APPLICATION_PIN)
+        this?.change_password?.setTarget(TARGET_CHANGE_PASSWORD)
 
         viewModel = ViewModelProviders.of(activity!!).get(ProfileViewModel::class.java)
         viewModel.user?.observe(viewLifecycleOwner,
             Observer<User> { user ->
                 if (user == null) return@Observer
-                this.email.text = user.email
+                this?.email?.text = user.email
             })
 
         viewModel.lastLogin.observe(viewLifecycleOwner,
             Observer { lastLogin ->
-                this.last_login.text = StringBuilder().append("Last login on ").append(
-                    if (lastLogin?.createdAt != null) lastLogin.createdAt?.format()
+                if (lastLogin == null) return@Observer
+                this?.last_login?.text = StringBuilder().append("Last login on ").append(
+                    if (lastLogin.createdAt != null) lastLogin.createdAt?.format()
                     else "Unknown"
                 )
                     .append(" By ")
-                    .append(lastLogin?.details?.extractIpAddress() ?: "Unknown")
+                    .append(lastLogin.details?.extractIpAddress() ?: "Unknown")
             })
 
 
         when {
             sessionManager.isTrustedClient -> {
-                rootView.verification_status.text = "Verified"
-                rootView.verification_status.textColorResource = R.color.real_green
+                this?.verification_status?.text = "Verified"
+                this?.verification_status?.textColorResource = R.color.real_green
             }
             sessionManager.isSemiTrustedClient -> {
-                rootView.verification_status.text = "Partially Verified"
-                rootView.verification_status.textColorResource = R.color.yellow
+                this?.verification_status?.text = "Partially Verified"
+                this?.verification_status?.textColorResource = R.color.yellow
             }
             sessionManager.isClient -> {
-                rootView.verification_status.text = "Unverified"
-                rootView.verification_status.textColorResource = R.color.real_red
+                this?.verification_status?.text = "Unverified"
+                this?.verification_status?.textColorResource = R.color.real_red
             }
         }
     }
