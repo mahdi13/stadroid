@@ -2,10 +2,12 @@ package io.stacrypt.stadroid.profile
 
 import android.content.Context
 import android.os.Bundle
+import android.text.InputType
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 
 import io.stacrypt.stadroid.R
@@ -13,8 +15,17 @@ import io.stacrypt.stadroid.data.*
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_login.view.*
 import kotlinx.coroutines.*
+import org.jetbrains.anko.customView
+import org.jetbrains.anko.design.textInputEditText
+import org.jetbrains.anko.design.textInputLayout
+import org.jetbrains.anko.padding
+import org.jetbrains.anko.support.v4.alert
+import org.jetbrains.anko.support.v4.dip
+import org.jetbrains.anko.support.v4.indeterminateProgressDialog
 import org.jetbrains.anko.support.v4.longToast
 import org.jetbrains.anko.support.v4.toast
+import org.jetbrains.anko.textView
+import org.jetbrains.anko.verticalLayout
 import retrofit2.HttpException
 
 class LoginFragment : Fragment() {
@@ -46,8 +57,33 @@ class LoginFragment : Fragment() {
             }
         }
 
-        reset_password.setOnClickListener {
+        view.reset_password.setOnClickListener {
+            alert {
+                var emailEditText: TextView? = null
+                customView {
+                    verticalLayout {
+                        padding = dip(16)
 
+                        textView("Enter your email") { }
+
+                        textView("You will receive a password reset link in your email.") { }
+
+                        textInputLayout {
+                            hint = "Email"
+                            emailEditText = textInputEditText {
+                                textSize = 16f
+                                inputType = InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
+                            }
+                        }
+                    }
+                }
+                positiveButton("Send email") {
+                    doSendSchedulePassword(emailEditText?.text?.toString() ?: "")
+                }
+
+                negativeButton("Cancel") {}
+
+            }.show()
         }
 
         view.register.setOnClickListener {
@@ -70,6 +106,25 @@ class LoginFragment : Fragment() {
         }
 
         return view
+    }
+
+    private fun doSendSchedulePassword(email: String) {
+        val progressDialog = indeterminateProgressDialog("Wait", "") {
+            GlobalScope.launch(Dispatchers.Main) {
+                try {
+                    stemeraldApiClient.scheduleResetPassword(email = email).await()
+                    longToast("Please check your email")
+                } catch (e: HttpException) {
+                    e.printStackTrace()
+                    longToast(e.verboseLocalizedMessage())
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    longToast(R.string.problem_occurred_toast)
+                } finally {
+                    this@indeterminateProgressDialog.dismiss()
+                }
+            }.apply { show() }
+        }
     }
 
     override fun onAttach(context: Context) {
