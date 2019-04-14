@@ -62,9 +62,6 @@ class MarketVitrineFragment : Fragment() {
 
     private lateinit var viewModel: MarketVitrineViewModel
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-    }
 }
 
 class VitrineRowViewModel : ViewModel() {

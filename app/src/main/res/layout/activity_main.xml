@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".MainActivity"
-        android:background="@color/colorPrimaryDark">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@color/colorPrimaryDark">
 
 
     <!--<RelativeLayout-->
@@ -50,61 +50,64 @@
 
 
     <com.google.android.material.appbar.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:elevation="0dp"
-            android:id="@+id/appBarLayout">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:elevation="0dp"
+        android:id="@+id/appBarLayout">
 
         <androidx.appcompat.widget.Toolbar
-                android:id="@+id/app_bar"
-                style="@style/Widget.Stadroid.Toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:paddingStart="12dp"
-                android:paddingLeft="12dp"
-                android:paddingEnd="12dp"
-                android:paddingRight="12dp"
-                app:contentInsetStart="0dp">
+            android:id="@+id/app_bar"
+            style="@style/Widget.Stadroid.Toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:paddingStart="12dp"
+            android:paddingLeft="12dp"
+            android:paddingEnd="12dp"
+            android:paddingRight="12dp"
+            app:contentInsetStart="0dp">
 
 
             <TextView
-                    android:id="@+id/toolbar_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="Toolbar Title"
-                    android:textColor="@color/colorPrimaryLightLight"
-                    style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse"
-                    android:layout_gravity="center"
-                    />
+                android:id="@+id/toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Toolbar Title"
+                android:textColor="@color/colorPrimaryLightLight"
+                style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse"
+                android:layout_gravity="center"
+                />
 
 
             <FrameLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="end"
-                    >
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                >
 
                 <ImageButton
-                        android:layout_width="?attr/actionBarSize"
-                        android:layout_height="?attr/actionBarSize"
-                        android:id="@+id/notifications"
-                        android:src="@drawable/ic_notifications_black_32dp"
-                        android:foregroundTint="@color/colorPrimaryLightLight"
-                        android:tint="@color/colorPrimaryLightLight"
-                        style="@style/Widget.AppCompat.ActionButton"/>
+                    android:layout_width="?attr/actionBarSize"
+                    android:layout_height="?attr/actionBarSize"
+                    android:id="@+id/notifications"
+                    android:src="@drawable/ic_notifications_black_32dp"
+                    android:foregroundTint="@color/colorPrimaryLightLight"
+                    android:tint="@color/colorPrimaryLightLight"
+                    style="@style/Widget.AppCompat.ActionButton"/>
 
                 <com.matrixxun.starry.badgetextview.MaterialBadgeTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/notification_badge"
-                        android:text="1"
-                        android:textColor="@android:color/white"
-                        android:background="@color/colorSecondary"
-                        android:textSize="12sp"
-                        android:layout_gravity="end"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/notification_badge"
+                    tools:text="1"
+                    tools:visibility="visible"
+                    android:text="0"
+                    android:visibility="gone"
+                    android:textColor="@android:color/white"
+                    android:background="@color/colorSecondary"
+                    android:textSize="12sp"
+                    android:layout_gravity="end"/>
 
             </FrameLayout>
 
@@ -153,31 +156,31 @@
     <!--</LinearLayout>-->
 
     <FrameLayout
-            android:id="@+id/nested_content"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
-            app:layout_constraintBottom_toTopOf="@+id/navigation"
-            android:layout_marginTop="57dp"
-            android:layout_marginBottom="56dp"
-            >
+        android:id="@+id/nested_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+        app:layout_constraintBottom_toTopOf="@+id/navigation"
+        android:layout_marginTop="57dp"
+        android:layout_marginBottom="56dp"
+        >
 
     </FrameLayout>
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/navigation"
-            android:layout_width="0dp"
-            android:layout_height="57dp"
-            android:background="?android:attr/windowBackground"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            android:backgroundTint="@color/colorPrimary"
-            app:backgroundTint="@color/colorPrimaryDarkDark"
-            android:foregroundTint="@color/white"
-            app:itemRippleColor="@color/colorSecondary"
-            app:menu="@menu/navigation"
-            style="@style/Widget.Stadroid.BottomNavigationView"/>
+        android:id="@+id/navigation"
+        android:layout_width="0dp"
+        android:layout_height="57dp"
+        android:background="?android:attr/windowBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:backgroundTint="@color/colorPrimary"
+        app:backgroundTint="@color/colorPrimaryDarkDark"
+        android:foregroundTint="@color/white"
+        app:itemRippleColor="@color/colorSecondary"
+        app:menu="@menu/navigation"
+        style="@style/Widget.Stadroid.BottomNavigationView"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

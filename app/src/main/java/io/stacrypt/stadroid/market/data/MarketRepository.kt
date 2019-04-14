@@ -41,7 +41,7 @@ object MarketRepository {
      * TODO: Limit webservice call rate
      */
     fun getMarkets(): LiveData<List<Market>> {
-        // refreshMarkets()
+        refreshMarkets()
         return marketDao.loadAll()
     }
 

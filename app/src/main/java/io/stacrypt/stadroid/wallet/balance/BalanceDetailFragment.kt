@@ -40,6 +40,7 @@ class BalanceDetailFragment : Fragment() {
         })
 
         viewModel.currency.observe(viewLifecycleOwner, Observer { item ->
+            if (item == null) return@Observer
             subject.text = "${item.name}'s Wallet"
             header_icon.setImageResource(item.iconResource()!!)
         })
