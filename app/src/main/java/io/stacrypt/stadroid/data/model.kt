@@ -212,7 +212,7 @@ data class Withdraw(
     @SerializedName("user") var user: String,
     @SerializedName("toAddress") var toAddress: String?,
     @SerializedName("netAmount") var netAmount: BigDecimal?,
-    @SerializedName("netAmount") var grossAmount: BigDecimal?,
+    @SerializedName("grossAmount") var grossAmount: BigDecimal?,
     @SerializedName("estimatedNetworkFee") var estimatedNetworkFee: BigDecimal?,
     @SerializedName("finalNetworkFee") var finalNetworkFee: BigDecimal?,
     @SerializedName("type") var type: String?,

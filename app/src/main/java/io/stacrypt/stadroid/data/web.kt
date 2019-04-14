@@ -226,6 +226,7 @@ interface StemeraldV2ApiClient {
         @Query("cryptocurrencySymbol") assetName: String
     ): Deferred<Withdraw>
 
+    @FormUrlEncoded
     @HTTP(method = "SCHEDULE", path = "withdraws", hasBody = true)
     fun scheduleWithdraw(
         @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",

@@ -54,5 +54,5 @@ class Converters {
     fun fromDouble(value: Double?): BigDecimal? = if (value == null) null else BigDecimal(value)
 
     @TypeConverter
-    fun toDouble(bigDecimal: BigDecimal?): Double? = bigDecimal?.multiply(BigDecimal(100))?.toDouble()
+    fun toDouble(bigDecimal: BigDecimal?): Double? = bigDecimal?.toDouble()
 }
