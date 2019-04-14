@@ -656,7 +656,11 @@ fun HttpException.verboseLocalizedMessage() = StringBuilder()
     .append("Error code:").append(this.code()).append(": ")
     .append("\n").append("Message: ").append(response().message() ?: "Unknown")
     .append("\n").append("Body: ")
-    .append(response().errorBody()?.string()?.run { if (length > 50) take(20) + takeLast(20) else this } ?: "Unknown")
+    .append(
+        response().errorBody()?.string()?.run {
+            if (length > 50) take(20) + " ... " + takeLast(20) else this
+        } ?: "Unknown"
+    )
     .append("\n").append("Reason: ").append(response().headers().get("X-Reason")?.snakeToHuman() ?: "Unknown")
     .toString()
 
