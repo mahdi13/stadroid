@@ -5,7 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.paging.toLiveData
 import io.stacrypt.stadroid.data.*
+import io.stacrypt.stadroid.wallet.transactions.BankingTransactionHistoryDataSourceFactory
 import io.stacrypt.stadroid.wallet.transactions.DepositHistoryDataSourceFactory
+import io.stacrypt.stadroid.wallet.transactions.PagedBankingTransactionHistoryDataSource
 import io.stacrypt.stadroid.wallet.transactions.WithdrawHistoryDataSourceFactory
 import kotlinx.coroutines.*
 import retrofit2.HttpException
@@ -207,27 +209,33 @@ object WalletRepository {
         }
     }
 
-    fun getBankingTransactions(type: String? = null, fiatSymbol: String? = null): LiveData<List<BankingTransaction>?> {
-        val liveData = MutableLiveData<List<BankingTransaction>?>()
-        scope.launch {
-            try {
-                liveData.postValue(
-                    stemeraldApiClient.getBankingTransactions(
-                        fiatSymbol = fiatSymbol,
-                        type = type
-                    ).await()
-                )
-            } catch (e: HttpException) {
-                // TODO Show error
-                liveData.postValue(null)
-//                }
-            } catch (e: Exception) {
-                // TODO Show error
-                liveData.postValue(null)
-            } finally {
-            }
+    /**
+     * Always online
+     */
+    fun getBankingTransactions(type: String? = null, fiatSymbol: String? = null): Listing<BankingTransaction> {
+        val sourceFactory = BankingTransactionHistoryDataSourceFactory(type, fiatSymbol)
+
+        val livePagedList = sourceFactory.toLiveData(
+            pageSize = 20
+        )
+
+        val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {
+            it.initialLoad
         }
-        return liveData
+
+        return Listing(
+            pagedList = livePagedList,
+            networkState = Transformations.switchMap(sourceFactory.sourceLiveData) {
+                it.networkState
+            },
+            retry = {
+                sourceFactory.sourceLiveData.value?.retryAllFailed()
+            },
+            refresh = {
+                sourceFactory.sourceLiveData.value?.invalidate()
+            },
+            refreshState = refreshState
+        )
     }
 
     fun getBankingTransactionById(id: Int): LiveData<BankingTransaction?> {
@@ -278,6 +286,7 @@ object WalletRepository {
             refreshState = refreshState
         )
     }
+
     /**
      * Always online
      */

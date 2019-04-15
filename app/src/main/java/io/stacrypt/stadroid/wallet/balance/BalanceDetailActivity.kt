@@ -13,6 +13,7 @@ import io.stacrypt.stadroid.wallet.cryptocurrency.WithdrawFragment
 import io.stacrypt.stadroid.wallet.deposit.DepositFragment
 import io.stacrypt.stadroid.wallet.fiat.TransactionDetailFragment
 import io.stacrypt.stadroid.wallet.transactions.CryptocurrencyTransactions
+import io.stacrypt.stadroid.wallet.transactions.FiatTransactions
 import org.jetbrains.anko.support.v4.withArguments
 
 class BalanceDetailActivity : AppCompatActivity() {
@@ -124,8 +125,8 @@ class BalanceDetailActivity : AppCompatActivity() {
         val fragment = when (symbol) {
             "BTC" -> CryptocurrencyTransactions()
             "TBTC" -> CryptocurrencyTransactions()
-            // "IRR" -> CashinFragment()
-            // "TIRR" -> CashinFragment()
+            "IRR" -> FiatTransactions()
+            "TIRR" -> FiatTransactions()
             else -> null
         }
 

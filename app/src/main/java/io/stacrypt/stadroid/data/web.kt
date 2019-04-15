@@ -264,7 +264,9 @@ interface StemeraldV2ApiClient {
     fun getBankingTransactions(
         @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
         @Query("fiatSymbol") fiatSymbol: String?,
-        @Query("type") type: String?
+        @Query("type") type: String?,
+        @Query("take") take: Int? = null,
+        @Query("skip") skip: Int? = null
     ): Deferred<List<BankingTransaction>>
 
     @HTTP(method = "GET", path = "transactions/{id}", hasBody = false)

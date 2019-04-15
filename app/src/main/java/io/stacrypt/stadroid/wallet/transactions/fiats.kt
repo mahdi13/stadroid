@@ -16,80 +16,78 @@ import io.stacrypt.stadroid.wallet.data.WalletRepository
 import kotlinx.android.synthetic.main.fragment_transaction_history_list.view.*
 import kotlinx.android.synthetic.main.fragment_transactions_history.view.*
 import kotlinx.android.synthetic.main.header_appbar_back.view.*
-import org.jetbrains.anko.support.v4.browse
 import org.jetbrains.anko.support.v4.withArguments
 
-const val ARG_CRYPTOCURRENCY_SYMBOL = "cryptocurrency"
+const val ARG_FIAT_SYMBOL = "fiat"
 
-class CryptocurrencyTransactionsViewModel : ViewModel() {
+class FiatTransactionsViewModel : ViewModel() {
 
-    lateinit var cryptocurrencySymbol: String
-    private val depositsListing by lazy { WalletRepository.getDeposits(cryptocurrencySymbol) }
-    val deposits by lazy { depositsListing.pagedList }
-    val depositsNetworkState by lazy { depositsListing.networkState }
-    val depositsRefreshState by lazy { depositsListing.refreshState }
+    lateinit var fiatSymbol: String
 
-    private val withdrawsListing by lazy { WalletRepository.getWithdraws(cryptocurrencySymbol) }
-    val withdraws by lazy { withdrawsListing.pagedList }
-    val withdrawsNetworkState by lazy { withdrawsListing.networkState }
-    val withdrawsRefreshState by lazy { withdrawsListing.refreshState }
+    private val cashinsListing by lazy { WalletRepository.getBankingTransactions("cashin", fiatSymbol) }
+    val cashins by lazy { cashinsListing.pagedList }
+    val cashinsNetworkState by lazy { cashinsListing.networkState }
+    val cashinsRefreshState by lazy { cashinsListing.refreshState }
+
+    private val cashoutListing by lazy { WalletRepository.getBankingTransactions("cashout", fiatSymbol) }
+    val cashouts by lazy { cashoutListing.pagedList }
+    val cashoutsNetworkState by lazy { cashoutListing.networkState }
+    val cashoutsRefreshState by lazy { cashoutListing.refreshState }
 }
 
-class DepositHistoryList : Fragment() {
+class CashinHistoryList : Fragment() {
 
-    lateinit var adapter: DepositHistoryPagedAdapter
-    lateinit var viewModel: CryptocurrencyTransactionsViewModel
+    lateinit var adapter: BankingTransactionHistoryPagedAdapter
+    lateinit var viewModel: FiatTransactionsViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_transaction_history_list, container, false)
 
-        viewModel = ViewModelProviders.of(parentFragment!!).get(CryptocurrencyTransactionsViewModel::class.java)
-        viewModel.cryptocurrencySymbol = arguments?.getString(ARG_CRYPTOCURRENCY_SYMBOL)!!
+        viewModel = ViewModelProviders.of(parentFragment!!).get(FiatTransactionsViewModel::class.java)
+        viewModel.fiatSymbol = arguments?.getString(ARG_FIAT_SYMBOL)!!
 
-        adapter = DepositHistoryPagedAdapter(viewModel.cryptocurrencySymbol)
+        adapter = BankingTransactionHistoryPagedAdapter(viewModel.fiatSymbol)
         rootView.list.adapter = adapter
         rootView.list.layoutManager = LinearLayoutManager(context)
 
-        viewModel.deposits.observe(viewLifecycleOwner, Observer {
+        viewModel.cashins.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)
         })
 
         adapter.onItemClickListener = {
-            // (activity!! as BalanceDetailActivity).showtransaction(it.id)
-            it.link?.let { link -> browse(link) }
+            (activity!! as BalanceDetailActivity).showtransaction(it.id)
         }
         return rootView
     }
 }
 
-class WithdrawHistoryList : Fragment() {
+class CashoutHistoryList : Fragment() {
 
-    lateinit var adapter: WithdrawHistoryPagedAdapter
-    lateinit var viewModel: CryptocurrencyTransactionsViewModel
+    lateinit var adapter: BankingTransactionHistoryPagedAdapter
+    lateinit var viewModel: FiatTransactionsViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_transaction_history_list, container, false)
 
-        viewModel = ViewModelProviders.of(parentFragment!!).get(CryptocurrencyTransactionsViewModel::class.java)
-        viewModel.cryptocurrencySymbol = arguments?.getString(ARG_CRYPTOCURRENCY_SYMBOL)!!
+        viewModel = ViewModelProviders.of(parentFragment!!).get(FiatTransactionsViewModel::class.java)
+        viewModel.fiatSymbol = arguments?.getString(ARG_FIAT_SYMBOL)!!
 
-        adapter = WithdrawHistoryPagedAdapter(viewModel.cryptocurrencySymbol)
+        adapter = BankingTransactionHistoryPagedAdapter(viewModel.fiatSymbol)
         rootView.list.adapter = adapter
         rootView.list.layoutManager = LinearLayoutManager(context)
 
-        viewModel.withdraws.observe(viewLifecycleOwner, Observer {
+        viewModel.cashouts.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)
         })
 
         adapter.onItemClickListener = {
-            // (activity!! as BalanceDetailActivity).showtransaction(it.id)
-            it.link?.let { link -> browse(link) }
+            (activity!! as BalanceDetailActivity).showtransaction(it.id)
         }
         return rootView
     }
 }
 
-class CryptocurrencyTransactions : Fragment() {
+class FiatTransactions : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_transactions_history, container, false)
@@ -97,12 +95,12 @@ class CryptocurrencyTransactions : Fragment() {
         rootView.viewpager.viewpager.adapter = object : FragmentPagerAdapter(childFragmentManager) {
             override fun getItem(position: Int): Fragment {
                 return when (position) {
-                    0 -> DepositHistoryList()
-                    1 -> WithdrawHistoryList()
+                    0 -> CashinHistoryList()
+                    1 -> CashoutHistoryList()
                     else -> throw IndexOutOfBoundsException()
                 }.apply {
                     this.withArguments(
-                        ARG_CRYPTOCURRENCY_SYMBOL to this@CryptocurrencyTransactions.arguments?.getString(
+                        ARG_FIAT_SYMBOL to this@FiatTransactions.arguments?.getString(
                             BalanceDetailActivity.ARG_ASSET
                         )
                     )

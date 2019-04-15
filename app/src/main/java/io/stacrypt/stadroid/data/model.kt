@@ -470,7 +470,6 @@ data class BankingTransaction(
     @SerializedName("referenceId") var referenceId: String?,
     @SerializedName("amount") var amount: BigDecimal?,
     @SerializedName("commission") var commission: BigDecimal?,
-    @SerializedName("creation") var creation: Date,
     @SerializedName("createdAt") var createdAt: Date?,
     @SerializedName("modifiedAt") var modifiedAt: Date?,
     @SerializedName("bankingId") var bankingId: GenericBankingId?,
