@@ -5,7 +5,7 @@ import io.stacrypt.stadroid.data.Currency
 
 fun Currency.iconResource(): Int = getCurrencyIconBySymbol(symbol)
 
-private fun getCurrencyIconBySymbol(symbol: String): Int = when (symbol) {
+fun getCurrencyIconBySymbol(symbol: String): Int = when (symbol) {
     "BTC" -> R.drawable.ic_btc
     "TBTC" -> R.drawable.ic_btc
     "ETH" -> R.drawable.ic_eth

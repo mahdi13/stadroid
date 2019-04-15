@@ -22,92 +22,107 @@
     <!--app:graph_title="Weather Report"/>-->
 
     <com.github.mikephil.charting.charts.LineChart
-            android:id="@+id/mini_chart"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginTop="120dp"
-            android:layout_marginLeft="-15dp"
-            android:layout_marginBottom="-15dp"
-            android:layout_marginRight="-15dp"/>
+        android:id="@+id/mini_chart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="120dp"
+        android:layout_marginLeft="-15dp"
+        android:layout_marginBottom="-15dp"
+        android:layout_marginRight="-15dp"/>
 
 
     <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="5dp"
-            android:id="@+id/row1">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        android:id="@+id/row1"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:id="@+id/quote_currency_icon"
+            android:src="@drawable/ic_btc"
+            android:layout_marginEnd="20dp"/>
 
         <TextView
-                android:textAppearance="@style/MaterialAlertDialog.MaterialComponents.Title.Text"
-                android:foregroundTint="@color/colorSecondary"
-                android:backgroundTint="@color/colorSecondary"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:id="@+id/market_name"
-                android:gravity="center"
-                android:textStyle="bold"
-                android:textSize="20sp"
-                android:fontFamily="@font/din_medium"
-                android:text="@string/loading"
-                tools:text="BTC / USD"/>
+            android:textAppearance="@style/MaterialAlertDialog.MaterialComponents.Title.Text"
+            android:foregroundTint="@color/colorSecondary"
+            android:backgroundTint="@color/colorSecondary"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:id="@+id/market_name"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:fontFamily="@font/din_medium"
+            android:text="@string/loading"
+            tools:text="BTC / USD"/>
 
-        <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:id="@+id/volume"
-                android:gravity="center"
-                android:textStyle="bold"
-                android:fontFamily="@font/din_medium"
-                android:text="@string/loading"
-                tools:text="23.47653 BTC"/>
+        <ImageView
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:id="@+id/base_currency_icon"
+            android:src="@drawable/ic_btc"
+            android:layout_marginStart="20dp"/>
 
     </LinearLayout>
 
     <LinearLayout
-            android:layout_width="match_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        android:layout_below="@+id/row1"
+        android:id="@+id/row2">
+
+        <TextView
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="5dp"
-            android:layout_below="@+id/row1"
-            android:id="@+id/row2">
+            android:layout_weight="2"
+            android:id="@+id/price"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:fontFamily="@font/din_medium"
+            android:text="@string/loading"
+            tools:text="Price: 1234.56 (+ 2.34 %)"/>
 
         <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:id="@+id/price"
-                android:gravity="center"
-                android:textStyle="bold"
-                android:textSize="18sp"
-                android:fontFamily="@font/din_medium"
-                android:text="@string/loading"
-                tools:text="Price: 1234.56 (+ 2.34 %)"/>
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/volume"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:fontFamily="@font/din_medium"
+            android:text="@string/loading"
+            tools:text="23.47653 BTC"/>
 
-        <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:id="@+id/deal"
-                android:gravity="center"
-                android:textColor="@color/colorGrayText"
-                android:fontFamily="@font/din_medium"
-                android:text="@string/loading"
-                tools:text="47562532 $"/>
+
+        <!--<TextView-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="1"-->
+        <!--android:id="@+id/deal"-->
+        <!--android:gravity="center"-->
+        <!--android:textColor="@color/colorGrayText"-->
+        <!--android:fontFamily="@font/din_medium"-->
+        <!--android:text="@string/loading"-->
+        <!--tools:text="47562532 $"/>-->
 
     </LinearLayout>
 
     <LinearLayout
-            android:layout_below="@+id/row2"
-            android:layout_alignParentBottom="true"
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+        android:layout_below="@+id/row2"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <!--<LinearLayout-->
         <!--android:layout_width="0dp"-->
@@ -138,60 +153,60 @@
         <!--</LinearLayout>-->
 
         <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <TextView
-                    android:id="@+id/high"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
-                    android:fontFamily="@font/din_medium"
-                    android:text="@string/loading"
-                    android:textColor="@color/real_red"
-                    tools:text="12345.76"/>
+                android:id="@+id/high"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:fontFamily="@font/din_medium"
+                android:text="@string/loading"
+                android:textColor="@color/real_red"
+                tools:text="12345.76"/>
 
             <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textColor="@color/real_red_semi_trans"
-                    android:textSize="10sp"
-                    android:fontFamily="@font/din_medium"
-                    android:text="High"/>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/real_red_semi_trans"
+                android:textSize="10sp"
+                android:fontFamily="@font/din_medium"
+                android:text="High"/>
 
         </LinearLayout>
 
         <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <TextView
-                    android:id="@+id/low"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
-                    android:fontFamily="@font/din_medium"
-                    android:text="@string/loading"
-                    android:textColor="@color/real_green"
-                    tools:text="12345.76"/>
+                android:id="@+id/low"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:fontFamily="@font/din_medium"
+                android:text="@string/loading"
+                android:textColor="@color/real_green"
+                tools:text="12345.76"/>
 
             <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textColor="@color/real_green_semi_trans"
-                    android:textSize="10sp"
-                    android:fontFamily="@font/din_medium"
-                    android:text="Low"/>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/real_green_semi_trans"
+                android:textSize="10sp"
+                android:fontFamily="@font/din_medium"
+                android:text="Low"/>
 
         </LinearLayout>
 

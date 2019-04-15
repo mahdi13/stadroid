@@ -19,7 +19,9 @@ import kotlinx.android.synthetic.main.fragment_market_vitrine.view.*
 import org.jetbrains.anko.support.v4.withArguments
 import androidx.core.content.ContextCompat
 import io.stacrypt.stadroid.ui.format10Digit
+import io.stacrypt.stadroid.ui.getCurrencyIconBySymbol
 import kotlinx.android.synthetic.main.fragment_market_vitrine_list.*
+import org.jetbrains.anko.imageResource
 import org.jetbrains.anko.support.v4.startActivity
 
 class MarketVitrineViewModel : ViewModel() {
@@ -44,16 +46,16 @@ class MarketVitrineFragment : Fragment() {
                             .replace(R.id.container1, MarketVitrineRowFragment().withArguments("market" to market.name))
                             .commitNow()
                     }
-                   "TIRR_TETH" -> {
-                       childFragmentManager.beginTransaction()
-                           .replace(R.id.container2, MarketVitrineRowFragment().withArguments("market" to market.name))
-                           .commitNow()
-                   }
-                   "TBTC_TETH" -> {
-                       childFragmentManager.beginTransaction()
-                           .replace(R.id.container3, MarketVitrineRowFragment().withArguments("market" to market.name))
-                           .commitNow()
-                   }
+                    "TIRR_TETH" -> {
+                        childFragmentManager.beginTransaction()
+                            .replace(R.id.container2, MarketVitrineRowFragment().withArguments("market" to market.name))
+                            .commitNow()
+                    }
+                    "TBTC_TETH" -> {
+                        childFragmentManager.beginTransaction()
+                            .replace(R.id.container3, MarketVitrineRowFragment().withArguments("market" to market.name))
+                            .commitNow()
+                    }
                 }
             }
         })
@@ -61,7 +63,6 @@ class MarketVitrineFragment : Fragment() {
     }
 
     private lateinit var viewModel: MarketVitrineViewModel
-
 }
 
 class VitrineRowViewModel : ViewModel() {
@@ -109,6 +110,10 @@ class MarketVitrineRowFragment : Fragment() {
         viewModel.market.observe(viewLifecycleOwner, Observer<Market?> { market ->
             if (market == null) return@Observer
             rootView?.market_name?.text = market.name.replace("_", " / ")
+
+            rootView?.base_currency_icon?.imageResource = getCurrencyIconBySymbol(market.baseCurrencySymbol!!)
+            rootView?.quote_currency_icon?.imageResource = getCurrencyIconBySymbol(market.quoteCurrencySymbol!!)
+
         })
 
         viewModel.status.observe(viewLifecycleOwner, Observer {
@@ -121,7 +126,7 @@ class MarketVitrineRowFragment : Fragment() {
         })
 
         viewModel.last.observe(viewLifecycleOwner, Observer {
-            rootView?.price?.text = it?.price.toString()
+            rootView?.price?.text = "Latest: " + (it?.price?.format10Digit() ?: "Loading...")
         })
 
         viewModel.status.observe(viewLifecycleOwner, Observer {
