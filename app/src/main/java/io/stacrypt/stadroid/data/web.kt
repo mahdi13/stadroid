@@ -233,7 +233,7 @@ interface StemeraldV2ApiClient {
         @Field("cryptocurrencySymbol") assetName: String,
         @Field("amount") amount: String,
         @Field("address") address: String,
-        @Field("businessUid") businessUid: String
+        @Field("businessUid") businessUid: Int
     ): Deferred<Withdraw>
 
     /**

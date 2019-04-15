@@ -55,7 +55,9 @@ class WithdrawViewModel : ObservableViewModel() {
     val withdrawResult = MutableLiveData<Event<Withdraw>>()
     val withdrawError = MutableLiveData<Event<String>>()
 
-    val businessUid by lazy { UUID.randomUUID().toString() }
+    val businessUid by lazy {
+        (Date().time / 1000L).toInt() // TODO: Think more about it
+    }
 
     // fun doWithdraw() =
     //     GlobalScope.launch(Dispatchers.IO) {
@@ -159,7 +161,6 @@ class WithdrawFragment : Fragment() {
                                 )
 
                                 (activity as BalanceDetailActivity).showtransaction(result.id)
-
                             } catch (e: HttpException) {
                                 // TODO: Handle all errors
                                 e.printStackTrace()
