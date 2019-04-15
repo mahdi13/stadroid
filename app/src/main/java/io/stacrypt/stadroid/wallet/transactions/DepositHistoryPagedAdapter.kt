@@ -54,7 +54,7 @@ class DepositHistoryPagedAdapter(val cryptocurrencySymbol: String) :
 
             progressView.max = depositDetail.confirmationsRequires?.toFloat() ?: 0f
             progressView.progress = depositDetail.confirmationsRequires?.minus(
-                depositDetail.confirmationsRequires ?: depositDetail.confirmationsRequires!!
+                depositDetail.confirmationsLeft ?: depositDetail.confirmationsRequires!!
             )?.toFloat() ?: 0f
 
             amountView.text = (depositDetail.netAmount ?: BigDecimal.ZERO).format10Digit() + " " + cryptocurrencySymbol

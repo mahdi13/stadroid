@@ -131,13 +131,11 @@
                     android:layout_marginEnd="20dp"
                     app:rcIconSrc="@drawable/ic_arrow_back_black_24dp"
                     android:layout_margin="10dp"
-                    app:rcSecondaryProgress="100"
                     app:rcMax="100"
                     app:rcRadius="5dp"
                     app:rcBackgroundPadding="1dp"
                     app:rcReverse="false"
                     app:rcProgressColor="@color/real_green"
-                    app:rcSecondaryProgressColor="@color/real_green"
                     app:rcBackgroundColor="@color/colorPrimaryDark"/>
 
 
