@@ -185,12 +185,13 @@ data class DepositDetail(
     @SerializedName("netAmount") var netAmount: BigDecimal,
     @SerializedName("grossAmount") var grossAmount: BigDecimal,
     @SerializedName("toAddress") var toAddress: DepositAddress,
-    @SerializedName("status") var status: String,
-    @SerializedName("txHash") var txHash: String,
+    @SerializedName("status") var status: String, //
+    @SerializedName("txHash") var txHash: String, //
     @SerializedName("blockHeight") var blockHeight: Long,
     @SerializedName("blockHash") var blockHash: String,
     @SerializedName("link") var link: String?,
     @SerializedName("confirmationsLeft") var confirmationsLeft: Int?,
+    @SerializedName("confirmationsRequires") var confirmationsRequires: Int?,
     @SerializedName("error") var error: String?,
     @SerializedName("invoice") var invoice: DepositInvoice,
     @SerializedName("extra") var extra: String?
@@ -224,9 +225,10 @@ data class Withdraw(
     @SerializedName("blockHash") var blockHash: String?,
     @SerializedName("link") var link: String?,
     @SerializedName("confirmationsLeft") var confirmationsLeft: Int?,
-    @SerializedName("error") var error: Int?,
-    @SerializedName("issuedAt") var creation: Date,
-    @SerializedName("paidAt") var expiration: Date?
+    @SerializedName("confirmationsRequires") var confirmationsRequires: Int?,
+    @SerializedName("error") var error: String?,
+    @SerializedName("issuedAt") var issuedAt: Date,
+    @SerializedName("paidAt") var paidAt: Date?
 )
 
 @Entity

@@ -5,6 +5,7 @@ import android.widget.EditText
 import android.text.Editable
 import androidx.lifecycle.MutableLiveData
 import io.stacrypt.stadroid.data.Currency
+import io.stacrypt.stadroid.data.DepositAddress
 import io.stacrypt.stadroid.data.dateFormatter
 import io.stacrypt.stadroid.ui.format
 import org.iban4j.Iban
@@ -173,3 +174,5 @@ class CurrencyTextWatcher(val currency: Currency, val et: EditText, val liveData
     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
     }
 }
+
+fun String.digestAddress() = if (length > 10) take(6) + "..." + takeLast(6) else this

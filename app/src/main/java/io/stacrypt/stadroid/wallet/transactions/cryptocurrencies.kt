@@ -16,6 +16,7 @@ import io.stacrypt.stadroid.wallet.data.WalletRepository
 import kotlinx.android.synthetic.main.fragment_cryptocurrency_transaction_list.view.*
 import kotlinx.android.synthetic.main.fragment_cryptocurrency_transactions.view.*
 import kotlinx.android.synthetic.main.header_appbar_back.view.*
+import org.jetbrains.anko.support.v4.browse
 import org.jetbrains.anko.support.v4.withArguments
 
 const val ARG_CRYPTOCURRENCY_SYMBOL = "cryptocurrency"
@@ -28,15 +29,15 @@ class CryptocurrencyTransactionsViewModel : ViewModel() {
     val depositsNetworkState by lazy { depositsListing.networkState }
     val depositsRefreshState by lazy { depositsListing.refreshState }
 
-    private val withdrawsListing by lazy { WalletRepository.getDeposits(cryptocurrencySymbol) }
-    val withdraws by lazy { depositsListing.pagedList }
-    val withdrawsNetworkState by lazy { depositsListing.networkState }
-    val withdrawsRefreshState by lazy { depositsListing.refreshState }
+    private val withdrawsListing by lazy { WalletRepository.getWithdraws(cryptocurrencySymbol) }
+    val withdraws by lazy { withdrawsListing.pagedList }
+    val withdrawsNetworkState by lazy { withdrawsListing.networkState }
+    val withdrawsRefreshState by lazy { withdrawsListing.refreshState }
 }
 
-class DepositCryptocurrencyTransactionList : Fragment() {
+class DepositHistoryList : Fragment() {
 
-    lateinit var adapter: CryptocurrencyDepositsPagedAdapter
+    lateinit var adapter: DepositHistoryPagedAdapter
     lateinit var viewModel: CryptocurrencyTransactionsViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -45,7 +46,7 @@ class DepositCryptocurrencyTransactionList : Fragment() {
         viewModel = ViewModelProviders.of(parentFragment!!).get(CryptocurrencyTransactionsViewModel::class.java)
         viewModel.cryptocurrencySymbol = arguments?.getString(ARG_CRYPTOCURRENCY_SYMBOL)!!
 
-        adapter = CryptocurrencyDepositsPagedAdapter()
+        adapter = DepositHistoryPagedAdapter(viewModel.cryptocurrencySymbol)
         rootView.list.adapter = adapter
         rootView.list.layoutManager = LinearLayoutManager(context)
 
@@ -54,15 +55,16 @@ class DepositCryptocurrencyTransactionList : Fragment() {
         })
 
         adapter.onItemClickListener = {
-            (activity!! as BalanceDetailActivity).showtransaction(it.id)
+            // (activity!! as BalanceDetailActivity).showtransaction(it.id)
+            it.link?.let { link -> browse(link) }
         }
         return rootView
     }
 }
 
-class WithdrawCryptocurrencyTransactionList : Fragment() {
+class WithdrawHistoryList : Fragment() {
 
-    lateinit var adapter: CryptocurrencyDepositsPagedAdapter
+    lateinit var adapter: WithdrawHistoryPagedAdapter
     lateinit var viewModel: CryptocurrencyTransactionsViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -71,14 +73,18 @@ class WithdrawCryptocurrencyTransactionList : Fragment() {
         viewModel = ViewModelProviders.of(parentFragment!!).get(CryptocurrencyTransactionsViewModel::class.java)
         viewModel.cryptocurrencySymbol = arguments?.getString(ARG_CRYPTOCURRENCY_SYMBOL)!!
 
-        adapter = CryptocurrencyDepositsPagedAdapter()
+        adapter = WithdrawHistoryPagedAdapter(viewModel.cryptocurrencySymbol)
         rootView.list.adapter = adapter
         rootView.list.layoutManager = LinearLayoutManager(context)
 
-        viewModel.deposits.observe(viewLifecycleOwner, Observer {
+        viewModel.withdraws.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)
         })
 
+        adapter.onItemClickListener = {
+            // (activity!! as BalanceDetailActivity).showtransaction(it.id)
+            it.link?.let { link -> browse(link) }
+        }
         return rootView
     }
 }
@@ -91,8 +97,8 @@ class CryptocurrencyTransactions : Fragment() {
         rootView.viewpager.viewpager.adapter = object : FragmentPagerAdapter(childFragmentManager) {
             override fun getItem(position: Int): Fragment {
                 return when (position) {
-                    0 -> DepositCryptocurrencyTransactionList()
-                    1 -> WithdrawCryptocurrencyTransactionList()
+                    0 -> DepositHistoryList()
+                    1 -> WithdrawHistoryList()
                     else -> throw IndexOutOfBoundsException()
                 }.apply {
                     this.withArguments(

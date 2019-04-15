@@ -149,7 +149,7 @@ class WithdrawFragment : Fragment() {
                                 val result = stemeraldApiClient.scheduleWithdraw(
                                     assetName = viewModel.cryptocurrencySymbol.value!!,
                                     amount = viewModel.selectedAmount.value!!,
-                                    address = viewModel.selectedAmount.value!!,
+                                    address = viewModel.selectedAddress.value!!,
                                     businessUid = viewModel.businessUid
                                 ).await()
 

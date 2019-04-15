@@ -5,7 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.paging.toLiveData
 import io.stacrypt.stadroid.data.*
-import io.stacrypt.stadroid.wallet.transactions.CryptocurrencyDepositsDataSourceFactory
+import io.stacrypt.stadroid.wallet.transactions.DepositHistoryDataSourceFactory
+import io.stacrypt.stadroid.wallet.transactions.WithdrawHistoryDataSourceFactory
 import kotlinx.coroutines.*
 import retrofit2.HttpException
 
@@ -253,7 +254,35 @@ object WalletRepository {
      * Always online
      */
     fun getDeposits(cryptocurrencySymbol: String): Listing<DepositDetail> {
-        val sourceFactory = CryptocurrencyDepositsDataSourceFactory(cryptocurrencySymbol)
+        val sourceFactory = DepositHistoryDataSourceFactory(cryptocurrencySymbol)
+
+        val livePagedList = sourceFactory.toLiveData(
+            pageSize = 20 // Doesn't matter, because server will set it
+        )
+
+        val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {
+            it.initialLoad
+        }
+
+        return Listing(
+            pagedList = livePagedList,
+            networkState = Transformations.switchMap(sourceFactory.sourceLiveData) {
+                it.networkState
+            },
+            retry = {
+                sourceFactory.sourceLiveData.value?.retryAllFailed()
+            },
+            refresh = {
+                sourceFactory.sourceLiveData.value?.invalidate()
+            },
+            refreshState = refreshState
+        )
+    }
+    /**
+     * Always online
+     */
+    fun getWithdraws(cryptocurrencySymbol: String): Listing<Withdraw> {
+        val sourceFactory = WithdrawHistoryDataSourceFactory(cryptocurrencySymbol)
 
         val livePagedList = sourceFactory.toLiveData(
             pageSize = 20 // Doesn't matter, because server will set it
