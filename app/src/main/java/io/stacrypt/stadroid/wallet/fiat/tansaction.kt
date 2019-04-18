@@ -16,17 +16,34 @@ import io.stacrypt.stadroid.ui.format10Digit
 import io.stacrypt.stadroid.ui.ibanSecurityMask
 import io.stacrypt.stadroid.ui.iconResource
 import io.stacrypt.stadroid.ui.panSecurityMask
+import io.stacrypt.stadroid.wallet.balance.BalanceDetailActivity
 import io.stacrypt.stadroid.wallet.data.WalletRepository
 import kotlinx.android.synthetic.main.fragment_transaction_detail.view.*
+import kotlinx.android.synthetic.main.fragment_transaction_detail.view.back
 import org.jetbrains.anko.support.v4.alert
 import org.jetbrains.anko.support.v4.browse
 
 class TransactionDetailViewModel : ViewModel() {
 
+    /**
+     * Just one of the following items will be filled
+     */
+    lateinit var symbol: String
+
     val transactionId = MutableLiveData<Int>()
+    val depositId = MutableLiveData<Int>()
+    val withdrawId = MutableLiveData<Int>()
 
     val transaction = Transformations.switchMap(transactionId) { id ->
         id?.let { WalletRepository.getBankingTransactionById(it) }
+    }
+
+    val deposit = Transformations.switchMap(depositId) { id ->
+        id?.let { WalletRepository.getDepositDetail(symbol, it) }
+    }
+
+    val withdraw = Transformations.switchMap(withdrawId) { id ->
+        id?.let { WalletRepository.getWithdrawDetail(symbol, it) }
     }
 }
 
@@ -39,16 +56,32 @@ class TransactionDetailFragment : Fragment() {
 
         viewModel = ViewModelProviders.of(activity!!).get(TransactionDetailViewModel::class.java)
 
-        arguments?.getInt("id")?.let { viewModel.transactionId.postValue(it) }
+        arguments?.getString(ARG_SYMBOL)?.let { viewModel.symbol = it }
+        arguments?.getInt(ARG_TRANSACTION_ID)?.let { viewModel.transactionId.postValue(it) }
+        arguments?.getInt(ARG_DEPOSIT_ID)?.let { viewModel.depositId.postValue(it) }
+        arguments?.getInt(ARG_WITHDRAW_ID)?.let { viewModel.withdrawId.postValue(it) }
 
         viewModel.transaction.observe(viewLifecycleOwner, Observer { transaction ->
             if (transaction == null) return@Observer
             rootView.currency.text = transaction?.paymentGateway?.fiatSymbol
             rootView.currency_icon.setImageResource(transaction?.paymentGateway?.fiat?.iconResource()!!)
-            rootView.type.text = when (transaction.type) {
-                "cashin" -> "Fiat Deposit"
-                "cashout" -> "Fiat Withdraw"
-                else -> "Other"
+
+            when (transaction.type) {
+                "cashin" -> {
+                    rootView.type.text = "Fiat Deposit"
+
+                    if (transaction.referenceId == null && transaction.paymentId != null) {
+                        rootView.pay.visibility = View.VISIBLE
+                    } else {
+                        rootView.pay.visibility = View.GONE
+                    }
+                }
+                "cashout" -> {
+                    rootView.type.text = "Fiat Withdraw"
+                }
+                else -> {
+                    rootView.type.text = "Other"
+                }
             }
 
             rootView.amount.text = transaction.amount?.format10Digit()
@@ -64,9 +97,9 @@ class TransactionDetailFragment : Fragment() {
             rootView.created_at.text = transaction.createdAt?.format() ?: "NA"
             rootView.updated_at.text = transaction.modifiedAt?.format() ?: "NA"
             rootView.payment_gateway.text = transaction.paymentGatewayName
-            rootView.banking_id.text = when {
-                transaction.type == "bank_card" -> transaction.bankingId?.pan?.panSecurityMask()!!
-                transaction.type == "bank_account" -> transaction.bankingId?.iban?.ibanSecurityMask()!!
+            rootView.source.text = when {
+                transaction.bankingId?.type == "bank_card" -> transaction.bankingId?.pan?.panSecurityMask()!!
+                transaction.bankingId?.type == "bank_account" -> transaction.bankingId?.iban?.ibanSecurityMask()!!
                 else -> "Unknown"
             }
 
@@ -75,13 +108,6 @@ class TransactionDetailFragment : Fragment() {
                 (transaction.referenceId != null) -> "Finished"
                 (transaction.transactionId == null) -> "In the way..."
                 else -> "Waiting to be paid"
-            }
-
-            with(transaction) {
-                if (type == "cashin" && error == null && referenceId == null && transactionId != null)
-                    rootView.visibility = View.VISIBLE
-                else
-                    rootView.visibility = View.GONE
             }
 
             rootView.pay.setOnClickListener {
@@ -99,7 +125,7 @@ class TransactionDetailFragment : Fragment() {
                     """.trimIndent()
 
                     positiveButton("Let's go") {
-                        browse("https://pay.ir/pg/${transaction.id}")
+                        browse("https://pay.ir/pg/${transaction.paymentId}")
                     }
 
                 }.show()
@@ -107,6 +133,15 @@ class TransactionDetailFragment : Fragment() {
 
         })
 
+        rootView.back.setOnClickListener { (activity as BalanceDetailActivity).up() }
+
         return rootView
+    }
+
+    companion object {
+        val ARG_SYMBOL = "transaction_id"
+        val ARG_TRANSACTION_ID = "transaction_id"
+        val ARG_DEPOSIT_ID = "deposit_id"
+        val ARG_WITHDRAW_ID = "withdraw_id"
     }
 }

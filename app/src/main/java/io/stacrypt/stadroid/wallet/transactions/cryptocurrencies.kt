@@ -55,7 +55,7 @@ class DepositHistoryList : Fragment() {
         })
 
         adapter.onItemClickListener = {
-            // (activity!! as BalanceDetailActivity).showtransaction(it.id)
+            // (activity!! as BalanceDetailActivity).showTransaction(it.id)
             it.link?.let { link -> browse(link) }
         }
         return rootView
@@ -82,7 +82,7 @@ class WithdrawHistoryList : Fragment() {
         })
 
         adapter.onItemClickListener = {
-            // (activity!! as BalanceDetailActivity).showtransaction(it.id)
+            // (activity!! as BalanceDetailActivity).showTransaction(it.id)
             it.link?.let { link -> browse(link) }
         }
         return rootView

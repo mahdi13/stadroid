@@ -477,6 +477,7 @@ data class BankingTransaction(
     @SerializedName("paymentGatewayName") var paymentGatewayName: String,
     @SerializedName("error") var error: String?,
     @SerializedName("transactionId") var transactionId: String?,
+    @SerializedName("paymentId") var paymentId: String?,
     @SerializedName("type") var type: String
 )
 

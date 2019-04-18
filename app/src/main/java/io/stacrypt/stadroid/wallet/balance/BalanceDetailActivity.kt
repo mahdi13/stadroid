@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import io.stacrypt.stadroid.R
+import io.stacrypt.stadroid.data.BankingTransaction
 import io.stacrypt.stadroid.wallet.fiat.CashinFragment
 import io.stacrypt.stadroid.wallet.fiat.CashoutFragment
 import io.stacrypt.stadroid.wallet.cryptocurrency.WithdrawFragment
@@ -81,10 +82,39 @@ class BalanceDetailActivity : AppCompatActivity() {
                 .commit()
     }
 
-    fun showtransaction(id: Int) {
+    fun showDepositTransaction(symbol: String, id: Int) {
         supportFragmentManager.beginTransaction()
             .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
-            .replace(R.id.container, TransactionDetailFragment().withArguments("id" to id))
+            .replace(
+                R.id.container, TransactionDetailFragment()
+                    .withArguments(TransactionDetailFragment.ARG_SYMBOL to symbol)
+                    .withArguments(TransactionDetailFragment.ARG_DEPOSIT_ID to symbol)
+            )
+            .addToBackStack("deposit-$id")
+            .commit()
+    }
+
+    fun showWithdrawTransaction(symbol: String, id: Int) {
+        supportFragmentManager.beginTransaction()
+            .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
+            .replace(
+                R.id.container, TransactionDetailFragment()
+                    .withArguments(TransactionDetailFragment.ARG_SYMBOL to symbol)
+                    .withArguments(TransactionDetailFragment.ARG_WITHDRAW_ID to symbol)
+            )
+            .addToBackStack("withdraw-$id")
+            .commit()
+    }
+
+    fun showBankingTransaction(symbol: String, id: Int) {
+        supportFragmentManager.beginTransaction()
+            .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
+            .replace(
+                R.id.container, TransactionDetailFragment()
+                    .withArguments(TransactionDetailFragment.ARG_SYMBOL to symbol)
+                    .withArguments(TransactionDetailFragment.ARG_TRANSACTION_ID to symbol)
+            )
+            .addToBackStack("banking-transaction-$id")
             .commit()
     }
 
@@ -140,7 +170,7 @@ class BalanceDetailActivity : AppCompatActivity() {
                         )
                     )
                 )
-                .addToBackStack("$symbol-deposit")
+                .addToBackStack("$symbol-history")
                 .commit()
     }
 

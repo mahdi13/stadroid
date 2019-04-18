@@ -161,7 +161,10 @@ class CashinFragment : Fragment() {
                                     resources.getDrawable(R.drawable.ic_check_circle_black_24dp).toBitmap(100, 100)
                                 )
 
-                                (activity as BalanceDetailActivity).showtransaction(result.id)
+                                (activity as BalanceDetailActivity).showBankingTransaction(
+                                    result.paymentGateway.fiatSymbol,
+                                    result.id
+                                )
 
                                 // Redirect him to the payment page on browser
                             } catch (e: HttpException) {

@@ -160,7 +160,10 @@ class WithdrawFragment : Fragment() {
                                     resources.getDrawable(R.drawable.ic_check_circle_black_24dp).toBitmap(100, 100)
                                 )
 
-                                (activity as BalanceDetailActivity).showtransaction(result.id)
+                                (activity as BalanceDetailActivity).showWithdrawTransaction(
+                                    viewModel.cryptocurrencySymbol.value ?: "",
+                                    result.id
+                                )
                             } catch (e: HttpException) {
                                 // TODO: Handle all errors
                                 e.printStackTrace()

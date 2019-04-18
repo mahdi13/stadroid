@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.data.BalanceHistory
+import io.stacrypt.stadroid.data.BankingTransaction
 import io.stacrypt.stadroid.data.format
 import io.stacrypt.stadroid.data.stemeraldApiClient
 import io.stacrypt.stadroid.ui.format10Digit
@@ -24,6 +25,8 @@ import java.lang.Exception
 
 class BalanceDetailPagedAdapter :
     PagedListAdapter<BalanceHistory, RecyclerView.ViewHolder>(ITEM_COMPARATOR) {
+
+    var onItemClicked: ((business: String, Int?) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         HistoryViewHolder(parent)
@@ -48,66 +51,68 @@ class BalanceDetailPagedAdapter :
                 val item = it.tag as BalanceHistory
                 when {
                     item.business?.toLowerCase().equals("deposit") -> {
-                        GlobalScope.launch(Dispatchers.Main) {
-                            val loadingDialog =
-                                it.context.indeterminateProgressDialog(title = "Loading...", message = "") {
-                                    context.setTheme(R.style.AlertDialogCustom)
-                                }.apply { show() }
-                            try {
-                                val deposit = stemeraldApiClient.getDepositInfo(
-                                    assetName = item.assetName,
-                                    depositId = item.detail?.id ?: -1
-                                ).await()
-                                loadingDialog.dismiss()
-                                it.context.alert {
-                                    ctx.setTheme(R.style.AlertDialogCustom)
-                                    title = "Deposit details"
-                                    customView {
-                                        verticalLayout {
-                                            textView("id: ${deposit.id}") {
-                                                gravity = Gravity.CENTER
-                                            }
-                                        }
-                                    }
-                                    negativeButton("Ok") {}
-                                }.show()
-                            } catch (e: Exception) {
-                                e.printStackTrace()
-                                loadingDialog.dismiss()
-                                it.context.toast(R.string.problem_occurred_toast)
-                            }
-                        }
+                        onItemClicked?.invoke(item.business?.toLowerCase()!!, item.detail?.id)
+                        // GlobalScope.launch(Dispatchers.Main) {
+                        //     val loadingDialog =
+                        //         it.context.indeterminateProgressDialog(title = "Loading...", message = "") {
+                        //             context.setTheme(R.style.AlertDialogCustom)
+                        //         }.apply { show() }
+                        //     try {
+                        //         val deposit = stemeraldApiClient.getDepositDetail(
+                        //             cryptocurrencySymbol = item.assetName,
+                        //             depositId = item.detail?.id ?: -1
+                        //         ).await()
+                        //         loadingDialog.dismiss()
+                        //         it.context.alert {
+                        //             ctx.setTheme(R.style.AlertDialogCustom)
+                        //             title = "Deposit details"
+                        //             customView {
+                        //                 verticalLayout {
+                        //                     textView("id: ${deposit.id}") {
+                        //                         gravity = Gravity.CENTER
+                        //                     }
+                        //                 }
+                        //             }
+                        //             negativeButton("Ok") {}
+                        //         }.show()
+                        //     } catch (e: Exception) {
+                        //         e.printStackTrace()
+                        //         loadingDialog.dismiss()
+                        //         it.context.toast(R.string.problem_occurred_toast)
+                        //     }
+                        // }
                     }
                     item.business?.toLowerCase().equals("withdraw") -> {
-                        GlobalScope.launch(Dispatchers.Main) {
-                            val loadingDialog =
-                                it.context.indeterminateProgressDialog(title = "Loading...", message = "") {
-                                    context.setTheme(R.style.AlertDialogCustom)
-                                }.apply { show() }
-                            try {
-                                val withdraw = stemeraldApiClient.getWithdrawDetail(
-                                    assetName = item.assetName,
-                                    withdrawId = item.detail?.id ?: -1
-                                ).await()
-                                loadingDialog.dismiss()
-                                it.context.alert {
-                                    ctx.setTheme(R.style.AlertDialogCustom)
-                                    title = "Withdraw details"
-                                    customView {
-                                        verticalLayout {
-                                            textView("id: ${withdraw.id}") {
-                                                gravity = Gravity.CENTER
-                                            }
-                                        }
-                                    }
-                                    negativeButton("Ok") {}
-                                }.show()
-                            } catch (e: Exception) {
-                                e.printStackTrace()
-                                loadingDialog.dismiss()
-                                it.context.toast(R.string.problem_occurred_toast)
-                            }
-                        }
+                        onItemClicked?.invoke(item.business?.toLowerCase()!!, item.detail?.id)
+                        // GlobalScope.launch(Dispatchers.Main) {
+                        //     val loadingDialog =
+                        //         it.context.indeterminateProgressDialog(title = "Loading...", message = "") {
+                        //             context.setTheme(R.style.AlertDialogCustom)
+                        //         }.apply { show() }
+                        //     try {
+                        //         val withdraw = stemeraldApiClient.getWithdrawDetail(
+                        //             cryptocurrencySymbol = item.assetName,
+                        //             withdrawId = item.detail?.id ?: -1
+                        //         ).await()
+                        //         loadingDialog.dismiss()
+                        //         it.context.alert {
+                        //             ctx.setTheme(R.style.AlertDialogCustom)
+                        //             title = "Withdraw details"
+                        //             customView {
+                        //                 verticalLayout {
+                        //                     textView("id: ${withdraw.id}") {
+                        //                         gravity = Gravity.CENTER
+                        //                     }
+                        //                 }
+                        //             }
+                        //             negativeButton("Ok") {}
+                        //         }.show()
+                        //     } catch (e: Exception) {
+                        //         e.printStackTrace()
+                        //         loadingDialog.dismiss()
+                        //         it.context.toast(R.string.problem_occurred_toast)
+                        //     }
+                        // }
                     }
                     item.business?.toLowerCase().equals("trade") -> {
                         try {

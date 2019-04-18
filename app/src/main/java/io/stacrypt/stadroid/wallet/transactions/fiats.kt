@@ -55,7 +55,7 @@ class CashinHistoryList : Fragment() {
         })
 
         adapter.onItemClickListener = {
-            (activity!! as BalanceDetailActivity).showtransaction(it.id)
+            (activity!! as BalanceDetailActivity).showBankingTransaction(it.paymentGateway.fiatSymbol, it.id)
         }
         return rootView
     }
@@ -81,7 +81,7 @@ class CashoutHistoryList : Fragment() {
         })
 
         adapter.onItemClickListener = {
-            (activity!! as BalanceDetailActivity).showtransaction(it.id)
+            (activity!! as BalanceDetailActivity).showBankingTransaction(it.paymentGateway.fiatSymbol, it.id)
         }
         return rootView
     }

@@ -21,11 +21,43 @@
             android:tint="@color/colorPrimaryLightLight"
             style="@style/Widget.AppCompat.ActionButton"/>
 
+
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:divider="@drawable/divider_primary"
             android:showDividers="middle"
-            android:orientation="vertical">
+            >
+
+
+            <TableRow
+                android:background="@color/colorPrimary">
+
+                <TextView
+                    android:text="Info"
+                    android:drawableStart="@drawable/ic_info_outline_black_24dp"
+                    android:drawableTint="@color/colorGrayText"
+                    android:drawablePadding="10dp"
+                    android:textColor="@color/colorGrayText"
+                    android:textAllCaps="true"
+                    android:textSize="16sp"/>
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    style="@style/TransactionDetailTextViewKey"
+                    android:text="Id"/>
+
+                <TextView
+                    style="@style/TransactionDetailTextViewValue"
+                    android:id="@+id/id"
+                    tools:text="# 4732"/>
+            </TableRow>
+
 
             <TableRow>
 
@@ -56,6 +88,7 @@
                 </FrameLayout>
             </TableRow>
 
+
             <TableRow>
 
                 <TextView
@@ -72,12 +105,24 @@
 
                 <TextView
                     style="@style/TransactionDetailTextViewKey"
-                    android:text="Amount"/>
+                    android:text="Payment Gateway"/>
 
                 <TextView
                     style="@style/TransactionDetailTextViewValue"
-                    android:id="@+id/amount"
-                    tools:text="23,232,900 IRR"/>
+                    android:id="@+id/payment_gateway"
+                    tools:text="Shaparak"/>
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    style="@style/TransactionDetailTextViewKey"
+                    android:text="Source"/>
+
+                <TextView
+                    style="@style/TransactionDetailTextViewValue"
+                    android:id="@+id/source"
+                    tools:text="1234 1234 1234 1234"/>
             </TableRow>
 
 
@@ -85,12 +130,12 @@
 
                 <TextView
                     style="@style/TransactionDetailTextViewKey"
-                    android:text="Commission"/>
+                    android:text="Destination"/>
 
                 <TextView
                     style="@style/TransactionDetailTextViewValue"
-                    android:id="@+id/commission"
-                    tools:text="1,234 IRR"/>
+                    android:id="@+id/dest"
+                    tools:text="1234 1234 1234 1234"/>
             </TableRow>
 
 
@@ -104,32 +149,6 @@
                     style="@style/TransactionDetailTextViewValue"
                     android:id="@+id/status"
                     tools:text="Waiting to be paid"/>
-            </TableRow>
-
-
-            <TableRow>
-
-                <TextView
-                    style="@style/TransactionDetailTextViewKey"
-                    android:text="Transaction Id"/>
-
-                <TextView
-                    style="@style/TransactionDetailTextViewValue"
-                    android:id="@+id/transaction_id"
-                    tools:text="348723543847"/>
-            </TableRow>
-
-            <TableRow>
-
-                <TextView
-                    style="@style/TransactionDetailTextViewKey"
-                    android:text="Reference Id"/>
-
-                <TextView
-                    style="@style/TransactionDetailTextViewValue"
-                    android:id="@+id/reference_id"
-                    tools:text="Waiting to be paid"/>
-
             </TableRow>
 
             <TableRow>
@@ -169,28 +188,96 @@
                     tools:text="@tools:sample/date/hhmmss"/>
             </TableRow>
 
+
+            <TableRow
+                android:background="@color/colorPrimary">
+
+                <TextView
+                    android:text="Amount"
+                    android:drawableStart="@drawable/ic_verified_user_black_24dp"
+                    android:drawableTint="@color/colorGrayText"
+                    android:drawablePadding="10dp"
+                    android:textColor="@color/colorGrayText"
+                    android:textAllCaps="true"
+                    android:textSize="16sp"/>
+            </TableRow>
+
+
             <TableRow>
 
                 <TextView
                     style="@style/TransactionDetailTextViewKey"
-                    android:text="Payment Gateway"/>
+                    android:text="Amount"/>
 
                 <TextView
                     style="@style/TransactionDetailTextViewValue"
-                    android:id="@+id/payment_gateway"
-                    tools:text="Shaparak"/>
+                    android:id="@+id/amount"
+                    tools:text="23,232,900 IRR"/>
+            </TableRow>
+
+
+            <TableRow>
+
+                <TextView
+                    style="@style/TransactionDetailTextViewKey"
+                    android:text="Commission"/>
+
+                <TextView
+                    style="@style/TransactionDetailTextViewValue"
+                    android:id="@+id/commission"
+                    tools:text="1,234 IRR"/>
+            </TableRow>
+
+
+            <TableRow
+                android:background="@color/colorPrimary">
+
+                <TextView
+                    android:text="Payment"
+                    android:drawableStart="@drawable/ic_verified_user_black_24dp"
+                    android:drawableTint="@color/colorGrayText"
+                    android:drawablePadding="10dp"
+                    android:textColor="@color/colorGrayText"
+                    android:textAllCaps="true"
+                    android:textSize="16sp"/>
+            </TableRow>
+
+
+            <TableRow>
+
+                <TextView
+                    style="@style/TransactionDetailTextViewKey"
+                    android:text="Payment Id"/>
+
+                <TextView
+                    style="@style/TransactionDetailTextViewValue"
+                    android:id="@+id/payment_id"
+                    tools:text="348723543847"/>
             </TableRow>
 
             <TableRow>
 
                 <TextView
                     style="@style/TransactionDetailTextViewKey"
-                    android:text="Target Bank Card/Account"/>
+                    android:text="Transaction Id"/>
 
                 <TextView
                     style="@style/TransactionDetailTextViewValue"
-                    android:id="@+id/banking_id"
-                    tools:text="1234 1234 1234 1234"/>
+                    android:id="@+id/transaction_id"
+                    tools:text="348723543847"/>
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    style="@style/TransactionDetailTextViewKey"
+                    android:text="Reference Id"/>
+
+                <TextView
+                    style="@style/TransactionDetailTextViewValue"
+                    android:id="@+id/reference_id"
+                    tools:text="Waiting to be paid"/>
+
             </TableRow>
 
 
@@ -203,6 +290,7 @@
             android:text="Pay"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
+            android:minWidth="200dp"
             android:maxWidth="400dp"
             android:padding="20dp"
             android:gravity="center"

@@ -43,6 +43,32 @@ object WalletRepository {
         return liveData
     }
 
+    fun getDepositDetail(cryptocurencySymbol: String, depositId: Int): LiveData<DepositDetail?> {
+        val liveData = MutableLiveData<DepositDetail?>()
+        scope.launch {
+            try {
+                liveData.postValue(
+                    stemeraldApiClient.getDepositDetail(
+                        depositId = depositId,
+                        cryptocurrencySymbol = cryptocurencySymbol
+                    ).await()
+                )
+            } catch (e: HttpException) {
+//                if (e.code() == 404) { // TODO: More strict if clause (or tell the backend team to handle it there!)
+//                    renewDepositInfo(assetName, liveData)
+//                } else {
+                // TODO Show error
+                liveData.postValue(null)
+//                }
+            } catch (e: Exception) {
+                // TODO Show error
+                liveData.postValue(null)
+            } finally {
+            }
+        }
+        return liveData
+    }
+
     fun renewDepositInfo(assetName: String, addressNotUsedHandler: () -> Unit): LiveData<DepositInfo?> {
         val liveData = MutableLiveData<DepositInfo?>()
         scope.launch {
@@ -285,6 +311,32 @@ object WalletRepository {
             },
             refreshState = refreshState
         )
+    }
+
+    fun getWithdrawDetail(cryptocurencySymbol: String, withdrawId: Int): LiveData<Withdraw?> {
+        val liveData = MutableLiveData<Withdraw?>()
+        scope.launch {
+            try {
+                liveData.postValue(
+                    stemeraldApiClient.getWithdrawDetail(
+                        withdrawId = withdrawId,
+                        cryptocurrencySymbol = cryptocurencySymbol
+                    ).await()
+                )
+            } catch (e: HttpException) {
+//                if (e.code() == 404) { // TODO: More strict if clause (or tell the backend team to handle it there!)
+//                    renewDepositInfo(assetName, liveData)
+//                } else {
+                // TODO Show error
+                liveData.postValue(null)
+//                }
+            } catch (e: Exception) {
+                // TODO Show error
+                liveData.postValue(null)
+            } finally {
+            }
+        }
+        return liveData
     }
 
     /**

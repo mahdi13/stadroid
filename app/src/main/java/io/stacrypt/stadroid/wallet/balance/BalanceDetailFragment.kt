@@ -43,6 +43,29 @@ class BalanceDetailFragment : Fragment() {
             if (item == null) return@Observer
             subject.text = "${item.name}'s Wallet"
             header_icon.setImageResource(item.iconResource()!!)
+
+            when (item.type) {
+                "fiat" -> {
+                    adapter.onItemClicked = { business, id ->
+                        (activity as BalanceDetailActivity?)?.showBankingTransaction(item.symbol, id ?: -1)
+                    }
+                }
+                "cryptocurrency" -> {
+                        adapter.onItemClicked = { business, id ->
+                            when (business) {
+                                "deposit" -> (activity as BalanceDetailActivity?)?.showDepositTransaction(
+                                    item.symbol,
+                                    id ?: -1
+                                )
+                                "withdraw" -> (activity as BalanceDetailActivity?)?.showWithdrawTransaction(
+                                    item.symbol,
+                                    id ?: -1
+                                )
+                            }
+                        }
+                }
+            }
+
         })
 
         viewModel.balance.observe(viewLifecycleOwner, Observer<BalanceOverview> { item ->
