@@ -121,7 +121,7 @@ class CashinFragment : Fragment() {
                 return@setOnClickListener Unit.apply { toast("Please choose a card first") }
 
             if (viewModel.selectedCard.value?.isVerified != true)
-                return@setOnClickListener Unit.apply { longToast("The selected card is not validated yet. Usually it will be done in a few hours.") }
+                return@setOnClickListener Unit.apply { longToast("The selected card is not verified yet. Usually it should be done in a few hours...") }
 
             if (viewModel.selectedPaymentGateway.value?.cashinMax?.takeIf { it > BigDecimal(0) }?.takeIf { it < viewModel.selectedAmount.value } != null)
                 return@setOnClickListener Unit.apply {

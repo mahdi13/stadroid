@@ -120,7 +120,7 @@ class CashoutFragment : Fragment() {
                 return@setOnClickListener Unit.apply { toast("Please choose an account first") }
 
             if (viewModel.selectedAccount.value?.isVerified != true)
-                return@setOnClickListener Unit.apply { longToast("The selected account is not verified yet. Usually it will be done in a few hours...") }
+                return@setOnClickListener Unit.apply { longToast("The selected account is not verified yet. Usually it should be done in a few hours...") }
 
             if (viewModel.selectedPaymentGateway.value?.cashoutMax?.takeIf { it > BigDecimal(0) }?.takeIf { it < viewModel.selectedAmount.value } != null)
                 return@setOnClickListener Unit.apply {
