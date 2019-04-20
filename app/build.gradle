@@ -28,8 +28,8 @@ android {
         applicationId "io.stacrypt.stadroid"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 12
-        versionName "1.1.9"
+        versionCode 15
+        versionName "1.1.12"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     compileOptions {

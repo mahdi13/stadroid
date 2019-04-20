@@ -22,6 +22,7 @@ import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.ARG_ACTION
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.ARG_LAUNCH_MODE
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.LAUNCH_MODE_DIALOG
 import kotlinx.android.synthetic.main.bank_cards_fragment.view.*
+import org.jetbrains.anko.support.v4.longToast
 
 class BankCardsFragment : BaseSettingFragment() {
 
@@ -53,12 +54,16 @@ class BankCardsFragment : BaseSettingFragment() {
                 })
         }
 
-        if (arguments?.getString(ARG_ACTION) == ACTION_CHOOSE) {
+        if (arguments?.getString(ProfileSettingActivity.ARG_ACTION) == ProfileSettingActivity.ACTION_CHOOSE) {
             adapter.onItemClickListener = {
-                activity?.setResult(
-                    Activity.RESULT_OK,
-                    Intent().apply { putExtra(ProfileSettingActivity.RESULT_CHOOSE, Gson().toJson(it)) })
-                if (arguments?.getString(ARG_LAUNCH_MODE) == LAUNCH_MODE_DIALOG) back()
+                if (!it.isVerified && it.error != null) {
+                    longToast("This card has been rejected and is invalid, because: ${it.error}")
+                } else {
+                    activity?.setResult(
+                        Activity.RESULT_OK,
+                        Intent().apply { putExtra(ProfileSettingActivity.RESULT_CHOOSE, Gson().toJson(it)) })
+                    if (arguments?.getString(ARG_LAUNCH_MODE) == LAUNCH_MODE_DIALOG) back()
+                }
             }
         }
 
