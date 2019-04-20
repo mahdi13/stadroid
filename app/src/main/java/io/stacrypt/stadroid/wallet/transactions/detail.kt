@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.data.format
+import io.stacrypt.stadroid.profile.banking.digestAddress
 import io.stacrypt.stadroid.ui.format10Digit
 import io.stacrypt.stadroid.ui.getCurrencyIconBySymbol
 import io.stacrypt.stadroid.ui.ibanSecurityMask
@@ -23,6 +24,7 @@ import kotlinx.android.synthetic.main.fragment_transaction_detail.view.*
 import kotlinx.android.synthetic.main.fragment_transaction_detail.view.back
 import org.jetbrains.anko.support.v4.alert
 import org.jetbrains.anko.support.v4.browse
+import org.jetbrains.anko.support.v4.toast
 
 class TransactionDetailViewModel : ViewModel() {
 
@@ -35,16 +37,22 @@ class TransactionDetailViewModel : ViewModel() {
     val depositId = MutableLiveData<Int>()
     val withdrawId = MutableLiveData<Int>()
 
-    val transaction = Transformations.switchMap(transactionId) { id ->
-        id?.let { WalletRepository.getBankingTransactionById(it) }
+    val transaction by lazy {
+        Transformations.switchMap(transactionId) { id ->
+            id?.let { WalletRepository.getBankingTransactionById(it) }
+        }
     }
 
-    val deposit = Transformations.switchMap(depositId) { id ->
-        id?.let { WalletRepository.getDepositDetail(symbol, it) }
+    val deposit by lazy {
+        Transformations.switchMap(depositId) { id ->
+            id?.let { WalletRepository.getDepositDetail(symbol, it) }
+        }
     }
 
-    val withdraw = Transformations.switchMap(withdrawId) { id ->
-        id?.let { WalletRepository.getWithdrawDetail(symbol, it) }
+    val withdraw by lazy {
+        Transformations.switchMap(withdrawId) { id ->
+            id?.let { WalletRepository.getWithdrawDetail(symbol, it) }
+        }
     }
 }
 
@@ -64,6 +72,7 @@ class TransactionDetailFragment : Fragment() {
 
         viewModel.transaction.observe(viewLifecycleOwner, Observer { transaction ->
             if (transaction == null) return@Observer
+            rootView.id_number.text = "# ${transaction.id}"
             rootView.currency.text = transaction?.paymentGateway?.fiatSymbol
             rootView.currency_icon.setImageResource(transaction?.paymentGateway?.fiat?.iconResource()!!)
 
@@ -111,6 +120,14 @@ class TransactionDetailFragment : Fragment() {
                 else -> "Waiting to be paid"
             }
 
+            rootView.transaction_link.setOnClickListener {
+                toast("Not Available")
+            }
+
+            rootView.reference_link.setOnClickListener {
+                toast("Not Available")
+            }
+
             rootView.pay.setOnClickListener {
                 alert {
                     ctx.setTheme(R.style.AlertDialogCustom)
@@ -136,6 +153,7 @@ class TransactionDetailFragment : Fragment() {
 
         viewModel.deposit.observe(viewLifecycleOwner, Observer { deposit ->
             if (deposit == null) return@Observer
+            rootView.id_number.text = "# ${deposit.id}"
             rootView.currency.text = viewModel.symbol
             rootView.currency_icon.setImageResource(getCurrencyIconBySymbol(viewModel.symbol))
 
@@ -147,13 +165,71 @@ class TransactionDetailFragment : Fragment() {
                 ?.plus(" ")
                 ?.plus(viewModel.symbol)
 
+            rootView.source.text = "***"
+            rootView.dest.text = deposit.toAddress.toString().digestAddress()
+
+            rootView.created_at.text = deposit.invoice.creation?.format() ?: "NA"
+            rootView.updated_at.text =
+                deposit.invoice.expiration?.format() ?: deposit.invoice.creation?.format() ?: "NA"
+            rootView.payment_gateway.text = "---"
+
+            rootView.payment_id.text = "---"
+            rootView.transaction_id.text = deposit.txHash ?: "NA"
+            rootView.transaction_link.setOnClickListener {
+                if (deposit.link != null) browse(deposit.link!!)
+                else toast("Not Available")
+            }
+
+            rootView.reference_id.text = deposit.txHash ?: "NA"
+            rootView.reference_link.setOnClickListener {
+                if (deposit.link != null) browse(deposit.link!!)
+                else toast("Not Available")
+            }
+
+            rootView.status.text = deposit.status
+
+            rootView.pay.visibility = View.GONE
+
             rootView.type.text = "Cryptocurrency Deposit"
         })
 
         viewModel.withdraw.observe(viewLifecycleOwner, Observer { withdraw ->
             if (withdraw == null) return@Observer
+            rootView.id_number.text = "# ${withdraw.id}"
             rootView.currency.text = viewModel.symbol
             rootView.currency_icon.setImageResource(getCurrencyIconBySymbol(viewModel.symbol))
+
+            rootView.amount.text = withdraw.netAmount?.format10Digit()
+                ?.plus(" ")
+                ?.plus(viewModel.symbol)
+
+            rootView.commission.text = (withdraw.grossAmount - withdraw.netAmount).abs().format10Digit()
+                ?.plus(" ")
+                ?.plus(viewModel.symbol)
+
+            rootView.source.text = "***"
+            rootView.dest.text = withdraw.toAddress.toString().digestAddress()
+
+            rootView.created_at.text = withdraw.issuedAt?.format() ?: "NA"
+            rootView.updated_at.text = withdraw.paidAt?.format() ?: "NA"
+            rootView.payment_gateway.text = "---"
+
+            rootView.payment_id.text = "---"
+            rootView.transaction_id.text = withdraw.txid ?: "NA"
+            rootView.transaction_link.setOnClickListener {
+                if (withdraw.txid != null) browse(withdraw.link!!)
+                else toast("Not Available")
+            }
+
+            rootView.reference_id.text = withdraw.txid ?: "NA"
+            rootView.reference_link.setOnClickListener {
+                if (withdraw.txid != null) browse(withdraw.link!!)
+                else toast("Not Available")
+            }
+
+            rootView.status.text = withdraw.status
+
+            rootView.pay.visibility = View.GONE
 
             rootView.type.text = "Cryptocurrency Withdraw"
         })

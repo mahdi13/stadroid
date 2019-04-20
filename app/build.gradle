@@ -225,6 +225,7 @@ dependencies {
     compile("com.github.walleth.kethereum:functions:$kethereumVersion")
     compile("com.github.walleth.kethereum:bip44:$kethereumVersion")
     compile("com.github.walleth.kethereum:crypto:$kethereumVersion")
+    compile("com.github.walleth.kethereum:base58:$kethereumVersion")
 
     testImplementation 'junit:junit:4.12'
     testImplementation 'androidx.arch.core:core-testing:2.0.1'
