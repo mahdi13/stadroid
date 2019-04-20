@@ -20,6 +20,7 @@ import io.stacrypt.stadroid.ui.iconResource
 import io.stacrypt.stadroid.ui.panSecurityMask
 import io.stacrypt.stadroid.wallet.balance.BalanceDetailActivity
 import io.stacrypt.stadroid.wallet.data.WalletRepository
+import kotlinx.android.synthetic.main.fragment_asset_balance.*
 import kotlinx.android.synthetic.main.fragment_transaction_detail.view.*
 import kotlinx.android.synthetic.main.fragment_transaction_detail.view.back
 import org.jetbrains.anko.support.v4.alert
@@ -118,6 +119,8 @@ class TransactionDetailFragment : Fragment() {
                 else -> "Waiting to be paid"
             }
 
+            rootView.confirmations.text = "---"
+
             rootView.pay.setOnClickListener {
                 alert {
                     title = "You are going to pay..."
@@ -173,6 +176,11 @@ class TransactionDetailFragment : Fragment() {
             }
 
             rootView.status.text = deposit.status
+            rootView.confirmations.text = if (deposit.confirmationsRequires != null)
+                "${deposit.confirmationsRequires!! - (deposit.confirmationsLeft
+                    ?: deposit.confirmationsRequires!!)} of ${deposit.confirmationsRequires}"
+            else
+                "NA"
 
             rootView.type.text = "Cryptocurrency Deposit"
         })
@@ -209,6 +217,11 @@ class TransactionDetailFragment : Fragment() {
             }
 
             rootView.status.text = withdraw.status
+            rootView.confirmations.text = if (withdraw.confirmationsRequires != null)
+                "${withdraw.confirmationsRequires!! - (withdraw.confirmationsLeft
+                    ?: withdraw.confirmationsRequires!!)} of ${withdraw.confirmationsRequires}"
+            else
+                "NA"
 
             rootView.type.text = "Cryptocurrency Withdraw"
         })

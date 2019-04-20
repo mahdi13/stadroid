@@ -125,16 +125,16 @@
                     tools:text="1234 1234 1234 1234"/>
 
                 <!--<com.google.android.material.button.MaterialButton-->
-                    <!--style="@style/MaterialAlertDialog.MaterialComponents.Title.Icon"-->
-                    <!--android:id="@+id/source_link"-->
-                    <!--android:layout_width="24dp"-->
-                    <!--android:layout_height="24dp"-->
-                    <!--android:background="@android:color/transparent"-->
-                    <!--android:backgroundTint="@android:color/transparent"-->
-                    <!--app:backgroundTint="@android:color/transparent"-->
-                    <!--android:gravity="center"-->
-                    <!--app:iconGravity="textStart"-->
-                    <!--app:icon="@drawable/ic_more_black_24dp"/>-->
+                <!--style="@style/MaterialAlertDialog.MaterialComponents.Title.Icon"-->
+                <!--android:id="@+id/source_link"-->
+                <!--android:layout_width="24dp"-->
+                <!--android:layout_height="24dp"-->
+                <!--android:background="@android:color/transparent"-->
+                <!--android:backgroundTint="@android:color/transparent"-->
+                <!--app:backgroundTint="@android:color/transparent"-->
+                <!--android:gravity="center"-->
+                <!--app:iconGravity="textStart"-->
+                <!--app:icon="@drawable/ic_more_black_24dp"/>-->
             </TableRow>
 
 
@@ -277,16 +277,29 @@
                     tools:text="348723543847"/>
 
                 <!--<com.google.android.material.button.MaterialButton-->
-                    <!--style="@style/MaterialAlertDialog.MaterialComponents.Title.Icon"-->
-                    <!--android:id="@+id/transaction_link"-->
-                    <!--android:layout_width="24dp"-->
-                    <!--android:layout_height="24dp"-->
-                    <!--android:background="@android:color/transparent"-->
-                    <!--android:backgroundTint="@android:color/transparent"-->
-                    <!--app:backgroundTint="@android:color/transparent"-->
-                    <!--android:gravity="center"-->
-                    <!--app:iconGravity="textStart"-->
-                    <!--app:icon="@drawable/ic_more_black_24dp"/>-->
+                <!--style="@style/MaterialAlertDialog.MaterialComponents.Title.Icon"-->
+                <!--android:id="@+id/transaction_link"-->
+                <!--android:layout_width="24dp"-->
+                <!--android:layout_height="24dp"-->
+                <!--android:background="@android:color/transparent"-->
+                <!--android:backgroundTint="@android:color/transparent"-->
+                <!--app:backgroundTint="@android:color/transparent"-->
+                <!--android:gravity="center"-->
+                <!--app:iconGravity="textStart"-->
+                <!--app:icon="@drawable/ic_more_black_24dp"/>-->
+
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    style="@style/TransactionDetailTextViewKey"
+                    android:text="Confirmations"/>
+
+                <TextView
+                    style="@style/TransactionDetailTextViewValue"
+                    android:id="@+id/confirmations"
+                    tools:text="3 of 10"/>
 
             </TableRow>
 
@@ -302,16 +315,16 @@
                     tools:text="Waiting to be paid"/>
 
                 <!--<com.google.android.material.button.MaterialButton-->
-                    <!--style="@style/MaterialAlertDialog.MaterialComponents.Title.Icon"-->
-                    <!--android:id="@+id/reference_link"-->
-                    <!--android:layout_width="24dp"-->
-                    <!--android:layout_height="24dp"-->
-                    <!--android:background="@android:color/transparent"-->
-                    <!--android:backgroundTint="@android:color/transparent"-->
-                    <!--app:backgroundTint="@android:color/transparent"-->
-                    <!--android:gravity="center"-->
-                    <!--app:iconGravity="textStart"-->
-                    <!--app:icon="@drawable/ic_more_black_24dp"/>-->
+                <!--style="@style/MaterialAlertDialog.MaterialComponents.Title.Icon"-->
+                <!--android:id="@+id/reference_link"-->
+                <!--android:layout_width="24dp"-->
+                <!--android:layout_height="24dp"-->
+                <!--android:background="@android:color/transparent"-->
+                <!--android:backgroundTint="@android:color/transparent"-->
+                <!--app:backgroundTint="@android:color/transparent"-->
+                <!--android:gravity="center"-->
+                <!--app:iconGravity="textStart"-->
+                <!--app:icon="@drawable/ic_more_black_24dp"/>-->
 
 
             </TableRow>
