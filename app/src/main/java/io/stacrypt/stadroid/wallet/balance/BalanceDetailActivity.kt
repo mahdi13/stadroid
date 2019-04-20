@@ -85,10 +85,13 @@ class BalanceDetailActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
             .replace(
-                R.id.container, TransactionDetailFragment()
-                    .withArguments(TransactionDetailFragment.ARG_SYMBOL to symbol)
-                    .withArguments(TransactionDetailFragment.ARG_ID to id)
-                    .withArguments(TransactionDetailFragment.ARG_TYPE to TransactionDetailFragment.TYPE_DEPOSIT)
+                R.id.container,
+                TransactionDetailFragment()
+                    .withArguments(
+                        TransactionDetailFragment.ARG_SYMBOL to symbol,
+                        TransactionDetailFragment.ARG_ID to id,
+                        TransactionDetailFragment.ARG_TYPE to TransactionDetailFragment.TYPE_DEPOSIT
+                    )
             )
             .addToBackStack("deposit-$id")
             .commit()
@@ -99,9 +102,11 @@ class BalanceDetailActivity : AppCompatActivity() {
             .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
             .replace(
                 R.id.container, TransactionDetailFragment()
-                    .withArguments(TransactionDetailFragment.ARG_SYMBOL to symbol)
-                    .withArguments(TransactionDetailFragment.ARG_ID to id)
-                    .withArguments(TransactionDetailFragment.ARG_TYPE to TransactionDetailFragment.TYPE_WITHDRAW)
+                    .withArguments(
+                        TransactionDetailFragment.ARG_SYMBOL to symbol,
+                        TransactionDetailFragment.ARG_ID to id,
+                        TransactionDetailFragment.ARG_TYPE to TransactionDetailFragment.TYPE_WITHDRAW
+                    )
             )
             .addToBackStack("withdraw-$id")
             .commit()
@@ -112,9 +117,11 @@ class BalanceDetailActivity : AppCompatActivity() {
             .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
             .replace(
                 R.id.container, TransactionDetailFragment()
-                    .withArguments(TransactionDetailFragment.ARG_SYMBOL to symbol)
-                    .withArguments(TransactionDetailFragment.ARG_ID to id)
-                    .withArguments(TransactionDetailFragment.ARG_TYPE to TransactionDetailFragment.TYPE_BANKING_TRANSATION)
+                    .withArguments(
+                        TransactionDetailFragment.ARG_SYMBOL to symbol,
+                        TransactionDetailFragment.ARG_ID to id,
+                        TransactionDetailFragment.ARG_TYPE to TransactionDetailFragment.TYPE_BANKING_TRANSATION
+                    )
             )
             .addToBackStack("banking-transaction-$id")
             .commit()

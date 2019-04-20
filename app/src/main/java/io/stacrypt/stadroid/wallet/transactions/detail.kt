@@ -37,22 +37,16 @@ class TransactionDetailViewModel : ViewModel() {
     val depositId = MutableLiveData<Int>()
     val withdrawId = MutableLiveData<Int>()
 
-    val transaction by lazy {
-        Transformations.switchMap(transactionId) { id ->
-            id?.let { WalletRepository.getBankingTransactionById(it) }
-        }
+    val transaction = Transformations.switchMap(transactionId) { id ->
+        id?.let { WalletRepository.getBankingTransactionById(it) }
     }
 
-    val deposit by lazy {
-        Transformations.switchMap(depositId) { id ->
-            id?.let { WalletRepository.getDepositDetail(symbol, it) }
-        }
+    val deposit = Transformations.switchMap(depositId) { id ->
+        id?.let { WalletRepository.getDepositDetail(symbol, it) }
     }
 
-    val withdraw by lazy {
-        Transformations.switchMap(withdrawId) { id ->
-            id?.let { WalletRepository.getWithdrawDetail(symbol, it) }
-        }
+    val withdraw = Transformations.switchMap(withdrawId) { id ->
+        id?.let { WalletRepository.getWithdrawDetail(symbol, it) }
     }
 }
 
@@ -124,14 +118,6 @@ class TransactionDetailFragment : Fragment() {
                 else -> "Waiting to be paid"
             }
 
-            rootView.transaction_link.setOnClickListener {
-                toast("Not Available")
-            }
-
-            rootView.reference_link.setOnClickListener {
-                toast("Not Available")
-            }
-
             rootView.pay.setOnClickListener {
                 alert {
                     title = "You are going to pay..."
@@ -168,8 +154,8 @@ class TransactionDetailFragment : Fragment() {
                 ?.plus(" ")
                 ?.plus(viewModel.symbol)
 
-            rootView.source.text = "***"
-            rootView.dest.text = deposit.toAddress.toString().digestAddress()
+            rootView.source.text = "---"
+            rootView.dest.text = deposit.toAddress.address.digestAddress()
 
             rootView.created_at.text = deposit.invoice.creation?.format() ?: "NA"
             rootView.updated_at.text =
@@ -177,21 +163,16 @@ class TransactionDetailFragment : Fragment() {
             rootView.payment_gateway.text = "---"
 
             rootView.payment_id.text = "---"
-            rootView.transaction_id.text = deposit.txHash ?: "NA"
-            rootView.transaction_link.setOnClickListener {
-                if (deposit.link != null) browse(deposit.link!!)
-                else toast("Not Available")
-            }
+            rootView.transaction_id.text = deposit.txHash?.digestAddress() ?: "NA"
+            rootView.reference_id.text = deposit.txHash?.digestAddress() ?: "NA"
 
-            rootView.reference_id.text = deposit.txHash ?: "NA"
-            rootView.reference_link.setOnClickListener {
+            rootView.pay.text = "Show More..."
+            rootView.pay.setOnClickListener {
                 if (deposit.link != null) browse(deposit.link!!)
                 else toast("Not Available")
             }
 
             rootView.status.text = deposit.status
-
-            rootView.pay.visibility = View.GONE
 
             rootView.type.text = "Cryptocurrency Deposit"
         })
@@ -210,7 +191,7 @@ class TransactionDetailFragment : Fragment() {
                 ?.plus(" ")
                 ?.plus(viewModel.symbol)
 
-            rootView.source.text = "***"
+            rootView.source.text = "---"
             rootView.dest.text = withdraw.toAddress.toString().digestAddress()
 
             rootView.created_at.text = withdraw.issuedAt?.format() ?: "NA"
@@ -218,21 +199,16 @@ class TransactionDetailFragment : Fragment() {
             rootView.payment_gateway.text = "---"
 
             rootView.payment_id.text = "---"
-            rootView.transaction_id.text = withdraw.txid ?: "NA"
-            rootView.transaction_link.setOnClickListener {
-                if (withdraw.txid != null) browse(withdraw.link!!)
-                else toast("Not Available")
-            }
+            rootView.transaction_id.text = withdraw.txid?.digestAddress() ?: "NA"
+            rootView.reference_id.text = withdraw.txid?.digestAddress() ?: "NA"
 
-            rootView.reference_id.text = withdraw.txid ?: "NA"
-            rootView.reference_link.setOnClickListener {
+            rootView.pay.text = "Show More..."
+            rootView.pay.setOnClickListener {
                 if (withdraw.txid != null) browse(withdraw.link!!)
                 else toast("Not Available")
             }
 
             rootView.status.text = withdraw.status
-
-            rootView.pay.visibility = View.GONE
 
             rootView.type.text = "Cryptocurrency Withdraw"
         })

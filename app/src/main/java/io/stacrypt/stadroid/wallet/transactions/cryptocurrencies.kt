@@ -55,8 +55,8 @@ class DepositHistoryList : Fragment() {
         })
 
         adapter.onItemClickListener = {
-            // (activity!! as BalanceDetailActivity).showTransaction(it.id)
-            it.link?.let { link -> browse(link) }
+            (activity!! as BalanceDetailActivity).showDepositTransaction(viewModel.cryptocurrencySymbol, it.id)
+            // it.link?.let { link -> browse(link) }
         }
         return rootView
     }
@@ -82,8 +82,8 @@ class WithdrawHistoryList : Fragment() {
         })
 
         adapter.onItemClickListener = {
-            // (activity!! as BalanceDetailActivity).showTransaction(it.id)
-            it.link?.let { link -> browse(link) }
+            (activity!! as BalanceDetailActivity).showWithdrawTransaction(viewModel.cryptocurrencySymbol, it.id)
+            // it.link?.let { link -> browse(link) }
         }
         return rootView
     }
