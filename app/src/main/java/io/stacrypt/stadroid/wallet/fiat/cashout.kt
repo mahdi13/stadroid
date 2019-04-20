@@ -135,7 +135,6 @@ class CashoutFragment : Fragment() {
                 }
 
             alert {
-                ctx.setTheme(R.style.AlertDialogCustom)
                 title = "Please review your withdraw info:"
                 message =
                     "Amount: ${viewModel.selectedAmount.value!!.format(viewModel.currency.value!!)}" + "\n" +

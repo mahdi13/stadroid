@@ -37,7 +37,6 @@ class MyOrdersFragment : Fragment() {
             onCancelClicked = { o ->
                 alert {
                     title = "You are going to cancel one of your pending orders!"
-                    ctx.setTheme(R.style.AlertDialogCustom)
                     message =
                         "Are you sure you want to cancel you ${o.type} ${o.side} order" +
                             " with amount ${o.amount}${if (o.price != null) " and price ${o.price}" else ""}"

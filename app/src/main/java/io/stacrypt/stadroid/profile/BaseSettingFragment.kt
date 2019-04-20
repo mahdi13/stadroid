@@ -18,7 +18,6 @@ abstract class BaseSettingFragment : Fragment() {
         // Check weather the user has access to this page
         if (!authorize()) {
             alert {
-                ctx.setTheme(R.style.AlertDialogCustom)
                 isCancelable = false
                 title = "There is one thing to do..."
                 message = "Before continue to this page you should complete your verification process"

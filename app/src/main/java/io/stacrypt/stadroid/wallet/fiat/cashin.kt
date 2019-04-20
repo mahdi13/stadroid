@@ -136,7 +136,6 @@ class CashinFragment : Fragment() {
                 }
 
             alert {
-                ctx.setTheme(R.style.AlertDialogCustom)
                 title = "Please review your deposit info:"
                 message =
                     "Amount: ${viewModel.selectedAmount.value!!.format(viewModel.currency.value!!)}" + "\n" +

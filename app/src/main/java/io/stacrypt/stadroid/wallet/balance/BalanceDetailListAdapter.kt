@@ -64,7 +64,6 @@ class BalanceDetailPagedAdapter :
                         //         ).await()
                         //         loadingDialog.dismiss()
                         //         it.context.alert {
-                        //             ctx.setTheme(R.style.AlertDialogCustom)
                         //             title = "Deposit details"
                         //             customView {
                         //                 verticalLayout {
@@ -96,7 +95,6 @@ class BalanceDetailPagedAdapter :
                         //         ).await()
                         //         loadingDialog.dismiss()
                         //         it.context.alert {
-                        //             ctx.setTheme(R.style.AlertDialogCustom)
                         //             title = "Withdraw details"
                         //             customView {
                         //                 verticalLayout {
@@ -117,7 +115,6 @@ class BalanceDetailPagedAdapter :
                     item.business?.toLowerCase().equals("trade") -> {
                         try {
                             it.context.alert {
-                                ctx.setTheme(R.style.AlertDialogCustom)
                                 title = "Trade details"
                                 customView {
                                     verticalLayout {

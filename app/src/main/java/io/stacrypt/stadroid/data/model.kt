@@ -449,6 +449,8 @@ data class BankCard(
 @Entity
 data class PaymentGateway(
     @PrimaryKey val name: String,
+    val cashinable: Boolean,
+    val cashoutable: Boolean,
     val cashinMin: BigDecimal,
     val cashoutStaticCommission: BigDecimal,
     val cashinMax: BigDecimal,

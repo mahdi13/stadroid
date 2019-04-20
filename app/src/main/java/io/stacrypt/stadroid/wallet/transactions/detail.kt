@@ -130,7 +130,6 @@ class TransactionDetailFragment : Fragment() {
 
             rootView.pay.setOnClickListener {
                 alert {
-                    ctx.setTheme(R.style.AlertDialogCustom)
                     title = "You are going to pay..."
                     message = """
                        You will be redirected to the payment page,

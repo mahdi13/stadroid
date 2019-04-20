@@ -156,7 +156,6 @@ class NewOrderFragment : Fragment() {
                 // TODO: Verify the value with min/max and user's balance
 
                 alert {
-                    ctx.setTheme(R.style.AlertDialogCustom)
                     title = "Review your order"
 
                     val newOrderAmount = viewModel.newOrderAmount.value
