@@ -29,6 +29,9 @@ import io.stacrypt.stadroid.profile.banking.CurrencyTextWatcher
 import io.stacrypt.stadroid.ui.calculateCashoutCommission
 import io.stacrypt.stadroid.ui.format
 import io.stacrypt.stadroid.ui.formatForJson
+import io.stacrypt.stadroid.ui.showError
+import io.stacrypt.stadroid.ui.showSuccess
+import io.stacrypt.stadroid.ui.showWarning
 import io.stacrypt.stadroid.wallet.balance.BalanceDetailActivity
 import io.stacrypt.stadroid.wallet.balance.BalanceDetailActivity.Companion.ARG_ASSET
 import io.stacrypt.stadroid.wallet.data.WalletRepository
@@ -207,6 +210,13 @@ class CashoutFragment : Fragment() {
             view?.selected_account?.account_title?.text = "Account # ${bankAccount.id}"
             view?.selected_account?.iban?.text = bankAccount.iban
             view?.selected_account?.owner?.text = bankAccount.owner
+            view?.selected_account?.account_verification?.apply {
+                when {
+                    bankAccount.isVerified -> showSuccess("Verified")
+                    bankAccount.error != null -> showError("Rejected: ${bankAccount.error}")
+                    else -> showWarning("Waiting to be verified...")
+                }
+            }
         }
     }
 

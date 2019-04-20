@@ -105,6 +105,19 @@
                     android:fontFamily="@font/kameron_bold"
                     android:text="Jack Daniel"/>
 
+                <com.matrixxun.starry.badgetextview.MaterialBadgeTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/account_verification"
+                    tools:text="Verified"
+                    android:textAllCaps="true"
+                    tools:visibility="visible"
+                    android:textColor="@android:color/white"
+                    android:background="@color/real_green"
+                    android:textSize="12sp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_gravity="end"/>
+
 
             </LinearLayout>
 

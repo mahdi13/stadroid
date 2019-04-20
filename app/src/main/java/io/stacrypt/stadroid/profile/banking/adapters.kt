@@ -7,9 +7,14 @@ import androidx.cardview.widget.CardView
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.matrixxun.starry.badgetextview.MaterialBadgeTextView
 import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.data.BankAccount
 import io.stacrypt.stadroid.data.BankCard
+import io.stacrypt.stadroid.ui.showError
+import io.stacrypt.stadroid.ui.showSuccess
+import io.stacrypt.stadroid.ui.showWarning
+import kotlinx.android.synthetic.main.fragment_profile.view.*
 import kotlinx.android.synthetic.main.row_bank_account.view.*
 import kotlinx.android.synthetic.main.row_bank_card.view.*
 
@@ -31,6 +36,7 @@ class BankCardPagedAdapter : PagedListAdapter<BankCard, BankCardPagedAdapter.Vie
         val titleView: TextView = itemView.card_title
         val numberView: TextView = itemView.pan
         val holderView: TextView = itemView.holder
+        val verificationView: MaterialBadgeTextView = itemView.card_verification
 
         fun bindTo(bankCard: BankCard?) {
             cardView.setOnClickListener { v ->
@@ -42,12 +48,20 @@ class BankCardPagedAdapter : PagedListAdapter<BankCard, BankCardPagedAdapter.Vie
             titleView.text = "Card Number ${bankCard.id}"
             numberView.text = bankCard.pan
             holderView.text = bankCard.holder
+            verificationView.apply {
+                when {
+                    bankCard.isVerified -> showSuccess("Verified")
+                    bankCard.error != null -> showError("Rejected: ${bankCard.error}")
+                    else -> showWarning("Waiting to be verified...")
+                }
+            }
         }
 
         private fun clear() {
             titleView.text = ""
             numberView.text = ""
             holderView.text = ""
+            verificationView.showWarning("NA")
         }
     }
 
@@ -80,6 +94,7 @@ class BankAccountPagedAdapter : PagedListAdapter<BankAccount, BankAccountPagedAd
         val titleView: TextView = itemView.account_title
         val numberView: TextView = itemView.iban
         val ownerView: TextView = itemView.owner
+        val verificationView: MaterialBadgeTextView = itemView.account_verification
 
         fun bindTo(bankAccount: BankAccount?) {
             cardView.setOnClickListener { v ->
@@ -91,12 +106,20 @@ class BankAccountPagedAdapter : PagedListAdapter<BankAccount, BankAccountPagedAd
             titleView.text = "Account Number ${bankAccount.id}"
             numberView.text = bankAccount.iban
             ownerView.text = bankAccount.owner
+            verificationView.apply {
+                when {
+                    bankAccount.isVerified -> showSuccess("Verified")
+                    bankAccount.error != null -> showError("Rejected: ${bankAccount.error}")
+                    else -> showWarning("Waiting to be verified...")
+                }
+            }
         }
 
         private fun clear() {
             titleView.text = ""
             numberView.text = ""
             ownerView.text = ""
+            verificationView.showWarning("NA")
         }
     }
 

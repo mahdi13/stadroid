@@ -29,6 +29,9 @@ import io.stacrypt.stadroid.profile.banking.CurrencyTextWatcher
 import io.stacrypt.stadroid.ui.calculateCashinCommission
 import io.stacrypt.stadroid.ui.format
 import io.stacrypt.stadroid.ui.formatForJson
+import io.stacrypt.stadroid.ui.showError
+import io.stacrypt.stadroid.ui.showSuccess
+import io.stacrypt.stadroid.ui.showWarning
 import io.stacrypt.stadroid.wallet.balance.BalanceDetailActivity
 import io.stacrypt.stadroid.wallet.balance.BalanceDetailActivity.Companion.ARG_ASSET
 import io.stacrypt.stadroid.wallet.data.WalletRepository
@@ -203,10 +206,18 @@ class CashinFragment : Fragment() {
             view?.selected_card?.card_title?.text = "Choose a card"
             view?.selected_card?.pan?.text = ""
             view?.selected_card?.holder?.text = ""
+            view?.selected_card?.card_verification?.showWarning("")
         } else {
             view?.selected_card?.card_title?.text = "Card # ${bankCard.id}"
             view?.selected_card?.pan?.text = bankCard.pan
             view?.selected_card?.holder?.text = bankCard.holder
+            view?.selected_card?.card_verification?.apply {
+                when {
+                    bankCard.isVerified -> showSuccess("Verified")
+                    bankCard.error != null -> showError("Rejected: ${bankCard.error}")
+                    else -> showWarning("Waiting to be verified...")
+                }
+            }
         }
     }
 
