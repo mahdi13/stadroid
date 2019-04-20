@@ -123,6 +123,8 @@
                     style="@style/TransactionDetailTextViewValue"
                     android:id="@+id/source"
                     tools:text="1234 1234 1234 1234"/>
+
+                <Button/>
             </TableRow>
 
 
@@ -188,21 +190,6 @@
                     tools:text="@tools:sample/date/hhmmss"/>
             </TableRow>
 
-
-            <TableRow
-                android:background="@color/colorPrimary">
-
-                <TextView
-                    android:text="Amount"
-                    android:drawableStart="@drawable/ic_verified_user_black_24dp"
-                    android:drawableTint="@color/colorGrayText"
-                    android:drawablePadding="10dp"
-                    android:textColor="@color/colorGrayText"
-                    android:textAllCaps="true"
-                    android:textSize="16sp"/>
-            </TableRow>
-
-
             <TableRow>
 
                 <TextView
@@ -234,7 +221,7 @@
 
                 <TextView
                     android:text="Payment"
-                    android:drawableStart="@drawable/ic_verified_user_black_24dp"
+                    android:drawableStart="@drawable/ic_payment_black_24dp"
                     android:drawableTint="@color/colorGrayText"
                     android:drawablePadding="10dp"
                     android:textColor="@color/colorGrayText"

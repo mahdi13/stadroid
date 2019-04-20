@@ -1,4 +1,4 @@
-package io.stacrypt.stadroid.wallet.fiat
+package io.stacrypt.stadroid.wallet.transactions
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProviders
 import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.data.format
 import io.stacrypt.stadroid.ui.format10Digit
+import io.stacrypt.stadroid.ui.getCurrencyIconBySymbol
 import io.stacrypt.stadroid.ui.ibanSecurityMask
 import io.stacrypt.stadroid.ui.iconResource
 import io.stacrypt.stadroid.ui.panSecurityMask
@@ -132,6 +133,31 @@ class TransactionDetailFragment : Fragment() {
             }
 
         })
+
+        viewModel.deposit.observe(viewLifecycleOwner, Observer { deposit ->
+            if (deposit == null) return@Observer
+            rootView.currency.text = viewModel.symbol
+            rootView.currency_icon.setImageResource(getCurrencyIconBySymbol(viewModel.symbol))
+
+            rootView.amount.text = deposit.netAmount?.format10Digit()
+                ?.plus(" ")
+                ?.plus(viewModel.symbol)
+
+            rootView.commission.text = (deposit.grossAmount - deposit.netAmount).abs().format10Digit()
+                ?.plus(" ")
+                ?.plus(viewModel.symbol)
+
+            rootView.type.text = "Cryptocurrency Deposit"
+        })
+
+        viewModel.withdraw.observe(viewLifecycleOwner, Observer { withdraw ->
+            if (withdraw == null) return@Observer
+            rootView.currency.text = viewModel.symbol
+            rootView.currency_icon.setImageResource(getCurrencyIconBySymbol(viewModel.symbol))
+
+            rootView.type.text = "Cryptocurrency Withdraw"
+        })
+
 
         rootView.back.setOnClickListener { (activity as BalanceDetailActivity).up() }
 

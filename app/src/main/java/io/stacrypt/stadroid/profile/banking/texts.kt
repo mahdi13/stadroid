@@ -1,8 +1,10 @@
 package io.stacrypt.stadroid.profile.banking
 
+import android.graphics.Paint
 import android.text.TextWatcher
 import android.widget.EditText
 import android.text.Editable
+import android.text.SpannableStringBuilder
 import androidx.lifecycle.MutableLiveData
 import io.stacrypt.stadroid.data.Currency
 import io.stacrypt.stadroid.data.DepositAddress
@@ -13,6 +15,10 @@ import org.iban4j.IbanFormat
 import java.lang.Exception
 import java.math.BigDecimal
 import java.util.regex.Pattern
+import android.graphics.Typeface
+import android.text.TextPaint
+import android.text.style.MetricAffectingSpan
+import io.stacrypt.stadroid.application
 
 private val IBAN_POSSIBILITY_REGEX = "^[A-Za-z]{0,2}|[A-Za-z]{2}[0-9\\s]{0,40}$".toRegex()
 private val IBAN_REGEX = "^[A-Za-z]{2}[0-9]{8,30}\$".toRegex()
@@ -176,3 +182,23 @@ class CurrencyTextWatcher(val currency: Currency, val et: EditText, val liveData
 }
 
 fun String.digestAddress() = if (length > 10) take(6) + "..." + takeLast(6) else this
+
+val awesomeFont by lazy { Typeface.createFromAsset(application.assets, "Akshar.ttf") }
+
+fun String.fontAwesomeSpan() = CustomTypefaceSpan(awesomeFont)
+
+class CustomTypefaceSpan(private val typeface: Typeface) : MetricAffectingSpan() {
+
+    override fun updateDrawState(ds: TextPaint) {
+        applyCustomTypeFace(ds, typeface)
+    }
+
+    override fun updateMeasureState(paint: TextPaint) {
+        applyCustomTypeFace(paint, typeface)
+    }
+
+    private fun applyCustomTypeFace(paint: Paint, tf: Typeface) {
+        paint.typeface = tf
+    }
+}
+

@@ -7,12 +7,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import io.stacrypt.stadroid.R
-import io.stacrypt.stadroid.data.BankingTransaction
 import io.stacrypt.stadroid.wallet.fiat.CashinFragment
 import io.stacrypt.stadroid.wallet.fiat.CashoutFragment
 import io.stacrypt.stadroid.wallet.cryptocurrency.WithdrawFragment
 import io.stacrypt.stadroid.wallet.deposit.DepositFragment
-import io.stacrypt.stadroid.wallet.fiat.TransactionDetailFragment
+import io.stacrypt.stadroid.wallet.transactions.TransactionDetailFragment
 import io.stacrypt.stadroid.wallet.transactions.CryptocurrencyTransactions
 import io.stacrypt.stadroid.wallet.transactions.FiatTransactions
 import org.jetbrains.anko.support.v4.withArguments
