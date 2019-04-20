@@ -87,7 +87,8 @@ class BalanceDetailActivity : AppCompatActivity() {
             .replace(
                 R.id.container, TransactionDetailFragment()
                     .withArguments(TransactionDetailFragment.ARG_SYMBOL to symbol)
-                    .withArguments(TransactionDetailFragment.ARG_DEPOSIT_ID to symbol)
+                    .withArguments(TransactionDetailFragment.ARG_ID to id)
+                    .withArguments(TransactionDetailFragment.ARG_TYPE to TransactionDetailFragment.TYPE_DEPOSIT)
             )
             .addToBackStack("deposit-$id")
             .commit()
@@ -99,7 +100,8 @@ class BalanceDetailActivity : AppCompatActivity() {
             .replace(
                 R.id.container, TransactionDetailFragment()
                     .withArguments(TransactionDetailFragment.ARG_SYMBOL to symbol)
-                    .withArguments(TransactionDetailFragment.ARG_WITHDRAW_ID to symbol)
+                    .withArguments(TransactionDetailFragment.ARG_ID to id)
+                    .withArguments(TransactionDetailFragment.ARG_TYPE to TransactionDetailFragment.TYPE_WITHDRAW)
             )
             .addToBackStack("withdraw-$id")
             .commit()
@@ -111,7 +113,8 @@ class BalanceDetailActivity : AppCompatActivity() {
             .replace(
                 R.id.container, TransactionDetailFragment()
                     .withArguments(TransactionDetailFragment.ARG_SYMBOL to symbol)
-                    .withArguments(TransactionDetailFragment.ARG_TRANSACTION_ID to symbol)
+                    .withArguments(TransactionDetailFragment.ARG_ID to id)
+                    .withArguments(TransactionDetailFragment.ARG_TYPE to TransactionDetailFragment.TYPE_BANKING_TRANSATION)
             )
             .addToBackStack("banking-transaction-$id")
             .commit()

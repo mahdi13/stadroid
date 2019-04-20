@@ -66,9 +66,13 @@ class TransactionDetailFragment : Fragment() {
         viewModel = ViewModelProviders.of(activity!!).get(TransactionDetailViewModel::class.java)
 
         arguments?.getString(ARG_SYMBOL)?.let { viewModel.symbol = it }
-        arguments?.getInt(ARG_TRANSACTION_ID)?.let { viewModel.transactionId.postValue(it) }
-        arguments?.getInt(ARG_DEPOSIT_ID)?.let { viewModel.depositId.postValue(it) }
-        arguments?.getInt(ARG_WITHDRAW_ID)?.let { viewModel.withdrawId.postValue(it) }
+        arguments?.getInt(ARG_ID)?.let {
+            when (arguments?.getString(ARG_TYPE)) {
+                TYPE_BANKING_TRANSATION -> viewModel.transactionId.postValue(it)
+                TYPE_DEPOSIT -> viewModel.depositId.postValue(it)
+                TYPE_WITHDRAW -> viewModel.withdrawId.postValue(it)
+            }
+        }
 
         viewModel.transaction.observe(viewLifecycleOwner, Observer { transaction ->
             if (transaction == null) return@Observer
@@ -240,9 +244,11 @@ class TransactionDetailFragment : Fragment() {
     }
 
     companion object {
-        val ARG_SYMBOL = "transaction_id"
-        val ARG_TRANSACTION_ID = "transaction_id"
-        val ARG_DEPOSIT_ID = "deposit_id"
-        val ARG_WITHDRAW_ID = "withdraw_id"
+        val ARG_SYMBOL = "symbol"
+        val ARG_ID = "id"
+        val ARG_TYPE = "type"
+        val TYPE_BANKING_TRANSATION = "transaction"
+        val TYPE_WITHDRAW = "withdraw"
+        val TYPE_DEPOSIT = "deposit"
     }
 }
