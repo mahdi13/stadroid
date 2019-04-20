@@ -9,18 +9,25 @@ class DepositViewModel : ViewModel() {
 
     lateinit var cryptocurrencySymbol: String
     lateinit var currency: LiveData<Currency>
-    lateinit var depositInfo: LiveData<DepositInfo?>
+    lateinit var depositInfo: MediatorLiveData<DepositInfo?>
 
     fun init(cryptocurrencySymbol: String) {
 
         this.cryptocurrencySymbol = cryptocurrencySymbol
 
         currency = WalletRepository.getCurrency(cryptocurrencySymbol)
-        depositInfo = WalletRepository.getDepositInfo(cryptocurrencySymbol)
+        depositInfo = MediatorLiveData()
+        depositInfo.addSource(WalletRepository.getDepositInfo(cryptocurrencySymbol), Observer {
+            depositInfo.value = it
+        })
     }
 
     fun renewDepositInfo(addressNotUsedHandler: () -> Unit) {
-        depositInfo = WalletRepository.renewDepositInfo(cryptocurrencySymbol, addressNotUsedHandler)
+        depositInfo.addSource(
+            WalletRepository.renewDepositInfo(cryptocurrencySymbol, addressNotUsedHandler),
+            Observer {
+                if (it != null) depositInfo.value = it
+            })
     }
 
 //    val asset = Transformations.switchMap(assetName) { WalletRepository.getAsset(it) }
