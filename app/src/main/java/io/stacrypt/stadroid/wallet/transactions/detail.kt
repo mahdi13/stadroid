@@ -212,7 +212,7 @@ class TransactionDetailFragment : Fragment() {
 
             rootView.pay.text = "Show More..."
             rootView.pay.setOnClickListener {
-                if (withdraw.txid != null) browse(withdraw.link!!)
+                if (withdraw.link != null) browse(withdraw.link!!)
                 else toast("Not Available")
             }
 
