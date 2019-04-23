@@ -116,31 +116,39 @@ class WithdrawFragment : Fragment() {
                 viewModel.currency.value?.withdrawCommissionRate == null ||
                 viewModel.currency.value?.withdrawCommissionRate?.toBigDecimal() == BigDecimal(0)
             )
-                BigDecimal(0)
+                BigDecimal.ZERO
             else
                 BigDecimal(viewModel.selectedAmount.value).times(BigDecimal(viewModel.currency.value?.withdrawCommissionRate))
+
+            val withdrawAmountPlusCommission = BigDecimal(viewModel.selectedAmount.value).plus(withdrawCommission)
 
             alert {
                 title = "Please review your withdrawal request:"
                 message = StringBuilder()
-                    .append("You are withdrawing ${viewModel.selectedAmount.value}").append("\n")
+                    .append("You are withdrawing ${viewModel.currency.value!!.name} (${viewModel.currency.value!!.symbol})")
+                    .append("\n\n")
 
                     .append("Amount you will received: ")
                     .append(viewModel.selectedAmount.value!!.format(viewModel.currency.value!!))
-                    .append("\n")
+                    .append(" ").append(viewModel.currency.value!!.symbol)
+                    .append("\n\n")
 
-                    .append("Commission: (about)")
-                    .append(withdrawCommission.format(viewModel.currency.value!!))
-                    .append("\n")
+                    .append("Amount you will be charged (approximately): ")
+                    .append(withdrawAmountPlusCommission.format(viewModel.currency.value!!))
+                    .append(" ").append(viewModel.currency.value!!.symbol)
+                    .append("\n\n")
 
-                    .append("Network Fee: (about)")
+                    .append("Network fee (approximately): ")
                     .append("0.0") // TODO Calculate
-                    .append("\n")
+                    .append(" ").append(viewModel.currency.value!!.symbol)
+                    .append("\n\n")
 
-                    .append("You will receive this amount within maximum 1 hour").append("\n")
-                    .append("Your ${viewModel.currency.value?.name} address is ${viewModel.selectedAmount.value}")
+                    .append("You will be paid within maximum 1 hour.")
                     .append("\n")
-                    .append("Your are agree with all terms and conditions .")
+                    .append("Your ${viewModel.currency.value?.name} address is ${viewModel.selectedAddress.value!!}")
+                    .append("\n\n")
+
+                    .append("Your agree with all terms and conditions .")
                     .append("\n")
 
                 negativeButton("Cancel") { }
