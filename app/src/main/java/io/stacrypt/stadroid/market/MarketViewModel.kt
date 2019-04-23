@@ -38,4 +38,9 @@ class MarketViewModel : ViewModel() {
     val newOrderAmount = MutableLiveData<BigDecimal>().apply { value = BigDecimal("0") }
     val newOrderPrice = MutableLiveData<BigDecimal>().apply { value = BigDecimal("0") }
     val newOrderType = MutableLiveData<String>().apply { value = "limit" }
+
+    // TODO: Auto update
+    val baseBalance: LiveData<BalanceOverview> by lazy { WalletRepository.getBalanceOverview(marketName.parseMarketBaseCurrency()) }
+    // TODO: Auto update
+    val quoteBalance: LiveData<BalanceOverview> by lazy { WalletRepository.getBalanceOverview(marketName.parseMarketQuoteCurrency()) }
 }
