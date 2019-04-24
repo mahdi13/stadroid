@@ -44,17 +44,18 @@ class MarketVitrineFragment : Fragment() {
                         }
                         childFragmentManager.beginTransaction()
                             .replace(R.id.container1, MarketVitrineRowFragment().withArguments("market" to market.name))
-                            .commitNow()
+                            // .commitNow()
+                            .commitNowAllowingStateLoss() // TODO: Is it really good solution?
                     }
                     "TIRR_TETH" -> {
                         childFragmentManager.beginTransaction()
                             .replace(R.id.container2, MarketVitrineRowFragment().withArguments("market" to market.name))
-                            .commitNow()
+                            .commitNowAllowingStateLoss() // TODO: Is it really good solution?
                     }
                     "TBTC_TETH" -> {
                         childFragmentManager.beginTransaction()
                             .replace(R.id.container3, MarketVitrineRowFragment().withArguments("market" to market.name))
-                            .commitNow()
+                            .commitNowAllowingStateLoss() // TODO: Is it really good solution?
                     }
                 }
             }
