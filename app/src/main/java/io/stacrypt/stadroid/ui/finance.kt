@@ -8,6 +8,16 @@ import java.util.*
 import kotlin.math.max
 import kotlin.math.min
 
+fun BigDecimal.formatExactFinancial() = when {
+    this < 10.toBigDecimal() -> this.format(8)
+    this < 1_000_000_000.toBigDecimal() -> java.lang.String.format(Locale.ENGLISH, "%.8f", this)
+        .substring(0, 9)
+        .toBigDecimal()
+        .format()
+        .run { if (substringBeforeLast(".").length > 9) substringBeforeLast(".") else this }
+    else -> java.lang.String.format(Locale.ENGLISH, "%,.0f", this)
+}
+
 fun BigDecimal.format10Digit() = when {
     this < 10.toBigDecimal() -> this.format(8)
     this < 1_000_000_000.toBigDecimal() -> java.lang.String.format(Locale.ENGLISH, "%.8f", this)

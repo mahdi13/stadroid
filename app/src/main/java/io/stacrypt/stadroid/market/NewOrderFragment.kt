@@ -29,6 +29,10 @@ import java.lang.IllegalArgumentException
 import java.math.BigDecimal
 import android.app.Activity
 import android.content.Context
+import io.stacrypt.stadroid.ui.formatExactFinancial
+import io.stacrypt.stadroid.util.NumberTextWatcherForThousand
+import org.jetbrains.anko.design.snackbar
+import java.math.RoundingMode
 
 class NewOrderFragment : Fragment() {
 
@@ -71,23 +75,21 @@ class NewOrderFragment : Fragment() {
         viewModel.baseBalance.observe(viewLifecycleOwner, Observer {})
 
         viewModel.newOrderPrice.observe(viewLifecycleOwner, Observer {
-            if (viewModel.newOrderType.value == "limit" && it != null)
-                rootView.price.setText(it.format10Digit())
+            if (viewModel.newOrderType.value == "limit" && it != null && viewModel.quoteCurrency.value != null)
+                rootView.price.setText(it.format(viewModel.quoteCurrency.value!!))
         })
 
         rootView.price.setOnFocusChangeListener { v, hasFocus ->
-            if (!hasFocus)
-                viewModel.newOrderPrice.value = rootView.price.text?.toString()?.replace(",", "")?.toBigDecimalOrNull()
+            if (!hasFocus) syncEdittextValues()
         }
 
         viewModel.newOrderAmount.observe(viewLifecycleOwner, Observer {
-            rootView.amount.setText(it.format10Digit())
+            if (viewModel.baseCurrency.value != null)
+                rootView.amount.setText((it ?: BigDecimal.ZERO).format(viewModel.baseCurrency.value!!))
         })
 
         rootView.amount.setOnFocusChangeListener { v, hasFocus ->
-            if (!hasFocus)
-                viewModel.newOrderAmount.value =
-                    rootView.amount.text?.toString()?.replace(",", "")?.toBigDecimalOrNull()
+            if (!hasFocus) syncEdittextValues()
         }
 
         viewModel.newOrderType.observe(viewLifecycleOwner, Observer {
@@ -97,7 +99,9 @@ class NewOrderFragment : Fragment() {
             }
 
             viewModel.newOrderPrice.postValue(viewModel.last.value?.price)
-            rootView.price.setText(viewModel.last.value?.price?.format10Digit())
+
+            if (viewModel.quoteCurrency.value != null)
+                rootView.price.setText(viewModel.last.value?.price?.format(viewModel.quoteCurrency.value!!))
 //            if (it == "limit") rootView.price.setText(viewModel.newOrderPrice.value?.format10Digit())
 //            else rootView.price.setText(viewModel.last.value?.price?.format10Digit())
         })
@@ -109,6 +113,7 @@ class NewOrderFragment : Fragment() {
             rootView.amount_down
         ).forEach {
             it.setOnLongClickListener { v ->
+                syncEdittextValues()
                 v.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
                 autoIncreaseDecreaseJob = GlobalScope.launch(Dispatchers.IO) {
                     while (true) {
@@ -147,40 +152,41 @@ class NewOrderFragment : Fragment() {
             }
         }
 
-        listOf(rootView.price, rootView.amount).forEach { view ->
-            view.setOnEditorActionListener { v, actionId, event ->
-                if (listOf(EditorInfo.IME_ACTION_DONE).contains(actionId)) {
-                    rootView?.price?.clearFocus()
-                    rootView?.amount?.clearFocus()
-                    rootView?.price?.clearFocus()
-                    hideKeyboardFrom(context!!, view)
-                    // (getSystemService(
-                    //     context!!,
-                    //     InputMethodService::class.java
-                    // ) as InputMethodManager?)?.hideSoftInputFromWindow(
-                    //     this@NewOrderFragment.activity?.currentFocus?.windowToken,
-                    //     0
-                    // )
-                    false
-                } else {
-                    true
-                }
-            }
-        }
+        // listOf(rootView.price, rootView.amount).forEach { view ->
+        //     view.setOnEditorActionListener { v, actionId, event ->
+        //         if (listOf(EditorInfo.IME_ACTION_DONE).contains(actionId)) {
+        //             // hideKeyboardFrom(context!!, view)
+        //             // (getSystemService(
+        //             //     context!!,
+        //             //     InputMethodService::class.java
+        //             // ) as InputMethodManager?)?.hideSoftInputFromWindow(
+        //             //     this@NewOrderFragment.activity?.currentFocus?.windowToken,
+        //             //     0
+        //             // )
+        //             false
+        //         } else {
+        //             true
+        //         }
+        //     }
+        // }
 
         rootView.price_up.setOnClickListener {
+            syncEdittextValues()
             viewModel.newOrderPrice.value = viewModel.newOrderPrice.value?.plus(priceTick)
         }
 
         rootView.amount_up.setOnClickListener {
+            syncEdittextValues()
             viewModel.newOrderAmount.value = viewModel.newOrderAmount.value?.plus(amountTick)
         }
 
         rootView.price_down.setOnClickListener {
+            syncEdittextValues()
             viewModel.newOrderPrice.value = viewModel.newOrderPrice.value?.minus(priceTick)?.max(0.toBigDecimal())
         }
 
         rootView.amount_down.setOnClickListener {
+            syncEdittextValues()
             viewModel.newOrderAmount.value = viewModel.newOrderAmount.value?.minus(amountTick)?.max(0.toBigDecimal())
         }
 
@@ -189,25 +195,20 @@ class NewOrderFragment : Fragment() {
             else viewModel.newOrderType.value = "limit"
         }
 
-        // rootView.price.addTextChangedListener(priceTextWatcher)
-        // rootView.amount.addTextChangedListener(amountTextWatcher)
+        rootView.price.addTextChangedListener(NumberTextWatcherForThousand(rootView.price))
+        rootView.amount.addTextChangedListener(NumberTextWatcherForThousand(rootView.amount))
 
         listOf(rootView.buy, rootView.sell).forEach {
             it.setOnClickListener { v ->
                 // TODO: Verify the value with min/max and user's balance
+
+                syncEdittextValues()
 
                 val newOrderAmount = viewModel.newOrderAmount.value
                 val newOrderPrice = viewModel.newOrderPrice.value
                 val newOrderType = viewModel.newOrderType.value!!
                 val newOrderSide = if (v.id == R.id.buy) "buy" else "sell"
                 val newOrderMarketName = viewModel.marketName
-                val newOrderEstimateFee = viewModel.market.value?.calculateEstimatedFee(
-                    type = newOrderType,
-                    side = newOrderSide,
-                    amount = newOrderAmount!!,
-                    price = newOrderPrice!!,
-                    lastPrice = viewModel.last.value!!
-                )
 
                 if (validateNewOrder(
                         type = newOrderType,
@@ -217,6 +218,14 @@ class NewOrderFragment : Fragment() {
                     )
                 ) alert {
                     title = "Review your order"
+
+                    val newOrderEstimateFee = viewModel.market.value?.calculateEstimatedFee(
+                        type = newOrderType,
+                        side = newOrderSide,
+                        amount = newOrderAmount!!,
+                        price = newOrderPrice!!,
+                        lastPrice = viewModel.last.value!!
+                    )
 
                     customView {
                         verticalLayout {
@@ -258,13 +267,13 @@ class NewOrderFragment : Fragment() {
 
                             try {
                                 val newOrder = request.await()
-                                toast("Your order has been submitted!")
+                                view?.snackbar("Your order has been submitted!")
                             } catch (e: HttpException) {
                                 e.printStackTrace()
-                                toast(e.verboseLocalizedMessage())
+                                view?.snackbar(e.verboseLocalizedMessage())
                             } catch (e: Exception) {
                                 e.printStackTrace()
-                                toast(R.string.problem_occurred_toast)
+                                view?.snackbar(R.string.problem_occurred_toast)
                             } finally {
                                 progressDialog.dismiss()
                             }
@@ -306,17 +315,25 @@ class NewOrderFragment : Fragment() {
             "Amount too high. Max is: ${maxAmount.format10Digit()}"
         else if (side == "buy" && viewModel.quoteBalance.value != null && amount.times(if (type == "market") viewModel.last.value!!.price else price!!) > viewModel.quoteBalance.value?.available)
             error =
-                "You balance is not enough. You have ${viewModel.quoteBalance.value} ${viewModel.quoteCurrency.value?.symbol} available"
+                "You balance is not enough. You have ${viewModel.quoteBalance.value!!.available.format10Digit()} ${viewModel.quoteCurrency.value?.symbol} available"
         else if (side == "sell" && viewModel.baseBalance.value != null && amount > viewModel.baseBalance.value?.available)
             error =
-                "You balance is not enough. You have ${viewModel.baseBalance.value} ${viewModel.baseCurrency.value?.symbol} available"
-        else if (side == "sell" && type == "limit" && viewModel.last.value != null && price!!.divide(viewModel.last.value!!.price) <= BigDecimal(
+                "You balance is not enough. You have ${viewModel.baseBalance.value!!.available.format10Digit()} ${viewModel.baseCurrency.value?.symbol} available"
+        else if (side == "sell" && type == "limit" && viewModel.last.value != null && price!!.divide(
+                viewModel.last.value!!.price,
+                2,
+                RoundingMode.HALF_UP
+            ) <= BigDecimal(
                 "0.1"
             )
         )
 
             error = "You price is too far from the market price, please review it. "
-        else if (side == "buy" && type == "limit" && viewModel.last.value != null && price!!.divide(viewModel.last.value!!.price) >= BigDecimal(
+        else if (side == "buy" && type == "limit" && viewModel.last.value != null && price!!.divide(
+                viewModel.last.value!!.price,
+                2,
+                RoundingMode.HALF_UP
+            ) >= BigDecimal(
                 "10"
             )
         )
@@ -324,7 +341,7 @@ class NewOrderFragment : Fragment() {
             error = "You price is too far from the market price, please review it. "
         else return true
 
-        longToast(error)
+        view?.snackbar(error)
 
         return false
     }
@@ -375,6 +392,11 @@ class NewOrderFragment : Fragment() {
     //     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
     //     }
     // }
+
+    private fun syncEdittextValues() {
+        viewModel.newOrderPrice.value = view?.price?.text?.toString()?.replace(",", "")?.toBigDecimalOrNull()
+        viewModel.newOrderAmount.value = view?.amount?.text?.toString()?.replace(",", "")?.toBigDecimalOrNull()
+    }
 }
 
 fun hideKeyboardFrom(context: Context, view: View) {
