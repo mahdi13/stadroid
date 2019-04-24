@@ -42,14 +42,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.dev
 
-            ext.betaDistributionReleaseNotes = "This is a Beta release."
+            ext.betaDistributionReleaseNotesFilePath = "../CHANGELOG.md"
             ext.betaDistributionGroupAliases = "Dev, TradeOff"
             ext.betaDistributionNotifications = true
         }
         debug {
             signingConfig signingConfigs.dev
 
-            ext.betaDistributionReleaseNotes = "This is a Beta release."
+            ext.betaDistributionReleaseNotesFilePath = "../CHANGELOG.md"
             ext.betaDistributionGroupAliases = "Dev, TradeOff"
             ext.betaDistributionNotifications = true
         }
