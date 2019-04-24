@@ -42,14 +42,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.dev
 
-            ext.betaDistributionReleaseNotesFilePath = "../CHANGELOG.md"
+            ext.betaDistributionReleaseNotesFilePath = file('../CHANGELOG.md').absolutePath
             ext.betaDistributionGroupAliases = "Dev, TradeOff"
             ext.betaDistributionNotifications = true
         }
         debug {
             signingConfig signingConfigs.dev
 
-            ext.betaDistributionReleaseNotesFilePath = "../CHANGELOG.md"
+            ext.betaDistributionReleaseNotesFilePath = file('../CHANGELOG.md').absolutePath
             ext.betaDistributionGroupAliases = "Dev, TradeOff"
             ext.betaDistributionNotifications = true
         }
