@@ -6,8 +6,16 @@ buildscript {
     repositories {
         google()
         jcenter()
+
+        // FIXME: Temporary, until the fix of https://issuetracker.google.com/issues/129730297. Remove after fixing:
+        maven { url "http://storage.googleapis.com/r8-releases/raw" }
+
     }
     dependencies {
+
+        // FIXME: Temporary, until the fix of https://issuetracker.google.com/issues/129730297. Remove after fixing:
+        classpath 'com.android.tools:r8:1.4.92'  // Must be before the Gradle Plugin for Android.
+
         classpath 'com.android.tools.build:gradle:3.4.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "android.arch.navigation:navigation-safe-args-gradle-plugin:1.0.0"
