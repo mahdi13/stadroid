@@ -153,7 +153,7 @@ class CashoutFragment : Fragment() {
                     rootView.submit.startAnimation {
                         GlobalScope.launch(Dispatchers.Main) {
                             try {
-                                val result = stemeraldApiClient.scheduleShaparakOut(
+                                val result = stemeraldApiClient.scheduleCashout(
                                     paymentMethodId = viewModel.selectedPaymentMethod.value?.id!!,
                                     amount = viewModel.selectedAmount.value?.formatForJson(viewModel.currency.value!!)!!,
                                     bankingIdId = viewModel.selectedAccount.value?.id!!

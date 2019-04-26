@@ -240,8 +240,8 @@ interface StemeraldV2ApiClient {
      * Shaparak
      */
     @FormUrlEncoded
-    @HTTP(method = "CREATE", path = "transactions/shaparak-ins", hasBody = true)
-    fun createShaparakIn(
+    @HTTP(method = "CREATE", path = "transactions/cashins", hasBody = true)
+    fun createCashin(
         @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
         @Field("amount") amount: String,
         @Field("bankingIdId") bankingIdId: Int,
@@ -249,8 +249,16 @@ interface StemeraldV2ApiClient {
     ): Deferred<BankingTransaction>
 
     @FormUrlEncoded
-    @HTTP(method = "SCHEDULE", path = "transactions/shaparak-outs", hasBody = true)
-    fun scheduleShaparakOut(
+    @HTTP(method = "CLAIM", path = "transactions/cashins/{id}", hasBody = true)
+    fun claimCashin(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
+        @Path("id") cashingId: Int,
+        @Field("referenceId") referenceId: String
+    ): Deferred<BankingTransaction>
+
+    @FormUrlEncoded
+    @HTTP(method = "SCHEDULE", path = "transactions/cashouts", hasBody = true)
+    fun scheduleCashout(
         @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
         @Field("amount") amount: String,
         @Field("bankingIdId") bankingIdId: Int,

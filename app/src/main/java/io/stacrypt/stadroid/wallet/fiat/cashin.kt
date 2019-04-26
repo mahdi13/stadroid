@@ -154,7 +154,7 @@ class CashinFragment : Fragment() {
                     rootView.submit.startAnimation {
                         GlobalScope.launch(Dispatchers.Main) {
                             try {
-                                val result = stemeraldApiClient.createShaparakIn(
+                                val result = stemeraldApiClient.createCashin(
                                     paymentMethodId = viewModel.selectedPaymentMethod.value?.id!!,
                                     amount = viewModel.selectedAmount.value?.formatForJson(viewModel.currency.value!!)!!,
                                     bankingIdId = viewModel.selectedCard.value?.id!!

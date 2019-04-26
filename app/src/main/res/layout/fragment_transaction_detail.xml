@@ -257,6 +257,18 @@
 
                 <TextView
                     style="@style/TransactionDetailTextViewKey"
+                    android:text="Payment Instruction"/>
+
+                <TextView
+                    style="@style/TransactionDetailTextViewValue"
+                    android:id="@+id/payment_instruction"
+                    tools:text="---"/>
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    style="@style/TransactionDetailTextViewKey"
                     android:text="Payment Id"/>
 
                 <TextView
