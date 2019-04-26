@@ -71,7 +71,7 @@ class MarketVitrineFragment : Fragment() {
 class VitrineRowViewModel : ViewModel() {
 
     init {
-        Log.e("salammmsalammm", "New Live Data")
+        // Log.e("salammmsalammm", "New Live Data")
     }
 
     lateinit var marketName: String
@@ -88,7 +88,7 @@ class VitrineRowViewModel : ViewModel() {
 
     override fun onCleared() {
         // (kline as PullerLiveData<*>).destroy()
-        Log.e("salammmsalammm", "Live Data Dead :(((")
+        // Log.e("salammmsalammm", "Live Data Dead :(((")
         super.onCleared()
     }
 }

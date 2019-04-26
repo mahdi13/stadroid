@@ -24,11 +24,11 @@ class PullerLiveData<T>(scope: CoroutineScope, interval: Long, executor: suspend
                     pullingStatus.postValue(PullingStatus.ERROR)
                     e.printStackTrace()
                 }
-                Log.e("salam updating", this@PullerLiveData.toString())
+                // Log.e("salam updating", this@PullerLiveData.toString())
             }
             delay(interval)
             if (!hasObservers()) destroy()
-            Log.e("salam alive", this@PullerLiveData.toString())
+            // Log.e("salam alive", this@PullerLiveData.toString())
         } while (true)
     }
     val pullingStatus = MutableLiveData<PullingStatus>().apply { postValue(PullingStatus.FIRST_LOADING) }
