@@ -108,9 +108,7 @@ fun BigDecimal.formatPercent(digits: Int = 2) = "${this.signSymbol()} ${this.for
 fun BigDecimal.signSymbol() = if (isPositive()) "+" else "-"
 fun BigDecimal.isPositive(): Boolean = this >= 0.toBigDecimal()
 
-fun String.panSecurityMask(): String = this.replace("-", "")
-    .replaceRange(IntRange(7, this.length - 3), "*")
-    .chunked(4).joinToString("-")
+fun String.panSecurityMask(): String = this.replaceRange(IntRange(7, this.length - 3), "**-****-**")
 
 fun String.ibanSecurityMask(): String = this.replaceRange(IntRange(7, this.length - 3), "*").replace("****", "")
 
