@@ -61,5 +61,5 @@ class DepositViewModel : ViewModel() {
 //        // FIXME: ReObserve the asset_name after renew
 //    }
 
-//    val paymentGateways by lazy { Transformations.switchMap(assetName) { WalletRepository.getPaymentGateways(it) } }
+//    val paymentMethods by lazy { Transformations.switchMap(assetName) { WalletRepository.getPaymentMethods(it) } }
 }

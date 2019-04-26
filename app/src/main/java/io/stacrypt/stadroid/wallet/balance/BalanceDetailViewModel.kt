@@ -39,5 +39,5 @@ class BalanceDetailViewModel : ViewModel() {
 //        // FIXME: ReObserve the asset_name after renew
 //    }
 
-    val paymentGateways by lazy { switchMap(assetName) { WalletRepository.getPaymentGateways(it) } }
+    val paymentMethods by lazy { switchMap(assetName) { WalletRepository.getPaymentMethods(it) } }
 }

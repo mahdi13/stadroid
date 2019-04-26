@@ -1,7 +1,7 @@
 package io.stacrypt.stadroid.ui
 
 import io.stacrypt.stadroid.data.Currency
-import io.stacrypt.stadroid.data.PaymentGateway
+import io.stacrypt.stadroid.data.PaymentMethod
 import java.math.BigDecimal
 import java.math.RoundingMode
 import java.util.*
@@ -122,7 +122,7 @@ fun Currency.calculateDepositCommission(amount: BigDecimal): BigDecimal {
     return commission
 }
 
-fun PaymentGateway.calculateCashinCommission(amount: BigDecimal): BigDecimal {
+fun PaymentMethod.calculateCashinCommission(amount: BigDecimal): BigDecimal {
     val commission =
         (cashinStaticCommission ?: BigDecimal.ZERO) + (cashinCommissionRate?.toBigDecimal()?.times(amount)
             ?: BigDecimal.ZERO)
@@ -133,7 +133,7 @@ fun PaymentGateway.calculateCashinCommission(amount: BigDecimal): BigDecimal {
     return commission
 }
 
-fun PaymentGateway.calculateCashoutCommission(amount: BigDecimal): BigDecimal {
+fun PaymentMethod.calculateCashoutCommission(amount: BigDecimal): BigDecimal {
     val commission =
         (cashoutStaticCommission ?: BigDecimal.ZERO) + (cashoutCommissionRate?.toBigDecimal()?.times(amount)
             ?: BigDecimal.ZERO)

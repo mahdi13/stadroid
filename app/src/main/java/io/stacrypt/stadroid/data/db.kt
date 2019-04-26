@@ -19,9 +19,9 @@ import java.math.BigDecimal
         // TicketMessage::class,
         ShetabAddress::class,
         ShebaAddress::class,
-        PaymentGateway::class
+        PaymentMethod::class
     ],
-    version = 8
+    version = 9
 )
 @TypeConverters(Converters::class)
 abstract class StemeraldDatabase : RoomDatabase() {
@@ -29,7 +29,7 @@ abstract class StemeraldDatabase : RoomDatabase() {
     abstract val assetDao: AssetDao
     abstract val currencyDao: CurrencyDao
     abstract val balanceOverviewDao: BalanceOverviewDao
-    abstract val paymentGatewayDao: PaymentGatewayDao
+    abstract val paymentMethodDao: PaymentMethodDao
     //    abstract val klineDao: KlineDao
 //    abstract val bookDao: BookDao
 //    abstract val dealDao: DealDao

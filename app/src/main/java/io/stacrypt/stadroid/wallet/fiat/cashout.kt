@@ -13,7 +13,7 @@ import androidx.lifecycle.*
 import com.google.gson.Gson
 import io.stacrypt.stadroid.R
 import io.stacrypt.stadroid.data.BankAccount
-import io.stacrypt.stadroid.data.PaymentGateway
+import io.stacrypt.stadroid.data.PaymentMethod
 import io.stacrypt.stadroid.data.stemeraldApiClient
 import io.stacrypt.stadroid.data.verboseLocalizedMessage
 import io.stacrypt.stadroid.profile.ProfileSettingActivity
@@ -55,9 +55,9 @@ class CashoutViewModel : ViewModel() {
     val currency = Transformations.switchMap(fiatSymbol) {
         WalletRepository.getCurrency(it)
     }
-    val paymentGateways = Transformations.switchMap(fiatSymbol) { WalletRepository.getPaymentGateways(it) }
+    val paymentMethods = Transformations.switchMap(fiatSymbol) { WalletRepository.getPaymentMethods(it) }
 
-    val selectedPaymentGateway = MutableLiveData<PaymentGateway?>()
+    val selectedPaymentMethod = MutableLiveData<PaymentMethod?>()
     val selectedAmount = MutableLiveData<BigDecimal?>()
     val selectedAccount = MutableLiveData<BankAccount?>()
 }
@@ -78,12 +78,12 @@ class CashoutFragment : Fragment() {
             }
         })
 
-        viewModel.paymentGateways.observe(viewLifecycleOwner, Observer { items ->
-            val paymentGatewayAdapter =
-                PaymentGatewayAdapter(items.filter { it.fiatSymbol == viewModel.fiatSymbol.value }) {
-                    viewModel.selectedPaymentGateway.postValue(it)
+        viewModel.paymentMethods.observe(viewLifecycleOwner, Observer { items ->
+            val paymentMethodAdapter =
+                PaymentMethodAdapter(items.filter { it.fiatSymbol == viewModel.fiatSymbol.value && it.cashoutable }) {
+                    viewModel.selectedPaymentMethod.postValue(it)
                 }
-            view?.payment_gateways?.adapter = paymentGatewayAdapter
+            view?.payment_gateways?.adapter = paymentMethodAdapter
         })
         viewModel.fiatSymbol.postValue(arguments?.getString(ARG_ASSET)!!)
 
@@ -113,7 +113,7 @@ class CashoutFragment : Fragment() {
             if (viewModel.selectedAmount.value == null)
                 return@setOnClickListener Unit.apply { toast("Amount is not valid") }
 
-            if (viewModel.selectedPaymentGateway.value == null)
+            if (viewModel.selectedPaymentMethod.value == null)
                 return@setOnClickListener Unit.apply { toast("Please choose a payment gateway") }
 
             if (viewModel.selectedAccount.value == null)
@@ -122,19 +122,19 @@ class CashoutFragment : Fragment() {
             if (viewModel.selectedAccount.value?.isVerified != true)
                 return@setOnClickListener Unit.apply { longToast("The selected account is not verified yet. Usually it should be done in a few hours...") }
 
-            if (viewModel.selectedPaymentGateway.value?.cashoutMax?.takeIf { it > BigDecimal(0) }?.takeIf { it < viewModel.selectedAmount.value } != null)
+            if (viewModel.selectedPaymentMethod.value?.cashoutMax?.takeIf { it > BigDecimal(0) }?.takeIf { it < viewModel.selectedAmount.value } != null)
                 return@setOnClickListener Unit.apply {
                     longToast(
-                        "Amount is too high. Maximum amount is ${viewModel.selectedPaymentGateway.value?.cashoutMax?.format(
+                        "Amount is too high. Maximum amount is ${viewModel.selectedPaymentMethod.value?.cashoutMax?.format(
                             viewModel.currency.value!!
                         )}"
                     )
                 }
 
-            if (viewModel.selectedPaymentGateway.value?.cashoutMin?.takeIf { it > viewModel.selectedAmount.value } != null)
+            if (viewModel.selectedPaymentMethod.value?.cashoutMin?.takeIf { it > viewModel.selectedAmount.value } != null)
                 return@setOnClickListener Unit.apply {
                     longToast(
-                        "Amount is too low. Minimum is ${viewModel.selectedPaymentGateway.value?.cashoutMin?.format(
+                        "Amount is too low. Minimum is ${viewModel.selectedPaymentMethod.value?.cashoutMin?.format(
                             viewModel.currency.value!!
                         )}"
                     )
@@ -144,19 +144,19 @@ class CashoutFragment : Fragment() {
                 title = "Please review your withdraw info:"
                 message =
                     "Amount: ${viewModel.selectedAmount.value!!.format(viewModel.currency.value!!)}" + "\n" +
-                        "Commission: ${viewModel.selectedPaymentGateway?.value!!.calculateCashoutCommission(viewModel.selectedAmount.value!!).format(
+                        "Commission: ${viewModel.selectedPaymentMethod?.value!!.calculateCashoutCommission(viewModel.selectedAmount.value!!).format(
                             viewModel.currency.value!!
                         )}" +
-                        "\n" + "You will be paid by: ${viewModel.selectedPaymentGateway.value!!.name}" +
+                        "\n" + "You will be paid by: ${viewModel.selectedPaymentMethod.value!!.gateway}" +
                         "\n" + "Will be received on account: ${viewModel.selectedAccount.value!!.iban}"
                 positiveButton("Let's do it") {
                     rootView.submit.startAnimation {
                         GlobalScope.launch(Dispatchers.Main) {
                             try {
                                 val result = stemeraldApiClient.scheduleShaparakOut(
-                                    paymentGatewayName = viewModel.selectedPaymentGateway.value?.name!!,
+                                    paymentMethodId = viewModel.selectedPaymentMethod.value?.id!!,
                                     amount = viewModel.selectedAmount.value?.formatForJson(viewModel.currency.value!!)!!,
-                                    bankAccountId = viewModel.selectedAccount.value?.id!!
+                                    bankingIdId = viewModel.selectedAccount.value?.id!!
                                 ).await()
 
 
@@ -166,7 +166,7 @@ class CashoutFragment : Fragment() {
                                 )
 
                                 (activity as BalanceDetailActivity).showBankingTransaction(
-                                    result.paymentGateway.fiatSymbol,
+                                    result.paymentMethod.fiatSymbol,
                                     result.id
                                 )
 

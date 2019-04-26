@@ -2,9 +2,6 @@ package io.stacrypt.stadroid.wallet
 
 import androidx.lifecycle.ViewModel
 import io.stacrypt.stadroid.wallet.data.WalletRepository
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 class WalletViewModel : ViewModel() {
 

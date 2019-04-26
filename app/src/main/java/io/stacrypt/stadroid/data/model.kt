@@ -70,7 +70,7 @@ data class Currency(
 
     /**
      * Important note!!!
-     * You shouldn't use these parameters for fiats! You should get these limitations from their payment gateway object.
+     * You shouldn't use these parameters for fiats! You should get these limitations from their payment method object.
      *
      *
      * Just for crypto:
@@ -447,8 +447,9 @@ data class BankCard(
 ) : BankId
 
 @Entity
-data class PaymentGateway(
-    @PrimaryKey val name: String,
+data class PaymentMethod(
+    @PrimaryKey val id: Int,
+    val gateway: String,
     val cashinable: Boolean,
     val cashoutable: Boolean,
     val cashinMin: BigDecimal,
@@ -475,12 +476,18 @@ data class BankingTransaction(
     @SerializedName("createdAt") var createdAt: Date?,
     @SerializedName("modifiedAt") var modifiedAt: Date?,
     @SerializedName("bankingId") var bankingId: GenericBankingId?,
-    @SerializedName("paymentGateway") var paymentGateway: PaymentGateway,
-    @SerializedName("paymentGatewayName") var paymentGatewayName: String,
+    @SerializedName("paymentMethod") var paymentMethod: PaymentMethod,
+    @SerializedName("paymentMethodId") var paymentMethodId: Int,
     @SerializedName("error") var error: String?,
+    @SerializedName("type") var type: String,
+
+    /**
+     * Only for cashin
+     */
     @SerializedName("transactionId") var transactionId: String?,
     @SerializedName("paymentId") var paymentId: String?,
-    @SerializedName("type") var type: String
+    @SerializedName("paymentInstruction") var paymentInstruction: Map<String, Any?>?,
+    @SerializedName("paymentClaim") var paymentClaim: Map<String, Any?>?
 )
 
 data class Notification(

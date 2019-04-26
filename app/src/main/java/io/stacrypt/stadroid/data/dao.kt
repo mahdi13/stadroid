@@ -65,18 +65,18 @@ interface BalanceOverviewDao {
 }
 
 @Dao
-interface PaymentGatewayDao {
+interface PaymentMethodDao {
     @Insert(onConflict = REPLACE)
-    fun save(paymentGateway: PaymentGateway)
+    fun save(paymentMethod: PaymentMethod)
 
-    @Query("DELETE FROM PaymentGateway")
+    @Query("DELETE FROM PaymentMethod")
     fun deleteAll()
 
-    @Query("SELECT * FROM PaymentGateway")
-    fun loadAll(): LiveData<List<PaymentGateway>>
+    @Query("SELECT * FROM PaymentMethod")
+    fun loadAll(): LiveData<List<PaymentMethod>>
 
-    @Query("SELECT * FROM PaymentGateway WHERE fiatSymbol = :fiatSymbol")
-    fun loadByFiatSymbol(fiatSymbol: String): LiveData<List<PaymentGateway>>
+    @Query("SELECT * FROM PaymentMethod WHERE fiatSymbol = :fiatSymbol")
+    fun loadByFiatSymbol(fiatSymbol: String): LiveData<List<PaymentMethod>>
 }
 
 // @Dao

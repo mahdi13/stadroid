@@ -177,8 +177,8 @@ interface StemeraldV2ApiClient {
         @Query("limit") take: Int = 20
     ): Deferred<ArrayList<MyDeal>>
 
-    @HTTP(method = "GET", path = "transactions/payment-gateways", hasBody = false)
-    fun getPaymentGateways(): Deferred<List<PaymentGateway>>
+    @HTTP(method = "GET", path = "transactions/payment-methods", hasBody = false)
+    fun getPaymentMethods(): Deferred<List<PaymentMethod>>
 
     /**
      * Deposits
@@ -244,8 +244,8 @@ interface StemeraldV2ApiClient {
     fun createShaparakIn(
         @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
         @Field("amount") amount: String,
-        @Field("shetabAddressId") bankCardId: Int,
-        @Field("paymentGatewayName") paymentGatewayName: String
+        @Field("bankingIdId") bankingIdId: Int,
+        @Field("paymentMethodId") paymentMethodId: Int
     ): Deferred<BankingTransaction>
 
     @FormUrlEncoded
@@ -253,8 +253,8 @@ interface StemeraldV2ApiClient {
     fun scheduleShaparakOut(
         @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
         @Field("amount") amount: String,
-        @Field("shebaAddressId") bankAccountId: Int,
-        @Field("paymentGatewayName") paymentGatewayName: String
+        @Field("bankingIdId") bankingIdId: Int,
+        @Field("paymentMethodId") paymentMethodId: Int
     ): Deferred<BankingTransaction>
 
     /**

@@ -7,7 +7,6 @@ import androidx.paging.toLiveData
 import io.stacrypt.stadroid.data.*
 import io.stacrypt.stadroid.wallet.transactions.BankingTransactionHistoryDataSourceFactory
 import io.stacrypt.stadroid.wallet.transactions.DepositHistoryDataSourceFactory
-import io.stacrypt.stadroid.wallet.transactions.PagedBankingTransactionHistoryDataSource
 import io.stacrypt.stadroid.wallet.transactions.WithdrawHistoryDataSourceFactory
 import kotlinx.coroutines.*
 import retrofit2.HttpException
@@ -16,7 +15,7 @@ import retrofit2.HttpException
 object WalletRepository {
     private val assetDao = stemeraldDatabase.assetDao
     private val currencyDao = stemeraldDatabase.currencyDao
-    private val paymentGatewayDao = stemeraldDatabase.paymentGatewayDao
+    private val paymentMethodDao = stemeraldDatabase.paymentMethodDao
     private val balanceOverviewDao = stemeraldDatabase.balanceOverviewDao
 
     private var job: Job? = null
@@ -182,9 +181,9 @@ object WalletRepository {
      *
      * TODO: Webservice call rate limit
      */
-    fun getPaymentGateways(symbol: String): LiveData<List<PaymentGateway>> {
-        refreshPaymentGateways() // TODO: Execute it rarely
-        return paymentGatewayDao.loadByFiatSymbol(symbol)
+    fun getPaymentMethods(symbol: String): LiveData<List<PaymentMethod>> {
+        refreshPaymentMethods() // TODO: Execute it rarely
+        return paymentMethodDao.loadByFiatSymbol(symbol)
     }
 
     fun refreshBalanceOverview() {
@@ -222,12 +221,12 @@ object WalletRepository {
         }
     }
 
-    private fun refreshPaymentGateways() {
+    private fun refreshPaymentMethods() {
         job = scope.launch {
             try {
-                stemeraldApiClient.getPaymentGateways().await()
-                    .apply { paymentGatewayDao.deleteAll() }
-                    .forEach { paymentGatewayDao.save(it) }
+                stemeraldApiClient.getPaymentMethods().await()
+                    .apply { paymentMethodDao.deleteAll() }
+                    .forEach { paymentMethodDao.save(it) }
             } catch (e: Exception) {
                 // TODO: Show error
                 e.printStackTrace()

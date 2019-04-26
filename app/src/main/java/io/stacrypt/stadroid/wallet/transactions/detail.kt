@@ -20,7 +20,6 @@ import io.stacrypt.stadroid.ui.iconResource
 import io.stacrypt.stadroid.ui.panSecurityMask
 import io.stacrypt.stadroid.wallet.balance.BalanceDetailActivity
 import io.stacrypt.stadroid.wallet.data.WalletRepository
-import kotlinx.android.synthetic.main.fragment_asset_balance.*
 import kotlinx.android.synthetic.main.fragment_transaction_detail.view.*
 import kotlinx.android.synthetic.main.fragment_transaction_detail.view.back
 import org.jetbrains.anko.support.v4.alert
@@ -72,8 +71,8 @@ class TransactionDetailFragment : Fragment() {
         viewModel.transaction.observe(viewLifecycleOwner, Observer { transaction ->
             if (transaction == null) return@Observer
             rootView.id_number.text = "# ${transaction.id}"
-            rootView.currency.text = transaction?.paymentGateway?.fiatSymbol
-            rootView.currency_icon.setImageResource(transaction?.paymentGateway?.fiat?.iconResource()!!)
+            rootView.currency.text = transaction?.paymentMethod?.fiatSymbol
+            rootView.currency_icon.setImageResource(transaction?.paymentMethod?.fiat?.iconResource()!!)
 
             when (transaction.type) {
                 "cashin" -> {
@@ -95,17 +94,17 @@ class TransactionDetailFragment : Fragment() {
 
             rootView.amount.text = transaction.amount?.format10Digit()
                 ?.plus(" ")
-                ?.plus(transaction.paymentGateway.fiatSymbol)
+                ?.plus(transaction.paymentMethod.fiatSymbol)
 
             rootView.commission.text = transaction.commission?.format10Digit()
                 ?.plus(" ")
-                ?.plus(transaction.paymentGateway.fiatSymbol)
+                ?.plus(transaction.paymentMethod.fiatSymbol)
 
             rootView.transaction_id.text = transaction.transactionId ?: "NA"
             rootView.reference_id.text = transaction.referenceId ?: "NA"
             rootView.created_at.text = transaction.createdAt?.format() ?: "NA"
             rootView.updated_at.text = transaction.modifiedAt?.format() ?: "NA"
-            rootView.payment_gateway.text = transaction.paymentGatewayName
+            rootView.payment_method.text = transaction.paymentMethod.gateway
             rootView.source.text = when {
                 transaction.bankingId?.type == "bank_card" -> transaction.bankingId?.pan?.panSecurityMask()!!
                 transaction.bankingId?.type == "bank_account" -> transaction.bankingId?.iban?.ibanSecurityMask()!!
@@ -163,7 +162,7 @@ class TransactionDetailFragment : Fragment() {
             rootView.created_at.text = deposit.invoice.creation?.format() ?: "NA"
             rootView.updated_at.text =
                 deposit.invoice.expiration?.format() ?: deposit.invoice.creation?.format() ?: "NA"
-            rootView.payment_gateway.text = "---"
+            rootView.payment_method.text = "---"
 
             rootView.payment_id.text = "---"
             rootView.transaction_id.text = deposit.txHash?.digestAddress() ?: "NA"
@@ -204,7 +203,7 @@ class TransactionDetailFragment : Fragment() {
 
             rootView.created_at.text = withdraw.issuedAt?.format() ?: "NA"
             rootView.updated_at.text = withdraw.paidAt?.format() ?: "NA"
-            rootView.payment_gateway.text = "---"
+            rootView.payment_method.text = "---"
 
             rootView.payment_id.text = "---"
             rootView.transaction_id.text = withdraw.txid?.digestAddress() ?: "NA"

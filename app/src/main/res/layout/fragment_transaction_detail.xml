@@ -109,7 +109,7 @@
 
                 <TextView
                     style="@style/TransactionDetailTextViewValue"
-                    android:id="@+id/payment_gateway"
+                    android:id="@+id/payment_method"
                     tools:text="Shaparak"/>
             </TableRow>
 
