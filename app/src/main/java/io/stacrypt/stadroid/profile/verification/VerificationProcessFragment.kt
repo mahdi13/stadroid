@@ -21,14 +21,11 @@ class VerificationProcessFragment : BaseSettingFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.verification_process_fragment, container, false)
-    }
+        val rootView = inflater.inflate(R.layout.verification_process_fragment, container, false)
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(activity!!).get(VerificationProcessViewModel::class.java)
 
-        viewModel.client.observe(this, Observer {
+        viewModel.client.observe(viewLifecycleOwner, Observer {
             if (!it.isEmailVerified) {
                 // Step 1
                 stepper.stepCount = 4
@@ -38,7 +35,7 @@ class VerificationProcessFragment : BaseSettingFragment() {
 //                childFragmentManager.beginTransaction().replace(R.id.verification_container, MobilePhoneVerificationFragment()).commitNow()
 //                childFragmentManager.beginTransaction().replace(R.id.verification_container, DoMobilePhoneVerificationFragment()).commitNow()
             } else {
-                viewModel.evidence.observe(this, Observer { evidence ->
+                viewModel.evidence.observe(viewLifecycleOwner, Observer { evidence ->
                     stepper.stepCount = 4
                     if (evidence.mobilePhone == null) {
                         stepper.currentStep = 1
@@ -129,5 +126,8 @@ class VerificationProcessFragment : BaseSettingFragment() {
                     ).commit()
             }
         })
+
+
+        return rootView
     }
 }

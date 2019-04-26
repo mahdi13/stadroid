@@ -22,7 +22,7 @@ abstract class BaseSettingFragment : Fragment() {
                 title = "There is one thing to do..."
                 message = "Before continue to this page you should complete your verification process"
                 positiveButton("Let's go") {
-                    back()
+                    NavHostFragment.findNavController(this@BaseSettingFragment).navigateUp()
                     NavHostFragment.findNavController(this@BaseSettingFragment)
                         .navigate(R.id.action_global_verification_process_fragment)
 //                    startActivity<ProfileSettingActivity>(
