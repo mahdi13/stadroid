@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+
+    <RelativeLayout
+        tools:listitem="@layout/row_bank_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:layout_width="?attr/actionBarSize"
+            android:layout_height="?attr/actionBarSize"
+            android:id="@+id/back"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_arrow_back_black_32dp"
+            android:foregroundTint="@color/colorPrimaryLightLight"
+            android:tint="@color/colorPrimaryLightLight"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            style="@style/Widget.AppCompat.ActionButton"/>
+
+        <ImageButton
+            android:layout_width="?attr/actionBarSize"
+            android:layout_height="?attr/actionBarSize"
+            android:id="@+id/add"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_add_black_24dp"
+            android:foregroundTint="@color/colorPrimaryLightLight"
+            android:tint="@color/colorPrimaryLightLight"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            style="@style/Widget.AppCompat.ActionButton"/>
+    </RelativeLayout>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/row_ticket_list"/>
+
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</LinearLayout>
