@@ -517,6 +517,53 @@ interface StemeraldV2ApiClient {
 
     @HTTP(method = "GET", path = "territories/cities", hasBody = false)
     fun getCities(@Query("stateId") stateId: Int): Deferred<List<City>>
+
+    /**
+     * Ticketing
+     */
+    @HTTP(method = "GET", path = "tickets/departments", hasBody = false)
+    fun getDepartments(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: ""
+    ): Deferred<List<TicketDepartment>>
+
+    @HTTP(method = "GET", path = "tickets", hasBody = false)
+    fun getTickets(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
+        @Query("take") take: Int? = null,
+        @Query("skip") skip: Int? = null
+    ): Deferred<List<Ticket>>
+
+    @HTTP(method = "GET", path = "tickets/{id}/messages", hasBody = false)
+    fun getTicketMessages(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
+        @Path("id") ticketId: Int,
+        @Query("take") take: Int? = null,
+        @Query("skip") skip: Int? = null
+    ): Deferred<List<TicketMessage>>
+
+    @FormUrlEncoded
+    @HTTP(method = "APPEND", path = "tickets/{id}", hasBody = true)
+    fun appendTicketMessages(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
+        @Path("id") ticketId: Int,
+        @Field("message") message: String
+    ): Deferred<TicketMessage>
+
+    @FormUrlEncoded
+    @HTTP(method = "CLOSE", path = "tickets/{id}", hasBody = true)
+    fun closeTicket(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
+        @Path("id") ticketId: Int
+    ): Deferred<Ticket>
+
+    @FormUrlEncoded
+    @HTTP(method = "CREATE", path = "tickets", hasBody = true)
+    fun createTicket(
+        @Header("Authorization") jwtToken: String = sessionManager.jwtToken ?: "",
+        @Field("departmentId") departmentId: Int,
+        @Field("title") title: String,
+        @Field("message") message: String
+    ): Deferred<Ticket>
 }
 
 // @Suppress("DeferredIsResult")
