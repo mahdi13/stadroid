@@ -2,8 +2,35 @@ package io.stacrypt.stadroid.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
+import androidx.paging.toLiveData
 import kotlinx.coroutines.*
 import retrofit2.HttpException
+
+fun <T> ListingDataSourceFactory<T>.listing(): Listing<T> {
+
+    val livePagedList = toLiveData(
+        pageSize = 20 // Doesn't matter, because server will set it
+    )
+
+    val refreshState = Transformations.switchMap(sourceLiveData) {
+        (it as ListingPageKeyedDataSource<T>).initialLoad
+    }
+
+    return Listing(
+        pagedList = livePagedList,
+        networkState = Transformations.switchMap(sourceLiveData) {
+            (it as ListingPageKeyedDataSource<T>).networkState
+        },
+        retry = {
+            (sourceLiveData.value as ListingPageKeyedDataSource<T>?)?.retryAllFailed()
+        },
+        refresh = {
+            (sourceLiveData.value as ListingPageKeyedDataSource<T>?)?.invalidate()
+        },
+        refreshState = refreshState
+    )
+}
 
 object UserRepository {
     private val userDao: UserDao = stemeraldDatabase.userDao

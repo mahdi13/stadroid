@@ -23,6 +23,18 @@
         android:paddingBottom="8dp"
         >
 
+        <com.matrixxun.starry.badgetextview.MaterialBadgeTextView
+            android:id="@+id/ticket_badge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textColor="@android:color/white"
+            android:background="@color/colorSecondaryTrans"
+            android:textSize="12sp"
+            tools:text="NEW!"
+            />
+
         <ImageView
             android:id="@+id/ticket_avatar"
             android:layout_width="48dp"

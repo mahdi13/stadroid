@@ -288,13 +288,13 @@ data class Order(
 )
 
 data class Ticket(
-    @PrimaryKey var id: Int,
+    /*@PrimaryKey */var id: Int,
     var title: String,
     var memberId: Int?,
     var closedAt: Date?,
-    @Embedded(prefix = "dp") var department: TicketDepartment,
+    /*@Embedded(prefix = "dp") */var department: TicketDepartment,
     var isClosed: Boolean,
-    @Embedded(prefix = "fm") var firstMessage: TicketMessage?,
+    /*@Embedded(prefix = "fm") */var firstMessage: TicketMessage?,
     var createdAt: Date?,
     var modifiedAt: Date?
 )
