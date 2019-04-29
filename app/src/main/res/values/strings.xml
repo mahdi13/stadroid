@@ -174,10 +174,16 @@
     <string name="close">Close</string>
     <string name="account_iban">Account IBAN</string>
     <string name="wait_a_few_hours_you_will_be_fully_verified_soon">Wait a few hours, you will be fully verified soon!</string>
+    <string name="change_language" translatable="false">Change Language / تغییر زبان</string>
 
     <string-array name="genders">
         <item>Male</item>
         <item>Female</item>
+    </string-array>
+
+    <string-array name="supported_languages">
+        <item>English</item>
+        <item>فارسی</item>
     </string-array>
 
 </resources>

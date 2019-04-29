@@ -20,7 +20,7 @@
             android:stretchColumns="*"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
-        >
+            >
 
             <TableRow>
 
@@ -49,7 +49,7 @@
                                 android:layout_marginStart="20dp"
                                 android:layout_marginEnd="0dp"
                                 android:tint="@color/colorPrimaryLight"
-                            />
+                                />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -67,7 +67,7 @@
                                     android:paddingTop="10dp"
                                     android:gravity="center"
                                     android:textAllCaps="true"
-                                />
+                                    />
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -361,6 +361,14 @@
                     android:textColor="@color/colorGrayText"
                     android:textAllCaps="true"
                     android:textSize="16sp"/>
+            </TableRow>
+
+            <TableRow>
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
+                    android:id="@+id/change_language"
+                    android:text="@string/change_language"/>
             </TableRow>
 
             <TableRow>

@@ -1,6 +1,7 @@
 package io.stacrypt.stadroid.profile
 
 import android.content.Context
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -21,8 +22,10 @@ import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_CHAN
 import io.stacrypt.stadroid.profile.ProfileSettingActivity.Companion.TARGET_VERIFICATION_PROCESS
 import io.stacrypt.stadroid.profile.banking.extractIpAddress
 import kotlinx.android.synthetic.main.fragment_profile.view.*
+import org.jetbrains.anko.support.v4.selector
 import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.textColorResource
+import java.util.Locale
 
 class ProfileFragment : Fragment() {
     private lateinit var viewModel: ProfileViewModel
@@ -44,6 +47,19 @@ class ProfileFragment : Fragment() {
             // TODO: Terminate current session
             // TODO: Clear entire db
             listener?.onLoggedOut()
+        }
+
+        this?.change_language?.setOnClickListener {
+            selector(
+                "Choose Language",
+                resources.getStringArray(R.array.supported_languages).toList()
+            ) { dialogInterface: DialogInterface, i: Int ->
+
+                when (i) {
+                    0 -> Locale.setDefault(Locale("fa"))
+                    1 -> Locale.setDefault(Locale("en"))
+                }
+            }
         }
 
         this?.verification?.setTarget(TARGET_VERIFICATION_PROCESS)
