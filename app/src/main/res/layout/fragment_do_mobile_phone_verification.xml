@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_marginBottom="10dp"
-            android:text="Enter Verification Code"
+            android:text="@string/enter_verification_code"
             android:textAllCaps="true"
             android:textColor="@color/colorPrimaryLightLight"/>
 

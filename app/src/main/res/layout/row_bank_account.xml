@@ -78,7 +78,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorPrimaryDark"
                     android:layout_marginTop="20dp"
-                    android:text="Account IBAN"/>
+                    android:text="@string/account_iban"/>
 
                 <TextView
                     android:id="@+id/iban"
@@ -94,7 +94,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorPrimaryDark"
                     android:layout_marginTop="20dp"
-                    android:text="Account Owner Name"/>
+                    android:text="@string/account_owner_name"/>
 
                 <TextView
                     android:id="@+id/owner"
@@ -103,7 +103,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="#ffffff"
                     android:fontFamily="@font/kameron_bold"
-                    android:text="Jack Daniel"/>
+                    tools:text="Jack Daniel"/>
 
                 <com.matrixxun.starry.badgetextview.MaterialBadgeTextView
                     android:layout_width="wrap_content"

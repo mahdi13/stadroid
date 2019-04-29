@@ -67,7 +67,7 @@
             <TextView
                     style="@style/MarketInfoTextViewKey"
                     android:layout_gravity="center_vertical"
-                    android:text="Quote Currency"/>
+                    android:text="@string/quote_currency"/>
 
             <FrameLayout style="@style/MarketInfoTextViewValue">
 
@@ -99,7 +99,7 @@
 
             <TextView
                     style="@style/MarketInfoTextViewTitle"
-                    android:text="Statistics"
+                    android:text="@string/statistics"
                     android:drawableTint="@color/colorGrayText"
                     android:drawableStart="@drawable/ic_trending_up_black_24dp"/>
         </TableRow>
@@ -108,7 +108,7 @@
 
             <TextView
                     style="@style/MarketInfoTextViewKey"
-                    android:text="Market Cap"/>
+                    android:text="@string/market_cap"/>
 
             <TextView
                     android:id="@+id/market_cap"
@@ -122,7 +122,7 @@
 
             <TextView
                     style="@style/MarketInfoTextViewKey"
-                    android:text="Bid Amount"/>
+                    android:text="@string/bid_amount"/>
 
             <TextView
                     android:id="@+id/bid_amount"
@@ -136,7 +136,7 @@
 
             <TextView
                     style="@style/MarketInfoTextViewKey"
-                    android:text="Ask Amount"/>
+                    android:text="@string/ask_amount"/>
 
             <TextView
                     android:id="@+id/ask_amount"
@@ -150,7 +150,7 @@
 
             <TextView
                     style="@style/MarketInfoTextViewKey"
-                    android:text="Bid Count"/>
+                    android:text="@string/bid_count"/>
 
             <TextView
                     android:id="@+id/bids"
@@ -164,7 +164,7 @@
 
             <TextView
                     style="@style/MarketInfoTextViewKey"
-                    android:text="Ask Count"/>
+                    android:text="@string/ask_count"/>
 
             <TextView
                     android:id="@+id/asks"
@@ -178,7 +178,7 @@
 
             <TextView
                     style="@style/MarketInfoTextViewTitle"
-                    android:text="Past 24H"
+                    android:text="@string/past_24h"
                     android:drawableTint="@color/colorGrayText"
                     android:drawableStart="@drawable/ic_more_horiz_black_24dp"/>
         </TableRow>
@@ -187,7 +187,7 @@
 
             <TextView
                     style="@style/MarketInfoTextViewKey"
-                    android:text="Open"/>
+                    android:text="@string/open"/>
 
             <TextView
                     android:id="@+id/open"
@@ -201,7 +201,7 @@
 
             <TextView
                     style="@style/MarketInfoTextViewKey"
-                    android:text="Highest"/>
+                    android:text="@string/highest"/>
 
             <TextView
                     android:id="@+id/highest"
@@ -215,7 +215,7 @@
 
             <TextView
                     style="@style/MarketInfoTextViewKey"
-                    android:text="Lowest"/>
+                    android:text="@string/lowest"/>
 
             <TextView
                     android:id="@+id/lowest"
@@ -229,7 +229,7 @@
 
             <TextView
                     style="@style/MarketInfoTextViewKey"
-                    android:text="Close"/>
+                    android:text="@string/close"/>
 
             <TextView
                     android:id="@+id/close"
@@ -243,7 +243,7 @@
 
             <TextView
                     style="@style/MarketInfoTextViewKey"
-                    android:text="Volume"/>
+                    android:text="@string/volume"/>
 
             <TextView
                     android:id="@+id/volume"
@@ -257,7 +257,7 @@
 
             <TextView
                     style="@style/MarketInfoTextViewKey"
-                    android:text="Deal"/>
+                    android:text="@string/deal"/>
 
             <TextView
                     android:id="@+id/deal"

@@ -37,7 +37,8 @@ class WalletAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
         holder.itemView.tag = item.assetName
-        holder.nameView.text = item.assetName
+        holder.nameView.text = item.currency.name
+        holder.symbolView.text = item.currency.symbol
 //        holder.totalView.text = (item.available + item.freeze).toString()
         holder.availableView.text = item.available.format10Digit()
         holder.freezeView.text = item.freeze.format10Digit()
@@ -53,6 +54,7 @@ class WalletAdapter(
             .inflate(R.layout.fragment_asset_balance, parent, false)
     ) {
 
+        val symbolView: TextView = itemView.symbol
         val nameView: TextView = itemView.name
         val cardView: View = itemView.card
         val depositView: Button = itemView.deposit

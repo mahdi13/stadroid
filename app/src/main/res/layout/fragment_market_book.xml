@@ -61,7 +61,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="---"/>
+            android:text="@string/empty_dash"/>
 
         <TextView
             android:id="@+id/amount_left"
@@ -71,7 +71,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:textColor="@color/real_green"
-            android:text="---"/>
+            android:text="@string/empty_dash"/>
 
 
         <TextView
@@ -82,7 +82,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:textColor="@color/real_red"
-            android:text="---"/>
+            android:text="@string/empty_dash"/>
 
         <TextView
             android:id="@+id/price_right"
@@ -91,7 +91,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="---"/>
+            android:text="@string/empty_dash"/>
 
     </LinearLayout>
 

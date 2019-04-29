@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="40dp"
-                android:text="Choose the bank account:"/>
+                android:text="@string/choose_the_bank_account"/>
 
 
             <include
@@ -77,7 +77,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/add_account"
                     android:layout_marginStart="5dp"
-                    android:text="Or add new account"/>
+                    android:text="@string/or_add_new_account"/>
 
             </LinearLayout>
 
@@ -86,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="40dp"
-                android:text="Choose the payment method:"/>
+                android:text="@string/choose_the_payment_method"/>
 
             <ListView
                 android:id="@+id/payment_gateways"
@@ -125,7 +125,7 @@
                 android:id="@+id/submit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Withdraw from my account"
+                android:text="@string/withdraw_from_my_account"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
                 android:maxWidth="400dp"

@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context=".notification.NotificationDetailActivity"
-             android:background="@color/colorPrimaryDark"
-             android:orientation="vertical"
-             tools:ignore="MergeRootFrame">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              tools:context=".notification.NotificationDetailActivity"
+              android:background="@color/colorPrimaryDark"
+              android:orientation="vertical"
+              tools:ignore="MergeRootFrame">
 
     <ImageButton
-            android:layout_width="?attr/actionBarSize"
-            android:layout_height="?attr/actionBarSize"
-            android:id="@+id/back"
-            android:layout_marginEnd="10dp"
-            android:src="@drawable/ic_arrow_back_black_32dp"
-            android:foregroundTint="@color/colorPrimaryLightLight"
-            android:tint="@color/colorPrimaryLightLight"
-            style="@style/Widget.AppCompat.ActionButton"/>
+        android:layout_width="?attr/actionBarSize"
+        android:layout_height="?attr/actionBarSize"
+        android:id="@+id/back"
+        android:layout_marginEnd="10dp"
+        android:src="@drawable/ic_arrow_back_black_32dp"
+        android:foregroundTint="@color/colorPrimaryLightLight"
+        android:tint="@color/colorPrimaryLightLight"
+        style="@style/Widget.AppCompat.ActionButton"/>
 
     <FrameLayout
-            android:id="@+id/notification_detail_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:ignore="MergeRootFrame"/>
+        android:id="@+id/notification_detail_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="MergeRootFrame"/>
 </LinearLayout>

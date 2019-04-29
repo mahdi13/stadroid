@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_marginBottom="10dp"
-            android:text="Verify your phone"
+            android:text="@string/verify_your_phone"
             android:textAllCaps="true"
             android:textColor="@color/colorPrimaryLightLight"/>
 
@@ -83,7 +83,7 @@
             android:gravity="center"
             android:layout_gravity="center"
             android:background="@drawable/button_shape_default_rounded"
-            android:text="Send me SMS"
+            android:text="@string/send_me_sms"
             android:textColor="@color/colorSecondary"
             app:spinning_bar_width="4dp"
             app:spinning_bar_color="#FFF"

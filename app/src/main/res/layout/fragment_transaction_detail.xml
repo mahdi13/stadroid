@@ -37,7 +37,7 @@
                 android:background="@color/colorPrimary">
 
                 <TextView
-                    android:text="Info"
+                    android:text="@string/info"
                     android:drawableStart="@drawable/ic_info_outline_black_24dp"
                     android:drawableTint="@color/colorGrayText"
                     android:drawablePadding="10dp"
@@ -50,7 +50,7 @@
 
                 <TextView
                     style="@style/TransactionDetailTextViewKey"
-                    android:text="Id"/>
+                    android:text="@string/id"/>
 
                 <TextView
                     style="@style/TransactionDetailTextViewValue"
@@ -63,7 +63,7 @@
 
                 <TextView
                     style="@style/TransactionDetailTextViewKey"
-                    android:text="Currency"/>
+                    android:text="@string/currency"/>
 
                 <FrameLayout style="@style/TransactionDetailTextViewValue">
 
@@ -93,7 +93,7 @@
 
                 <TextView
                     style="@style/TransactionDetailTextViewKey"
-                    android:text="Type"/>
+                    android:text="@string/type"/>
 
                 <TextView
                     style="@style/TransactionDetailTextViewValue"
@@ -105,7 +105,7 @@
 
                 <TextView
                     style="@style/TransactionDetailTextViewKey"
-                    android:text="Payment Gateway"/>
+                    android:text="@string/payment_gateway"/>
 
                 <TextView
                     style="@style/TransactionDetailTextViewValue"
@@ -117,7 +117,7 @@
 
                 <TextView
                     style="@style/TransactionDetailTextViewKey"
-                    android:text="Source"/>
+                    android:text="@string/source"/>
 
                 <TextView
                     style="@style/TransactionDetailTextViewValue"
@@ -142,7 +142,7 @@
 
                 <TextView
                     style="@style/TransactionDetailTextViewKey"
-                    android:text="Destination"/>
+                    android:text="@string/destination"/>
 
                 <TextView
                     style="@style/TransactionDetailTextViewValue"
@@ -168,7 +168,7 @@
 
                 <TextView
                     style="@style/TransactionDetailTextViewKey"
-                    android:text="Status"/>
+                    android:text="@string/status"/>
 
                 <TextView
                     style="@style/TransactionDetailTextViewValue"
@@ -180,7 +180,7 @@
 
                 <TextView
                     style="@style/TransactionDetailTextViewKey"
-                    android:text="Created At"/>
+                    android:text="@string/created_at"/>
 
                 <TextView
                     style="@style/TransactionDetailTextViewValue"
@@ -205,7 +205,7 @@
 
                 <TextView
                     style="@style/TransactionDetailTextViewKey"
-                    android:text="Updated At"/>
+                    android:text="@string/updated_at"/>
 
                 <TextView
                     style="@style/TransactionDetailTextViewValue"
@@ -217,7 +217,7 @@
 
                 <TextView
                     style="@style/TransactionDetailTextViewKey"
-                    android:text="Amount"/>
+                    android:text="@string/amount"/>
 
                 <TextView
                     style="@style/TransactionDetailTextViewValue"
@@ -230,7 +230,7 @@
 
                 <TextView
                     style="@style/TransactionDetailTextViewKey"
-                    android:text="Commission"/>
+                    android:text="@string/commission"/>
 
                 <TextView
                     style="@style/TransactionDetailTextViewValue"
@@ -243,7 +243,7 @@
                 android:background="@color/colorPrimary">
 
                 <TextView
-                    android:text="Payment"
+                    android:text="@string/payment"
                     android:drawableStart="@drawable/ic_payment_black_24dp"
                     android:drawableTint="@color/colorGrayText"
                     android:drawablePadding="10dp"
@@ -257,7 +257,7 @@
 
                 <TextView
                     style="@style/TransactionDetailTextViewKey"
-                    android:text="Payment Instruction"/>
+                    android:text="@string/payment_instruction"/>
 
                 <TextView
                     style="@style/TransactionDetailTextViewValue"
@@ -269,7 +269,7 @@
 
                 <TextView
                     style="@style/TransactionDetailTextViewKey"
-                    android:text="Payment Id"/>
+                    android:text="@string/payment_id"/>
 
                 <TextView
                     style="@style/TransactionDetailTextViewValue"
@@ -281,7 +281,7 @@
 
                 <TextView
                     style="@style/TransactionDetailTextViewKey"
-                    android:text="Transaction Id"/>
+                    android:text="@string/transaction_id"/>
 
                 <TextView
                     style="@style/TransactionDetailTextViewValue"
@@ -306,7 +306,7 @@
 
                 <TextView
                     style="@style/TransactionDetailTextViewKey"
-                    android:text="Confirmations"/>
+                    android:text="@string/confirmations"/>
 
                 <TextView
                     style="@style/TransactionDetailTextViewValue"
@@ -319,7 +319,7 @@
 
                 <TextView
                     style="@style/TransactionDetailTextViewKey"
-                    android:text="Reference Id"/>
+                    android:text="@string/reference_id"/>
 
                 <TextView
                     style="@style/TransactionDetailTextViewValue"
@@ -348,7 +348,7 @@
             android:id="@+id/pay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pay"
+            android:text="@string/pay"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
             android:minWidth="200dp"

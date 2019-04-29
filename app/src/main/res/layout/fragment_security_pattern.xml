@@ -18,7 +18,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Security Pattern"
+                android:text="@string/security_pattern"
                 android:textAllCaps="true"
                 android:fontFamily="@font/open_sans_bold"
                 android:textColor="@color/colorAccent"
@@ -64,7 +64,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Forgot your pattern?"
+                android:text="@string/forgot_your_pattern"
                 android:fontFamily="@font/open_sans_bold"
                 android:textColor="@color/colorPrimaryLight"/>
 

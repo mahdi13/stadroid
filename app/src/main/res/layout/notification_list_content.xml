@@ -11,42 +11,42 @@
                                    android:id="@+id/card">
 
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            tools:text="Title"
+            android:textStyle="bold"
+            android:textAppearance="?attr/textAppearanceListItem"/>
+
+
+        <TextView
+            android:id="@+id/description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
-
-
-        <TextView
-                android:id="@+id/title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/text_margin"
-                tools:text="Title"
-                android:textStyle="bold"
-                android:textAppearance="?attr/textAppearanceListItem"/>
-
+            android:layout_margin="@dimen/text_margin"
+            tools:text="Description"
+            android:textColor="@color/colorPrimaryLightLight"
+            android:textAppearance="?attr/textAppearanceListItem"/>
 
         <TextView
-                android:id="@+id/description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/text_margin"
-                tools:text="Description"
-                android:textColor="@color/colorPrimaryLightLight"
-                android:textAppearance="?attr/textAppearanceListItem"/>
-
-        <TextView
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-                android:id="@+id/date"
-                android:textColor="@color/colorGrayText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:minWidth="150dp"
-                tools:text="11-03 15:45"
-                android:gravity="end|bottom"
-                android:layout_gravity="bottom"/>
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+            android:id="@+id/date"
+            android:textColor="@color/colorGrayText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:minWidth="150dp"
+            tools:text="11-03 15:45"
+            android:gravity="end|bottom"
+            android:layout_gravity="bottom"/>
 
 
     </LinearLayout>

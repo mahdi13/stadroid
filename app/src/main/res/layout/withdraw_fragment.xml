@@ -54,7 +54,7 @@
             android:id="@+id/submit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Withdraw from my account"
+            android:text="@string/withdraw_from_my_account"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
             android:maxWidth="400dp"

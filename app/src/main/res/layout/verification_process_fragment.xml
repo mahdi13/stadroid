@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".profile.verification.VerificationProcessFragment"
-        android:orientation="vertical">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".profile.verification.VerificationProcessFragment"
+    android:orientation="vertical">
 
     <include layout="@layout/header_appbar_back"/>
 
     <com.badoualy.stepperindicator.StepperIndicator
-            android:id="@+id/stepper"
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:stpi_stepCount="4"
-            app:stpi_indicatorColor="@color/colorSecondary"
-            app:stpi_lineDoneColor="@color/colorSecondary"
-            app:stpi_lineColor="@color/colorSecondary"
-            app:stpi_circleColor="@color/colorSecondary"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            />
+        android:id="@+id/stepper"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:stpi_stepCount="4"
+        app:stpi_indicatorColor="@color/colorSecondary"
+        app:stpi_lineDoneColor="@color/colorSecondary"
+        app:stpi_lineColor="@color/colorSecondary"
+        app:stpi_circleColor="@color/colorSecondary"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        />
 
     <FrameLayout
-            android:id="@+id/verification_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:layout="@layout/email_verification_fragment">
+        android:id="@+id/verification_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout="@layout/email_verification_fragment">
 
     </FrameLayout>
 

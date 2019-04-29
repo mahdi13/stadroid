@@ -128,7 +128,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:paddingStart="10dp"
-                        android:text="Security Alert: 2FA is disable"/>
+                        android:text="@string/security_alert_2fa_is_disable"/>
 
                 </androidx.cardview.widget.CardView>
             </TableRow>
@@ -137,7 +137,7 @@
             <TableRow android:layout_marginTop="5dp">
 
                 <TextView
-                    android:text="Verification"
+                    android:text="@string/verification"
                     android:drawableStart="@drawable/ic_verified_user_black_24dp"
                     android:drawableTint="@color/colorGrayText"
                     android:drawablePadding="10dp"
@@ -151,7 +151,7 @@
                 <com.google.android.material.button.MaterialButton
                     style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
                     android:id="@+id/verification"
-                    android:text="Verification Process"/>
+                    android:text="@string/verification_process"/>
 
             </TableRow>
 
@@ -161,13 +161,13 @@
                     style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
                     android:id="@+id/evidence"
                     android:enabled="false"
-                    android:text="Evidences"/>
+                    android:text="@string/evidences"/>
             </TableRow>
 
             <TableRow>
 
                 <TextView
-                    android:text="Bank Accounts"
+                    android:text="@string/bank_accounts"
                     android:drawableStart="@drawable/ic_credit_card_black_24dp"
                     android:drawableTint="@color/colorGrayText"
                     android:drawablePadding="10dp"
@@ -181,7 +181,7 @@
                 <com.google.android.material.button.MaterialButton
                     style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
                     android:id="@+id/bank_cards"
-                    android:text="Bank Cards"/>
+                    android:text="@string/bank_cards"/>
             </TableRow>
 
             <TableRow>
@@ -189,13 +189,13 @@
                 <com.google.android.material.button.MaterialButton
                     style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
                     android:id="@+id/bank_accounts"
-                    android:text="Bank Accounts"/>
+                    android:text="@string/bank_accounts"/>
             </TableRow>
 
             <TableRow>
 
                 <TextView
-                    android:text="Support"
+                    android:text="@string/support"
                     android:drawableStart="@drawable/ic_perm_phone_msg_black_24dp"
                     android:drawableTint="@color/colorGrayText"
                     android:drawablePadding="10dp"
@@ -210,7 +210,7 @@
                     style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
                     android:enabled="false"
                     android:id="@+id/tickets"
-                    android:text="Tickets"/>
+                    android:text="@string/tickets"/>
             </TableRow>
 
             <TableRow>
@@ -219,14 +219,14 @@
                     style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
                     android:enabled="false"
                     android:id="@+id/new_ticket"
-                    android:text="New Ticket"/>
+                    android:text="@string/new_ticket"/>
 
             </TableRow>
 
             <TableRow>
 
                 <TextView
-                    android:text="Application Security"
+                    android:text="@string/application_security"
                     android:drawableStart="@drawable/ic_screen_lock_portrait_black_24dp"
                     android:drawableTint="@color/colorGrayText"
                     android:drawablePadding="10dp"
@@ -241,7 +241,7 @@
                     style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
                     android:enabled="false"
                     android:id="@+id/pin"
-                    android:text="Application PIN"/>
+                    android:text="@string/application_pin"/>
 
             </TableRow>
 
@@ -251,14 +251,14 @@
                     style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
                     android:enabled="false"
                     android:id="@+id/whipe"
-                    android:text="Whip Cache"/>
+                    android:text="@string/whip_cache"/>
 
             </TableRow>
 
             <TableRow>
 
                 <TextView
-                    android:text="Withdrawal"
+                    android:text="@string/withdrawal"
                     android:drawableStart="@drawable/ic_account_balance_wallet_black_24dp"
                     android:drawableTint="@color/colorGrayText"
                     android:drawablePadding="10dp"
@@ -273,7 +273,7 @@
                     style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
                     android:enabled="false"
                     android:id="@+id/withdrawal_pin"
-                    android:text="Withdrawal PIN"/>
+                    android:text="@string/withdrawal_pin"/>
             </TableRow>
 
             <TableRow>
@@ -282,13 +282,13 @@
                     style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
                     android:id="@+id/withdrawal_limit"
                     android:enabled="false"
-                    android:text="Withdrawal Limitations"/>
+                    android:text="@string/withdrawal_limitations"/>
             </TableRow>
 
             <TableRow>
 
                 <TextView
-                    android:text="Account Security"
+                    android:text="@string/account_security"
                     android:drawableStart="@drawable/ic_security_black_24dp"
                     android:drawableTint="@color/colorGrayText"
                     android:drawablePadding="10dp"
@@ -303,7 +303,7 @@
                     style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
                     android:id="@+id/second_factor"
                     android:enabled="false"
-                    android:text="2 Factor Authentication ( 2FA )"/>
+                    android:text="@string/_2_factor_authentication_2fa"/>
             </TableRow>
 
             <TableRow>
@@ -312,7 +312,7 @@
                     style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
                     android:enabled="false"
                     android:id="@+id/api_key"
-                    android:text="API Keys"/>
+                    android:text="@string/api_keys"/>
             </TableRow>
 
             <TableRow>
@@ -321,7 +321,7 @@
                     style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
                     android:id="@+id/sessions"
                     android:enabled="false"
-                    android:text="Sessions"/>
+                    android:text="@string/sessions"/>
             </TableRow>
 
             <TableRow>
@@ -330,7 +330,7 @@
                     style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
                     android:id="@+id/ip_whitelist"
                     android:enabled="false"
-                    android:text="IP Whitelist"/>
+                    android:text="@string/ip_whitelist"/>
             </TableRow>
 
             <TableRow>
@@ -339,7 +339,7 @@
                     style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
                     android:id="@+id/logs"
                     android:enabled="false"
-                    android:text="Security Logs"/>
+                    android:text="@string/security_logs"/>
             </TableRow>
 
             <TableRow>
@@ -348,13 +348,13 @@
                     style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
                     android:id="@+id/change_password"
                     android:enabled="false"
-                    android:text="Change Password"/>
+                    android:text="@string/change_password"/>
             </TableRow>
 
             <TableRow>
 
                 <TextView
-                    android:text="Other"
+                    android:text="@string/other"
                     android:drawableStart="@drawable/ic_more_horiz_black_24dp"
                     android:drawableTint="@color/colorGrayText"
                     android:drawablePadding="10dp"
@@ -368,7 +368,7 @@
                 <com.google.android.material.button.MaterialButton
                     style="@style/Widget.MaterialComponents.CompoundButton.CheckBox"
                     android:id="@+id/logout"
-                    android:text="Logout"/>
+                    android:text="@string/logout"/>
             </TableRow>
 
         </TableLayout>

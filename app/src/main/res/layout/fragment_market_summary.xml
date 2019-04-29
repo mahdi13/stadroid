@@ -23,64 +23,64 @@
 
 
     <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="5dp"
-            android:id="@+id/row1">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        android:id="@+id/row1">
 
         <ImageButton
-                android:layout_width="?attr/actionBarSize"
-                android:layout_height="?attr/actionBarSize"
-                android:id="@+id/back"
-                android:layout_marginEnd="10dp"
-                android:src="@drawable/ic_arrow_back_black_32dp"
-                android:foregroundTint="@color/colorPrimaryLightLight"
-                android:tint="@color/colorPrimaryLightLight"
-                style="@style/Widget.AppCompat.ActionButton"/>
+            android:layout_width="?attr/actionBarSize"
+            android:layout_height="?attr/actionBarSize"
+            android:id="@+id/back"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_arrow_back_black_32dp"
+            android:foregroundTint="@color/colorPrimaryLightLight"
+            android:tint="@color/colorPrimaryLightLight"
+            style="@style/Widget.AppCompat.ActionButton"/>
 
         <TextView
-                android:textAppearance="@style/MaterialAlertDialog.MaterialComponents.Title.Text"
-                android:foregroundTint="@color/colorSecondary"
-                android:backgroundTint="@color/colorSecondary"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:id="@+id/market_name"
-                android:gravity="center"
-                android:textStyle="bold"
-                android:textSize="20sp"
-                android:fontFamily="@font/din_medium"
-                android:textColor="@color/colorSecondary"
-                android:text="@string/loading"
-                tools:text="BTC / USD"/>
+            android:textAppearance="@style/MaterialAlertDialog.MaterialComponents.Title.Text"
+            android:foregroundTint="@color/colorSecondary"
+            android:backgroundTint="@color/colorSecondary"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:id="@+id/market_name"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:fontFamily="@font/din_medium"
+            android:textColor="@color/colorSecondary"
+            android:text="@string/loading"
+            tools:text="BTC / USD"/>
 
         <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:gravity="center"
-                >
+                android:textStyle="bold"
+                android:fontFamily="@font/din_medium"
+                android:id="@+id/market_cap"
+                tools:text="cap. 23.47653"/>
 
             <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/din_medium"
-                    android:id="@+id/market_cap"
-                    tools:text="cap. 23.47653"/>
-
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/cap_24"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/din_medium"
-                    android:textColor="@color/colorPrimaryLightLight"
-                    tools:text="24H. 23,47653"/>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/cap_24"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:fontFamily="@font/din_medium"
+                android:textColor="@color/colorPrimaryLightLight"
+                tools:text="24H. 23,47653"/>
 
 
         </LinearLayout>
@@ -90,18 +90,18 @@
 
 
     <com.wajahatkarim3.easyflipview.EasyFlipView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/row1"
-            android:id="@+id/flip"
-            app:flipOnTouch="true"
-            app:flipEnabled="true"
-            app:flipDuration="400"
-            app:flipType="vertical"
-            app:flipFrom="front"
-            app:autoFlipBack="false"
-            app:autoFlipBackTime="1000"
-            >
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/row1"
+        android:id="@+id/flip"
+        app:flipOnTouch="true"
+        app:flipEnabled="true"
+        app:flipDuration="400"
+        app:flipType="vertical"
+        app:flipFrom="front"
+        app:autoFlipBack="false"
+        app:autoFlipBackTime="1000"
+        >
 
 
         <include layout="@layout/market_summary_price"/>

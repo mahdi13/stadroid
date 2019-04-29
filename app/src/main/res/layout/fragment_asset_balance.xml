@@ -3,6 +3,7 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -34,7 +35,8 @@
                     style="@style/TextAppearance.MaterialComponents.Caption"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Bitcoin"
+                    android:id="@+id/name"
+                    tools:text="Bitcoin"
                     android:textColor="@color/colorPrimaryLightLight"
                     android:textStyle="bold"
                     android:layout_marginBottom="10dp"
@@ -55,7 +57,7 @@
                         />
 
                     <TextView
-                        android:id="@+id/name"
+                        android:id="@+id/symbol"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -117,8 +119,8 @@
                         android:layout_gravity="center_horizontal"
                         android:gravity="center"
                         android:textColor="@color/colorPrimaryLightLight"
-                        android:text="0.500000000"
-                        android:maxLength="6"
+                        tools:text="0.500000000"
+                        android:maxLength="16"
                         android:drawablePadding="5dp"
                         android:textSize="13sp"
                         android:lines="1"
@@ -145,7 +147,7 @@
                         android:gravity="center"
                         android:textColor="@color/white"
                         android:fontFamily="@font/din_medium"
-                        android:text="1.00000000"
+                        tools:text="1.00000000"
                         android:lines="1"/>
 
                     <!--<TextView-->
@@ -197,7 +199,7 @@
                 app:iconTint="@color/colorSecondary"
                 app:strokeWidth="1dp"
                 app:strokeColor="@color/colorSecondary"
-                android:text="Deposit"
+                android:text="@string/deposit"
                 android:layout_margin="5dp"/>
 
 
@@ -215,7 +217,7 @@
                 app:iconTint="@color/colorPrimaryText"
                 app:strokeWidth="1dp"
                 app:strokeColor="@color/colorPrimaryLight"
-                android:text="Withdraw"
+                android:text="@string/withdraw"
                 android:layout_margin="5dp"/>
 
             <com.google.android.material.button.MaterialButton

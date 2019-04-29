@@ -6,15 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".wallet.deposit.DepositFragment"
-    android:background="@color/colorPrimaryDark"
+    android:background="@color/colorPrimary"
     android:orientation="vertical">
 
     <include layout="@layout/header_appbar_back"/>
 
     <ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingStart="10dp"
@@ -28,7 +25,7 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:backgroundTint="@color/colorPrimary"
+                android:backgroundTint="@color/colorPrimaryDark"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="5dp"
                 app:cardCornerRadius="5dp">
@@ -66,7 +63,7 @@
                             android:textColor="@color/white"
                             android:textStyle="bold"
                             android:fontFamily="@font/din_medium"
-                            android:text="Minimum"/>
+                            android:text="@string/minimum"/>
 
                         <View
                             android:layout_width="1dp"
@@ -83,7 +80,7 @@
                             android:textColor="@color/white"
                             android:textStyle="bold"
                             android:fontFamily="@font/din_medium"
-                            android:text="Maximum"/>
+                            android:text="@string/maximum"/>
 
                         <View
                             android:layout_width="1dp"
@@ -100,7 +97,7 @@
                             android:textColor="@color/white"
                             android:textStyle="bold"
                             android:fontFamily="@font/din_medium"
-                            android:text="Commission"/>
+                            android:text="@string/commission"/>
 
 
                     </LinearLayout>
@@ -175,7 +172,7 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/colorPrimary"
+                android:backgroundTint="@color/colorPrimaryDark"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="5dp"
                 app:cardCornerRadius="5dp">
@@ -193,7 +190,7 @@
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Address"
+                        android:text="@string/address"
                         android:paddingStart="10dp"
                         android:textColor="@color/colorPrimaryLightLight"
                         android:fontFamily="@font/din_medium"
@@ -240,7 +237,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:text="Renew"/>
+                            android:text="@string/renew"/>
 
                         <View
                             android:layout_width="5dp"
@@ -256,7 +253,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:text="Copy"/>
+                            android:text="@string/copy"/>
 
                         <View
                             android:layout_width="5dp"
@@ -272,7 +269,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:text="Share"/>
+                            android:text="@string/share"/>
 
                         <!--<View-->
                         <!--android:layout_width="5dp"-->
@@ -300,7 +297,7 @@
                 android:id="@+id/tag_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/colorPrimary"
+                android:backgroundTint="@color/colorPrimaryDark"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="5dp"
                 app:cardCornerRadius="5dp">
@@ -318,7 +315,7 @@
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Tag"
+                        android:text="@string/tag"
                         android:paddingStart="10dp"
                         android:textColor="@color/colorPrimaryLightLight"
                         android:fontFamily="@font/din_medium"
@@ -364,7 +361,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:text="Renew"/>
+                            android:text="@string/renew"/>
 
                         <View
                             android:layout_width="5dp"
@@ -380,7 +377,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:text="Copy"/>
+                            android:text="@string/copy"/>
 
                         <View
                             android:layout_width="5dp"
@@ -396,7 +393,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:text="Share"/>
+                            android:text="@string/share"/>
 
                         <!--<View-->
                         <!--android:layout_width="5dp"-->

@@ -8,24 +8,24 @@
               tools:context=".notification.NotificationListActivity"
               android:orientation="vertical"
               android:background="@color/colorPrimaryDark"
-        >
+    >
 
     <ImageButton
-            android:layout_width="?attr/actionBarSize"
-            android:layout_height="?attr/actionBarSize"
-            android:id="@+id/back"
-            android:layout_marginEnd="10dp"
-            android:src="@drawable/ic_arrow_back_black_32dp"
-            android:foregroundTint="@color/colorPrimaryLightLight"
-            android:tint="@color/colorPrimaryLightLight"
-            style="@style/Widget.AppCompat.ActionButton"/>
+        android:layout_width="?attr/actionBarSize"
+        android:layout_height="?attr/actionBarSize"
+        android:id="@+id/back"
+        android:layout_marginEnd="10dp"
+        android:src="@drawable/ic_arrow_back_black_32dp"
+        android:foregroundTint="@color/colorPrimaryLightLight"
+        android:tint="@color/colorPrimaryLightLight"
+        style="@style/Widget.AppCompat.ActionButton"/>
 
     <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/notification_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            app:layoutManager="LinearLayoutManager"
-            tools:listitem="@layout/notification_list_content"/>
+        android:id="@+id/notification_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        app:layoutManager="LinearLayoutManager"
+        tools:listitem="@layout/notification_list_content"/>
 </LinearLayout>

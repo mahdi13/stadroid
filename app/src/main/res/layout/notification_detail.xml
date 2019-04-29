@@ -10,27 +10,27 @@
             tools:context=".notification.NotificationDetailFragment">
 
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:id="@+id/title"
+            tools:text="Hi"
+            android:gravity="center"
+            android:layout_margin="20dp"
+            android:textColor="@color/colorSecondary"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"/>
 
         <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/title"
-                tools:text="Hi"
-                android:gravity="center"
-                android:layout_margin="20dp"
-                android:textColor="@color/colorSecondary"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"/>
-
-        <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/description"
-                android:layout_margin="20dp"
-                tools:text="This is a notification"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/description"
+            android:layout_margin="20dp"
+            tools:text="This is a notification"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"/>
 
 
     </LinearLayout>

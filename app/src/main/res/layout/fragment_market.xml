@@ -1,111 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".market.MarketFragment">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".market.MarketFragment">
 
     <fragment
-            android:id="@+id/summary"
-            class="io.stacrypt.stadroid.market.MarketSummaryFragment"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_alignParentTop="true"
-            android:background="@color/colorPrimaryDarkDark"
-            tools:context=".market.MarketSummaryFragment"
-            tools:layout="@layout/fragment_market_summary"
-            android:layout_marginTop="0dp">
+        android:id="@+id/summary"
+        class="io.stacrypt.stadroid.market.MarketSummaryFragment"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorPrimaryDarkDark"
+        tools:context=".market.MarketSummaryFragment"
+        tools:layout="@layout/fragment_market_summary"
+        android:layout_marginTop="0dp">
 
     </fragment>
 
     <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/colorPrimary"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_above="@+id/tabs"/>
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimary"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_above="@+id/tabs"/>
 
     <com.google.android.material.tabs.TabLayout
-            style="@style/Widget.MaterialComponents.TabLayout.Colored"
-            android:id="@+id/tabs"
-            android:layout_width="match_parent"
+        style="@style/Widget.MaterialComponents.TabLayout.Colored"
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/summary"
+        app:tabTextColor="#ffffff"
+        app:tabIndicatorColor="#ffffff"
+        app:tabRippleColor="#ffffff"
+        app:tabMode="scrollable"
+        android:background="@color/colorPrimaryDarkDark"
+        >
+
+        <com.google.android.material.tabs.TabItem
             android:layout_height="wrap_content"
-            android:layout_below="@+id/summary"
-            app:tabTextColor="#ffffff"
-            app:tabIndicatorColor="#ffffff"
-            app:tabRippleColor="#ffffff"
-            app:tabMode="scrollable"
-            android:background="@color/colorPrimaryDarkDark"
-            >
+            android:layout_width="wrap_content"
+            android:id="@+id/chart_tab"
+            android:text="@string/chart"
+            />
 
         <com.google.android.material.tabs.TabItem
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:id="@+id/chart_tab"
-                android:text="@string/chart"
-                />
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:id="@+id/my_orders_tab"
+            android:text="@string/my_orders"
+            />
 
         <com.google.android.material.tabs.TabItem
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:id="@+id/my_orders_tab"
-                android:text="@string/my_orders"
-                />
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:id="@+id/book_tab"
+            android:text="@string/book"
+            />
 
         <com.google.android.material.tabs.TabItem
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:id="@+id/book_tab"
-                android:text="@string/book"
-                />
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:id="@+id/my_deals_tab"
+            android:text="@string/my_deals"
+            />
 
         <com.google.android.material.tabs.TabItem
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:id="@+id/my_deals_tab"
-                android:text="@string/my_deals"
-                />
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:id="@+id/history_tab"
+            android:text="@string/history"
+            />
 
         <com.google.android.material.tabs.TabItem
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:id="@+id/history_tab"
-                android:text="@string/history"
-                />
-
-        <com.google.android.material.tabs.TabItem
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:id="@+id/info_tab"
-                android:text="@string/info"
-                />
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:id="@+id/info_tab"
+            android:text="@string/info"
+            />
 
 
     </com.google.android.material.tabs.TabLayout>
 
 
     <io.stacrypt.stadroid.ui.UnscrollableViewPager
-            android:id="@+id/viewpager"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tabs"
-            android:layout_above="@+id/new_order"/>
+        android:id="@+id/viewpager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tabs"
+        android:layout_above="@+id/new_order"/>
 
 
     <fragment
-            android:id="@+id/new_order"
-            android:layout_width="match_parent"
-            android:layout_height="170dp"
-            android:layout_alignParentBottom="true"
-            class="io.stacrypt.stadroid.market.NewOrderFragment"
-            android:background="@color/colorPrimaryDark"
-            tools:context=".market.NewOrderFragment"
-            tools:layout="@layout/new_order_fragment"/>
+        android:id="@+id/new_order"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:layout_alignParentBottom="true"
+        class="io.stacrypt.stadroid.market.NewOrderFragment"
+        android:background="@color/colorPrimaryDark"
+        tools:context=".market.NewOrderFragment"
+        tools:layout="@layout/new_order_fragment"/>
 
 
 </RelativeLayout>

@@ -102,7 +102,6 @@
                     android:id="@+id/notification_badge"
                     tools:text="1"
                     tools:visibility="visible"
-                    android:text="0"
                     android:visibility="gone"
                     android:textColor="@android:color/white"
                     android:background="@color/colorSecondary"

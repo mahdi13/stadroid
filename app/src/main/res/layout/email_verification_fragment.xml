@@ -2,14 +2,15 @@
 
 
 <androidx.coordinatorlayout.widget.CoordinatorLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/coordinator"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorPrimary"
-        android:fitsSystemWindows="true"
-        >
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinator"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:fitsSystemWindows="true"
+    >
 
     <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar"
@@ -71,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:layout_marginBottom="10dp"
-                android:text="Verify your email"
+                android:text="@string/verify_your_email"
                 android:textAllCaps="true"
                 android:textColor="@color/colorGrayText"/>
 
@@ -87,7 +88,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#eeeeee"
-                android:text="MY@EMAIL.COM"/>
+                tools:text="MY@EMAIL.COM"/>
 
         <!--<com.google.android.material.button.MaterialButton-->
                 <!--android:id="@+id/verify"-->
@@ -108,7 +109,7 @@
                 android:id="@+id/verify"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Send me a verification email"
+                android:text="@string/send_me_the_verification_email"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
                 android:maxWidth="400dp"

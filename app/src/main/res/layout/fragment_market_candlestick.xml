@@ -6,19 +6,19 @@
                 tools:context=".market.chart.MarketCandlestickFragment">
 
     <com.github.mikephil.charting.charts.CombinedChart
-            android:id="@+id/chart"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_above="@id/bar_chart"
-            android:layout_marginEnd="4dp"/>
+        android:id="@+id/chart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_above="@id/bar_chart"
+        android:layout_marginEnd="4dp"/>
 
     <com.github.mikephil.charting.charts.BarChart
-            android:id="@+id/bar_chart"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="4dp"/>
+        android:id="@+id/bar_chart"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="4dp"/>
 
 
 </RelativeLayout>

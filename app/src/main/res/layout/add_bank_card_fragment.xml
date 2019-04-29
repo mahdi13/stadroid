@@ -56,14 +56,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="#999999"
-                        android:text="Your New Card"/>
+                        android:text="@string/your_new_card"/>
 
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/colorGrayText"
                         android:layout_marginTop="20dp"
-                        android:text="Card Number"/>
+                        android:text="@string/card_number"/>
 
                 <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/number"
@@ -76,14 +76,14 @@
                         android:lines="1"
                         android:inputType="number"
                         android:digits="0123456789-"
-                        android:hint="11** **** **33 4444"/>
+                        android:hint="@string/card_sample"/>
 
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/colorGrayText"
                         android:layout_marginTop="20dp"
-                        android:text="Card Holder Name"/>
+                        android:text="@string/card_holder_name"/>
 
                 <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/holder"
@@ -96,7 +96,7 @@
                         android:lines="1"
                         android:maxLength="50"
                         android:inputType="textPersonName|textAutoComplete|textCapWords"
-                        android:hint="Jack Daniel"/>
+                        android:hint="@string/owner_sample"/>
 
 
             </LinearLayout>
@@ -121,7 +121,7 @@
             app:iconPadding="20dp"
             app:icon="@drawable/ic_check_circle_black_24dp"
             app:iconTint="@color/white"
-            android:text="Save"/>
+            android:text="@string/save"/>
 
 
 </LinearLayout>

@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="40dp"
-                android:text="Choose the payment method:"/>
+                android:text="@string/choose_the_payment_method"/>
 
             <ListView
                 android:id="@+id/payment_gateways"
@@ -66,7 +66,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="40dp"
-                android:text="Choose the bank card:"/>
+                android:text="@string/choose_the_bank_card"/>
 
 
             <include
@@ -96,7 +96,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/add_card"
                     android:layout_marginStart="5dp"
-                    android:text="Or add new card"/>
+                    android:text="@string/or_add_new_card"/>
 
             </LinearLayout>
 
@@ -127,7 +127,7 @@
                 android:id="@+id/submit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Make a dopsit transaction"
+                android:text="@string/make_a_dopsit_transaction"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
                 android:maxWidth="400dp"

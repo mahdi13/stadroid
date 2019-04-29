@@ -20,7 +20,7 @@
         android:gravity="center"
         android:layout_marginBottom="10dp"
         android:padding="20dp"
-        android:text="Wait a few hours, you will be fully verified soon!"
+        android:text="@string/wait_a_few_hours_you_will_be_fully_verified_soon"
         android:textAllCaps="true"
         android:textColor="@color/colorPrimaryLightLight"/>
 

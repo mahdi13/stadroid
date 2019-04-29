@@ -177,7 +177,7 @@
                 android:textColor="@color/real_red_semi_trans"
                 android:textSize="10sp"
                 android:fontFamily="@font/din_medium"
-                android:text="High"/>
+                android:text="@string/high"/>
 
         </LinearLayout>
 
@@ -206,7 +206,7 @@
                 android:textColor="@color/real_green_semi_trans"
                 android:textSize="10sp"
                 android:fontFamily="@font/din_medium"
-                android:text="Low"/>
+                android:text="@string/low"/>
 
         </LinearLayout>
 

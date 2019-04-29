@@ -134,7 +134,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/colorGrayText"
                         android:fontFamily="@font/open_sans_regular"
-                        android:text="Forgot your password?"/>
+                        android:text="@string/forgot_your_password"/>
 
                 <TextView
                     android:id="@+id/reset_password"
@@ -145,7 +145,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
-                        android:text="Reset Password"/>
+                        android:text="@string/reset_password"/>
             </LinearLayout>
 
 

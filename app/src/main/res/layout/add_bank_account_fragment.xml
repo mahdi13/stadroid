@@ -45,7 +45,8 @@
                 android:layout_alignParentEnd="true"
                 android:paddingTop="20dp"
                 android:paddingBottom="20dp"
-                android:paddingStart="20dp">
+                android:paddingStart="20dp"
+                >
 
 
                 <TextView
@@ -56,14 +57,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#999999"
-                    android:text="Your New Account"/>
+                    android:text="@string/your_new_account"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorGrayText"
                     android:layout_marginTop="20dp"
-                    android:text="Account IBAN"/>
+                    android:text="@string/account_iban"/>
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/iban"
@@ -77,14 +78,14 @@
                     android:maxLines="4"
                     android:scrollHorizontally="false"
                     android:inputType="text|textAutoComplete|textMultiLine"
-                    android:hint="IR 12 3456 7812 3456 7812 3456 781 2345 6781"/>
+                    android:hint="@string/iban_sample"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorGrayText"
                     android:layout_marginTop="20dp"
-                    android:text="Account Owner Name"/>
+                    android:text="@string/account_owner_name"/>
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/owner"
@@ -97,7 +98,7 @@
                     android:lines="1"
                     android:maxLength="50"
                     android:inputType="textPersonName|textAutoComplete|textCapWords"
-                    android:hint="Jack Daniel"/>
+                    android:hint="@string/owner_sample"/>
 
 
             </LinearLayout>
@@ -122,7 +123,7 @@
         app:iconPadding="20dp"
         app:icon="@drawable/ic_check_circle_black_24dp"
         app:iconTint="@color/white"
-        android:text="Save"/>
+        android:text="@string/save"/>
 
 
 </LinearLayout>

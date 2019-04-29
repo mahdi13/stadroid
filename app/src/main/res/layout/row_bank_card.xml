@@ -71,14 +71,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#ffffff"
-                    android:text="Card 1"/>
+                    tools:text="Card 1"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorPrimaryDark"
                     android:layout_marginTop="20dp"
-                    android:text="Card Number"/>
+                    android:text="@string/card_number"/>
 
                 <TextView
                     android:id="@+id/pan"
@@ -87,14 +87,14 @@
                     android:layout_height="wrap_content"
                     android:textColor="#ffffff"
                     android:fontFamily="@font/kameron_bold"
-                    android:text="11** **** **33 4444"/>
+                    tools:text="11** **** **33 4444"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorPrimaryDark"
                     android:layout_marginTop="20dp"
-                    android:text="Card Holder Name"/>
+                    android:text="@string/card_holder_name"/>
 
                 <TextView
                     android:id="@+id/holder"
@@ -103,7 +103,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="#ffffff"
                     android:fontFamily="@font/kameron_bold"
-                    android:text="Jack Daniel"/>
+                    tools:text="Jack Daniel"/>
 
                 <com.matrixxun.starry.badgetextview.MaterialBadgeTextView
                     android:layout_width="wrap_content"

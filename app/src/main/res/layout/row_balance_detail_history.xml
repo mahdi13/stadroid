@@ -43,13 +43,13 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/real_green"
                     android:fontFamily="@font/din_medium"
-                    android:text="Deposit"/>
+                    android:text="@string/deposit"/>
 
             <TextView
                     android:id="@+id/date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="10 jan 2019 16:40"
+                    tools:text="10 jan 2019 16:40"
                     android:fontFamily="@font/din_medium"
                     android:textColor="@color/colorPrimaryLightLight"/>
 
