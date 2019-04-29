@@ -5,8 +5,7 @@
     <string name="title_profile">Profile</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_market">MarketActivity</string>
+    <string name="title_activity_market">Markets</string>
     <string name="action_settings">Settings</string>
 
     <!-- Login Activity -->
@@ -46,9 +45,8 @@
     <string name="my_deals">My Deals</string>
     <string name="history">History</string>
     <string name="market_order">Market Order</string>
-    <string name="minus">-</string>
-    <string name="plus">+</string>
-    <string name="price">Price</string>
+    <string name="minus" translatable="false">-</string>
+    <string name="plus" translatable="false">+</string>
     <string name="limit_order">Limit Order</string>
     <string name="sell">sell</string>
     <string name="buy">buy</string>
@@ -63,55 +61,41 @@
     <string name="are_you_sure">Are you sure?</string>
     <string name="cancel">Cancel</string>
     <string name="coming_soon">Coming Soon…</string>
-    <string name="amount">Amount</string>
-    <string name="address">Address</string>
     <string name="title_notification_list">Notifications</string>
     <string name="title_notification_detail">Notification Detail</string>
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
     <string name="identity">Identity</string>
     <string name="national_or_passport_number">National (or passport) number</string>
-    <string name="info">Info</string>
     <string name="your_new_account">Your New Account</string>
-    <string name="account_iban">Account IBAN</string>
-    <string name="iban_sample">IR 12 3456 7812 3456 7812 3456 781 2345 6781</string>
+    <string name="iban_sample" translatable="false">IR 12 3456 7812 3456 7812 3456 781 2345 6781</string>
     <string name="account_owner_name">Account Owner Name</string>
     <string name="owner_sample">Jack Daniel</string>
     <string name="save">Save</string>
     <string name="your_new_card">Your New Card</string>
     <string name="card_number">Card Number</string>
-    <string name="card_sample">11** **** **33 4444</string>
+    <string name="card_sample" translatable="false">11** **** **33 4444</string>
     <string name="card_holder_name">Card Holder Name</string>
-    <string name="owner_sample">Jack Daniel</string>
-    <string name="save">Save</string>
     <string name="transaction_history">Transaction History</string>
     <string name="changes">Changes</string>
     <string name="tag">Tag</string>
     <string name="share">Share</string>
     <string name="copy">Copy</string>
     <string name="renew">Renew</string>
-    <string name="share">Share</string>
-    <string name="copy">Copy</string>
-    <string name="renew">Renew</string>
     <string name="address">Address</string>
-    <string name="commission">Commission</string>
     <string name="maximum">Maximum</string>
     <string name="minimum">Minimum</string>
     <string name="verify_your_email">Verify your email</string>
     <string name="send_me_the_verification_email">Send me the verification email</string>
-    <string name="deposit">Deposit</string>
-    <string name="withdraw">Withdraw</string>
     <string name="enter_verification_code">Enter Verification Code</string>
     <string name="forgot_your_password">Forgot your password?</string>
     <string name="reset_password">Reset Password</string>
 
-    <string name="empty_dash">---</string>
+    <string name="empty_dash" translatable="false">---</string>
     <string name="asks">Asks</string>
     <string name="bids">Bids</string>
     <string name="change">Change</string>
     <string name="time">Time</string>
-    <string name="price">Price</string>
-    <string name="amount">Amount</string>
     <string name="quote_currency">Quote Currency</string>
     <string name="statistics">Statistics</string>
     <string name="market_cap">Market Cap</string>
@@ -120,26 +104,19 @@
     <string name="bid_count">Bid Count</string>
     <string name="ask_count">Ask Count</string>
     <string name="past_24h">Past 24H</string>
-    <string name="open">Open</string>
     <string name="highest">Highest</string>
     <string name="lowest">Lowest</string>
-    <string name="close">Close</string>
     <string name="volume">Volume</string>
     <string name="deal">Deal</string>
-    <string name="high">High</string>
-    <string name="low">Low</string>
     <string name="verify_your_phone">Verify your phone</string>
     <string name="send_me_sms">Send me SMS</string>
     <string name="price">Price</string>
     <string name="amount">Amount</string>
     <string name="value">Value</string>
-    <string name="amount">Amount</string>
-    <string name="price">Price</string>
     <string name="security_alert_2fa_is_disable">Security Alert: 2FA is disable</string>
     <string name="verification">Verification</string>
     <string name="verification_process">Verification Process</string>
     <string name="evidences">Evidences</string>
-    <string name="bank_accounts">Bank Accounts</string>
     <string name="bank_cards">Bank Cards</string>
     <string name="bank_accounts">Bank Accounts</string>
     <string name="support">Support</string>
@@ -157,8 +134,6 @@
     <string name="sessions">Sessions</string>
     <string name="ip_whitelist">IP Whitelist</string>
     <string name="security_logs">Security Logs</string>
-    <string name="change_password">Change Password</string>
-    <string name="other">Other</string>
     <string name="logout">Logout</string>
     <string name="choose_a_new_password">Choose a new Password</string>
     <string name="repeat_new_password">Repeat New Password</string>
@@ -178,7 +153,6 @@
     <string name="status">Status</string>
     <string name="created_at">Created At</string>
     <string name="updated_at">Updated At</string>
-    <string name="amount">Amount</string>
     <string name="commission">Commission</string>
     <string name="payment">Payment</string>
     <string name="payment_instruction">Payment Instruction</string>
@@ -187,7 +161,6 @@
     <string name="confirmations">Confirmations</string>
     <string name="reference_id">Reference Id</string>
     <string name="pay">Pay</string>
-    <string name="choose_the_payment_method">Choose the payment method:</string>
     <string name="choose_the_bank_card">Choose the bank card:</string>
     <string name="or_add_new_card">Or add new card</string>
     <string name="make_a_dopsit_transaction">Make a dopsit transaction</string>
@@ -199,13 +172,8 @@
     <string name="high">High</string>
     <string name="low">Low</string>
     <string name="close">Close</string>
-    <string name="deposit">Deposit</string>
     <string name="account_iban">Account IBAN</string>
-    <string name="account_owner_name">Account Owner Name</string>
-    <string name="card_number">Card Number</string>
-    <string name="card_holder_name">Card Holder Name</string>
     <string name="wait_a_few_hours_you_will_be_fully_verified_soon">Wait a few hours, you will be fully verified soon!</string>
-    <string name="withdraw_from_my_account">Withdraw from my account</string>
 
     <string-array name="genders">
         <item>Male</item>
